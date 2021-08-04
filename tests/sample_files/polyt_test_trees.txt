@@ -1,0 +1,4 @@
+./tests/sample_files/polyt_test_tree0.tre
+./tests/sample_files/polyt_test_tree1.tre
+./tests/sample_files/polyt_test_tree2.tre
+./tests/sample_files/polyt_test_tree3.tre

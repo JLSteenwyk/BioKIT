@@ -1,0 +1,10 @@
+comment: false
+coverage:
+  precision: 2
+  round: down
+  range: "70...95"
+ignore:
+  - "tests"
+  - "biokit-runner.py"
+  - "setup.py"
+  - "biokit/__main__.py"
