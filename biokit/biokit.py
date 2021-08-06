@@ -15,6 +15,7 @@ from argparse import (
 from .services.text import (
     Faidx,
     FileFormatConverter,
+    RenameFastaEntries,
 )
 
 from .services.tree import (
@@ -200,6 +201,49 @@ class Biokit(object):
 
         args = parser.parse_args(argv)
         FileFormatConverter(args).run()
+
+    @staticmethod
+    def rename_fasta_entries(argv):
+        parser = ArgumentParser(add_help=True,
+            usage=SUPPRESS,
+            formatter_class=RawDescriptionHelpFormatter,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+                Renames fasta entries.
+                Renaming fasta entries will follow the scheme of a tab-delimited
+                file wherein the first column is the current fasta entry name and
+                the second column is the new fasta entry name in the resulting 
+                output alignment. 
+                Aliases:
+                  rename_fasta_entries, rename_fasta
+                Command line interfaces: 
+                  pk_rename_fasta_entries, pk_rename_fasta
+                Usage:
+                phykit rename_fasta_entries <fasta> -i/--idmap <idmap>
+                    [-o/--output <output_file>]
+                Options
+                =====================================================
+                <fasta>                     first argument after 
+                                            function name should be
+                                            a fasta file
+                -i/--idmap                  identifier map of current FASTA
+                                            names (col1) and desired FASTA
+                                            names (col2)
+                -o/--output                 optional argument to write
+                                            the renamed fasta file to.
+                                            Default output has the same 
+                                            name as the input file with
+                                            the suffix ".renamed.fa" added
+                                            to it.
+                """
+            ),
+        )
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        parser.add_argument("-i","--idmap", type=str, help=SUPPRESS)
+        parser.add_argument("-o", "--output", type=str, required=False, help=SUPPRESS)
+        args = parser.parse_args(argv)
+        RenameFastaEntries(args).run()
 
     ## Tree functions
     @staticmethod
