@@ -16,6 +16,7 @@ from .services.text import (
     Faidx,
     FileFormatConverter,
     RenameFastaEntries,
+    SequenceLength,
 )
 
 from .services.tree import (
@@ -244,6 +245,24 @@ class Biokit(object):
         parser.add_argument("-o", "--output", type=str, required=False, help=SUPPRESS)
         args = parser.parse_args(argv)
         RenameFastaEntries(args).run()
+
+    @staticmethod
+    def sequence_length(argv):
+        parser = ArgumentParser(add_help=True,
+            usage=SUPPRESS,
+            formatter_class=RawDescriptionHelpFormatter,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+
+                REWRITE
+                """
+            ),
+        )
+
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        args = parser.parse_args(argv)
+        SequenceLength(args).run()
 
     ## Tree functions
     @staticmethod
