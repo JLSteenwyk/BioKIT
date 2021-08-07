@@ -15,6 +15,7 @@ from argparse import (
 from .services.text import (
     Faidx,
     FileFormatConverter,
+    GCContent,
     RenameFastaEntries,
     SequenceLength,
 )
@@ -67,32 +68,22 @@ class Biokit(object):
                 f"""\
                 {self.help_header}
 
-                BioKIT helps process and analyze multiple sequence alignments and phylogenies.
+                BioKIT is a broadly applicable command-line toolkit for bioinformatics research.
 
-                Generally, all functions are designed to help understand the contents of alignments
-                (e.g., gc content or the number of parsimony informative sites) and the shape
-                of trees (e.g., treeness, degree of violation of a molecular clock).
-
-                Some help messages indicate that summary statistics are reported (e.g., 
-                bipartition_support_stats). Summary statistics include mean, median, 25th percentile,
-                75th percentile, minimum, maximum, standard deviation, and variance. These functions
-                typically have a verbose option that allows users to get the underlying data
-                used to calculate summary statistics. 
-
-                Usage: phykit <command> [optional command arguments]
+                Usage: biokit <command> [optional command arguments]
 
                 Command specific help messages can be viewed by adding a 
                 -h/--help argument after the command. For example, to see the
-                to see the help message for the command 'treeness', execute
-                "phykit treeness -h" or "phykit treeness --help".
+                to see the help message for the command 'get_entry', execute
+                "biokit get_entry -h" or "biokit get_entry --help".
 
                 Lastly, each function comes with aliases to save the user some
-                key strokes. For example, to get the help message for the 'treeness'
-                function, you can type "phykit tness -h". All aliases are specified
+                key strokes. For example, to get the help message for the 'get_entry'
+                function, you can type "biokit ge -h". All aliases are specified
                 in parentheses after the long form of the function name. 
 
-                Alignment-based commands
-                ========================
+                Text sequence file-based commands
+                =================================
                 faidx (alias: get_entry; ge)
                     - extract query fasta entry from multi-fasta file                              
 
@@ -160,11 +151,11 @@ class Biokit(object):
                 Aliases:
                   faidx, get_entry; ge
                 Command line interfaces: 
-                  pk_faidx, pk_get_entry, pk_ge
+                  bk_faidx, bk_get_entry, bk_ge
                   
 
                 Usage:
-                phykit faidx <fasta> -e/--entry <fasta entry>
+                biokit faidx <fasta> -e/--entry <fasta entry>
 
                 Options
                 =====================================================
@@ -204,6 +195,40 @@ class Biokit(object):
         FileFormatConverter(args).run()
 
     @staticmethod
+    def gc_content(argv):
+        parser = ArgumentParser(add_help=True,
+            usage=SUPPRESS,
+            formatter_class=RawDescriptionHelpFormatter,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+                
+                Calculate GC content of a fasta file.
+                
+                Aliases:
+                  gc_content, gc
+                Command line interfaces: 
+                  bk_gc_content, bk_gc
+                Usage:
+                biokit gc_content <fasta> [-v/--verbose]
+                Options
+                =====================================================
+                <fasta>                     first argument after 
+                                            function name should be
+                                            a fasta file 
+            
+                -v, --verbose               optional argument to print
+                                            the GC content of each fasta
+                                            entry
+                """
+            ),
+        )
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        parser.add_argument("-v", "--verbose", action="store_true", required=False, help=SUPPRESS)
+        args = parser.parse_args(argv)
+        GCContent(args).run()
+
+    @staticmethod
     def rename_fasta_entries(argv):
         parser = ArgumentParser(add_help=True,
             usage=SUPPRESS,
@@ -219,9 +244,9 @@ class Biokit(object):
                 Aliases:
                   rename_fasta_entries, rename_fasta
                 Command line interfaces: 
-                  pk_rename_fasta_entries, pk_rename_fasta
+                  bk_rename_fasta_entries, bk_rename_fasta
                 Usage:
-                phykit rename_fasta_entries <fasta> -i/--idmap <idmap>
+                biokit rename_fasta_entries <fasta> -i/--idmap <idmap>
                     [-o/--output <output_file>]
                 Options
                 =====================================================
@@ -279,10 +304,10 @@ class Biokit(object):
                 Aliases:
                   tip_labels, tree_labels; labels; tl
                 Command line interfaces: 
-                  pk_tip_labels, pk_tree_labels; pk_labels; pk_tl
+                  bk_tip_labels, bk_tree_labels; bk_labels; bk_tl
 
                 Usage:
-                phykit tip_labels <tree>
+                biokit tip_labels <tree>
 
                 Options
                 =====================================================
