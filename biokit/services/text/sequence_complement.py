@@ -8,7 +8,7 @@ class SequenceComplement(Text):
 
     def run(self):
         records = SeqIO.parse(self.fasta, "fasta")
-        if self.reverse:
+        if not self.reverse:
             for seq_record in records:
                 print(f'>{seq_record.id}\n{seq_record.seq.complement()}')
         else:
@@ -18,5 +18,5 @@ class SequenceComplement(Text):
     def process_args(self, args):
         return dict(
             fasta=args.fasta,
-            reverse=args.fasta,
+            reverse=args.reverse,
         )
