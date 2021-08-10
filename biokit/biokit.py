@@ -17,6 +17,7 @@ from .services.text import (
     FileFormatConverter,
     GCContent,
     N50,
+    N90,
     RenameFastaEntries,
     SequenceLength,
 )
@@ -302,6 +303,37 @@ class Biokit(object):
         parser.add_argument("fasta", type=str, help=SUPPRESS)
         args = parser.parse_args(argv)
         N50(args).run()
+
+    @staticmethod
+    def n90(argv):
+        parser = ArgumentParser(add_help=True,
+            usage=SUPPRESS,
+            formatter_class=RawDescriptionHelpFormatter,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+                
+                Calculates N90 for a genome assembly.
+                
+                Aliases:
+                  n90
+                Command line interfaces: 
+                  bk_n90
+
+                Usage:
+                biokit n90 <fasta>
+
+                Options
+                =====================================================
+                <fasta>                     first argument after 
+                                            function name should be
+                                            a fasta file 
+                """
+            ),
+        )
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        args = parser.parse_args(argv)
+        N90(args).run()
 
     @staticmethod
     def rename_fasta_entries(argv):
