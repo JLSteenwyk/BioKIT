@@ -1,3 +1,4 @@
+from .consensus_sequence import ConsensusSequence
 from .gc_content import GCContent
 from .faidx import Faidx
 from .file_format_converter import FileFormatConverter

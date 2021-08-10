@@ -13,6 +13,7 @@ from argparse import (
 )
 
 from .services.text import (
+    ConsensusSequence,
     Faidx,
     FileFormatConverter,
     GCContent,
@@ -147,6 +148,49 @@ class Biokit(object):
         ))
 
     ## Alignment functions
+    @staticmethod
+    def consensus_sequence(argv):
+        parser = ArgumentParser(add_help=True,
+            usage=SUPPRESS,
+            formatter_class=RawDescriptionHelpFormatter,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+
+                Generates a consequence from a multiple sequence alignment
+                file in FASTA format.
+                
+                Aliases:
+                  consensus_sequence, con_len
+                Command line interfaces: 
+                  bk_consensus_sequence, bk_con_len
+
+                Usage:
+                biokit consensus_sequence <fasta> -t/--threshold <threshold>
+                -ac/--ambiguous_character <ambiguous character>
+
+                Options
+                =====================================================
+                <fasta>                     first argument after 
+                                            function name should be
+                                            a fasta file
+
+                -t/--threshold              threshold for how common
+                                            a residue must be to be
+                                            represented
+                
+                -ac/--ambiguous_character   the ambiguity character to
+                                            use. Default is 'N'
+                """
+            ),
+        )
+
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        parser.add_argument("-t","--threshold", type=str, help=SUPPRESS)
+        parser.add_argument("-ac","--ambiguous_character", type=str, help=SUPPRESS)
+        args = parser.parse_args(argv)
+        ConsensusSequence(args).run()
+
     @staticmethod
     def faidx(argv):
         parser = ArgumentParser(add_help=True,

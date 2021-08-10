@@ -1,0 +1,26 @@
+from Bio import AlignIO
+from Bio.Align import AlignInfo
+
+from .base import Text
+
+class ConsensusSequence(Text):
+    def __init__(self, args) -> None:
+        super().__init__(**self.process_args(args))
+
+    def run(self):
+        alignment = AlignIO.read(self.fasta, "fasta")
+        summary_align = AlignInfo.SummaryInfo(alignment)
+        consensus = summary_align.dumb_consensus(
+            threshold = float(self.threshold),
+            ambiguous=str(self.ambiguous_character)
+        )
+        header = ">" + str(self.fasta) + ".consensus"
+        print(f"{header}\n{consensus}")
+
+
+    def process_args(self, args):
+        return dict(
+            fasta=args.fasta,
+            threshold=args.threshold,
+            ambiguous_character=args.ambiguous_character,
+        )

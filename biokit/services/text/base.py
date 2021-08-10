@@ -22,6 +22,8 @@ class Text(BaseService):
         output_file_format=None,
         input_file_format=None,
         output_file=None,
+        threshold=None,
+        ambiguous_character = None,
     ):
         self.alignment_file_path = alignment_file_path
         self.output_file_path = output_file_path
@@ -38,6 +40,8 @@ class Text(BaseService):
         self.output_file_format = output_file_format
         self.input_file_format = input_file_format
         self.output_file = output_file
+        self.threshold = threshold
+        self.ambiguous_character = ambiguous_character
 
     def get_alignment_and_format(self):
         """
