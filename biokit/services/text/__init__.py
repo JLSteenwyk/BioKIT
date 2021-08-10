@@ -7,4 +7,5 @@ from .l90 import L90
 from .n50 import N50
 from .n90 import N90
 from .rename_fasta_entries import RenameFastaEntries
+from .sequence_complement import SequenceComplement
 from .sequence_length import SequenceLength

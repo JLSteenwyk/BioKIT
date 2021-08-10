@@ -13,7 +13,6 @@ from argparse import (
 )
 
 from .services.text import (
-    ConsensusSequence,
     Faidx,
     FileFormatConverter,
     GCContent,
@@ -22,6 +21,7 @@ from .services.text import (
     N50,
     N90,
     RenameFastaEntries,
+    SequenceComplement,
     SequenceLength,
 )
 
@@ -127,6 +127,8 @@ class Biokit(object):
         if command in ['v']:
             return self.version()
         # Text aliases
+        elif command in ['con_len']:
+            return self.consensus_sequence(argv)
         elif command in ['get_entry', 'ge']:
             return self.faidx(argv)
         elif command in ['format_converter', 'ffc']:
@@ -507,7 +509,7 @@ class Biokit(object):
                   bk_sequence_length, bk_seq_len
 
                 Usage:
-                biokit sequence_length <fasta> [-v/--verbose]
+                biokit sequence_length <fasta>
 
                 Options
                 =====================================================
@@ -521,6 +523,44 @@ class Biokit(object):
         parser.add_argument("fasta", type=str, help=SUPPRESS)
         args = parser.parse_args(argv)
         SequenceLength(args).run()
+
+    @staticmethod
+    def sequence_complement(argv):
+        parser = ArgumentParser(add_help=True,
+            usage=SUPPRESS,
+            formatter_class=RawDescriptionHelpFormatter,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+
+                Generates the sequence complement for all entries
+                in a multi-FASTA file. To generate a reverse sequence
+                complement, add the -r/--reverse argument.
+                
+                Aliases:
+                  sequence_complement, seq_comp
+                Command line interfaces: 
+                  bk_sequence_complement, bk_seq_comp
+
+                Usage:
+                biokit sequence_complement <fasta> [-r/--reverse]
+
+                Options
+                =====================================================
+                <fasta>                     first argument after 
+                                            function name should be
+                                            a fasta file
+
+                -r/--reverse                if used, the reverse complement
+                                            sequence will be generated
+                """
+            ),
+        )
+
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        parser.add_argument("-r", "--reverse", action="store_true", required=False, help=SUPPRESS)
+        args = parser.parse_args(argv)
+        SequenceComplement(args).run()
 
     ## Tree functions
     @staticmethod
