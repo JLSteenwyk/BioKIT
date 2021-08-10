@@ -16,6 +16,7 @@ from .services.text import (
     Faidx,
     FileFormatConverter,
     GCContent,
+    N50,
     RenameFastaEntries,
     SequenceLength,
 )
@@ -270,6 +271,37 @@ class Biokit(object):
         parser.add_argument("-v", "--verbose", action="store_true", required=False, help=SUPPRESS)
         args = parser.parse_args(argv)
         GCContent(args).run()
+
+    @staticmethod
+    def n50(argv):
+        parser = ArgumentParser(add_help=True,
+            usage=SUPPRESS,
+            formatter_class=RawDescriptionHelpFormatter,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+                
+                Calculates N50 for a genome assembly.
+                
+                Aliases:
+                  n50
+                Command line interfaces: 
+                  bk_n50
+
+                Usage:
+                biokit n50 <fasta>
+
+                Options
+                =====================================================
+                <fasta>                     first argument after 
+                                            function name should be
+                                            a fasta file 
+                """
+            ),
+        )
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        args = parser.parse_args(argv)
+        N50(args).run()
 
     @staticmethod
     def rename_fasta_entries(argv):
