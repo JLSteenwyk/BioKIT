@@ -85,7 +85,14 @@ class Biokit(object):
                 Text sequence file-based commands
                 =================================
                 faidx (alias: get_entry; ge)
-                    - extract query fasta entry from multi-fasta file                              
+                    - extract query fasta entry from multi-fasta file
+                file_format_converter (alias: format_converter; ffc)
+                    - convert a multiple sequence file from one format
+                      to another
+                gc_content (alias: gc)
+                    - calculate the GC content of a FASTA file
+                rename_fasta_entries
+                sequence_length                           
 
                 Tree-based commands
                 ===================
@@ -114,9 +121,11 @@ class Biokit(object):
         # version
         if command in ['v']:
             return self.version()
-        # Alignment aliases
+        # Text aliases
         elif command in ['get_entry', 'ge']:
             return self.faidx(argv)
+        elif command in ['format_converter', 'ffc']:
+            return self.file_format_converter(argv)
         # Tree aliases
         elif command in ['labels', 'tree_labels', 'tl']:
             return self.tip_labels(argv)
@@ -149,10 +158,9 @@ class Biokit(object):
                 in samtools, but does not requiring an indexing function.
 
                 Aliases:
-                  faidx, get_entry; ge
+                  faidx, get_entry, ge
                 Command line interfaces: 
                   bk_faidx, bk_get_entry, bk_ge
-                  
 
                 Usage:
                 biokit faidx <fasta> -e/--entry <fasta entry>
@@ -182,7 +190,40 @@ class Biokit(object):
                 f"""\
                 {help_header}
 
-                REWRITE
+                Converts a multiple sequence file from one format to another.
+
+                Acceptable file formats include FASTA, Clustal, MAF, Mauve,
+                Phylip, Phylip-sequential, Phylip-relaxed, and Stockholm.
+                Input and output file formats are specified with the
+                --input_file_format and --output_file_format arguments; input
+                and output files are specified with the --input_file and
+                --output_file arguments.
+
+                Aliases:
+                  file_format_converter, format_converter, ffc
+                Command line interfaces: 
+                  bk_file_format_converter, bk_format_converter, bk_ffc
+                  
+
+                Usage:
+                biokit file_format_converter -i/--input_file <input_file>
+                -iff/--input_file_format <input_file_format> 
+                -o/--output_file <output_file>
+                -off/--output_file_format <output_file_format>
+
+                Options
+                =====================================================
+                -i/--input_file             input file name 
+
+                -iff/--input_file_format    input file format
+
+                -o/--output_file            output file name
+
+                -off/--output_file_format   output file format
+
+                Input and output file formats are specified using one of
+                the following strings: fasta, clustal, maf, mauve, phylip,
+                phylip_sequential, phylip_relaxed, & stockholm.
                 """
             ),
         )
@@ -209,8 +250,10 @@ class Biokit(object):
                   gc_content, gc
                 Command line interfaces: 
                   bk_gc_content, bk_gc
+
                 Usage:
                 biokit gc_content <fasta> [-v/--verbose]
+
                 Options
                 =====================================================
                 <fasta>                     first argument after 
@@ -237,17 +280,21 @@ class Biokit(object):
                 f"""\
                 {help_header}
                 Renames fasta entries.
+
                 Renaming fasta entries will follow the scheme of a tab-delimited
                 file wherein the first column is the current fasta entry name and
                 the second column is the new fasta entry name in the resulting 
                 output alignment. 
+
                 Aliases:
                   rename_fasta_entries, rename_fasta
                 Command line interfaces: 
                   bk_rename_fasta_entries, bk_rename_fasta
+                
                 Usage:
                 biokit rename_fasta_entries <fasta> -i/--idmap <idmap>
                     [-o/--output <output_file>]
+                
                 Options
                 =====================================================
                 <fasta>                     first argument after 
@@ -280,7 +327,21 @@ class Biokit(object):
                 f"""\
                 {help_header}
 
-                REWRITE
+                Calculate sequence length of each FASTA entry.
+                
+                Aliases:
+                  sequence_length, seq_len
+                Command line interfaces: 
+                  bk_sequence_length, bk_seq_len
+
+                Usage:
+                biokit sequence_length <fasta> [-v/--verbose]
+
+                Options
+                =====================================================
+                <fasta>                     first argument after 
+                                            function name should be
+                                            a fasta file 
                 """
             ),
         )
