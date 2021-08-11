@@ -17,6 +17,7 @@ from .services.text import (
     Faidx,
     FileFormatConverter,
     GCContent,
+    GCContentThirdPosition,
     LongestScaffold,
     L50,
     L90,
@@ -328,6 +329,45 @@ class Biokit(object):
         parser.add_argument("-v", "--verbose", action="store_true", required=False, help=SUPPRESS)
         args = parser.parse_args(argv)
         GCContent(args).run()
+    
+    @staticmethod
+    def gc_content_third_position(argv):
+        parser = ArgumentParser(add_help=True,
+            usage=SUPPRESS,
+            formatter_class=RawDescriptionHelpFormatter,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+                
+                Calculate GC content of the third codon position.
+                The input must be the coding sequence of a gene or
+                genes. All genes are assumed to have sequence lengths
+                divisible by three.
+                
+                Aliases:
+                  gc_content_third_position, gc3
+                Command line interfaces: 
+                  bk_gc_content_third_position, bk_gc3
+
+                Usage:
+                biokit gc_content_third_position <fasta> [-v/--verbose]
+
+                Options
+                =====================================================
+                <fasta>                     first argument after 
+                                            function name should be
+                                            a fasta file 
+            
+                -v, --verbose               optional argument to print
+                                            the GC content of each fasta
+                                            entry
+                """
+            ),
+        )
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        parser.add_argument("-v", "--verbose", action="store_true", required=False, help=SUPPRESS)
+        args = parser.parse_args(argv)
+        GCContentThirdPosition(args).run()
 
     @staticmethod
     def longest_scaffold(argv):

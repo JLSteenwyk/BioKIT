@@ -1,5 +1,6 @@
 from .consensus_sequence import ConsensusSequence
 from .gc_content import GCContent
+from .gc_content_third_position import GCContentThirdPosition
 from .faidx import Faidx
 from .file_format_converter import FileFormatConverter
 from .longest_scaffold import LongestScaffold
