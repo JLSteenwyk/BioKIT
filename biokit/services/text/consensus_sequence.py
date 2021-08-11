@@ -10,10 +10,22 @@ class ConsensusSequence(Text):
     def run(self):
         alignment = AlignIO.read(self.fasta, "fasta")
         summary_align = AlignInfo.SummaryInfo(alignment)
+
+        if not self.ambiguous_character:
+            ambiguous_character = 'N'
+        else:
+            ambiguous_character = self.ambiguous_character
+
+        if not self.threshold:
+            threshold = 0.7
+        else:
+            threshold = float(self.threshold)
+
         consensus = summary_align.dumb_consensus(
-            threshold = float(self.threshold),
-            ambiguous=str(self.ambiguous_character)
+            threshold = threshold,
+            ambiguous = ambiguous_character
         )
+
         header = ">" + str(self.fasta) + ".consensus"
         print(f"{header}\n{consensus}")
 

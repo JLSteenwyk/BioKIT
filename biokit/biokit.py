@@ -13,6 +13,7 @@ from argparse import (
 )
 
 from .services.text import (
+    ConsensusSequence,
     Faidx,
     FileFormatConverter,
     GCContent,
@@ -20,6 +21,7 @@ from .services.text import (
     L90,
     N50,
     N90,
+    PositionSpecificScoreMatrix,
     RenameFastaEntries,
     SequenceComplement,
     SequenceLength,
@@ -444,6 +446,42 @@ class Biokit(object):
         parser.add_argument("fasta", type=str, help=SUPPRESS)
         args = parser.parse_args(argv)
         N90(args).run()
+
+    @staticmethod
+    def position_specific_score_matrix(argv):
+        parser = ArgumentParser(add_help=True,
+            usage=SUPPRESS,
+            formatter_class=RawDescriptionHelpFormatter,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+
+                Generates a position specific score matrix for an alignment.
+                
+                Aliases:
+                  position_specific_score_matrix, pssm
+                Command line interfaces: 
+                  bk_position_specific_score_matrix, bk_pssm
+
+                Usage:
+                biokit position_specific_score_matrix <fasta> [-r/--reverse]
+
+                Options
+                =====================================================
+                <fasta>                     first argument after 
+                                            function name should be
+                                            a fasta file
+
+                -ac/--ambiguous_character   the ambiguity character to
+                                            use. Default is 'N'
+                """
+            ),
+        )
+
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        parser.add_argument("-ac","--ambiguous_character", type=str, help=SUPPRESS)
+        args = parser.parse_args(argv)
+        PositionSpecificScoreMatrix(args).run()
 
     @staticmethod
     def rename_fasta_entries(argv):
