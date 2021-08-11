@@ -13,3 +13,4 @@ from .position_specific_score_matrix import PositionSpecificScoreMatrix
 from .rename_fasta_entries import RenameFastaEntries
 from .sequence_complement import SequenceComplement
 from .sequence_length import SequenceLength
+from .translate_sequence import TranslateSequence

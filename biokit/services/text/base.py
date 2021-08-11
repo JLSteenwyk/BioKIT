@@ -23,8 +23,9 @@ class Text(BaseService):
         input_file_format=None,
         output_file=None,
         threshold=None,
-        ambiguous_character = None,
+        ambiguous_character=None,
         reverse=None,
+        translation_table=None,
     ):
         self.alignment_file_path = alignment_file_path
         self.output_file_path = output_file_path
@@ -44,6 +45,7 @@ class Text(BaseService):
         self.threshold = threshold
         self.ambiguous_character = ambiguous_character
         self.reverse = reverse
+        self.translation_table = translation_table
 
     def get_alignment_and_format(self):
         """

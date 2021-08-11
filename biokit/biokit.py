@@ -28,6 +28,7 @@ from .services.text import (
     RenameFastaEntries,
     SequenceComplement,
     SequenceLength,
+    TranslateSequence,
 )
 
 from .services.tree import (
@@ -709,6 +710,88 @@ class Biokit(object):
         parser.add_argument("-r", "--reverse", action="store_true", required=False, help=SUPPRESS)
         args = parser.parse_args(argv)
         SequenceComplement(args).run()
+
+    @staticmethod
+    def translate_sequence(argv):
+        parser = ArgumentParser(add_help=True,
+            usage=SUPPRESS,
+            formatter_class=RawDescriptionHelpFormatter,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+
+                Translates coding sequences to amino acid
+                sequences. Sequences can be translated using
+                diverse genetic codes. For codons that can
+                encode two amino acids (e.g., TAG encodes
+                Glu or STOP in the Blastocrithidia Nuclear Code),
+                the standard genetic code is used.
+
+                Custom genetic codes can be used as input and should
+                be formatted with the codon in first column and the 
+                resulting amino acid in the second column.
+                
+                Aliases:
+                  translate_sequence, translate_seq
+                Command line interfaces: 
+                  bk_translate_sequence, bk_translate_seq
+
+                Usage:
+                biokit translate_sequence <fasta> [-tt/--translation_table]
+
+                Options
+                =====================================================
+                <fasta>                     first argument after 
+                                            function name should be
+                                            a fasta file
+
+                -tt/--translation_table     Code for the translation table
+                                            to be used. Default: 1, which
+                                            is the standard code.
+
+
+                Codes for which translation table to use
+                =====================================================
+                1. The Standard Code
+                2. The Vertebrate Mitochondrial Code
+                3. The Yeast Mitochondrial Code
+                4. The Mold, Protozoan, and Coelenterate Mitochondrial
+                   Code and the Mycoplasma/Spiroplasma Code
+                5. The Invertebrate Mitochondrial Code
+                6. The Ciliate, Dasycladacean and Hexamita Nuclear Code
+                9. The Echinoderm and Flatworm Mitochondrial Code
+                10. The Euplotid Nuclear Code
+                11. The Bacterial, Archaeal and Plant Plastid Code
+                12. The Alternative Yeast Nuclear Code
+                13. The Ascidian Mitochondrial Code
+                14. The Alternative Flatworm Mitochondrial Code
+                16. Chlorophycean Mitochondrial Code
+                21. Trematode Mitochondrial Code
+                22. Scenedesmus obliquus Mitochondrial Code
+                23. Thraustochytrium Mitochondrial Code
+                24. Rhabdopleuridae Mitochondrial Code
+                25. Candidate Division SR1 and Gracilibacteria Code
+                26. Pachysolen tannophilus Nuclear Code
+                27. Karyorelict Nuclear Code
+                28. Condylostoma Nuclear Code
+                29. Mesodinium Nuclear Code
+                30. Peritrich Nuclear Code
+                31. Blastocrithidia Nuclear Code
+                33. Cephalodiscidae Mitochondrial UAA-Tyr Code
+                50. CUG-Ala Code
+
+                More information about genetic codes can be obtained from NCBI:
+                https://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi?chapter=tgencodes.
+                The only codon table not described by NCBI is 50, CUG-Ala wherein CUG encodes
+                for alanine.
+                """
+            ),
+        )
+
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        parser.add_argument("-tt", "--translation_table", type=str, required=False, help=SUPPRESS)
+        args = parser.parse_args(argv)
+        TranslateSequence(args).run()
 
     ## Tree functions
     @staticmethod
