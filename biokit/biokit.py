@@ -17,8 +17,10 @@ from .services.text import (
     Faidx,
     FileFormatConverter,
     GCContent,
+    LongestScaffold,
     L50,
     L90,
+    NumberOfScaffolds,
     N50,
     N90,
     PositionSpecificScoreMatrix,
@@ -135,6 +137,10 @@ class Biokit(object):
             return self.faidx(argv)
         elif command in ['format_converter', 'ffc']:
             return self.file_format_converter(argv)
+        elif command in ['longest_scaff', 'longest_contig', 'longest_cont']:
+            return self.longest_scaffold(argv)
+        elif command in ['num_of_scaffolds', 'number_of_contigs', 'num_of_cont']:
+            return self.number_of_scaffolds(argv)
         # Tree aliases
         elif command in ['labels', 'tree_labels', 'tl']:
             return self.tip_labels(argv)
@@ -324,6 +330,38 @@ class Biokit(object):
         GCContent(args).run()
 
     @staticmethod
+    def longest_scaffold(argv):
+        parser = ArgumentParser(add_help=True,
+            usage=SUPPRESS,
+            formatter_class=RawDescriptionHelpFormatter,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+
+                Calculate sequence length of each FASTA entry.
+                
+                Aliases:
+                  longest_scaffold, longest_scaff, longest_contig, longest_cont
+                Command line interfaces: 
+                  bk_longest_scaffold, bk_longest_scaff, bk_longest_contig, bk_longest_cont
+
+                Usage:
+                biokit longest_scaffold <fasta>
+
+                Options
+                =====================================================
+                <fasta>                     first argument after 
+                                            function name should be
+                                            a fasta file 
+                """
+            ),
+        )
+
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        args = parser.parse_args(argv)
+        LongestScaffold(args).run()
+
+    @staticmethod
     def l50(argv):
         parser = ArgumentParser(add_help=True,
             usage=SUPPRESS,
@@ -384,6 +422,38 @@ class Biokit(object):
         parser.add_argument("fasta", type=str, help=SUPPRESS)
         args = parser.parse_args(argv)
         L90(args).run()
+
+    @staticmethod
+    def number_of_scaffolds(argv):
+        parser = ArgumentParser(add_help=True,
+            usage=SUPPRESS,
+            formatter_class=RawDescriptionHelpFormatter,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+
+                Calculate sequence length of each FASTA entry.
+                
+                Aliases:
+                  number_of_scaffolds, num_of_scaffolds, number_of_contigs, num_of_cont
+                Command line interfaces: 
+                  bk_number_of_scaffolds, bk_num_of_scaffolds, bk_number_of_contigs, bk_num_of_cont
+
+                Usage:
+                biokit number_of_scaffolds <fasta>
+
+                Options
+                =====================================================
+                <fasta>                     first argument after 
+                                            function name should be
+                                            a fasta file 
+                """
+            ),
+        )
+
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        args = parser.parse_args(argv)
+        NumberOfScaffolds(args).run()
 
     @staticmethod
     def n50(argv):
