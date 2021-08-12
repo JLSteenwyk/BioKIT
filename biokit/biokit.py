@@ -24,6 +24,7 @@ from .services.text import (
     NumberOfScaffolds,
     N50,
     N90,
+    NumberOfLargeScaffolds,
     PositionSpecificScoreMatrix,
     RenameFastaEntries,
     ReorderBySequenceLength,
@@ -464,6 +465,49 @@ class Biokit(object):
         parser.add_argument("fasta", type=str, help=SUPPRESS)
         args = parser.parse_args(argv)
         L90(args).run()
+
+    @staticmethod
+    def number_of_large_scaffolds(argv):
+        parser = ArgumentParser(add_help=True,
+            usage=SUPPRESS,
+            formatter_class=RawDescriptionHelpFormatter,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+
+                Calculate number and total sequence length of
+                large scaffolds. Each value is represented as
+                column 1 and column 2 in the output, respectively.
+                
+                Aliases:
+                  number_of_large_scaffolds, num_of_lrg_scaffolds,
+                  number_of_large_contigs, num_of_lrg_cont
+                Command line interfaces: 
+                  bk_number_of_large_scaffolds, bk_num_of_lrg_scaffolds,
+                  bk_number_of_large_contigs, bk_num_of_lrg_cont
+
+                Usage:
+                biokit number_of_large_scaffolds <fasta> [-t/--threshold <int>]
+
+                Options
+                =====================================================
+                <fasta>                     first argument after 
+                                            function name should be
+                                            a fasta file
+                
+                -t/--threshold              threshold for what is considered
+                                            a large scaffold. Only scaffolds
+                                            with a length greater than this
+                                            value will be counted.
+                                            Default: 500
+                """
+            ),
+        )
+
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        parser.add_argument("-t","--threshold", type=str, help=SUPPRESS)
+        args = parser.parse_args(argv)
+        NumberOfLargeScaffolds(args).run()
 
     @staticmethod
     def number_of_scaffolds(argv):
