@@ -1,8 +1,11 @@
+from os import path
 import sys
 
 from Bio import SeqIO
 
 from .base import Text
+
+here = path.dirname(__file__)
 
 class TranslateSequence(Text):
     def __init__(self, args) -> None:
@@ -26,8 +29,9 @@ class TranslateSequence(Text):
     
     def read_translation_table(self, translation_table: str):
         translation_table = dict()
+        
         if self.translation_table is None:
-            pathing = '/Users/jlsteenwyk/Desktop/GITHUB/BioKIT/biokit/tables/standard_genetic_code.txt'
+            pathing = path.join(here, "../../tables/standard_genetic_code.txt")
             with open(pathing) as code:
                 for line in code:
                     line=line.split()
@@ -38,6 +42,33 @@ class TranslateSequence(Text):
             '31', '33', '50'
         ]:
             print("eh")
+            # 1. The Standard Code
+            # 2. The Vertebrate Mitochondrial Code
+            # 3. The Yeast Mitochondrial Code
+            # 4. The Mold, Protozoan, and Coelenterate Mitochondrial
+            #     Code and the Mycoplasma/Spiroplasma Code
+            # 5. The Invertebrate Mitochondrial Code
+            # 6. The Ciliate, Dasycladacean and Hexamita Nuclear Code
+            # 9. The Echinoderm and Flatworm Mitochondrial Code
+            # 10. The Euplotid Nuclear Code
+            # 11. The Bacterial, Archaeal and Plant Plastid Code
+            # 12. The Alternative Yeast Nuclear Code
+            # 13. The Ascidian Mitochondrial Code
+            # 14. The Alternative Flatworm Mitochondrial Code
+            # 16. Chlorophycean Mitochondrial Code
+            # 21. Trematode Mitochondrial Code
+            # 22. Scenedesmus obliquus Mitochondrial Code
+            # 23. Thraustochytrium Mitochondrial Code
+            # 24. Rhabdopleuridae Mitochondrial Code
+            # 25. Candidate Division SR1 and Gracilibacteria Code
+            # 26. Pachysolen tannophilus Nuclear Code
+            # 27. Karyorelict Nuclear Code
+            # 28. Condylostoma Nuclear Code
+            # 29. Mesodinium Nuclear Code
+            # 30. Peritrich Nuclear Code
+            # 31. Blastocrithidia Nuclear Code
+            # 33. Cephalodiscidae Mitochondrial UAA-Tyr Code
+            # 50. CUG-Ala Code
         # case handling for a custom translation table
         else:
             with open(self.translation_table) as code:
