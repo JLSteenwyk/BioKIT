@@ -16,17 +16,16 @@ class N50(Text):
             contig_lens.append(len(seq_record))
         
         # sort and reverse contig lengths
-        contig_lens = sorted(contig_lens)
-        contig_lens.reverse()
+        contig_lens.sort(reverse=True)
 
         # calculate N50
         sum_contig_lens = sum(contig_lens)
-        threshold = sum_contig_lens*.50
-        n50 = 0
+        n50_threshold = sum_contig_lens*.50
+        curr = 0
 
         for contig_len in contig_lens:
-            n50 += contig_len
-            if n50 >= threshold:
+            curr += contig_len
+            if curr >= n50_threshold:
                 print(contig_len)
                 break
     

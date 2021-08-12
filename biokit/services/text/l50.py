@@ -16,8 +16,7 @@ class L50(Text):
             contig_lens.append(len(seq_record))
         
         # sort and reverse contig lengths
-        contig_lens = sorted(contig_lens)
-        contig_lens.reverse()
+        contig_lens.sort(reverse=True)
 
         # calculate N50
         sum_contig_lens = sum(contig_lens)
