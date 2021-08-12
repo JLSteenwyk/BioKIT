@@ -26,6 +26,7 @@ from .services.text import (
     N90,
     PositionSpecificScoreMatrix,
     RenameFastaEntries,
+    ReorderBySequenceLength,
     SequenceComplement,
     SequenceLength,
     TranslateSequence,
@@ -53,7 +54,7 @@ help_header = f"""
                             
                 Version: {__version__}
                 Citation: Steenwyk et al. 2021, CITATION INFORMATION
-
+                
 """
 
 class Biokit(object):
@@ -640,6 +641,46 @@ class Biokit(object):
         parser.add_argument("-o", "--output", type=str, required=False, help=SUPPRESS)
         args = parser.parse_args(argv)
         RenameFastaEntries(args).run()
+    
+    @staticmethod
+    def reorder_by_sequence_length(argv):
+        parser = ArgumentParser(add_help=True,
+            usage=SUPPRESS,
+            formatter_class=RawDescriptionHelpFormatter,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+                Reorder FASTA file entries from the longest entry
+                to the shortest entry. 
+
+                Aliases:
+                  reorder_by_sequence_length, reorder_by_seq_len
+                Command line interfaces: 
+                  bk_reorder_by_sequence_length, bk_reorder_by_seq_len
+                
+                Usage:
+                biokit reorder_by_sequence_length <fasta> [-o/--output <output_file>]
+                
+                Options
+                =====================================================
+                <fasta>                     first argument after 
+                                            function name should be
+                                            a fasta file
+
+                -o/--output                 optional argument to write
+                                            the reordered fasta file to.
+                                            Default output has the same 
+                                            name as the input file with
+                                            the suffix ".reordered.fa" added
+                                            to it.
+                """
+            ),
+        )
+
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        parser.add_argument("-o", "--output", type=str, required=False, help=SUPPRESS)
+        args = parser.parse_args(argv)
+        ReorderBySequenceLength(args).run()
 
     @staticmethod
     def sequence_length(argv):
