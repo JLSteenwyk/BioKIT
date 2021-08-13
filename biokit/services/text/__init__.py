@@ -2,6 +2,7 @@ from .character_frequency import CharacterFrequency
 from .consensus_sequence import ConsensusSequence
 from .gc_content import GCContent
 from .gc_content_third_position import GCContentThirdPosition
+from .genome_assembly_metrics import GenomeAssemblyMetrics
 from .faidx import Faidx
 from .file_format_converter import FileFormatConverter
 from .l50 import L50

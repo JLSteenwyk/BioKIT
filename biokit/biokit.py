@@ -19,6 +19,7 @@ from .services.text import (
     FileFormatConverter,
     GCContent,
     GCContentThirdPosition,
+    GenomeAssemblyMetrics,
     L50,
     L90,
     LongestScaffold,
@@ -451,6 +452,47 @@ class Biokit(object):
         parser.add_argument("-v", "--verbose", action="store_true", required=False, help=SUPPRESS)
         args = parser.parse_args(argv)
         GCContentThirdPosition(args).run()
+
+    @staticmethod
+    def genome_assembly_metrics(argv):
+        parser = ArgumentParser(add_help=True,
+            usage=SUPPRESS,
+            formatter_class=RawDescriptionHelpFormatter,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+                
+                Calculate L50, L90, N50, N90, GC content, total
+                length, number of scaffolds, number and sum length
+                of large scaffolds, frequency of A, T, C, and G.
+                
+                Aliases:
+                  genome_assembly_metrics, assembly_metrics
+                Command line interfaces: 
+                  bk_genome_assembly_metrics, bk_assembly_metrics
+
+                Usage:
+                biokit genome_assembly_metrics <fasta>
+
+                Options
+                =====================================================
+                <fasta>                     first argument after 
+                                            function name should be
+                                            a fasta file 
+
+                -t/--threshold              threshold for what is considered
+                                            a large scaffold. Only scaffolds
+                                            with a length greater than this
+                                            value will be counted.
+                                            Default: 500
+                """
+            ),
+        )
+
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        parser.add_argument("-t","--threshold", type=str, help=SUPPRESS)
+        args = parser.parse_args(argv)
+        GenomeAssemblyMetrics(args).run()
 
     @staticmethod
     def l50(argv):
