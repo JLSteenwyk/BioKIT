@@ -18,12 +18,12 @@ from .services.text import (
     FileFormatConverter,
     GCContent,
     GCContentThirdPosition,
-    LongestScaffold,
     L50,
     L90,
-    NumberOfScaffolds,
+    LongestScaffold,
     N50,
     N90,
+    NumberOfScaffolds,
     NumberOfLargeScaffolds,
     PositionSpecificScoreMatrix,
     RenameFastaEntries,
@@ -97,6 +97,8 @@ class Biokit(object):
 
                 Text sequence file-based commands
                 =================================
+                consensus_sequence (alias: con_len)
+                    - create a consensus sequence from an alignment
                 faidx (alias: get_entry; ge)
                     - extract query fasta entry from multi-fasta file
                 file_format_converter (alias: format_converter; ffc)
@@ -104,8 +106,37 @@ class Biokit(object):
                       to another
                 gc_content (alias: gc)
                     - calculate the GC content of a FASTA file
-                rename_fasta_entries
-                sequence_length                           
+                gc_content_third_position (alias: gc3)
+                    - calculate the GC content of the third position
+                      among coding sequences
+                l50
+                    - calculate the L50 of a genome assembly
+                l90
+                    - calcualte the L90 of a genome assembly
+                longest_scaffold (alias: longest_scaff, longest_contig, longest_cont)
+                    - determine the length of the longest
+                      scaffold of a genome assembly
+                n50
+                    - calculate the N50 of a genome assembly
+                n90
+                    - calculate the N90 of a genome assembly
+                number_of_scaffolds (alias: num_of_scaffolds, number_of_contigs, num_of_cont)
+                    - calculate the number of scaffolds in a
+                      genome assembly
+                number_of_large_scaffolds (alias: num_of_lrg_scaffolds, number_of_large_contigs, num_of_lrg_cont)
+                    - calculate the number of large scaffolds
+                position_specific_score_matrix (alias: pssm)
+                    - create a position specific score matrix for an alignment
+                rename_fasta_entries (alias: rename_fasta)
+                    - rename entries in a FASTA file
+                reorder_by_sequence_length (alias: reorder_by_seq_len)
+                    - reorder sequences from longest to shortest in a FASTA file
+                sequence_complement (alias: seq_comp)
+                    - generate the complementary sequence for an alignment 
+                sequence_length (alias: seq_len)
+                    - calculate the length of each FASTA entry
+                translate_sequence (alias: translate_seq, trans_seq) 
+                    - translate coding sequences to amino acids
 
                 Tree-based commands
                 ===================
@@ -145,6 +176,21 @@ class Biokit(object):
             return self.longest_scaffold(argv)
         elif command in ['num_of_scaffolds', 'number_of_contigs', 'num_of_cont']:
             return self.number_of_scaffolds(argv)
+        elif command in [
+            'number_of_large_scaffolds',
+            'num_of_lrg_scaffolds', 
+            'number_of_large_contigs',
+            'num_of_lrg_cont'
+        ]:
+            return self.number_of_large_scaffolds(argv)
+        elif command in ['pssm']:
+            return self.position_specific_score_matrix(argv)
+        elif command in ['reorder_by_seq_len']:
+            return self.reorder_by_sequence_length(argv)
+        elif command in ['seq_comp']:
+            return self.sequence_complement(argv)
+        elif command in ['seq_len']:
+            return self.sequence_length(argv)
         # Tree aliases
         elif command in ['labels', 'tree_labels', 'tl']:
             return self.tip_labels(argv)
@@ -373,38 +419,6 @@ class Biokit(object):
         GCContentThirdPosition(args).run()
 
     @staticmethod
-    def longest_scaffold(argv):
-        parser = ArgumentParser(add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
-            description=textwrap.dedent(
-                f"""\
-                {help_header}
-
-                Calculate sequence length of each FASTA entry.
-                
-                Aliases:
-                  longest_scaffold, longest_scaff, longest_contig, longest_cont
-                Command line interfaces: 
-                  bk_longest_scaffold, bk_longest_scaff, bk_longest_contig, bk_longest_cont
-
-                Usage:
-                biokit longest_scaffold <fasta>
-
-                Options
-                =====================================================
-                <fasta>                     first argument after 
-                                            function name should be
-                                            a fasta file 
-                """
-            ),
-        )
-
-        parser.add_argument("fasta", type=str, help=SUPPRESS)
-        args = parser.parse_args(argv)
-        LongestScaffold(args).run()
-
-    @staticmethod
     def l50(argv):
         parser = ArgumentParser(add_help=True,
             usage=SUPPRESS,
@@ -465,6 +479,100 @@ class Biokit(object):
         parser.add_argument("fasta", type=str, help=SUPPRESS)
         args = parser.parse_args(argv)
         L90(args).run()
+
+    @staticmethod
+    def longest_scaffold(argv):
+        parser = ArgumentParser(add_help=True,
+            usage=SUPPRESS,
+            formatter_class=RawDescriptionHelpFormatter,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+
+                Calculate sequence length of each FASTA entry.
+                
+                Aliases:
+                  longest_scaffold, longest_scaff, longest_contig, longest_cont
+                Command line interfaces: 
+                  bk_longest_scaffold, bk_longest_scaff, bk_longest_contig, bk_longest_cont
+
+                Usage:
+                biokit longest_scaffold <fasta>
+
+                Options
+                =====================================================
+                <fasta>                     first argument after 
+                                            function name should be
+                                            a fasta file 
+                """
+            ),
+        )
+
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        args = parser.parse_args(argv)
+        LongestScaffold(args).run()
+
+    @staticmethod
+    def n50(argv):
+        parser = ArgumentParser(add_help=True,
+            usage=SUPPRESS,
+            formatter_class=RawDescriptionHelpFormatter,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+                
+                Calculates N50 for a genome assembly.
+                
+                Aliases:
+                  n50
+                Command line interfaces: 
+                  bk_n50
+
+                Usage:
+                biokit n50 <fasta>
+
+                Options
+                =====================================================
+                <fasta>                     first argument after 
+                                            function name should be
+                                            a fasta file 
+                """
+            ),
+        )
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        args = parser.parse_args(argv)
+        N50(args).run()
+
+    @staticmethod
+    def n90(argv):
+        parser = ArgumentParser(add_help=True,
+            usage=SUPPRESS,
+            formatter_class=RawDescriptionHelpFormatter,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+                
+                Calculates N90 for a genome assembly.
+                
+                Aliases:
+                  n90
+                Command line interfaces: 
+                  bk_n90
+
+                Usage:
+                biokit n90 <fasta>
+
+                Options
+                =====================================================
+                <fasta>                     first argument after 
+                                            function name should be
+                                            a fasta file 
+                """
+            ),
+        )
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        args = parser.parse_args(argv)
+        N90(args).run()
 
     @staticmethod
     def number_of_large_scaffolds(argv):
@@ -540,68 +648,6 @@ class Biokit(object):
         parser.add_argument("fasta", type=str, help=SUPPRESS)
         args = parser.parse_args(argv)
         NumberOfScaffolds(args).run()
-
-    @staticmethod
-    def n50(argv):
-        parser = ArgumentParser(add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
-            description=textwrap.dedent(
-                f"""\
-                {help_header}
-                
-                Calculates N50 for a genome assembly.
-                
-                Aliases:
-                  n50
-                Command line interfaces: 
-                  bk_n50
-
-                Usage:
-                biokit n50 <fasta>
-
-                Options
-                =====================================================
-                <fasta>                     first argument after 
-                                            function name should be
-                                            a fasta file 
-                """
-            ),
-        )
-        parser.add_argument("fasta", type=str, help=SUPPRESS)
-        args = parser.parse_args(argv)
-        N50(args).run()
-
-    @staticmethod
-    def n90(argv):
-        parser = ArgumentParser(add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
-            description=textwrap.dedent(
-                f"""\
-                {help_header}
-                
-                Calculates N90 for a genome assembly.
-                
-                Aliases:
-                  n90
-                Command line interfaces: 
-                  bk_n90
-
-                Usage:
-                biokit n90 <fasta>
-
-                Options
-                =====================================================
-                <fasta>                     first argument after 
-                                            function name should be
-                                            a fasta file 
-                """
-            ),
-        )
-        parser.add_argument("fasta", type=str, help=SUPPRESS)
-        args = parser.parse_args(argv)
-        N90(args).run()
 
     @staticmethod
     def position_specific_score_matrix(argv):
@@ -817,9 +863,9 @@ class Biokit(object):
                 resulting amino acid in the second column.
                 
                 Aliases:
-                  translate_sequence, translate_seq
+                  translate_sequence, translate_seq, trans_seq
                 Command line interfaces: 
-                  bk_translate_sequence, bk_translate_seq
+                  bk_translate_sequence, bk_translate_seq, bk_trans_seq
 
                 Usage:
                 biokit translate_sequence <fasta> [-tt/--translation_table <code>

@@ -3,12 +3,12 @@ from .gc_content import GCContent
 from .gc_content_third_position import GCContentThirdPosition
 from .faidx import Faidx
 from .file_format_converter import FileFormatConverter
-from .longest_scaffold import LongestScaffold
 from .l50 import L50
 from .l90 import L90
-from .number_of_scaffolds import NumberOfScaffolds
+from .longest_scaffold import LongestScaffold
 from .n50 import N50
 from .n90 import N90
+from .number_of_scaffolds import NumberOfScaffolds
 from .number_of_large_scaffolds import NumberOfLargeScaffolds
 from .position_specific_score_matrix import PositionSpecificScoreMatrix
 from .rename_fasta_entries import RenameFastaEntries
