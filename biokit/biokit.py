@@ -13,6 +13,7 @@ from argparse import (
 )
 
 from .services.text import (
+    CharacterFrequency,
     ConsensusSequence,
     Faidx,
     FileFormatConverter,
@@ -30,6 +31,7 @@ from .services.text import (
     ReorderBySequenceLength,
     SequenceComplement,
     SequenceLength,
+    SumOfScaffoldLengths,
     TranslateSequence,
 )
 
@@ -208,6 +210,38 @@ class Biokit(object):
         ))
 
     ## Alignment functions
+    @staticmethod
+    def character_frequency(argv):
+        parser = ArgumentParser(add_help=True,
+            usage=SUPPRESS,
+            formatter_class=RawDescriptionHelpFormatter,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+
+                Calculate the frequency of characters in a FASTA file.
+                
+                Aliases:
+                  character_frequency, char_freq
+                Command line interfaces: 
+                  bk_character_frequency, bk_char_freq
+
+                Usage:
+                biokit character_frequency <fasta>
+
+                Options
+                =====================================================
+                <fasta>                     first argument after 
+                                            function name should be
+                                            a fasta file
+                """
+            ),
+        )
+
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        args = parser.parse_args(argv)
+        CharacterFrequency(args).run()
+
     @staticmethod
     def consensus_sequence(argv):
         parser = ArgumentParser(add_help=True,
@@ -841,6 +875,42 @@ class Biokit(object):
         parser.add_argument("-r", "--reverse", action="store_true", required=False, help=SUPPRESS)
         args = parser.parse_args(argv)
         SequenceComplement(args).run()
+
+    @staticmethod
+    def sum_of_scaffold_lengths(argv):
+        parser = ArgumentParser(add_help=True,
+            usage=SUPPRESS,
+            formatter_class=RawDescriptionHelpFormatter,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+
+                Determine the sum of scaffold lengths. The
+                intended use of this function is to determine
+                the length of a genome assembly, but can also be
+                used, for example, to determine the sum length
+                of all coding sequences.
+                
+                Aliases:
+                  sum_of_scaffold_lengths, sum_of_scaff_lens
+                Command line interfaces: 
+                  bk_sequence_complement, bk_sum_of_scaff_lens
+
+                Usage:
+                biokit sum_of_scaffold_lengths <fasta>
+
+                Options
+                =====================================================
+                <fasta>                     first argument after 
+                                            function name should be
+                                            a fasta file
+                """
+            ),
+        )
+
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        args = parser.parse_args(argv)
+        SumOfScaffoldLengths(args).run()
 
     @staticmethod
     def translate_sequence(argv):

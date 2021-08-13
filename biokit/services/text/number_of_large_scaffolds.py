@@ -9,15 +9,7 @@ class NumberOfLargeScaffolds(Text):
         super().__init__(**self.process_args(args))
 
     def run(self):
-        records = SeqIO.parse(self.fasta, "fasta")
-        cnt = 0
-        total_len = 0
-        for seq_record in records:
-            seq_len = len(seq_record)
-            if seq_len > self.threshold:
-                cnt += 1
-                total_len += seq_len
-
+        cnt, total_len = self.number_of_large_scaffolds()
         print(f"{cnt}\t{total_len}")
     
     def process_args(self, args):
