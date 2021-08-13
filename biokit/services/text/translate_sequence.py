@@ -93,7 +93,7 @@ class TranslateSequence(Text):
             pathing = path.join(here, "../../tables/CUG_ala_code.txt")
         # case handling for a custom translation table
         else:
-            trans_table = self.read_lookup_table(translation_table, trans_table)
+            return self.read_lookup_table(translation_table, trans_table)
         
         return self.read_lookup_table(pathing, trans_table)
 
