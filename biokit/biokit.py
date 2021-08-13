@@ -822,7 +822,9 @@ class Biokit(object):
                   bk_translate_sequence, bk_translate_seq
 
                 Usage:
-                biokit translate_sequence <fasta> [-tt/--translation_table]
+                biokit translate_sequence <fasta> [-tt/--translation_table <code>
+                -o/--output <output_file>]
+
 
                 Options
                 =====================================================
@@ -833,6 +835,13 @@ class Biokit(object):
                 -tt/--translation_table     Code for the translation table
                                             to be used. Default: 1, which
                                             is the standard code.
+                
+                -o/--output                 optional argument to write
+                                            the reordered fasta file to.
+                                            Default output has the same 
+                                            name as the input file with
+                                            the suffix ".reordered.fa" added
+                                            to it.
 
 
                 Codes for which translation table to use
@@ -875,6 +884,7 @@ class Biokit(object):
 
         parser.add_argument("fasta", type=str, help=SUPPRESS)
         parser.add_argument("-tt", "--translation_table", type=str, required=False, help=SUPPRESS)
+        parser.add_argument("-o", "--output", type=str, required=False, help=SUPPRESS)
         args = parser.parse_args(argv)
         TranslateSequence(args).run()
 

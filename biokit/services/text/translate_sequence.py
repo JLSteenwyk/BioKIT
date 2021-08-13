@@ -2,6 +2,8 @@ from os import path
 import sys
 
 from Bio import SeqIO
+from Bio.Seq import Seq
+from Bio.SeqRecord import SeqRecord
 
 from .base import Text
 
@@ -17,67 +19,99 @@ class TranslateSequence(Text):
 
         records = SeqIO.parse(self.fasta, "fasta")
         
-        for seq_record in records:
-            amino_acids = []
-            if len(seq_record._seq) % 3 == 0:
-                for position in range(0, len(seq_record._seq), 3):
-                    codon = seq_record._seq[position:position+3]._data.upper().replace("T", "U")
-                    amino_acids.append(translation_table[codon])
-            
-            print(f">{seq_record.id}")
-            print('\n'.join(''.join(amino_acids)[i:i+80] for i in range(0, len(amino_acids), 80)))
+        with open(self.output_file_path, 'w') as output_file_path:
+            for seq_record in records:
+                amino_acids = []
+                if len(seq_record._seq) % 3 == 0:
+                    for position in range(0, len(seq_record._seq), 3):
+                        codon = seq_record._seq[position:position+3]._data.upper().replace("T", "U")
+                        amino_acids.append(translation_table[codon])
+
+                translated_seq_record = SeqRecord(
+                    Seq(''.join(amino_acids)),
+                    id=seq_record.id,
+                    name='',
+                    description='',
+                )
+
+                SeqIO.write(translated_seq_record, output_file_path, "fasta")
     
     def read_translation_table(self, translation_table: str):
-        translation_table = dict()
-        
-        if self.translation_table is None:
+        trans_table = dict()
+
+        if translation_table is None or translation_table == '1':
             pathing = path.join(here, "../../tables/standard_genetic_code.txt")
-            with open(pathing) as code:
-                for line in code:
-                    line=line.split()
-                    translation_table[line[0]] = line[1]
-        elif self.translation_table in [
-            '1', '2', '3', '4', '5', '6', '9', '10', '11', '12', '13', '14',
-            '16', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30',
-            '31', '33', '50'
-        ]:
-            print("eh")
-            # 1. The Standard Code
-            # 2. The Vertebrate Mitochondrial Code
-            # 3. The Yeast Mitochondrial Code
-            # 4. The Mold, Protozoan, and Coelenterate Mitochondrial
-            #     Code and the Mycoplasma/Spiroplasma Code
-            # 5. The Invertebrate Mitochondrial Code
-            # 6. The Ciliate, Dasycladacean and Hexamita Nuclear Code
-            # 9. The Echinoderm and Flatworm Mitochondrial Code
-            # 10. The Euplotid Nuclear Code
-            # 11. The Bacterial, Archaeal and Plant Plastid Code
-            # 12. The Alternative Yeast Nuclear Code
-            # 13. The Ascidian Mitochondrial Code
-            # 14. The Alternative Flatworm Mitochondrial Code
-            # 16. Chlorophycean Mitochondrial Code
-            # 21. Trematode Mitochondrial Code
-            # 22. Scenedesmus obliquus Mitochondrial Code
-            # 23. Thraustochytrium Mitochondrial Code
-            # 24. Rhabdopleuridae Mitochondrial Code
-            # 25. Candidate Division SR1 and Gracilibacteria Code
-            # 26. Pachysolen tannophilus Nuclear Code
-            # 27. Karyorelict Nuclear Code
-            # 28. Condylostoma Nuclear Code
-            # 29. Mesodinium Nuclear Code
-            # 30. Peritrich Nuclear Code
-            # 31. Blastocrithidia Nuclear Code
-            # 33. Cephalodiscidae Mitochondrial UAA-Tyr Code
-            # 50. CUG-Ala Code
+        elif translation_table == '2':
+            pathing = path.join(here, "../../tables/vertebrate_mitochondrial_code.txt")
+        elif translation_table == '3':
+            pathing = path.join(here, "../../tables/yeast_mitochondrial_code.txt")
+        elif translation_table == '4':
+            pathing = path.join(here, "../../tables/mold_protozoan_and_coelenterate_mitochondrial_code_and_the_mycoplasma_spiroplasma.txt")
+        elif translation_table == '5':
+            pathing = path.join(here, "../../tables/invertebrate_mitochondrial_code.txt")
+        elif translation_table == '6':
+            pathing = path.join(here, "../../tables/ciliate_dasycladacean_and_hexamita_nuclear_code.txt")
+        elif translation_table == '9':
+            pathing = path.join(here, "../../tables/echinoderm_and_flatworm_mitochondrial_code.txt")
+        elif translation_table == '10':
+            pathing = path.join(here, "../../tables/euplotid_nuclear_code.txt")
+        elif translation_table == '11':
+            pathing = path.join(here, "../../tables/bacterial_archaeal_and_plant_plastid_code.txt")
+        elif translation_table == '12':
+            pathing = path.join(here, "../../tables/alternative_yeast_nuclear_code.txt")
+        elif translation_table == '13':
+            pathing = path.join(here, "../../tables/ascidian_mitochondrial_code.txt")
+        elif translation_table == '14':
+            pathing = path.join(here, "../../tables/alternative_flatworm_mitochondrial_code.txt")
+        elif translation_table == '16':
+            pathing = path.join(here, "../../tables/chlorophycean_mitochondrial_code.txt")
+        elif translation_table == '21':
+            pathing = path.join(here, "../../tables/trematode_mitochondrial_code.txt")
+        elif translation_table == '22':
+            pathing = path.join(here, "../../tables/scenedesmus_obliquus_mitochondrial_code.txt")
+        elif translation_table == '23':
+            pathing = path.join(here, "../../tables/thraustochytrium_mitochondrial_code.txt")
+        elif translation_table == '24':
+            pathing = path.join(here, "../../tables/rhabdopleuridae_mitochondrial_code.txt")
+        elif translation_table == '25':
+            pathing = path.join(here, "../../tables/candidate_division_sr1_and_gracilibacteria_code.txt")
+        elif translation_table == '26':
+            pathing = path.join(here, "../../tables/pachysolen_tannophilus_nuclear_code.txt")
+        elif translation_table == '27':
+            pathing = path.join(here, "../../tables/karyorelict_nuclear_code.txt")
+        elif translation_table == '28':
+            pathing = path.join(here, "../../tables/condylostoma_nuclear_code.txt")
+        elif translation_table == '29':
+            pathing = path.join(here, "../../tables/mesodinium_nuclear_code.txt")
+        elif translation_table == '30':
+            pathing = path.join(here, "../../tables/peritrich_nuclear_code.txt")
+        elif translation_table == '31':
+            pathing = path.join(here, "../../tables/blastocrithidia_nuclear_code.txt")
+        elif translation_table == '33':
+            pathing = path.join(here, "../../tables/cephalodiscidae_mitochondrial_UAA_tyr_code.txt")
+        elif translation_table == '50':
+            pathing = path.join(here, "../../tables/CUG_ala_code.txt")
         # case handling for a custom translation table
         else:
-            with open(self.translation_table) as code:
-                for line in code:
-                    line=line.split()
-                    translation_table[line[0]] = line[1]
+            trans_table = self.read_lookup_table(translation_table, trans_table)
         
-        return translation_table
+        return self.read_lookup_table(pathing, trans_table)
 
+    def read_lookup_table(self, pathing: str, trans_table: dict):
+        with open(pathing) as code:
+            for line in code:
+                line=line.split()
+                trans_table[line[0]] = line[1]
+        return trans_table
 
     def process_args(self, args):
-        return dict(fasta=args.fasta, translation_table=args.translation_table)
+        if args.output is None:
+            output_file_path = f"{args.fasta}.translated.fa"
+        else:
+            output_file_path = f"{args.output}"
+
+        return dict(
+            fasta=args.fasta,
+            translation_table=args.translation_table,
+            output_file_path=output_file_path,
+        )
