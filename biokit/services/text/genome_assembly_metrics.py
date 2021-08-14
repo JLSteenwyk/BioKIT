@@ -1,4 +1,5 @@
 import sys
+import textwrap
 
 from .base import Text
 
@@ -26,10 +27,21 @@ class GenomeAssemblyMetrics(Text):
 
         num_of_large_scaffolds, len_of_large_scaffolds = self.number_of_large_scaffolds()
 
-
-
-        print(f"{l50}\t{l90}\t{n50}\t{n90}\t{char_freq}\t{gc_content}\t{num_of_scaffolds}\t{num_of_large_scaffolds}\t{len_of_large_scaffolds}\t{a_freq}\t{t_freq}\t{c_freq}\t{g_freq}")
-        # Calculate frequency of A, T, C, and G.
+        print(textwrap.dedent(f"\
+            Assembly size\t{sum_of_chars}\n\
+            L50\t{l50}\n\
+            L90\t{l90}\n\
+            N50\t{n50}\n\
+            N90\t{n90}\n\
+            GC content\t{round(gc_content, 4)}\n\
+            Number of scaffolds\t{num_of_scaffolds}\n\
+            Number of large scaffolds\t{num_of_large_scaffolds}\n\
+            Sum length of large scaffolds\t{len_of_large_scaffolds}\n\
+            Frequency of A\t{round(a_freq, 4)}\n\
+            Frequency of T\t{round(t_freq, 4)}\n\
+            Frequency of C\t{round(c_freq, 4)}\n\
+            Frequency of G\t{round(g_freq, 4)}"
+        ))
     
     def process_args(self, args):
         if args.threshold is None:
