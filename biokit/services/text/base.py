@@ -29,6 +29,9 @@ class Text(BaseService):
         ambiguous_character=None,
         reverse=None,
         translation_table=None,
+        fastq=None,
+        minimum=None,
+        length=None,
     ):
         self.alignment_file_path = alignment_file_path
         self.output_file_path = output_file_path
@@ -49,6 +52,9 @@ class Text(BaseService):
         self.ambiguous_character = ambiguous_character
         self.reverse = reverse
         self.translation_table = translation_table
+        self.fastq = fastq
+        self.minimum = minimum
+        self.length = length
 
     def get_alignment_and_format(self):
         """

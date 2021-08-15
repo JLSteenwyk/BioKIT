@@ -19,3 +19,4 @@ from .sequence_complement import SequenceComplement
 from .sequence_length import SequenceLength
 from .sum_of_scaffold_lengths import SumOfScaffoldLengths
 from .translate_sequence import TranslateSequence
+from .trim_se_fastq import TrimSEFastQ
