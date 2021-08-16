@@ -34,6 +34,7 @@ from .services.text import (
     SequenceLength,
     SumOfScaffoldLengths,
     TranslateSequence,
+    TrimPEFastQ,
     TrimSEFastQ,
 )
 
@@ -1046,6 +1047,49 @@ class Biokit(object):
         parser.add_argument("-o", "--output", type=str, required=False, help=SUPPRESS)
         args = parser.parse_args(argv)
         TranslateSequence(args).run()
+
+    @staticmethod
+    def trim_pe_fastq(argv):
+        parser = ArgumentParser(add_help=True,
+            usage=SUPPRESS,
+            formatter_class=RawDescriptionHelpFormatter,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+
+                Quality trim paired-end FastQ data.
+                
+                Aliases:
+                  sum_of_scaffold_lengths, sum_of_scaff_lens
+                Command line interfaces: 
+                  bk_sequence_complement, bk_sum_of_scaff_lens
+
+                Usage:
+                biokit sum_of_scaffold_lengths <fasta> [-m/--minimum N]
+
+                Options
+                =====================================================
+                <fastq>                     first argument after 
+                                            function name should be
+                                            a fastq file
+
+                -m/--minimum                minimum quality of read 
+                                            to be kept (Default: 20)
+                
+                -l/--length                 minimum length of read 
+                                            to be kept (Default: 20)
+
+                -o/--output_file            output file name
+                """
+            ),
+        )
+
+        parser.add_argument("fastq1", type=str, help=SUPPRESS)
+        parser.add_argument("fastq2", type=str, help=SUPPRESS)
+        parser.add_argument("-m", "--minimum", type=str, required=False, help=SUPPRESS)
+        parser.add_argument("-l", "--length", type=str, required=False, help=SUPPRESS)
+        args = parser.parse_args(argv)
+        TrimPEFastQ(args).run()
 
     @staticmethod
     def trim_se_fastq(argv):

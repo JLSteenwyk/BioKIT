@@ -35,7 +35,7 @@ class TrimSEFastQ(Text):
                         break
                 # if there is no base below the quality threshold
                 # save the whole read
-                if not trim_idx:
+                if not trim_idx and trim_idx != 0:
                     good_reads.append("@"+title)
                     good_reads.append(seq)
                     good_reads.append("+"+title)
@@ -76,7 +76,6 @@ class TrimSEFastQ(Text):
 
         if args.output_file is None:
             output_file = re.sub(".fastq$|.fq$", "_trimmed.fq", args.fastq)
-            print(output_file)
         else:
             output_file = args.output_file
 
