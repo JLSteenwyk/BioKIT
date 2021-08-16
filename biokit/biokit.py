@@ -1077,6 +1077,8 @@ class Biokit(object):
                 
                 -l/--length                 minimum length of read 
                                             to be kept (Default: 20)
+
+                -o/--output_file            output file name
                 """
             ),
         )
@@ -1084,6 +1086,7 @@ class Biokit(object):
         parser.add_argument("fastq", type=str, help=SUPPRESS)
         parser.add_argument("-m", "--minimum", type=str, required=False, help=SUPPRESS)
         parser.add_argument("-l", "--length", type=str, required=False, help=SUPPRESS)
+        parser.add_argument("-o", "--output_file", type=str, required=False, help=SUPPRESS)
         args = parser.parse_args(argv)
         TrimSEFastQ(args).run()
 

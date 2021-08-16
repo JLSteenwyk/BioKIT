@@ -36,21 +36,20 @@ class TrimSEFastQ(Text):
                 # if there is no base below the quality threshold
                 # save the whole read
                 if not trim_idx:
-                    good_reads.append(title)
+                    good_reads.append("@"+title)
                     good_reads.append(seq)
-                    good_reads.append(title)
+                    good_reads.append("+"+title)
                     good_reads.append(qual)
                     kept += 1
                     cnt += 1
                 # if the trimming idx is longer than the length 
                 # threshold, trim the read
                 elif trim_idx >= self.length:
-                    title = re.sub("length=.*", f"length={trim_idx}", title)
                     seq = seq[:i]
                     qual = qual[:i]
-                    good_reads.append(title)
+                    good_reads.append("@"+title)
                     good_reads.append(seq)
-                    good_reads.append(title)
+                    good_reads.append("+"+title)
                     good_reads.append(qual)
                     kept += 1
                     cnt += 1
@@ -61,7 +60,7 @@ class TrimSEFastQ(Text):
         print(f"Reads processed: {cnt}\nReads kept: {kept}\nReads removed: {removed}")
 
         # write output file
-        with open('trimming_test.out.fastq', 'w') as output_fastq_file_name:
+        with open(self.output_file, 'w') as output_fastq_file_name:
             output_fastq_file_name.write('\n'.join(good_reads))
     
     def process_args(self, args):
@@ -75,8 +74,15 @@ class TrimSEFastQ(Text):
         else:
             length = int(args.length)
 
+        if args.output_file is None:
+            output_file = re.sub(".fastq$|.fq$", "_trimmed.fq", args.fastq)
+            print(output_file)
+        else:
+            output_file = args.output_file
+
         return dict(
             fastq=args.fastq,
             minimum=minimum,
             length=length,
+            output_file=output_file,
         )
