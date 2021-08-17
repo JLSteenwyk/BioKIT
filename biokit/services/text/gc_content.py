@@ -44,8 +44,7 @@ class GCContent(Text):
             try:
                 print(gc_content)
             except BrokenPipeError:
-                pass
-            
+                pass  
 
     def process_args(self, args):
         return dict(

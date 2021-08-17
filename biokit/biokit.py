@@ -18,6 +18,8 @@ from .services.text import (
     Faidx,
     FileFormatConverter,
     GCContent,
+    GCContentFirstPosition,
+    GCContentSecondPosition,
     GCContentThirdPosition,
     GenomeAssemblyMetrics,
     L50,
@@ -111,6 +113,12 @@ class Biokit(object):
                       to another
                 gc_content (alias: gc)
                     - calculate the GC content of a FASTA file
+                gc_content_first_position (alias: gc1)
+                    - calculate the GC content of the first position
+                      among coding sequences
+                gc_content_second_position (alias: gc2)
+                    - calculate the GC content of the second position
+                      among coding sequences
                 gc_content_third_position (alias: gc3)
                     - calculate the GC content of the third position
                       among coding sequences
@@ -416,6 +424,84 @@ class Biokit(object):
         args = parser.parse_args(argv)
         GCContent(args).run()
     
+    @staticmethod
+    def gc_content_first_position(argv):
+        parser = ArgumentParser(add_help=True,
+            usage=SUPPRESS,
+            formatter_class=RawDescriptionHelpFormatter,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+                
+                Calculate GC content of the first codon position.
+                The input must be the coding sequence of a gene or
+                genes. All genes are assumed to have sequence lengths
+                divisible by three.
+                
+                Aliases:
+                  gc_content_first_position, gc1
+                Command line interfaces: 
+                  bk_gc_content_first_position, bk_gc1
+
+                Usage:
+                biokit gc_content_first_position <fasta> [-v/--verbose]
+
+                Options
+                =====================================================
+                <fasta>                     first argument after 
+                                            function name should be
+                                            a fasta file 
+            
+                -v, --verbose               optional argument to print
+                                            the GC content of each fasta
+                                            entry
+                """
+            ),
+        )
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        parser.add_argument("-v", "--verbose", action="store_true", required=False, help=SUPPRESS)
+        args = parser.parse_args(argv)
+        GCContentFirstPosition(args).run()
+
+    @staticmethod
+    def gc_content_second_position(argv):
+        parser = ArgumentParser(add_help=True,
+            usage=SUPPRESS,
+            formatter_class=RawDescriptionHelpFormatter,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+                
+                Calculate GC content of the second codon position.
+                The input must be the coding sequence of a gene or
+                genes. All genes are assumed to have sequence lengths
+                divisible by three.
+                
+                Aliases:
+                  gc_content_second_position, gc2
+                Command line interfaces: 
+                  bk_gc_content_second_position, bk_gc2
+
+                Usage:
+                biokit gc_content_second_position <fasta> [-v/--verbose]
+
+                Options
+                =====================================================
+                <fasta>                     first argument after 
+                                            function name should be
+                                            a fasta file 
+            
+                -v, --verbose               optional argument to print
+                                            the GC content of each fasta
+                                            entry
+                """
+            ),
+        )
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        parser.add_argument("-v", "--verbose", action="store_true", required=False, help=SUPPRESS)
+        args = parser.parse_args(argv)
+        GCContentSecondPosition(args).run()
+
     @staticmethod
     def gc_content_third_position(argv):
         parser = ArgumentParser(add_help=True,
