@@ -39,6 +39,8 @@ class Text(BaseService):
         output_file_2=None,
         fastq1 = None,
         fastq2 = None,
+        percent = None,
+        seed = None,
     ):
         self.alignment_file_path = alignment_file_path
         self.output_file_path = output_file_path
@@ -66,6 +68,8 @@ class Text(BaseService):
         self.output_file_2 = output_file_2
         self.fastq1 = fastq1
         self.fastq2 = fastq2
+        self.percent = percent
+        self.seed = seed
 
     def get_alignment_and_format(self):
         """

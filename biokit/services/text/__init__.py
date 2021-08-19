@@ -20,6 +20,8 @@ from .rename_fasta_entries import RenameFastaEntries
 from .reorder_by_sequence_length import ReorderBySequenceLength
 from .sequence_complement import SequenceComplement
 from .sequence_length import SequenceLength
+from .subset_pe_fastq_reads import SubsetPEFastQReads
+from .subset_se_fastq_reads import SubsetSEFastQReads
 from .sum_of_scaffold_lengths import SumOfScaffoldLengths
 from .translate_sequence import TranslateSequence
 from .trim_pe_fastq import TrimPEFastQ

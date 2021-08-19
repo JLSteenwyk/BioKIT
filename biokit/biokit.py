@@ -35,6 +35,8 @@ from .services.text import (
     ReorderBySequenceLength,
     SequenceComplement,
     SequenceLength,
+    SubsetPEFastQReads,
+    SubsetSEFastQReads,
     SumOfScaffoldLengths,
     TranslateSequence,
     TrimPEFastQ,
@@ -1050,6 +1052,99 @@ class Biokit(object):
         SequenceLength(args).run()
 
     @staticmethod
+    def subset_pe_fastq_reads(argv):
+        parser = ArgumentParser(add_help=True,
+            usage=SUPPRESS,
+            formatter_class=RawDescriptionHelpFormatter,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+
+                Subset paired-end FastQ data.
+                
+                Aliases:
+                  subset_pe_fastq_reads, subset_pe_fastq
+                Command line interfaces: 
+                  bk_subset_pe_fastq_reads, bk_subset_pe_fastq
+
+                Usage:
+                biokit subset_pe_fastq_reads <fasta>
+
+                Options
+                =====================================================
+                <fastq1>                    first argument after 
+                                            function name should be
+                                            a fastq file
+
+                <fastq2>                    second argument after 
+                                            function name should be
+                                            a fastq file
+
+                -p/--percent                percentage of reads to
+                                            maintain in subsetted data.
+                                            Default: 10
+
+                -s/--seed                   seed for random sampling.
+                                            Default: date and time
+
+                -o/--output_file            output file name
+                """
+            ),
+        )
+
+        parser.add_argument("fastq1", type=str, help=SUPPRESS)
+        parser.add_argument("fastq2", type=str, help=SUPPRESS)
+        parser.add_argument("-p", "--percent", type=str, required=False, help=SUPPRESS)
+        parser.add_argument("-s", "--seed", type=str, required=False, help=SUPPRESS)
+        parser.add_argument("-o", "--output_file", type=str, required=False, help=SUPPRESS)
+        args = parser.parse_args(argv)
+        SubsetPEFastQReads(args).run()
+
+    @staticmethod
+    def subset_se_fastq_reads(argv):
+        parser = ArgumentParser(add_help=True,
+            usage=SUPPRESS,
+            formatter_class=RawDescriptionHelpFormatter,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+
+                Subset single-end FastQ data.
+                
+                Aliases:
+                  subset_se_fastq_reads, subset_se_fastq
+                Command line interfaces: 
+                  bk_subset_se_fastq_reads, bk_subset_se_fastq
+
+                Usage:
+                biokit subset_se_fastq_reads <fasta>
+
+                Options
+                =====================================================
+                <fastq>                     first argument after 
+                                            function name should be
+                                            a fastq file
+
+                -p/--percent                percentage of reads to
+                                            maintain in subsetted data.
+                                            Default: 10
+
+                -s/--seed                   seed for random sampling.
+                                            Default: date and time
+
+                -o/--output_file            output file name
+                """
+            ),
+        )
+
+        parser.add_argument("fastq", type=str, help=SUPPRESS)
+        parser.add_argument("-p", "--percent", type=str, required=False, help=SUPPRESS)
+        parser.add_argument("-s", "--seed", type=str, required=False, help=SUPPRESS)
+        parser.add_argument("-o", "--output_file", type=str, required=False, help=SUPPRESS)
+        args = parser.parse_args(argv)
+        SubsetSEFastQReads(args).run()
+
+    @staticmethod
     def sequence_complement(argv):
         parser = ArgumentParser(add_help=True,
             usage=SUPPRESS,
@@ -1212,8 +1307,6 @@ class Biokit(object):
                 
                 -l/--length                 minimum length of read 
                                             to be kept (Default: 20)
-
-                -o/--output_file            output file name
                 """
             ),
         )
