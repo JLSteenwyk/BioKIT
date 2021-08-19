@@ -15,6 +15,7 @@ from .n90 import N90
 from .number_of_scaffolds import NumberOfScaffolds
 from .number_of_large_scaffolds import NumberOfLargeScaffolds
 from .position_specific_score_matrix import PositionSpecificScoreMatrix
+from .relative_synonymous_codon_usage import RelativeSynonymousCodonUsage
 from .rename_fasta_entries import RenameFastaEntries
 from .reorder_by_sequence_length import ReorderBySequenceLength
 from .sequence_complement import SequenceComplement

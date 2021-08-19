@@ -30,6 +30,7 @@ from .services.text import (
     NumberOfScaffolds,
     NumberOfLargeScaffolds,
     PositionSpecificScoreMatrix,
+    RelativeSynonymousCodonUsage,
     RenameFastaEntries,
     ReorderBySequenceLength,
     SequenceComplement,
@@ -63,6 +64,43 @@ help_header = f"""
                 Version: {__version__}
                 Citation: Steenwyk et al. 2021, CITATION INFORMATION
                 
+"""
+
+translation_table_codes = f"""
+                Codes for which translation table to use
+                =====================================================
+                1. The Standard Code
+                2. The Vertebrate Mitochondrial Code
+                3. The Yeast Mitochondrial Code
+                4. The Mold, Protozoan, and Coelenterate Mitochondrial
+                   Code and the Mycoplasma/Spiroplasma Code
+                5. The Invertebrate Mitochondrial Code
+                6. The Ciliate, Dasycladacean and Hexamita Nuclear Code
+                9. The Echinoderm and Flatworm Mitochondrial Code
+                10. The Euplotid Nuclear Code
+                11. The Bacterial, Archaeal and Plant Plastid Code
+                12. The Alternative Yeast Nuclear Code
+                13. The Ascidian Mitochondrial Code
+                14. The Alternative Flatworm Mitochondrial Code
+                16. Chlorophycean Mitochondrial Code
+                21. Trematode Mitochondrial Code
+                22. Scenedesmus obliquus Mitochondrial Code
+                23. Thraustochytrium Mitochondrial Code
+                24. Rhabdopleuridae Mitochondrial Code
+                25. Candidate Division SR1 and Gracilibacteria Code
+                26. Pachysolen tannophilus Nuclear Code
+                27. Karyorelict Nuclear Code
+                28. Condylostoma Nuclear Code
+                29. Mesodinium Nuclear Code
+                30. Peritrich Nuclear Code
+                31. Blastocrithidia Nuclear Code
+                33. Cephalodiscidae Mitochondrial UAA-Tyr Code
+                50. CUG-Ala Code
+
+                More information about genetic codes can be obtained from NCBI:
+                https://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi?chapter=tgencodes.
+                The only codon table not described by NCBI is 50, CUG-Ala wherein CUG encodes
+                for alanine.
 """
 
 class Biokit(object):
@@ -850,6 +888,49 @@ class Biokit(object):
         PositionSpecificScoreMatrix(args).run()
 
     @staticmethod
+    def relative_synonymous_codon_usage(argv):
+        parser = ArgumentParser(add_help=True,
+            usage=SUPPRESS,
+            formatter_class=RawDescriptionHelpFormatter,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+                Calculate relative synonymous codon usage.
+
+                Relative synonymous codon usage is the ratio
+                of the observed frequency of codons over the
+                expected frequency given that all the synonymous
+                codons for the same amino acids are used equally.
+
+                Aliases:
+                  relative_synonymous_codon_usage, rscu
+                Command line interfaces: 
+                  bk_relative_synonymous_codon_usage, bk_rscu
+                
+                Usage:
+                biokit relative_synonymous_codon_usage <fasta> 
+                
+                Options
+                =====================================================
+                <fasta>                     first argument after 
+                                            function name should be
+                                            a fasta file
+
+                -tt/--translation_table     Code for the translation table
+                                            to be used. Default: 1, which
+                                            is the standard code.
+
+
+                {translation_table_codes}
+                """
+            ),
+        )
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        parser.add_argument("-tt", "--translation_table", type=str, required=False, help=SUPPRESS)
+        args = parser.parse_args(argv)
+        RelativeSynonymousCodonUsage(args).run()
+
+    @staticmethod
     def rename_fasta_entries(argv):
         parser = ArgumentParser(add_help=True,
             usage=SUPPRESS,
@@ -1090,40 +1171,7 @@ class Biokit(object):
                                             to it.
 
 
-                Codes for which translation table to use
-                =====================================================
-                1. The Standard Code
-                2. The Vertebrate Mitochondrial Code
-                3. The Yeast Mitochondrial Code
-                4. The Mold, Protozoan, and Coelenterate Mitochondrial
-                   Code and the Mycoplasma/Spiroplasma Code
-                5. The Invertebrate Mitochondrial Code
-                6. The Ciliate, Dasycladacean and Hexamita Nuclear Code
-                9. The Echinoderm and Flatworm Mitochondrial Code
-                10. The Euplotid Nuclear Code
-                11. The Bacterial, Archaeal and Plant Plastid Code
-                12. The Alternative Yeast Nuclear Code
-                13. The Ascidian Mitochondrial Code
-                14. The Alternative Flatworm Mitochondrial Code
-                16. Chlorophycean Mitochondrial Code
-                21. Trematode Mitochondrial Code
-                22. Scenedesmus obliquus Mitochondrial Code
-                23. Thraustochytrium Mitochondrial Code
-                24. Rhabdopleuridae Mitochondrial Code
-                25. Candidate Division SR1 and Gracilibacteria Code
-                26. Pachysolen tannophilus Nuclear Code
-                27. Karyorelict Nuclear Code
-                28. Condylostoma Nuclear Code
-                29. Mesodinium Nuclear Code
-                30. Peritrich Nuclear Code
-                31. Blastocrithidia Nuclear Code
-                33. Cephalodiscidae Mitochondrial UAA-Tyr Code
-                50. CUG-Ala Code
-
-                More information about genetic codes can be obtained from NCBI:
-                https://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi?chapter=tgencodes.
-                The only codon table not described by NCBI is 50, CUG-Ala wherein CUG encodes
-                for alanine.
+                {translation_table_codes}
                 """
             ),
         )
