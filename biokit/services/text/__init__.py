@@ -6,6 +6,7 @@ from .gc_content_second_position import GCContentSecondPosition
 from .gc_content_third_position import GCContentThirdPosition
 from .genome_assembly_metrics import GenomeAssemblyMetrics
 from .faidx import Faidx
+from .fastq_read_lengths import FastQReadLengths
 from .file_format_converter import FileFormatConverter
 from .l50 import L50
 from .l90 import L90

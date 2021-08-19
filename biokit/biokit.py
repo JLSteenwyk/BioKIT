@@ -16,6 +16,7 @@ from .services.text import (
     CharacterFrequency,
     ConsensusSequence,
     Faidx,
+    FastQReadLengths,
     FileFormatConverter,
     GCContent,
     GCContentFirstPosition,
@@ -373,6 +374,42 @@ class Biokit(object):
         parser.add_argument("-e","--entry", type=str, help=SUPPRESS)
         args = parser.parse_args(argv)
         Faidx(args).run()
+
+    @staticmethod
+    def fastq_read_lengths(argv):
+        parser = ArgumentParser(add_help=True,
+            usage=SUPPRESS,
+            formatter_class=RawDescriptionHelpFormatter,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+
+                Quality trim single-end FastQ data.
+                
+                Aliases:
+                  sum_of_scaffold_lengths, sum_of_scaff_lens
+                Command line interfaces: 
+                  bk_sequence_complement, bk_sum_of_scaff_lens
+
+                Usage:
+                biokit sum_of_scaffold_lengths <fasta> [-m/--minimum N]
+
+                Options
+                =====================================================
+                <fastq>                     first argument after 
+                                            function name should be
+                                            a fastq file
+
+                -v/--verbose                print length of each fastq
+                                            read
+                """
+            ),
+        )
+
+        parser.add_argument("fastq", type=str, help=SUPPRESS)
+        parser.add_argument("-v", "--verbose", type=str, required=False, help=SUPPRESS)
+        args = parser.parse_args(argv)
+        FastQReadLengths(args).run()
 
     @staticmethod
     def file_format_converter(argv):
@@ -1298,7 +1335,11 @@ class Biokit(object):
 
                 Options
                 =====================================================
-                <fastq>                     first argument after 
+                <fastq1>                    first argument after 
+                                            function name should be
+                                            a fastq file
+
+                <fastq2>                    second argument after 
                                             function name should be
                                             a fastq file
 
