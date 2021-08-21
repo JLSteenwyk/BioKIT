@@ -1,6 +1,5 @@
 import collections
 import textwrap
-import sys
 
 from Bio import AlignIO
 
