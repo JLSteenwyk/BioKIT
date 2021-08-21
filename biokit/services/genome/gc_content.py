@@ -31,13 +31,15 @@ class GCContent(Genome):
             all_seqs = []
             for entry, seq in entry_and_seq.items():
                 all_seqs.append(seq)
-            all_seqs = ''.join(all_seqs)
+            all_seqs = "".join(all_seqs)
             all_seqs, matches = self.find_matches_and_remove_gaps(all_seqs)
             try:
                 gc_content = round(len(matches) / len(all_seqs), 4)
             except ZeroDivisionError:
                 try:
-                    print("Input file has an unacceptable format. Please check input file argument.")
+                    print(
+                        "Input file has an unacceptable format. Please check input file argument."
+                    )
                     sys.exit()
                 except BrokenPipeError:
                     pass
@@ -47,9 +49,9 @@ class GCContent(Genome):
                 pass
 
     def find_matches_and_remove_gaps(self, seq: str):
-        regex_pattern = re.compile('[GgCc]')
-        seq = seq.replace('-', '')
-        seq = seq.replace('?', '')
+        regex_pattern = re.compile("[GgCc]")
+        seq = seq.replace("-", "")
+        seq = seq.replace("?", "")
         matches = regex_pattern.findall(seq)
         return seq, matches
 

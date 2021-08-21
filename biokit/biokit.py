@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+# !/usr/bin/env python
 
 import logging
 import sys
@@ -72,7 +72,7 @@ help_header = f"""
                 Version: {__version__}
                 Citation: Steenwyk et al. 2021, CITATION INFORMATION
                 
-""" # noqa
+"""  # noqa
 
 translation_table_codes = f"""
                 Codes for which translation table to use
@@ -109,7 +109,7 @@ translation_table_codes = f"""
                 https://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi?chapter=tgencodes.
                 The only codon table not described by NCBI is 50, CUG-Ala wherein CUG encodes
                 for alanine.
-""" # noqa
+"""  # noqa
 
 
 class Biokit(object):
@@ -124,7 +124,7 @@ class Biokit(object):
                 Version: {__version__}
                 Citation: Steenwyk et al. 2021, CITATION INFORMATION
 
-    """ # noqa
+    """  # noqa
 
     def __init__(self):
         parser = ArgumentParser(
@@ -232,7 +232,7 @@ class Biokit(object):
                     - generate the complementary sequence for an alignment 
                 sequence_length (alias: seq_len)
                     - calculate the length of each FASTA entry
-                """ # noqa
+                """  # noqa
             ),
         )
         parser.add_argument("command", help=SUPPRESS)
@@ -360,7 +360,7 @@ class Biokit(object):
                 <fasta>                     first argument after 
                                             function name should be
                                             a fasta file
-                """ # noqa
+                """  # noqa
             ),
         )
 
@@ -402,7 +402,7 @@ class Biokit(object):
                 
                 -ac/--ambiguous_character   the ambiguity character to
                                             use. Default is 'N'
-                """ # noqa
+                """  # noqa
             ),
         )
 
@@ -440,7 +440,7 @@ class Biokit(object):
 
                 -ac/--ambiguous_character   the ambiguity character to
                                             use. Default is 'N'
-                """ # noqa
+                """  # noqa
             ),
         )
 
@@ -482,7 +482,7 @@ class Biokit(object):
                 -v, --verbose               optional argument to print
                                             the GC content of each fasta
                                             entry
-                """ # noqa
+                """  # noqa
             ),
         )
         parser.add_argument("fasta", type=str, help=SUPPRESS)
@@ -524,7 +524,7 @@ class Biokit(object):
                 -v, --verbose               optional argument to print
                                             the GC content of each fasta
                                             entry
-                """ # noqa
+                """  # noqa
             ),
         )
         parser.add_argument("fasta", type=str, help=SUPPRESS)
@@ -566,7 +566,7 @@ class Biokit(object):
                 -v, --verbose               optional argument to print
                                             the GC content of each fasta
                                             entry
-                """ # noqa
+                """  # noqa
             ),
         )
         parser.add_argument("fasta", type=str, help=SUPPRESS)
@@ -612,7 +612,7 @@ class Biokit(object):
 
 
                 {translation_table_codes}
-                """ # noqa
+                """  # noqa
             ),
         )
         parser.add_argument("fasta", type=str, help=SUPPRESS)
@@ -672,7 +672,7 @@ class Biokit(object):
 
 
                 {translation_table_codes}
-                """ # noqa
+                """  # noqa
             ),
         )
 
@@ -713,7 +713,7 @@ class Biokit(object):
 
                 -v/--verbose                print length of each fastq
                                             read
-                """ # noqa
+                """  # noqa
             ),
         )
 
@@ -760,7 +760,7 @@ class Biokit(object):
                                             Default: date and time
 
                 -o/--output_file            output file name
-                """ # noqa
+                """  # noqa
             ),
         )
 
@@ -808,7 +808,7 @@ class Biokit(object):
                                             Default: date and time
 
                 -o/--output_file            output file name
-                """ # noqa
+                """  # noqa
             ),
         )
 
@@ -857,7 +857,7 @@ class Biokit(object):
                 
                 -l/--length                 minimum length of read 
                                             to be kept (Default: 20)
-                """ # noqa
+                """  # noqa
             ),
         )
 
@@ -901,7 +901,7 @@ class Biokit(object):
                                             to be kept (Default: 20)
 
                 -o/--output_file            output file name
-                """ # noqa
+                """  # noqa
             ),
         )
 
@@ -944,7 +944,7 @@ class Biokit(object):
                 -v, --verbose               optional argument to print
                                             the GC content of each fasta
                                             entry
-                """ # noqa
+                """  # noqa
             ),
         )
         parser.add_argument("fasta", type=str, help=SUPPRESS)
@@ -987,7 +987,7 @@ class Biokit(object):
                                             with a length greater than this
                                             value will be counted.
                                             Default: 500
-                """ # noqa
+                """  # noqa
             ),
         )
 
@@ -1021,7 +1021,7 @@ class Biokit(object):
                 <fasta>                     first argument after 
                                             function name should be
                                             a fasta file 
-                """ # noqa
+                """  # noqa
             ),
         )
         parser.add_argument("fasta", type=str, help=SUPPRESS)
@@ -1053,7 +1053,7 @@ class Biokit(object):
                 <fasta>                     first argument after 
                                             function name should be
                                             a fasta file 
-                """ # noqa
+                """  # noqa
             ),
         )
         parser.add_argument("fasta", type=str, help=SUPPRESS)
@@ -1085,7 +1085,7 @@ class Biokit(object):
                 <fasta>                     first argument after 
                                             function name should be
                                             a fasta file 
-                """ # noqa
+                """  # noqa
             ),
         )
 
@@ -1118,7 +1118,7 @@ class Biokit(object):
                 <fasta>                     first argument after 
                                             function name should be
                                             a fasta file 
-                """ # noqa
+                """  # noqa
             ),
         )
         parser.add_argument("fasta", type=str, help=SUPPRESS)
@@ -1150,7 +1150,7 @@ class Biokit(object):
                 <fasta>                     first argument after 
                                             function name should be
                                             a fasta file 
-                """ # noqa
+                """  # noqa
             ),
         )
         parser.add_argument("fasta", type=str, help=SUPPRESS)
@@ -1192,7 +1192,7 @@ class Biokit(object):
                                             with a length greater than this
                                             value will be counted.
                                             Default: 500
-                """ # noqa
+                """  # noqa
             ),
         )
 
@@ -1226,7 +1226,7 @@ class Biokit(object):
                 <fasta>                     first argument after 
                                             function name should be
                                             a fasta file 
-                """ # noqa
+                """  # noqa
             ),
         )
 
@@ -1263,7 +1263,7 @@ class Biokit(object):
                 <fasta>                     first argument after 
                                             function name should be
                                             a fasta file
-                """ # noqa
+                """  # noqa
             ),
         )
 
@@ -1297,7 +1297,7 @@ class Biokit(object):
                 <fasta>                     first argument after 
                                             function name should be
                                             a fasta file
-                """ # noqa
+                """  # noqa
             ),
         )
 
@@ -1336,7 +1336,7 @@ class Biokit(object):
 
                 -e/--entry                  entry name to be extracted
                                             from the inputted fasta file
-                """ # noqa
+                """  # noqa
             ),
         )
         parser.add_argument("fasta", type=str, help=SUPPRESS)
@@ -1388,7 +1388,7 @@ class Biokit(object):
                 Input and output file formats are specified using one of
                 the following strings: fasta, clustal, maf, mauve, phylip,
                 phylip_sequential, phylip_relaxed, & stockholm.
-                """ # noqa
+                """  # noqa
             ),
         )
         parser.add_argument("-i", "--input_file", type=str, help=SUPPRESS)
@@ -1438,7 +1438,7 @@ class Biokit(object):
                                             name as the input file with
                                             the suffix ".renamed.fa" added
                                             to it.
-                """ # noqa
+                """  # noqa
             ),
         )
         parser.add_argument("fasta", type=str, help=SUPPRESS)
@@ -1479,7 +1479,7 @@ class Biokit(object):
                                             name as the input file with
                                             the suffix ".reordered.fa" added
                                             to it.
-                """ # noqa
+                """  # noqa
             ),
         )
 
@@ -1518,7 +1518,7 @@ class Biokit(object):
 
                 -r/--reverse                if used, the reverse complement
                                             sequence will be generated
-                """ # noqa
+                """  # noqa
             ),
         )
 
@@ -1554,7 +1554,7 @@ class Biokit(object):
                 <fasta>                     first argument after 
                                             function name should be
                                             a fasta file 
-                """ # noqa
+                """  # noqa
             ),
         )
 

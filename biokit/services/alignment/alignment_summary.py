@@ -1,5 +1,4 @@
 import collections
-import sys
 import textwrap
 
 from Bio import AlignIO
@@ -17,10 +16,8 @@ class AlignmentSummary(Alignment):
 
         # character frequency counting
         char_freq = calculate_character_frequencies(self.fasta)
-
-        if "?" in char_freq.keys() and "-" in char_freq.keys():
-            char_freq["-"] += char_freq["?"]
-            del char_freq["?"]
+        char_freq = self.combine_gaps(char_freq)
+        char_freq = collections.OrderedDict(sorted(char_freq.items(), reverse=True))
 
         # number of taxa
         number_of_taxa = len(alignment)
@@ -28,7 +25,24 @@ class AlignmentSummary(Alignment):
         # alignment length
         alignment_length = alignment.get_alignment_length()
 
-        # number of parsimony informative sites
+        # number of parsimony informative, variable, and constant sites
+        pis, vs, cs = self.determine_pis_vs_cs(alignment, alignment_length)
+
+        # print out results
+        self.print_alignment_summary(
+            number_of_taxa,
+            alignment_length,
+            pis,
+            vs,
+            cs,
+            char_freq,
+        )
+
+    def determine_pis_vs_cs(self, alignment, alignment_length):
+        """
+        determine number of parsimony informative,
+        variable, and constant sites in an alignment
+        """
         parsimony_informative_sites = 0
         variable_sites = 0
         constant_sites = 0
@@ -53,29 +67,49 @@ class AlignmentSummary(Alignment):
             else:
                 1
 
-        print(
-            textwrap.dedent(
-                f"\
+        return parsimony_informative_sites, variable_sites, constant_sites
+
+    def combine_gaps(self, char_freq: dict) -> dict:
+        """
+        combine counts for '?' and '-' characters,
+        which represents gaps
+        """
+        if "?" in char_freq.keys() and "-" in char_freq.keys():
+            char_freq["-"] += char_freq["?"]
+            del char_freq["?"]
+
+        return char_freq
+
+    def print_alignment_summary(
+        self,
+        number_of_taxa: int,
+        alignment_length: int,
+        parsimony_informative_sites: int,
+        variable_sites: int,
+        constant_sites: int,
+        char_freq: dict,
+    ):
+        """
+        print summary results
+        """
+
+        out_str = textwrap.dedent(
+            f"""
             General Characteristics\n\
             =======================\n\
             {number_of_taxa}\tNumber of taxa\n\
             {alignment_length}\tAlignment length\n\
             {parsimony_informative_sites}\tParsimony informative sites\n\
             {variable_sites}\tVariable sites\n\
-            {constant_sites}\tConstant sites"
-            )
+            {constant_sites}\tConstant sites"""
         )
-        char_freq = collections.OrderedDict(sorted(char_freq.items(), reverse=True))
-        print("\nCharacter Frequencies")
-        print("=====================")
-        for k, v in char_freq.items():
-            print(f"{k}\t{v}")
 
-        # Summary statistics for an alignment. Reported
-        # statistics include alignment length, number of taxa,
-        # number of parsimony sites, number of variable sites,
-        # number of constant sites, frequency of each character
-        # (including gaps, which are considered to be '-' or '?').
+        out_str += "\n\nCharacter Frequencies"
+        out_str += "\n====================="
+        for k, v in char_freq.items():
+            out_str += f"\n{k}\t{v}"
+
+        print(out_str)
 
     def process_args(self, args):
         return dict(fasta=args.fasta)
