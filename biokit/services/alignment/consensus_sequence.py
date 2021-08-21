@@ -1,10 +1,10 @@
 from Bio import AlignIO
 from Bio.Align import AlignInfo
 
-from .base import Text
+from .base import Alignment
 
 
-class ConsensusSequence(Text):
+class ConsensusSequence(Alignment):
     def __init__(self, args) -> None:
         super().__init__(**self.process_args(args))
 
