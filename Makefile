@@ -1,6 +1,6 @@
 ## Run alignment-based functions
-run.alignment_length:
-	python3 -m biokit-runner alignment_length ./tests/sample_files/simple.fa 
+run.alignment_summary:
+	python3 -m biokit-runner alignment_summary ./tests/sample_files/simple.fa 
 
 ## Install, develop, and testing make commands
 install:
@@ -20,7 +20,6 @@ test.integration:
 	rm -rf output/
 	mkdir output/
 	python3 -m pytest --basetemp=output -m "integration"
-	rm test.fa test.occupancy test.partition
 
 test.fast:
 	python -m pytest -m "not (integration or slow)"

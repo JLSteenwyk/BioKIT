@@ -21,7 +21,7 @@ class TestAlignmentSummary(object):
         assert pytest_wrapped_e.value.code == 2
 
     @patch("builtins.print")
-    def test_alignment_summary(self, mocked_print):
+    def test_alignment_summary_simple(self, mocked_print):
         expected_result = textwrap.dedent(
             """
             General Characteristics
