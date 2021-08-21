@@ -23,10 +23,15 @@ class TestInternodeLabeler(object):
         with patch.object(sys, "argv", testargs):
             Phykit()
 
-        with open(f"{here.parent.parent}/expected/tree_simple.tre.internode_labels.tre", "r") as expected_tree:
+        with open(
+            f"{here.parent.parent}/expected/tree_simple.tre.internode_labels.tre", "r"
+        ) as expected_tree:
             expected_tree_content = expected_tree.read()
 
-        with open(f"{here.parent.parent.parent}/sample_files/tree_simple.tre.internode_labels.tre", "r") as out_tree:
+        with open(
+            f"{here.parent.parent.parent}/sample_files/tree_simple.tre.internode_labels.tre",
+            "r",
+        ) as out_tree:
             out_tree_content = out_tree.read()
 
         assert expected_tree_content == out_tree_content
@@ -42,10 +47,15 @@ class TestInternodeLabeler(object):
         with patch.object(sys, "argv", testargs):
             Phykit()
 
-        with open(f"{here.parent.parent}/expected/tree_simple.tre.internode_labels.tre", "r") as expected_tree:
+        with open(
+            f"{here.parent.parent}/expected/tree_simple.tre.internode_labels.tre", "r"
+        ) as expected_tree:
             expected_tree_content = expected_tree.read()
 
-        with open(f"{here.parent.parent.parent}/sample_files/tree_simple.tre.internode_labels.tre", "r") as out_tree:
+        with open(
+            f"{here.parent.parent.parent}/sample_files/tree_simple.tre.internode_labels.tre",
+            "r",
+        ) as out_tree:
             out_tree_content = out_tree.read()
 
         assert expected_tree_content == out_tree_content
@@ -57,16 +67,21 @@ class TestInternodeLabeler(object):
             "internode_labeler",
             f"{here.parent.parent.parent}/sample_files/tree_simple.tre",
             "-o",
-            f"{here.parent.parent.parent}/sample_files/tree_simple.custom_out_internode_labels.tre"
+            f"{here.parent.parent.parent}/sample_files/tree_simple.custom_out_internode_labels.tre",
         ]
 
         with patch.object(sys, "argv", testargs):
             Phykit()
 
-        with open(f"{here.parent.parent}/expected/tree_simple.tre.internode_labels.tre", "r") as expected_tree:
+        with open(
+            f"{here.parent.parent}/expected/tree_simple.tre.internode_labels.tre", "r"
+        ) as expected_tree:
             expected_tree_content = expected_tree.read()
 
-        with open(f"{here.parent.parent.parent}/sample_files/tree_simple.tre.internode_labels.tre", "r") as out_tree:
+        with open(
+            f"{here.parent.parent.parent}/sample_files/tree_simple.tre.internode_labels.tre",
+            "r",
+        ) as out_tree:
             out_tree_content = out_tree.read()
 
         assert expected_tree_content == out_tree_content
@@ -78,9 +93,9 @@ class TestInternodeLabeler(object):
             "internode_labeler",
             f"{here.parent.parent.parent}/sample_files/tree_simple.tre",
             "-o",
-            f"{here.parent.parent.parent}/sample_files/tree_simple.custom_out_internode_labels.tre"
+            f"{here.parent.parent.parent}/sample_files/tree_simple.custom_out_internode_labels.tre",
         ]
-        
+
         with pytest.raises(SystemExit) as pytest_wrapped_e:
             Phykit()
 

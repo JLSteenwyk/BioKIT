@@ -8,7 +8,10 @@ from phykit.services.tree.dvmc import DVMC
 
 @pytest.fixture
 def args():
-    kwargs = dict(tree="/some/path/to/file.tre", root="/home/path/to/file.txt",)
+    kwargs = dict(
+        tree="/some/path/to/file.tre",
+        root="/home/path/to/file.txt",
+    )
     return Namespace(**kwargs)
 
 

@@ -21,15 +21,19 @@ class TestBranchLengthMultiplier(object):
             "-f",
             "5",
             "-o",
-            "./tests/sample_files/tree_simple_blm_5.tre"
+            "./tests/sample_files/tree_simple_blm_5.tre",
         ]
         with patch.object(sys, "argv", testargs):
             Phykit()
 
-        with open(f"{here.parent.parent}/expected/tree_simple_blm_5.tre", "r") as expected_tree:
+        with open(
+            f"{here.parent.parent}/expected/tree_simple_blm_5.tre", "r"
+        ) as expected_tree:
             expected_tree_content = expected_tree.read()
 
-        with open(f"{here.parent.parent.parent}/sample_files/tree_simple_blm_5.tre", "r") as out_tree:
+        with open(
+            f"{here.parent.parent.parent}/sample_files/tree_simple_blm_5.tre", "r"
+        ) as out_tree:
             out_tree_content = out_tree.read()
 
         assert expected_tree_content == out_tree_content
@@ -46,10 +50,15 @@ class TestBranchLengthMultiplier(object):
         with patch.object(sys, "argv", testargs):
             Phykit()
 
-        with open(f"{here.parent.parent}/expected/tree_simple.tre.factor_2.0.tre", "r") as expected_tree:
+        with open(
+            f"{here.parent.parent}/expected/tree_simple.tre.factor_2.0.tre", "r"
+        ) as expected_tree:
             expected_tree_content = expected_tree.read()
 
-        with open(f"{here.parent.parent.parent}/sample_files/tree_simple.tre.factor_2.0.tre", "r") as out_tree:
+        with open(
+            f"{here.parent.parent.parent}/sample_files/tree_simple.tre.factor_2.0.tre",
+            "r",
+        ) as out_tree:
             out_tree_content = out_tree.read()
 
         assert expected_tree_content == out_tree_content
@@ -66,10 +75,15 @@ class TestBranchLengthMultiplier(object):
         with patch.object(sys, "argv", testargs):
             Phykit()
 
-        with open(f"{here.parent.parent}/expected/tree_simple.tre.factor_2.0.tre", "r") as expected_tree:
+        with open(
+            f"{here.parent.parent}/expected/tree_simple.tre.factor_2.0.tre", "r"
+        ) as expected_tree:
             expected_tree_content = expected_tree.read()
 
-        with open(f"{here.parent.parent.parent}/sample_files/tree_simple.tre.factor_2.0.tre", "r") as out_tree:
+        with open(
+            f"{here.parent.parent.parent}/sample_files/tree_simple.tre.factor_2.0.tre",
+            "r",
+        ) as out_tree:
             out_tree_content = out_tree.read()
 
         assert expected_tree_content == out_tree_content
@@ -83,7 +97,7 @@ class TestBranchLengthMultiplier(object):
             "-f",
             "2",
         ]
-        
+
         with pytest.raises(SystemExit) as pytest_wrapped_e:
             Phykit()
 
@@ -98,7 +112,7 @@ class TestBranchLengthMultiplier(object):
             f"{here.parent.parent.parent}/sample_files/tree_simple.tr",
             "-f",
         ]
-        
+
         with pytest.raises(SystemExit) as pytest_wrapped_e:
             Phykit()
 

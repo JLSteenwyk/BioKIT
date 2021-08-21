@@ -47,7 +47,9 @@ class TestCreateConcatenationMatrix(object):
             call("Complete!\n"),
         ]
 
-        with open(f"{here.parent.parent}/expected/concat_matrix.fa", "r") as expected_fa, open(
+        with open(
+            f"{here.parent.parent}/expected/concat_matrix.fa", "r"
+        ) as expected_fa, open(
             f"{here.parent.parent}/expected/concat_matrix.occupancy", "r"
         ) as expected_occupency, open(
             f"{here.parent.parent}/expected/concat_matrix.partition"
@@ -103,7 +105,9 @@ class TestCreateConcatenationMatrix(object):
             call("Complete!\n"),
         ]
 
-        with open(f"{here.parent.parent}/expected/test_alignment_concat_123.fa", "r") as expected_fa, open(
+        with open(
+            f"{here.parent.parent}/expected/test_alignment_concat_123.fa", "r"
+        ) as expected_fa, open(
             f"{here.parent.parent}/expected/test_alignment_concat_123.occupancy", "r"
         ) as expected_occupency, open(
             f"{here.parent.parent}/expected/test_alignment_concat_123.partition"
@@ -122,7 +126,6 @@ class TestCreateConcatenationMatrix(object):
         assert expected_fa_content == out_fa_content
         assert expected_occupency_content == out_occupency_content
         assert expected_partition_content == out_partition_content
-
 
     @patch("builtins.print")
     def test_create_concatenation_matrix_wrong_input_file(self, mocked_print):

@@ -8,7 +8,9 @@ from phykit.services.tree.treeness import Treeness
 
 @pytest.fixture
 def args():
-    kwargs = dict(tree="/some/path/to/file.tre",)
+    kwargs = dict(
+        tree="/some/path/to/file.tre",
+    )
     return Namespace(**kwargs)
 
 

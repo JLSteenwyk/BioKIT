@@ -23,10 +23,14 @@ class TestRenameFastaEntries(object):
         with patch.object(sys, "argv", testargs):
             Phykit()
 
-        with open(f"{here.parent.parent}/expected/simple.fa.renamed.fa", "r") as expected_fa:
+        with open(
+            f"{here.parent.parent}/expected/simple.fa.renamed.fa", "r"
+        ) as expected_fa:
             expected_fa_content = expected_fa.read()
 
-        with open(f"{here.parent.parent.parent}/sample_files/simple.fa.renamed.fa", "r") as out_renamed:
+        with open(
+            f"{here.parent.parent.parent}/sample_files/simple.fa.renamed.fa", "r"
+        ) as out_renamed:
             out_renamed_content = out_renamed.read()
 
         assert expected_fa_content == out_renamed_content
@@ -40,15 +44,19 @@ class TestRenameFastaEntries(object):
             "-i",
             f"{here.parent.parent.parent}/sample_files/simple_fasta_idmap.txt",
             "-o",
-            f"{here.parent.parent.parent}/sample_files/simple_customized_output_name.fa"
+            f"{here.parent.parent.parent}/sample_files/simple_customized_output_name.fa",
         ]
         with patch.object(sys, "argv", testargs):
             Phykit()
 
-        with open(f"{here.parent.parent}/expected/simple_customized_output_name.fa", "r") as expected_fa:
+        with open(
+            f"{here.parent.parent}/expected/simple_customized_output_name.fa", "r"
+        ) as expected_fa:
             expected_fa_content = expected_fa.read()
 
-        with open(f"{here.parent.parent.parent}/sample_files/simple.fa.renamed.fa", "r") as out_renamed:
+        with open(
+            f"{here.parent.parent.parent}/sample_files/simple.fa.renamed.fa", "r"
+        ) as out_renamed:
             out_renamed_content = out_renamed.read()
 
         assert expected_fa_content == out_renamed_content
@@ -65,10 +73,14 @@ class TestRenameFastaEntries(object):
         with patch.object(sys, "argv", testargs):
             Phykit()
 
-        with open(f"{here.parent.parent}/expected/simple.fa.renamed.fa", "r") as expected_fa:
+        with open(
+            f"{here.parent.parent}/expected/simple.fa.renamed.fa", "r"
+        ) as expected_fa:
             expected_fa_content = expected_fa.read()
 
-        with open(f"{here.parent.parent.parent}/sample_files/simple.fa.renamed.fa", "r") as out_renamed:
+        with open(
+            f"{here.parent.parent.parent}/sample_files/simple.fa.renamed.fa", "r"
+        ) as out_renamed:
             out_renamed_content = out_renamed.read()
 
         assert expected_fa_content == out_renamed_content
@@ -88,9 +100,11 @@ class TestRenameFastaEntries(object):
                 Phykit()
 
         assert pytest_wrapped_e.type == SystemExit
-        mocked_print.assert_has_calls([
-            call("Please double check pathing and filenames"),
-        ])
+        mocked_print.assert_has_calls(
+            [
+                call("Please double check pathing and filenames"),
+            ]
+        )
 
     @patch("builtins.print")
     def test_rename_fasta_entries_incorrect_input_idmap_file(self, mocked_print):
@@ -107,7 +121,8 @@ class TestRenameFastaEntries(object):
                 Phykit()
 
         assert pytest_wrapped_e.type == SystemExit
-        mocked_print.assert_has_calls([
-            call("Please double check pathing and filenames"),
-        ])
-        
+        mocked_print.assert_has_calls(
+            [
+                call("Please double check pathing and filenames"),
+            ]
+        )

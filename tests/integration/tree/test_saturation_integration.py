@@ -86,7 +86,7 @@ class TestSaturation(object):
             f"{here.parent.parent.parent}/sample_files/12_YPR191W_Anc_7.548_codon_aln.fasta.clipkit.treefile",
             "-a",
             f"{here.parent.parent.parent}/sample_files/12_YPR191W_Anc_7.548_codon_aln.fasta.clipkit",
-            "-v"
+            "-v",
         ]
         with patch.object(sys, "argv", testargs):
             Phykit()

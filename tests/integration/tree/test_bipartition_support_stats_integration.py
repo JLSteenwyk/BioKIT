@@ -30,7 +30,7 @@ class TestBipartitionSupportStats(object):
             call("minimum: 85"),
             call("maximum: 100"),
             call("standard deviation: 7.3193"),
-            call("variance: 53.5714")
+            call("variance: 53.5714"),
         ]
 
     @patch("builtins.print")
@@ -39,7 +39,7 @@ class TestBipartitionSupportStats(object):
             "phykit",
             "bipartition_support_stats",
             f"{here.parent.parent.parent}/sample_files/small_Aspergillus_tree.tre",
-            "-v"
+            "-v",
         ]
         with patch.object(sys, "argv", testargs):
             Phykit()
@@ -59,9 +59,9 @@ class TestBipartitionSupportStats(object):
         testargs = [
             "phykit",
             "bipartition_support_stats",
-            f"{here.parent.parent.parent}/sample_files/small_Aspergillus_tree.tr"
+            f"{here.parent.parent.parent}/sample_files/small_Aspergillus_tree.tr",
         ]
-        
+
         with pytest.raises(SystemExit) as pytest_wrapped_e:
             Phykit()
 
@@ -86,5 +86,5 @@ class TestBipartitionSupportStats(object):
             call("minimum: 85"),
             call("maximum: 100"),
             call("standard deviation: 7.3193"),
-            call("variance: 53.5714")
+            call("variance: 53.5714"),
         ]

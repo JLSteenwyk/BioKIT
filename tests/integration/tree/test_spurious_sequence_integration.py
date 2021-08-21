@@ -56,7 +56,7 @@ class TestSpuriousSequence(object):
             "spurious_sequence",
             f"{here.parent.parent.parent}/sample_files/tree_simple.tre",
             "-f",
-            "2"
+            "2",
         ]
         with patch.object(sys, "argv", testargs):
             Phykit()

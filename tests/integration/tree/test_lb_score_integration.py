@@ -35,9 +35,9 @@ class TestLBScore(object):
 
         for print_call, expected_call in zip(mocked_print.call_args_list, expected):
             print_call_args, _ = print_call
-            [print_label, print_value] = print_call_args[0].split(': ')
+            [print_label, print_value] = print_call_args[0].split(": ")
             assert print_label == expected_call["label"]
-            assert isclose(float(print_value), expected_call["value"], rel_tol = 0.0001)
+            assert isclose(float(print_value), expected_call["value"], rel_tol=0.0001)
 
     @patch("builtins.print")
     def test_lb_score1(self, mocked_print):
@@ -57,7 +57,7 @@ class TestLBScore(object):
             call("minimum: -22.4599"),
             call("maximum: 6.964"),
             call("standard deviation: 12.7705"),
-            call("variance: 163.086")
+            call("variance: 163.086"),
         ]
 
     @patch("builtins.print")
@@ -78,7 +78,7 @@ class TestLBScore(object):
             call("minimum: -22.4599"),
             call("maximum: 6.964"),
             call("standard deviation: 12.7705"),
-            call("variance: 163.086")
+            call("variance: 163.086"),
         ]
 
     @patch("builtins.print")
@@ -99,14 +99,16 @@ class TestLBScore(object):
             call("minimum: -22.4599"),
             call("maximum: 6.964"),
             call("standard deviation: 12.7705"),
-            call("variance: 163.086")
+            call("variance: 163.086"),
         ]
 
     @patch("builtins.print")
     def test_lb_score_verbose(self, mocked_print):
         expected_result0 = "Aspergillus_fischeri_IBT_3003\t-21.8103"
         expected_result1 = "Aspergillus_fischeri_IBT_3007\t-21.7868"
-        expected_result2 = "Aspergillus_fischeri_NRRL181.GCF_000149645.1_ASM14964v1\t-22.4599"
+        expected_result2 = (
+            "Aspergillus_fischeri_NRRL181.GCF_000149645.1_ASM14964v1\t-22.4599"
+        )
         expected_result3 = "Aspergillus_fischeri_NRRL4585\t-21.4924"
         expected_result4 = "Aspergillus_fumigatus_Af293\t4.1569"
         expected_result5 = "Aspergillus_fumigatus_CEA10\t0.9815"
@@ -119,7 +121,7 @@ class TestLBScore(object):
             "phykit",
             "lb_score",
             f"{here.parent.parent.parent}/sample_files/small_Aspergillus_tree.tre",
-            "-v"
+            "-v",
         ]
 
         with patch.object(sys, "argv", testargs):
@@ -163,7 +165,7 @@ class TestLBScore(object):
         with patch.object(sys, "argv", testargs):
             with pytest.raises(SystemExit) as pytest_wrapped_e:
                 Phykit()
-        
+
         assert mocked_print.mock_calls == [
             call("Invalid tree. Tree should contain branch lengths"),
         ]

@@ -7,50 +7,54 @@ from .version import __version__
 
 from argparse import (
     ArgumentParser,
-    RawTextHelpFormatter,
     SUPPRESS,
     RawDescriptionHelpFormatter,
 )
 
-from .services.text import (
+from .services.alignment import (
     AlignmentSummary,
-    CharacterFrequency,
-    ConsensusSequence,
-    Faidx,
-    FastQReadLengths,
-    FileFormatConverter,
-    GCContent,
+    PositionSpecificScoreMatrix,
+)
+
+from .services.coding_sequences import (
     GCContentFirstPosition,
     GCContentSecondPosition,
     GCContentThirdPosition,
+    RelativeSynonymousCodonUsage,
+    TranslateSequence,
+)
+
+from .services.fastq import (
+    FastQReadLengths,
+    SubsetPEFastQReads,
+    SubsetSEFastQReads,
+    TrimPEFastQ,
+    TrimSEFastQ,
+)
+
+from .services.genome import (
+    GCContent,
     GenomeAssemblyMetrics,
     L50,
     L90,
     LongestScaffold,
     N50,
     N90,
-    NumberOfScaffolds,
     NumberOfLargeScaffolds,
-    PositionSpecificScoreMatrix,
-    RelativeSynonymousCodonUsage,
+    NumberOfScaffolds,
+    SumOfScaffoldLengths,
+)
+
+from .services.text import (
+    CharacterFrequency,
+    ConsensusSequence,
+    Faidx,
+    FileFormatConverter,
     RenameFastaEntries,
     ReorderBySequenceLength,
     SequenceComplement,
     SequenceLength,
-    SubsetPEFastQReads,
-    SubsetSEFastQReads,
-    SumOfScaffoldLengths,
-    TranslateSequence,
-    TrimPEFastQ,
-    TrimSEFastQ,
 )
-
-from .services.tree import (
-    TipLabels,
-)
-
-from .helpers.boolean_argument_parsing import str2bool
-
 
 logger = logging.getLogger(__name__)
 ch = logging.StreamHandler()
@@ -58,7 +62,7 @@ ch.setLevel(logging.INFO)
 logger.addHandler(ch)
 
 help_header = f"""
-                 ____  _       _  _______ _______ 
+                 ____  _       _  _______ _______
                 |  _ \(_)     | |/ /_   _|__   __|
                 | |_) |_  ___ | ' /  | |    | |   
                 |  _ <| |/ _ \|  <   | |    | |   
@@ -68,7 +72,7 @@ help_header = f"""
                 Version: {__version__}
                 Citation: Steenwyk et al. 2021, CITATION INFORMATION
                 
-"""
+""" # noqa
 
 translation_table_codes = f"""
                 Codes for which translation table to use
@@ -105,7 +109,8 @@ translation_table_codes = f"""
                 https://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi?chapter=tgencodes.
                 The only codon table not described by NCBI is 50, CUG-Ala wherein CUG encodes
                 for alanine.
-"""
+""" # noqa
+
 
 class Biokit(object):
     help_header = f"""
@@ -119,8 +124,8 @@ class Biokit(object):
                 Version: {__version__}
                 Citation: Steenwyk et al. 2021, CITATION INFORMATION
 
-    """
-    
+    """ # noqa
+
     def __init__(self):
         parser = ArgumentParser(
             add_help=True,
@@ -198,7 +203,7 @@ class Biokit(object):
                 tip_labels (alias: tree_labels; labels; tl)
                     - print leaf names in a phylogeny
                 
-                """
+                """ # noqa
             ),
         )
         parser.add_argument("command", help=SUPPRESS)
@@ -211,61 +216,64 @@ class Biokit(object):
             if hasattr(self, args.command):
                 getattr(self, args.command)(sys.argv[2:])
             else:
-                self.run_alias(args.command, sys.argv[2:])
-        except NameError:
+                self.run_alias(args.command, sys.argv[2:], parser)
+        except NameError as e:
+            print(e)
             sys.exit()
 
-    ## Aliases
-    def run_alias(self, command, argv):
+    ## Aliases # noqa
+    def run_alias(self, command, argv, parser):
         # version
-        if command in ['v']:
+        if command in ["v"]:
             return self.version()
         # Text aliases
-        elif command in ['con_len']:
+        elif command in ["con_len"]:
             return self.consensus_sequence(argv)
-        elif command in ['get_entry', 'ge']:
+        elif command in ["get_entry", "ge"]:
             return self.faidx(argv)
-        elif command in ['format_converter', 'ffc']:
+        elif command in ["format_converter", "ffc"]:
             return self.file_format_converter(argv)
-        elif command in ['longest_scaff', 'longest_contig', 'longest_cont']:
+        elif command in ["longest_scaff", "longest_contig", "longest_cont"]:
             return self.longest_scaffold(argv)
-        elif command in ['num_of_scaffolds', 'number_of_contigs', 'num_of_cont']:
+        elif command in ["num_of_scaffolds", "number_of_contigs", "num_of_cont"]:
             return self.number_of_scaffolds(argv)
         elif command in [
-            'number_of_large_scaffolds',
-            'num_of_lrg_scaffolds', 
-            'number_of_large_contigs',
-            'num_of_lrg_cont'
+            "number_of_large_scaffolds",
+            "num_of_lrg_scaffolds",
+            "number_of_large_contigs",
+            "num_of_lrg_cont",
         ]:
             return self.number_of_large_scaffolds(argv)
-        elif command in ['pssm']:
+        elif command in ["pssm"]:
             return self.position_specific_score_matrix(argv)
-        elif command in ['reorder_by_seq_len']:
+        elif command in ["reorder_by_seq_len"]:
             return self.reorder_by_sequence_length(argv)
-        elif command in ['seq_comp']:
+        elif command in ["seq_comp"]:
             return self.sequence_complement(argv)
-        elif command in ['seq_len']:
+        elif command in ["seq_len"]:
             return self.sequence_length(argv)
-        # Tree aliases
-        elif command in ['labels', 'tree_labels', 'tl']:
-            return self.tip_labels(argv)
         else:
-            print("Invalid command option. See help for a complete list of commands and aliases.")
+            print(
+                "Invalid command option. See help for a complete list of commands and aliases."
+            )
             parser.print_help()
             sys.exit(1)
 
-    ## print version
+    # print version
     def version(self):
-        print(textwrap.dedent(
-            f"""\
+        print(
+            textwrap.dedent(
+                f"""\
             {self.help_header}
             """
-        ))
+            )
+        )
 
-    ## Alignment functions
+    # Alignment functions
     @staticmethod
     def alignment_summary(argv):
-        parser = ArgumentParser(add_help=True,
+        parser = ArgumentParser(
+            add_help=True,
             usage=SUPPRESS,
             formatter_class=RawDescriptionHelpFormatter,
             description=textwrap.dedent(
@@ -291,7 +299,7 @@ class Biokit(object):
                 <fasta>                     first argument after 
                                             function name should be
                                             a fasta file
-                """
+                """ # noqa
             ),
         )
 
@@ -301,7 +309,8 @@ class Biokit(object):
 
     @staticmethod
     def character_frequency(argv):
-        parser = ArgumentParser(add_help=True,
+        parser = ArgumentParser(
+            add_help=True,
             usage=SUPPRESS,
             formatter_class=RawDescriptionHelpFormatter,
             description=textwrap.dedent(
@@ -323,7 +332,7 @@ class Biokit(object):
                 <fasta>                     first argument after 
                                             function name should be
                                             a fasta file
-                """
+                """ # noqa
             ),
         )
 
@@ -333,7 +342,8 @@ class Biokit(object):
 
     @staticmethod
     def consensus_sequence(argv):
-        parser = ArgumentParser(add_help=True,
+        parser = ArgumentParser(
+            add_help=True,
             usage=SUPPRESS,
             formatter_class=RawDescriptionHelpFormatter,
             description=textwrap.dedent(
@@ -364,19 +374,20 @@ class Biokit(object):
                 
                 -ac/--ambiguous_character   the ambiguity character to
                                             use. Default is 'N'
-                """
+                """ # noqa
             ),
         )
 
         parser.add_argument("fasta", type=str, help=SUPPRESS)
-        parser.add_argument("-t","--threshold", type=str, help=SUPPRESS)
-        parser.add_argument("-ac","--ambiguous_character", type=str, help=SUPPRESS)
+        parser.add_argument("-t", "--threshold", type=str, help=SUPPRESS)
+        parser.add_argument("-ac", "--ambiguous_character", type=str, help=SUPPRESS)
         args = parser.parse_args(argv)
         ConsensusSequence(args).run()
 
     @staticmethod
     def faidx(argv):
-        parser = ArgumentParser(add_help=True,
+        parser = ArgumentParser(
+            add_help=True,
             usage=SUPPRESS,
             formatter_class=RawDescriptionHelpFormatter,
             description=textwrap.dedent(
@@ -404,17 +415,18 @@ class Biokit(object):
 
                 -e/--entry                  entry name to be extracted
                                             from the inputted fasta file
-                """
+                """ # noqa
             ),
         )
         parser.add_argument("fasta", type=str, help=SUPPRESS)
-        parser.add_argument("-e","--entry", type=str, help=SUPPRESS)
+        parser.add_argument("-e", "--entry", type=str, help=SUPPRESS)
         args = parser.parse_args(argv)
         Faidx(args).run()
 
     @staticmethod
     def fastq_read_lengths(argv):
-        parser = ArgumentParser(add_help=True,
+        parser = ArgumentParser(
+            add_help=True,
             usage=SUPPRESS,
             formatter_class=RawDescriptionHelpFormatter,
             description=textwrap.dedent(
@@ -439,7 +451,7 @@ class Biokit(object):
 
                 -v/--verbose                print length of each fastq
                                             read
-                """
+                """ # noqa
             ),
         )
 
@@ -450,7 +462,8 @@ class Biokit(object):
 
     @staticmethod
     def file_format_converter(argv):
-        parser = ArgumentParser(add_help=True,
+        parser = ArgumentParser(
+            add_help=True,
             usage=SUPPRESS,
             formatter_class=RawDescriptionHelpFormatter,
             description=textwrap.dedent(
@@ -491,7 +504,7 @@ class Biokit(object):
                 Input and output file formats are specified using one of
                 the following strings: fasta, clustal, maf, mauve, phylip,
                 phylip_sequential, phylip_relaxed, & stockholm.
-                """
+                """ # noqa
             ),
         )
         parser.add_argument("-i", "--input_file", type=str, help=SUPPRESS)
@@ -504,7 +517,8 @@ class Biokit(object):
 
     @staticmethod
     def gc_content(argv):
-        parser = ArgumentParser(add_help=True,
+        parser = ArgumentParser(
+            add_help=True,
             usage=SUPPRESS,
             formatter_class=RawDescriptionHelpFormatter,
             description=textwrap.dedent(
@@ -530,17 +544,20 @@ class Biokit(object):
                 -v, --verbose               optional argument to print
                                             the GC content of each fasta
                                             entry
-                """
+                """ # noqa
             ),
         )
         parser.add_argument("fasta", type=str, help=SUPPRESS)
-        parser.add_argument("-v", "--verbose", action="store_true", required=False, help=SUPPRESS)
+        parser.add_argument(
+            "-v", "--verbose", action="store_true", required=False, help=SUPPRESS
+        )
         args = parser.parse_args(argv)
         GCContent(args).run()
-    
+
     @staticmethod
     def gc_content_first_position(argv):
-        parser = ArgumentParser(add_help=True,
+        parser = ArgumentParser(
+            add_help=True,
             usage=SUPPRESS,
             formatter_class=RawDescriptionHelpFormatter,
             description=textwrap.dedent(
@@ -569,17 +586,20 @@ class Biokit(object):
                 -v, --verbose               optional argument to print
                                             the GC content of each fasta
                                             entry
-                """
+                """ # noqa
             ),
         )
         parser.add_argument("fasta", type=str, help=SUPPRESS)
-        parser.add_argument("-v", "--verbose", action="store_true", required=False, help=SUPPRESS)
+        parser.add_argument(
+            "-v", "--verbose", action="store_true", required=False, help=SUPPRESS
+        )
         args = parser.parse_args(argv)
         GCContentFirstPosition(args).run()
 
     @staticmethod
     def gc_content_second_position(argv):
-        parser = ArgumentParser(add_help=True,
+        parser = ArgumentParser(
+            add_help=True,
             usage=SUPPRESS,
             formatter_class=RawDescriptionHelpFormatter,
             description=textwrap.dedent(
@@ -608,17 +628,20 @@ class Biokit(object):
                 -v, --verbose               optional argument to print
                                             the GC content of each fasta
                                             entry
-                """
+                """ # noqa
             ),
         )
         parser.add_argument("fasta", type=str, help=SUPPRESS)
-        parser.add_argument("-v", "--verbose", action="store_true", required=False, help=SUPPRESS)
+        parser.add_argument(
+            "-v", "--verbose", action="store_true", required=False, help=SUPPRESS
+        )
         args = parser.parse_args(argv)
         GCContentSecondPosition(args).run()
 
     @staticmethod
     def gc_content_third_position(argv):
-        parser = ArgumentParser(add_help=True,
+        parser = ArgumentParser(
+            add_help=True,
             usage=SUPPRESS,
             formatter_class=RawDescriptionHelpFormatter,
             description=textwrap.dedent(
@@ -647,17 +670,20 @@ class Biokit(object):
                 -v, --verbose               optional argument to print
                                             the GC content of each fasta
                                             entry
-                """
+                """ # noqa
             ),
         )
         parser.add_argument("fasta", type=str, help=SUPPRESS)
-        parser.add_argument("-v", "--verbose", action="store_true", required=False, help=SUPPRESS)
+        parser.add_argument(
+            "-v", "--verbose", action="store_true", required=False, help=SUPPRESS
+        )
         args = parser.parse_args(argv)
         GCContentThirdPosition(args).run()
 
     @staticmethod
     def genome_assembly_metrics(argv):
-        parser = ArgumentParser(add_help=True,
+        parser = ArgumentParser(
+            add_help=True,
             usage=SUPPRESS,
             formatter_class=RawDescriptionHelpFormatter,
             description=textwrap.dedent(
@@ -687,18 +713,19 @@ class Biokit(object):
                                             with a length greater than this
                                             value will be counted.
                                             Default: 500
-                """
+                """ # noqa
             ),
         )
 
         parser.add_argument("fasta", type=str, help=SUPPRESS)
-        parser.add_argument("-t","--threshold", type=str, help=SUPPRESS)
+        parser.add_argument("-t", "--threshold", type=str, help=SUPPRESS)
         args = parser.parse_args(argv)
         GenomeAssemblyMetrics(args).run()
 
     @staticmethod
     def l50(argv):
-        parser = ArgumentParser(add_help=True,
+        parser = ArgumentParser(
+            add_help=True,
             usage=SUPPRESS,
             formatter_class=RawDescriptionHelpFormatter,
             description=textwrap.dedent(
@@ -720,7 +747,7 @@ class Biokit(object):
                 <fasta>                     first argument after 
                                             function name should be
                                             a fasta file 
-                """
+                """ # noqa
             ),
         )
         parser.add_argument("fasta", type=str, help=SUPPRESS)
@@ -729,7 +756,8 @@ class Biokit(object):
 
     @staticmethod
     def l90(argv):
-        parser = ArgumentParser(add_help=True,
+        parser = ArgumentParser(
+            add_help=True,
             usage=SUPPRESS,
             formatter_class=RawDescriptionHelpFormatter,
             description=textwrap.dedent(
@@ -751,7 +779,7 @@ class Biokit(object):
                 <fasta>                     first argument after 
                                             function name should be
                                             a fasta file 
-                """
+                """ # noqa
             ),
         )
         parser.add_argument("fasta", type=str, help=SUPPRESS)
@@ -760,7 +788,8 @@ class Biokit(object):
 
     @staticmethod
     def longest_scaffold(argv):
-        parser = ArgumentParser(add_help=True,
+        parser = ArgumentParser(
+            add_help=True,
             usage=SUPPRESS,
             formatter_class=RawDescriptionHelpFormatter,
             description=textwrap.dedent(
@@ -782,7 +811,7 @@ class Biokit(object):
                 <fasta>                     first argument after 
                                             function name should be
                                             a fasta file 
-                """
+                """ # noqa
             ),
         )
 
@@ -792,7 +821,8 @@ class Biokit(object):
 
     @staticmethod
     def n50(argv):
-        parser = ArgumentParser(add_help=True,
+        parser = ArgumentParser(
+            add_help=True,
             usage=SUPPRESS,
             formatter_class=RawDescriptionHelpFormatter,
             description=textwrap.dedent(
@@ -814,7 +844,7 @@ class Biokit(object):
                 <fasta>                     first argument after 
                                             function name should be
                                             a fasta file 
-                """
+                """ # noqa
             ),
         )
         parser.add_argument("fasta", type=str, help=SUPPRESS)
@@ -823,7 +853,8 @@ class Biokit(object):
 
     @staticmethod
     def n90(argv):
-        parser = ArgumentParser(add_help=True,
+        parser = ArgumentParser(
+            add_help=True,
             usage=SUPPRESS,
             formatter_class=RawDescriptionHelpFormatter,
             description=textwrap.dedent(
@@ -845,7 +876,7 @@ class Biokit(object):
                 <fasta>                     first argument after 
                                             function name should be
                                             a fasta file 
-                """
+                """ # noqa
             ),
         )
         parser.add_argument("fasta", type=str, help=SUPPRESS)
@@ -854,7 +885,8 @@ class Biokit(object):
 
     @staticmethod
     def number_of_large_scaffolds(argv):
-        parser = ArgumentParser(add_help=True,
+        parser = ArgumentParser(
+            add_help=True,
             usage=SUPPRESS,
             formatter_class=RawDescriptionHelpFormatter,
             description=textwrap.dedent(
@@ -886,18 +918,19 @@ class Biokit(object):
                                             with a length greater than this
                                             value will be counted.
                                             Default: 500
-                """
+                """ # noqa
             ),
         )
 
         parser.add_argument("fasta", type=str, help=SUPPRESS)
-        parser.add_argument("-t","--threshold", type=str, help=SUPPRESS)
+        parser.add_argument("-t", "--threshold", type=str, help=SUPPRESS)
         args = parser.parse_args(argv)
         NumberOfLargeScaffolds(args).run()
 
     @staticmethod
     def number_of_scaffolds(argv):
-        parser = ArgumentParser(add_help=True,
+        parser = ArgumentParser(
+            add_help=True,
             usage=SUPPRESS,
             formatter_class=RawDescriptionHelpFormatter,
             description=textwrap.dedent(
@@ -919,7 +952,7 @@ class Biokit(object):
                 <fasta>                     first argument after 
                                             function name should be
                                             a fasta file 
-                """
+                """ # noqa
             ),
         )
 
@@ -929,7 +962,8 @@ class Biokit(object):
 
     @staticmethod
     def position_specific_score_matrix(argv):
-        parser = ArgumentParser(add_help=True,
+        parser = ArgumentParser(
+            add_help=True,
             usage=SUPPRESS,
             formatter_class=RawDescriptionHelpFormatter,
             description=textwrap.dedent(
@@ -954,18 +988,19 @@ class Biokit(object):
 
                 -ac/--ambiguous_character   the ambiguity character to
                                             use. Default is 'N'
-                """
+                """ # noqa
             ),
         )
 
         parser.add_argument("fasta", type=str, help=SUPPRESS)
-        parser.add_argument("-ac","--ambiguous_character", type=str, help=SUPPRESS)
+        parser.add_argument("-ac", "--ambiguous_character", type=str, help=SUPPRESS)
         args = parser.parse_args(argv)
         PositionSpecificScoreMatrix(args).run()
 
     @staticmethod
     def relative_synonymous_codon_usage(argv):
-        parser = ArgumentParser(add_help=True,
+        parser = ArgumentParser(
+            add_help=True,
             usage=SUPPRESS,
             formatter_class=RawDescriptionHelpFormatter,
             description=textwrap.dedent(
@@ -998,17 +1033,20 @@ class Biokit(object):
 
 
                 {translation_table_codes}
-                """
+                """ # noqa
             ),
         )
         parser.add_argument("fasta", type=str, help=SUPPRESS)
-        parser.add_argument("-tt", "--translation_table", type=str, required=False, help=SUPPRESS)
+        parser.add_argument(
+            "-tt", "--translation_table", type=str, required=False, help=SUPPRESS
+        )
         args = parser.parse_args(argv)
         RelativeSynonymousCodonUsage(args).run()
 
     @staticmethod
     def rename_fasta_entries(argv):
-        parser = ArgumentParser(add_help=True,
+        parser = ArgumentParser(
+            add_help=True,
             usage=SUPPRESS,
             formatter_class=RawDescriptionHelpFormatter,
             description=textwrap.dedent(
@@ -1044,18 +1082,19 @@ class Biokit(object):
                                             name as the input file with
                                             the suffix ".renamed.fa" added
                                             to it.
-                """
+                """ # noqa
             ),
         )
         parser.add_argument("fasta", type=str, help=SUPPRESS)
-        parser.add_argument("-i","--idmap", type=str, help=SUPPRESS)
+        parser.add_argument("-i", "--idmap", type=str, help=SUPPRESS)
         parser.add_argument("-o", "--output", type=str, required=False, help=SUPPRESS)
         args = parser.parse_args(argv)
         RenameFastaEntries(args).run()
-    
+
     @staticmethod
     def reorder_by_sequence_length(argv):
-        parser = ArgumentParser(add_help=True,
+        parser = ArgumentParser(
+            add_help=True,
             usage=SUPPRESS,
             formatter_class=RawDescriptionHelpFormatter,
             description=textwrap.dedent(
@@ -1084,7 +1123,7 @@ class Biokit(object):
                                             name as the input file with
                                             the suffix ".reordered.fa" added
                                             to it.
-                """
+                """ # noqa
             ),
         )
 
@@ -1095,7 +1134,8 @@ class Biokit(object):
 
     @staticmethod
     def sequence_length(argv):
-        parser = ArgumentParser(add_help=True,
+        parser = ArgumentParser(
+            add_help=True,
             usage=SUPPRESS,
             formatter_class=RawDescriptionHelpFormatter,
             description=textwrap.dedent(
@@ -1117,7 +1157,7 @@ class Biokit(object):
                 <fasta>                     first argument after 
                                             function name should be
                                             a fasta file 
-                """
+                """ # noqa
             ),
         )
 
@@ -1127,7 +1167,8 @@ class Biokit(object):
 
     @staticmethod
     def subset_pe_fastq_reads(argv):
-        parser = ArgumentParser(add_help=True,
+        parser = ArgumentParser(
+            add_help=True,
             usage=SUPPRESS,
             formatter_class=RawDescriptionHelpFormatter,
             description=textwrap.dedent(
@@ -1162,7 +1203,7 @@ class Biokit(object):
                                             Default: date and time
 
                 -o/--output_file            output file name
-                """
+                """ # noqa
             ),
         )
 
@@ -1170,13 +1211,16 @@ class Biokit(object):
         parser.add_argument("fastq2", type=str, help=SUPPRESS)
         parser.add_argument("-p", "--percent", type=str, required=False, help=SUPPRESS)
         parser.add_argument("-s", "--seed", type=str, required=False, help=SUPPRESS)
-        parser.add_argument("-o", "--output_file", type=str, required=False, help=SUPPRESS)
+        parser.add_argument(
+            "-o", "--output_file", type=str, required=False, help=SUPPRESS
+        )
         args = parser.parse_args(argv)
         SubsetPEFastQReads(args).run()
 
     @staticmethod
     def subset_se_fastq_reads(argv):
-        parser = ArgumentParser(add_help=True,
+        parser = ArgumentParser(
+            add_help=True,
             usage=SUPPRESS,
             formatter_class=RawDescriptionHelpFormatter,
             description=textwrap.dedent(
@@ -1207,20 +1251,23 @@ class Biokit(object):
                                             Default: date and time
 
                 -o/--output_file            output file name
-                """
+                """ # noqa
             ),
         )
 
         parser.add_argument("fastq", type=str, help=SUPPRESS)
         parser.add_argument("-p", "--percent", type=str, required=False, help=SUPPRESS)
         parser.add_argument("-s", "--seed", type=str, required=False, help=SUPPRESS)
-        parser.add_argument("-o", "--output_file", type=str, required=False, help=SUPPRESS)
+        parser.add_argument(
+            "-o", "--output_file", type=str, required=False, help=SUPPRESS
+        )
         args = parser.parse_args(argv)
         SubsetSEFastQReads(args).run()
 
     @staticmethod
     def sequence_complement(argv):
-        parser = ArgumentParser(add_help=True,
+        parser = ArgumentParser(
+            add_help=True,
             usage=SUPPRESS,
             formatter_class=RawDescriptionHelpFormatter,
             description=textwrap.dedent(
@@ -1247,18 +1294,21 @@ class Biokit(object):
 
                 -r/--reverse                if used, the reverse complement
                                             sequence will be generated
-                """
+                """ # noqa
             ),
         )
 
         parser.add_argument("fasta", type=str, help=SUPPRESS)
-        parser.add_argument("-r", "--reverse", action="store_true", required=False, help=SUPPRESS)
+        parser.add_argument(
+            "-r", "--reverse", action="store_true", required=False, help=SUPPRESS
+        )
         args = parser.parse_args(argv)
         SequenceComplement(args).run()
 
     @staticmethod
     def sum_of_scaffold_lengths(argv):
-        parser = ArgumentParser(add_help=True,
+        parser = ArgumentParser(
+            add_help=True,
             usage=SUPPRESS,
             formatter_class=RawDescriptionHelpFormatter,
             description=textwrap.dedent(
@@ -1284,7 +1334,7 @@ class Biokit(object):
                 <fasta>                     first argument after 
                                             function name should be
                                             a fasta file
-                """
+                """ # noqa
             ),
         )
 
@@ -1294,7 +1344,8 @@ class Biokit(object):
 
     @staticmethod
     def translate_sequence(argv):
-        parser = ArgumentParser(add_help=True,
+        parser = ArgumentParser(
+            add_help=True,
             usage=SUPPRESS,
             formatter_class=RawDescriptionHelpFormatter,
             description=textwrap.dedent(
@@ -1341,19 +1392,22 @@ class Biokit(object):
 
 
                 {translation_table_codes}
-                """
+                """ # noqa
             ),
         )
 
         parser.add_argument("fasta", type=str, help=SUPPRESS)
-        parser.add_argument("-tt", "--translation_table", type=str, required=False, help=SUPPRESS)
+        parser.add_argument(
+            "-tt", "--translation_table", type=str, required=False, help=SUPPRESS
+        )
         parser.add_argument("-o", "--output", type=str, required=False, help=SUPPRESS)
         args = parser.parse_args(argv)
         TranslateSequence(args).run()
 
     @staticmethod
     def trim_pe_fastq(argv):
-        parser = ArgumentParser(add_help=True,
+        parser = ArgumentParser(
+            add_help=True,
             usage=SUPPRESS,
             formatter_class=RawDescriptionHelpFormatter,
             description=textwrap.dedent(
@@ -1385,7 +1439,7 @@ class Biokit(object):
                 
                 -l/--length                 minimum length of read 
                                             to be kept (Default: 20)
-                """
+                """ # noqa
             ),
         )
 
@@ -1398,7 +1452,8 @@ class Biokit(object):
 
     @staticmethod
     def trim_se_fastq(argv):
-        parser = ArgumentParser(add_help=True,
+        parser = ArgumentParser(
+            add_help=True,
             usage=SUPPRESS,
             formatter_class=RawDescriptionHelpFormatter,
             description=textwrap.dedent(
@@ -1428,58 +1483,24 @@ class Biokit(object):
                                             to be kept (Default: 20)
 
                 -o/--output_file            output file name
-                """
+                """ # noqa
             ),
         )
 
         parser.add_argument("fastq", type=str, help=SUPPRESS)
         parser.add_argument("-m", "--minimum", type=str, required=False, help=SUPPRESS)
         parser.add_argument("-l", "--length", type=str, required=False, help=SUPPRESS)
-        parser.add_argument("-o", "--output_file", type=str, required=False, help=SUPPRESS)
+        parser.add_argument(
+            "-o", "--output_file", type=str, required=False, help=SUPPRESS
+        )
         args = parser.parse_args(argv)
         TrimSEFastQ(args).run()
 
-    ## Tree functions
-    @staticmethod
-    def tip_labels(argv):
-        parser = ArgumentParser(add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
-            description=textwrap.dedent(
-                f"""\
-                {help_header}
-
-                Prints the tip labels (or names) a phylogeny.
-
-                Aliases:
-                  tip_labels, tree_labels; labels; tl
-                Command line interfaces: 
-                  bk_tip_labels, bk_tree_labels; bk_labels; bk_tl
-
-                Usage:
-                biokit tip_labels <tree>
-
-                Options
-                =====================================================
-                <tree>                      first argument after 
-                                            function name should be
-                                            a tree file
-                """
-            ),
-        )
-        parser.add_argument("tree", type=str, help=SUPPRESS)
-        args = parser.parse_args(argv)
-        TipLabels(args).run()
 
 def main(argv=None):
-    BioKIT()
+    Biokit()
+
 
 # Alignment-based functions
 def faidx(argv=None):
     Biokit.faidx(sys.argv[1:])
-
-
-# Tree-based functions
-def tip_labels(argv=None):
-    Biokit.tip_labels(sys.argv[1:])
-

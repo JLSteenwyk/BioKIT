@@ -18,8 +18,8 @@ class TestGCContent(object):
             "phykit",
             "faidx",
             f"{here.parent.parent.parent}/sample_files/simple.fa",
-            '-e',
-            '1'
+            "-e",
+            "1",
         ]
         with patch.object(sys, "argv", testargs):
             Phykit()
@@ -32,8 +32,8 @@ class TestGCContent(object):
             "phykit",
             "get_entry",
             f"{here.parent.parent.parent}/sample_files/simple.fa",
-            '-e',
-            '1'
+            "-e",
+            "1",
         ]
         with patch.object(sys, "argv", testargs):
             Phykit()
@@ -46,8 +46,8 @@ class TestGCContent(object):
             "phykit",
             "ge",
             f"{here.parent.parent.parent}/sample_files/simple.fa",
-            '-e',
-            '1'
+            "-e",
+            "1",
         ]
         with patch.object(sys, "argv", testargs):
             Phykit()
@@ -60,8 +60,8 @@ class TestGCContent(object):
             "phykit",
             "faidx",
             f"{here.parent.parent.parent}/sample_files/test_alignment.prot.faa",
-            '-e',
-            '4'
+            "-e",
+            "4",
         ]
         with patch.object(sys, "argv", testargs):
             Phykit()

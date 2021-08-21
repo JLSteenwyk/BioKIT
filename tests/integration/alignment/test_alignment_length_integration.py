@@ -13,7 +13,9 @@ here = Path(__file__)
 class TestAlignmentLength(object):
     @patch("builtins.print")
     def test_alignment_length_incorrect_file_path(self, mocked_print):
-        expected_result = "Input file could not be read. Please check input file argument."
+        expected_result = (
+            "Input file could not be read. Please check input file argument."
+        )
         testargs = [
             "phykit",
             "alignment_length",
@@ -76,7 +78,9 @@ class TestAlignmentLength(object):
 
     @patch("builtins.print")
     def test_alignment_length_incorrect_input_file(self, mocked_print):
-        expected_result = "Input file could not be read. Please check input file argument."
+        expected_result = (
+            "Input file could not be read. Please check input file argument."
+        )
         testargs = [
             "phykit",
             "alignment_length",

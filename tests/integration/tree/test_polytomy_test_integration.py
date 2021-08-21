@@ -91,10 +91,11 @@ class TestTree(object):
                 Phykit()
 
         assert pytest_wrapped_e.type == SystemExit
-        mocked_print.assert_has_calls([
-            call("Please check filename and pathing again."),
-        ])
-        
+        mocked_print.assert_has_calls(
+            [
+                call("Please check filename and pathing again."),
+            ]
+        )
 
     @patch("builtins.print")
     def test_polytomy_test_incorrect_group_formatting(self, mocked_print):
@@ -112,14 +113,17 @@ class TestTree(object):
                 Phykit()
 
         assert pytest_wrapped_e.type == SystemExit
-        mocked_print.assert_has_calls([
-            call("Please format the groups file (-g) as a four column tab-delimited file with column 1 being the name of the test"),
-            call("col2: the tip names of one group (; separated)"),
-            call("col3: the tip names of a second group (; separated)"),
-            call("col4: the tip names of a third group (; separated)"),
-            call("col5: the tip names of the outgroup taxa (; separated)"),
-        ])
-            
+        mocked_print.assert_has_calls(
+            [
+                call(
+                    "Please format the groups file (-g) as a four column tab-delimited file with column 1 being the name of the test"
+                ),
+                call("col2: the tip names of one group (; separated)"),
+                call("col3: the tip names of a second group (; separated)"),
+                call("col4: the tip names of a third group (; separated)"),
+                call("col5: the tip names of the outgroup taxa (; separated)"),
+            ]
+        )
 
     @patch("builtins.print")
     def test_polytomy_test_incorrect_trees_path(self, mocked_print):
@@ -136,9 +140,11 @@ class TestTree(object):
                 Phykit()
 
         assert pytest_wrapped_e.type == SystemExit
-        mocked_print.assert_has_calls([
-            call("Please check file name and pathing"),
-        ])
+        mocked_print.assert_has_calls(
+            [
+                call("Please check file name and pathing"),
+            ]
+        )
 
     @patch("builtins.print")
     def test_polytomy_test_incorrect_path_within_trees_file(self, mocked_print):

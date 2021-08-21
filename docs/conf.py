@@ -43,7 +43,7 @@ author = "Jacob L. Steenwyk <jlsteenwyk@gmail.com>"
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx_rtd_theme']
+extensions = ["sphinx_rtd_theme"]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
@@ -88,10 +88,10 @@ html_theme = "sphinx_rtd_theme"
 #
 html_theme_options = {
     "body_max_width": "900px",
-    'logo_only': True,
-    'analytics_id': 'UA-104875636-1'
+    "logo_only": True,
+    "analytics_id": "UA-104875636-1",
 }
-html_logo = '_static/img/logo.png'
+html_logo = "_static/img/logo.png"
 html_show_sourcelink = False
 
 # Add any paths that contain custom static files (such as style sheets) here,

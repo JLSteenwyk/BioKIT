@@ -9,6 +9,7 @@ from phykit.phykit import Phykit
 
 here = Path(__file__)
 
+
 @pytest.mark.integration
 class TestBrokenPipeError(object):
     @pytest.mark.slow
@@ -25,7 +26,9 @@ class TestBrokenPipeError(object):
 
     @pytest.mark.slow
     def test_gc_content_BrokenPipeError(self):
-        cmd = "phykit gc_content ./tests/sample_files/EOG091N44MS.fa.mafft -v | head -n 1"
+        cmd = (
+            "phykit gc_content ./tests/sample_files/EOG091N44MS.fa.mafft -v | head -n 1"
+        )
         exit_status = os.system(cmd)
         assert exit_status == 0
 
@@ -46,4 +49,3 @@ class TestBrokenPipeError(object):
         cmd = "phykit bss ./tests/sample_files/small_Aspergillus_tre_rooted.tree -v | head -n 1"
         exit_status = os.system(cmd)
         assert exit_status == 0
-

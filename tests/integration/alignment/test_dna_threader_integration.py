@@ -13,15 +13,11 @@ here = Path(__file__)
 class TestDNAThreader(object):
     @patch("builtins.print")
     def test_dna_threader0(self, mocked_print):
-        expected_result_0 = dedent(
-            """>200_S38"""
-        )
+        expected_result_0 = dedent(""">200_S38""")
         expected_result_1 = dedent(
             """atggctgacatcctcacgcagctccagacttgcctggatcagcttgcaacacaattctacgcaacacttggttatctcacaacataccacgacaatgcccccacaacaccaccacca------aatgtccccgacgcagcaccagccctagcaaagatcaccaagaactcatcatcaccgccagtcccagcagccatcgcaaataaagtggggggtgcagctgctgttgcgggcaatgca---tcacccccacaggcgcct---------cct---------------------------------------------caacaacccggagct---------gcgcca---gggagagcagtagaaggtgaagatcccaaccttcctcccgcgccagactcgcccagcacgtttgcaagccggcagcgggagcttgcgcgcgatctcattatcaaagaacagcagatcgagtaccttatctccgtgcttcccgggattggcgcctctgaggctgaacaagaaaccagaatccaggacctggagaccgagcttagagacgtcgagaaggagcgcgctgcgaaagtgcgggagttgaaaaagttgaggactcggttggaggatgttcttggcgctgtcgctgtgggtatccacggggatggttactctcaaaac---------"""
         )
-        expected_result_2 = dedent(
-            """>203_S40"""
-        )
+        expected_result_2 = dedent(""">203_S40""")
         expected_result_3 = dedent(
             """atggctgacatcctcacgcagctccagacttgcctggatcagcttgcaacacaattctacgcaacacttggttatctcacaacataccacgacaatgcccccacaacaccaccacca------aatgtccccgacgcagcaccagccctagcaaagatcaccaagaactcatcatcaccaccagtcccagcagccatcgcaaataaagtggggggtgcagctgctgttgcgggcaatgca---tcacccccacaggcgcct---------cct---------------------------------------------caacaacccggagct---------gcgcca---gggagagcagtagaaggtgaagatcccaaccttcctcccgcgccagactcgcccagcacgtttgcaagccggcagcgggagcttgcgcgcgatctcattatcaaagaacagcagatcgagtaccttatctccgtgcttcccgggattggcgcctctgaggctgaacaagaaaccagaatccaggacctggagaccgagcttagagacgtcgagaaggagcgcgctgcgaaagtgcgggagttgaaaaagttgaggactcggttggaggatgttcttggcgctgtcgctgtgggtatccacggggatggttactctcaaaac---------"""
         )
@@ -46,30 +42,14 @@ class TestDNAThreader(object):
 
     @patch("builtins.print")
     def test_dna_threader1(self, mocked_print):
-        expected_result_0 = dedent(
-            """>1"""
-        )
-        expected_result_1 = dedent(
-            """AAAGGG---"""
-        )
-        expected_result_2 = dedent(
-            """>2"""  
-        )
-        expected_result_3 = dedent(
-            """AAATTTGGG"""
-        )
-        expected_result_4 = dedent(
-            """>3"""  
-        )
-        expected_result_5 = dedent(
-            """AAATTTGGG"""
-        )
-        expected_result_6 = dedent(
-            """>4"""  
-        )
-        expected_result_7 = dedent(
-            """AAATTTGGG"""
-        )
+        expected_result_0 = dedent(""">1""")
+        expected_result_1 = dedent("""AAAGGG---""")
+        expected_result_2 = dedent(""">2""")
+        expected_result_3 = dedent("""AAATTTGGG""")
+        expected_result_4 = dedent(""">3""")
+        expected_result_5 = dedent("""AAATTTGGG""")
+        expected_result_6 = dedent(""">4""")
+        expected_result_7 = dedent("""AAATTTGGG""")
         testargs = [
             "phykit",
             "thread_dna",
@@ -94,30 +74,14 @@ class TestDNAThreader(object):
 
     @patch("builtins.print")
     def test_dna_threader_alias0(self, mocked_print):
-        expected_result_0 = dedent(
-            """>1"""
-        )
-        expected_result_1 = dedent(
-            """AAAGGG---"""
-        )
-        expected_result_2 = dedent(
-            """>2"""  
-        )
-        expected_result_3 = dedent(
-            """AAATTTGGG"""
-        )
-        expected_result_4 = dedent(
-            """>3"""  
-        )
-        expected_result_5 = dedent(
-            """AAATTTGGG"""
-        )
-        expected_result_6 = dedent(
-            """>4"""  
-        )
-        expected_result_7 = dedent(
-            """AAATTTGGG"""
-        )
+        expected_result_0 = dedent(""">1""")
+        expected_result_1 = dedent("""AAAGGG---""")
+        expected_result_2 = dedent(""">2""")
+        expected_result_3 = dedent("""AAATTTGGG""")
+        expected_result_4 = dedent(""">3""")
+        expected_result_5 = dedent("""AAATTTGGG""")
+        expected_result_6 = dedent(""">4""")
+        expected_result_7 = dedent("""AAATTTGGG""")
         testargs = [
             "phykit",
             "pal2nal",
@@ -142,30 +106,14 @@ class TestDNAThreader(object):
 
     @patch("builtins.print")
     def test_dna_threader_alias1(self, mocked_print):
-        expected_result_0 = dedent(
-            """>1"""
-        )
-        expected_result_1 = dedent(
-            """AAAGGG---"""
-        )
-        expected_result_2 = dedent(
-            """>2"""  
-        )
-        expected_result_3 = dedent(
-            """AAATTTGGG"""
-        )
-        expected_result_4 = dedent(
-            """>3"""  
-        )
-        expected_result_5 = dedent(
-            """AAATTTGGG"""
-        )
-        expected_result_6 = dedent(
-            """>4"""  
-        )
-        expected_result_7 = dedent(
-            """AAATTTGGG"""
-        )
+        expected_result_0 = dedent(""">1""")
+        expected_result_1 = dedent("""AAAGGG---""")
+        expected_result_2 = dedent(""">2""")
+        expected_result_3 = dedent("""AAATTTGGG""")
+        expected_result_4 = dedent(""">3""")
+        expected_result_5 = dedent("""AAATTTGGG""")
+        expected_result_6 = dedent(""">4""")
+        expected_result_7 = dedent("""AAATTTGGG""")
         testargs = [
             "phykit",
             "p2n",
@@ -207,30 +155,14 @@ class TestDNAThreader(object):
 
     @patch("builtins.print")
     def test_dna_threader_alias_stop_codon_true(self, mocked_print):
-        expected_result_0 = dedent(
-            """>1"""
-        )
-        expected_result_1 = dedent(
-            """AAAGGG---"""
-        )
-        expected_result_2 = dedent(
-            """>2"""  
-        )
-        expected_result_3 = dedent(
-            """AAATTTGGG"""
-        )
-        expected_result_4 = dedent(
-            """>3"""  
-        )
-        expected_result_5 = dedent(
-            """AAATTTGGG"""
-        )
-        expected_result_6 = dedent(
-            """>4"""  
-        )
-        expected_result_7 = dedent(
-            """AAATTTGGG"""
-        )
+        expected_result_0 = dedent(""">1""")
+        expected_result_1 = dedent("""AAAGGG---""")
+        expected_result_2 = dedent(""">2""")
+        expected_result_3 = dedent("""AAATTTGGG""")
+        expected_result_4 = dedent(""">3""")
+        expected_result_5 = dedent("""AAATTTGGG""")
+        expected_result_6 = dedent(""">4""")
+        expected_result_7 = dedent("""AAATTTGGG""")
         testargs = [
             "phykit",
             "p2n",
@@ -238,7 +170,7 @@ class TestDNAThreader(object):
             f"{here.parent.parent.parent}/sample_files/test_alignment.prot.faa",
             "-n",
             f"{here.parent.parent.parent}/sample_files/test.nucl.fna",
-            "-s"
+            "-s",
         ]
 
         with patch.object(sys, "argv", testargs):
@@ -256,30 +188,14 @@ class TestDNAThreader(object):
 
     @patch("builtins.print")
     def test_dna_threader_alias_stop_codon_true(self, mocked_print):
-        expected_result_0 = dedent(
-            """>1"""
-        )
-        expected_result_1 = dedent(
-            """AAAGGG---"""
-        )
-        expected_result_2 = dedent(
-            """>2"""  
-        )
-        expected_result_3 = dedent(
-            """AAATTTGGG"""
-        )
-        expected_result_4 = dedent(
-            """>3"""  
-        )
-        expected_result_5 = dedent(
-            """AAATTTGGG"""
-        )
-        expected_result_6 = dedent(
-            """>4"""  
-        )
-        expected_result_7 = dedent(
-            """AAATTT---"""
-        )
+        expected_result_0 = dedent(""">1""")
+        expected_result_1 = dedent("""AAAGGG---""")
+        expected_result_2 = dedent(""">2""")
+        expected_result_3 = dedent("""AAATTTGGG""")
+        expected_result_4 = dedent(""">3""")
+        expected_result_5 = dedent("""AAATTTGGG""")
+        expected_result_6 = dedent(""">4""")
+        expected_result_7 = dedent("""AAATTT---""")
         testargs = [
             "phykit",
             "p2n",
@@ -306,30 +222,14 @@ class TestDNAThreader(object):
 
     @patch("builtins.print")
     def test_dna_threader_alias_stop_codon_true(self, mocked_print):
-        expected_result_0 = dedent(
-            """>1"""
-        )
-        expected_result_1 = dedent(
-            """AAAGGG---"""
-        )
-        expected_result_2 = dedent(
-            """>2"""  
-        )
-        expected_result_3 = dedent(
-            """AAATTTGGG"""
-        )
-        expected_result_4 = dedent(
-            """>3"""  
-        )
-        expected_result_5 = dedent(
-            """AAATTTGGG"""
-        )
-        expected_result_6 = dedent(
-            """>4"""  
-        )
-        expected_result_7 = dedent(
-            """AAATTTGGG"""
-        )
+        expected_result_0 = dedent(""">1""")
+        expected_result_1 = dedent("""AAAGGG---""")
+        expected_result_2 = dedent(""">2""")
+        expected_result_3 = dedent("""AAATTTGGG""")
+        expected_result_4 = dedent(""">3""")
+        expected_result_5 = dedent("""AAATTTGGG""")
+        expected_result_6 = dedent(""">4""")
+        expected_result_7 = dedent("""AAATTTGGG""")
         testargs = [
             "phykit",
             "p2n",
@@ -356,30 +256,14 @@ class TestDNAThreader(object):
 
     @patch("builtins.print")
     def test_dna_threader_ambig_char_false(self, mocked_print):
-        expected_result_0 = dedent(
-            """>1"""
-        )
-        expected_result_1 = dedent(
-            """AAAGGG---"""
-        )
-        expected_result_2 = dedent(
-            """>2"""  
-        )
-        expected_result_3 = dedent(
-            """AAATTTGGG"""
-        )
-        expected_result_4 = dedent(
-            """>3"""  
-        )
-        expected_result_5 = dedent(
-            """AAATTT---"""
-        )
-        expected_result_6 = dedent(
-            """>4"""  
-        )
-        expected_result_7 = dedent(
-            """AAATTT---"""
-        )
+        expected_result_0 = dedent(""">1""")
+        expected_result_1 = dedent("""AAAGGG---""")
+        expected_result_2 = dedent(""">2""")
+        expected_result_3 = dedent("""AAATTTGGG""")
+        expected_result_4 = dedent(""">3""")
+        expected_result_5 = dedent("""AAATTT---""")
+        expected_result_6 = dedent(""">4""")
+        expected_result_7 = dedent("""AAATTT---""")
         testargs = [
             "phykit",
             "p2n",
@@ -406,30 +290,14 @@ class TestDNAThreader(object):
 
     @patch("builtins.print")
     def test_dna_threader_ambig_char_true(self, mocked_print):
-        expected_result_0 = dedent(
-            """>1"""
-        )
-        expected_result_1 = dedent(
-            """AAAGGG---"""
-        )
-        expected_result_2 = dedent(
-            """>2"""  
-        )
-        expected_result_3 = dedent(
-            """AAATTTGGG"""
-        )
-        expected_result_4 = dedent(
-            """>3"""  
-        )
-        expected_result_5 = dedent(
-            """AAATTTGGG"""
-        )
-        expected_result_6 = dedent(
-            """>4"""  
-        )
-        expected_result_7 = dedent(
-            """AAATTTGGG"""
-        )
+        expected_result_0 = dedent(""">1""")
+        expected_result_1 = dedent("""AAAGGG---""")
+        expected_result_2 = dedent(""">2""")
+        expected_result_3 = dedent("""AAATTTGGG""")
+        expected_result_4 = dedent(""">3""")
+        expected_result_5 = dedent("""AAATTTGGG""")
+        expected_result_6 = dedent(""">4""")
+        expected_result_7 = dedent("""AAATTTGGG""")
         testargs = [
             "phykit",
             "p2n",

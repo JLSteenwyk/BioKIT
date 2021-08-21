@@ -22,7 +22,7 @@ class TestGCContent(object):
         with patch.object(sys, "argv", testargs):
             Phykit()
         assert mocked_print.mock_calls == [call(expected_result)]
-    
+
     @patch("builtins.print")
     def test_gc_content_maf(self, mocked_print):
         expected_result = 0.2273

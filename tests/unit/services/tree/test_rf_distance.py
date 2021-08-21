@@ -9,7 +9,8 @@ from phykit.services.tree.rf_distance import RobinsonFouldsDistance
 @pytest.fixture
 def args():
     kwargs = dict(
-        tree_zero="/some/path/to/file.tre", tree_one="/some/path/to/file.tre",
+        tree_zero="/some/path/to/file.tre",
+        tree_one="/some/path/to/file.tre",
     )
     return Namespace(**kwargs)
 

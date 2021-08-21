@@ -19,7 +19,7 @@ class TestColumnScore(object):
             "column_score",
             f"{here.parent.parent.parent}/sample_files/simple.fa",
             "--reference",
-            f"{here.parent.parent.parent}/sample_files/simple_reference.fa"
+            f"{here.parent.parent.parent}/sample_files/simple_reference.fa",
         ]
         with patch.object(sys, "argv", testargs):
             Phykit()
@@ -33,7 +33,7 @@ class TestColumnScore(object):
             "column_score",
             f"{here.parent.parent.parent}/sample_files/simple.fa",
             "-r",
-            f"{here.parent.parent.parent}/sample_files/simple_reference.fa"
+            f"{here.parent.parent.parent}/sample_files/simple_reference.fa",
         ]
         with patch.object(sys, "argv", testargs):
             Phykit()
@@ -47,7 +47,7 @@ class TestColumnScore(object):
             "cs",
             f"{here.parent.parent.parent}/sample_files/simple.fa",
             "-r",
-            f"{here.parent.parent.parent}/sample_files/simple_reference.fa"
+            f"{here.parent.parent.parent}/sample_files/simple_reference.fa",
         ]
         with patch.object(sys, "argv", testargs):
             Phykit()

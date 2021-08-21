@@ -8,7 +8,9 @@ from phykit.services.tree.total_tree_length import TotalTreeLength
 
 @pytest.fixture
 def args():
-    kwargs = dict(tree="/some/path/to/file.tre",)
+    kwargs = dict(
+        tree="/some/path/to/file.tre",
+    )
     return Namespace(**kwargs)
 
 

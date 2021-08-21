@@ -30,7 +30,7 @@ class TestTree(object):
             call("minimum: 0.846"),
             call("maximum: 20.592"),
             call("standard deviation: 8.0114"),
-            call("variance: 64.1826")
+            call("variance: 64.1826"),
         ]
 
     @patch("builtins.print")
@@ -51,7 +51,7 @@ class TestTree(object):
             call("minimum: 0.0002"),
             call("maximum: 0.0337"),
             call("standard deviation: 0.0129"),
-            call("variance: 0.0002")
+            call("variance: 0.0002"),
         ]
 
     @patch("builtins.print")
@@ -60,7 +60,7 @@ class TestTree(object):
             "phykit",
             "internal_branch_stats",
             f"{here.parent.parent.parent}/sample_files/tree_simple.tre",
-            "-v"
+            "-v",
         ]
         with patch.object(sys, "argv", testargs):
             Phykit()
@@ -70,7 +70,7 @@ class TestTree(object):
             call(3.8738),
             call(7.5297),
             call(2.0946),
-            call(20.592)
+            call(20.592),
         ]
 
     @patch("builtins.print")
@@ -79,7 +79,7 @@ class TestTree(object):
             "phykit",
             "internal_branch_stats",
             f"{here.parent.parent.parent}/sample_files/small_Aspergillus_tree.tre",
-            "-v"
+            "-v",
         ]
         with patch.object(sys, "argv", testargs):
             Phykit()
@@ -91,7 +91,7 @@ class TestTree(object):
             call(0.0158),
             call(0.0337),
             call(0.0008),
-            call(0.0007)
+            call(0.0007),
         ]
 
     @patch("builtins.print")
@@ -112,7 +112,7 @@ class TestTree(object):
             call("minimum: 0.846"),
             call("maximum: 20.592"),
             call("standard deviation: 8.0114"),
-            call("variance: 64.1826")
+            call("variance: 64.1826"),
         ]
 
     @patch("builtins.print")

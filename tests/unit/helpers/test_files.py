@@ -2,7 +2,11 @@ import argparse
 
 import pytest
 
-from phykit.helpers.files import (get_alignment_and_format, read_single_column_file_to_list)
+from phykit.helpers.files import (
+    get_alignment_and_format,
+    read_single_column_file_to_list,
+)
+
 
 class TestFileErrorHandling(object):
     def test_get_alignment_and_format_error_handling(self):
@@ -16,7 +20,3 @@ class TestFileErrorHandling(object):
         with pytest.raises(SystemExit) as excinfo:
             read_single_column_file_to_list(file_path)
         assert excinfo.type == SystemExit
-
-        
-        
-

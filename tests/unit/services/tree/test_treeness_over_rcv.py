@@ -8,7 +8,10 @@ from phykit.services.tree.treeness_over_rcv import TreenessOverRCV
 
 @pytest.fixture
 def args():
-    kwargs = dict(alignment="/some/path/to/file.fa", tree="/some/path/to/file.tre",)
+    kwargs = dict(
+        alignment="/some/path/to/file.fa",
+        tree="/some/path/to/file.tre",
+    )
     return Namespace(**kwargs)
 
 

@@ -82,7 +82,7 @@ class TestDVMC(object):
             "-t",
             f"{here.parent.parent.parent}/sample_files/tree_simple.tre",
             "-r",
-            f"no_file"
+            f"no_file",
         ]
 
         with pytest.raises(SystemExit) as pytest_wrapped_e:

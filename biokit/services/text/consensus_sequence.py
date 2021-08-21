@@ -3,6 +3,7 @@ from Bio.Align import AlignInfo
 
 from .base import Text
 
+
 class ConsensusSequence(Text):
     def __init__(self, args) -> None:
         super().__init__(**self.process_args(args))
@@ -12,7 +13,7 @@ class ConsensusSequence(Text):
         summary_align = AlignInfo.SummaryInfo(alignment)
 
         if not self.ambiguous_character:
-            ambiguous_character = 'N'
+            ambiguous_character = "N"
         else:
             ambiguous_character = self.ambiguous_character
 
@@ -22,13 +23,11 @@ class ConsensusSequence(Text):
             threshold = float(self.threshold)
 
         consensus = summary_align.dumb_consensus(
-            threshold = threshold,
-            ambiguous = ambiguous_character
+            threshold=threshold, ambiguous=ambiguous_character
         )
 
         header = ">" + str(self.fasta) + ".consensus"
         print(f"{header}\n{consensus}")
-
 
     def process_args(self, args):
         return dict(

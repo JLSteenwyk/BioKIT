@@ -19,7 +19,7 @@ class TestSumOfPairsScore(object):
             "sum_of_pairs_score",
             f"{here.parent.parent.parent}/sample_files/simple.fa",
             "--reference",
-            f"{here.parent.parent.parent}/sample_files/simple_reference.fa"
+            f"{here.parent.parent.parent}/sample_files/simple_reference.fa",
         ]
         with patch.object(sys, "argv", testargs):
             Phykit()
@@ -33,7 +33,7 @@ class TestSumOfPairsScore(object):
             "sum_of_pairs_score",
             f"{here.parent.parent.parent}/sample_files/simple.fa",
             "-r",
-            f"{here.parent.parent.parent}/sample_files/simple_reference.fa"
+            f"{here.parent.parent.parent}/sample_files/simple_reference.fa",
         ]
         with patch.object(sys, "argv", testargs):
             Phykit()
@@ -47,7 +47,7 @@ class TestSumOfPairsScore(object):
             "sops",
             f"{here.parent.parent.parent}/sample_files/simple.fa",
             "-r",
-            f"{here.parent.parent.parent}/sample_files/simple_reference.fa"
+            f"{here.parent.parent.parent}/sample_files/simple_reference.fa",
         ]
         with patch.object(sys, "argv", testargs):
             Phykit()
@@ -61,7 +61,7 @@ class TestSumOfPairsScore(object):
             "sop",
             f"{here.parent.parent.parent}/sample_files/simple.fa",
             "-r",
-            f"{here.parent.parent.parent}/sample_files/simple_reference.fa"
+            f"{here.parent.parent.parent}/sample_files/simple_reference.fa",
         ]
         with patch.object(sys, "argv", testargs):
             Phykit()

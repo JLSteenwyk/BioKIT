@@ -4,31 +4,34 @@ import pytest
 import sys
 from textwrap import dedent
 
-from phykit.services.alignment.create_concatenation_matrix import CreateConcatenationMatrix
+from phykit.services.alignment.create_concatenation_matrix import (
+    CreateConcatenationMatrix,
+)
+
 
 @pytest.fixture
 def args():
-    kwargs = dict(
-        alignment_list="/some/path/to/file",
-        prefix="some_str")
+    kwargs = dict(alignment_list="/some/path/to/file", prefix="some_str")
     return Namespace(**kwargs)
+
 
 @pytest.fixture
 def taxa_list():
     return [
-        'Kpol',
-        'Kpha',
-        'Kbla',
-        'Sdai',
-        'Scas',
-        'Snag',
-        'Kafr',
-        'Cgla',
-        'Suva',
-        'Skud',
-        'Smik',
-        'Scer'
+        "Kpol",
+        "Kpha",
+        "Kbla",
+        "Sdai",
+        "Scas",
+        "Snag",
+        "Kafr",
+        "Cgla",
+        "Suva",
+        "Skud",
+        "Smik",
+        "Scer",
     ]
+
 
 class TestCreateConcatenationMatrix(object):
     def test_init_sets_alignment_list_path(self, args):
@@ -36,7 +39,7 @@ class TestCreateConcatenationMatrix(object):
         assert ccm.alignment_list_path == args.alignment_list
         assert ccm.prefix == args.prefix
         assert ccm.output_file_path is None
-    
+
     def test_taxa_names_acquisition(self, alignments, args, taxa_list):
 
         ccm = CreateConcatenationMatrix(args)
@@ -47,7 +50,8 @@ class TestCreateConcatenationMatrix(object):
 
     def test_print_start_message(self, alignments, args, taxa_list, capfd):
 
-        expected_start_message = dedent(f"""
+        expected_start_message = dedent(
+            f"""
             --------------------
             | General features |
             --------------------
@@ -62,19 +66,16 @@ class TestCreateConcatenationMatrix(object):
             Concatenated fasta output: test.fa
             Occupancy report: test.occupancy
 
-        """)
+        """
+        )
 
-        file_partition = 'test.partition'
-        fasta_output = 'test.fa'
-        file_occupancy = 'test.occupancy'
+        file_partition = "test.partition"
+        fasta_output = "test.fa"
+        file_occupancy = "test.occupancy"
 
         ccm = CreateConcatenationMatrix(args)
         ccm.print_start_message(
-            taxa_list,
-            alignments,
-            file_partition,
-            fasta_output,
-            file_occupancy
+            taxa_list, alignments, file_partition, fasta_output, file_occupancy
         )
 
         out, _ = capfd.readouterr()
@@ -123,5 +124,3 @@ class TestCreateConcatenationMatrix(object):
     #         file_partition_filename,
     #         file_occupancy_filename
     #     )
-
-

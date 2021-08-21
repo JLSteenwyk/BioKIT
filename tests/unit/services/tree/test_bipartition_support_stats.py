@@ -9,6 +9,7 @@ from mock import patch, call
 from phykit.phykit import Phykit
 from phykit.services.tree.bipartition_support_stats import BipartitionSupportStats
 
+
 @pytest.fixture
 def args():
     kwargs = dict(tree="/some/path/to/file.tre", verbose=None)
@@ -40,10 +41,11 @@ class TestBipartitionSupportStats(object):
                 Phykit()
 
         assert pytest_wrapped_e.type == SystemExit
-        mocked_print.assert_has_calls([
-            call("Please check filename and pathing"),
-        ])
-
+        mocked_print.assert_has_calls(
+            [
+                call("Please check filename and pathing"),
+            ]
+        )
 
     # def test_calculate_bipartition_support_stats(self, small_aspergillus_tree, args):
     #     t = BipartitionSupportStats(args)

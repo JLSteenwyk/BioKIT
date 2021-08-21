@@ -29,7 +29,7 @@ class TestPairwiseIdentity(object):
             call("minimum: 0.1667"),
             call("maximum: 0.8333"),
             call("standard deviation: 0.2194"),
-            call("variance: 0.0481")
+            call("variance: 0.0481"),
         ]
 
     @patch("builtins.print")
@@ -50,7 +50,7 @@ class TestPairwiseIdentity(object):
             call("minimum: 0.5556"),
             call("maximum: 0.8889"),
             call("standard deviation: 0.1299"),
-            call("variance: 0.0169")
+            call("variance: 0.0169"),
         ]
 
     @patch("builtins.print")
@@ -71,7 +71,7 @@ class TestPairwiseIdentity(object):
             call("minimum: 0.6667"),
             call("maximum: 1.0"),
             call("standard deviation: 0.1826"),
-            call("variance: 0.0333")
+            call("variance: 0.0333"),
         ]
 
     @patch("builtins.print")
@@ -92,7 +92,7 @@ class TestPairwiseIdentity(object):
             call("minimum: 0.6667"),
             call("maximum: 1.0"),
             call("standard deviation: 0.1826"),
-            call("variance: 0.0333")
+            call("variance: 0.0333"),
         ]
 
     @patch("builtins.print")

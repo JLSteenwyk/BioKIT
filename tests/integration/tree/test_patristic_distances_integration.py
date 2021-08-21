@@ -30,7 +30,7 @@ class TestPatristicDistances(object):
             call("minimum: 24.0"),
             call("maximum: 152.8813"),
             call("standard deviation: 45.4698"),
-            call("variance: 2067.502")
+            call("variance: 2067.502"),
         ]
 
     @patch("builtins.print")
@@ -51,7 +51,7 @@ class TestPatristicDistances(object):
             call("minimum: 24.0"),
             call("maximum: 152.8813"),
             call("standard deviation: 45.4698"),
-            call("variance: 2067.502")
+            call("variance: 2067.502"),
         ]
 
     @patch("builtins.print")
@@ -60,7 +60,7 @@ class TestPatristicDistances(object):
             "phykit",
             "patristic_distances",
             f"{here.parent.parent.parent}/sample_files/tree_simple.tre",
-            "-v"
+            "-v",
         ]
         with patch.object(sys, "argv", testargs):
             Phykit()

@@ -24,10 +24,14 @@ class TestPruneTree(object):
         with patch.object(sys, "argv", testargs):
             Phykit()
 
-        with open(f"{here.parent.parent}/expected/tree_simple.tre.pruned", "r") as expected_tree:
+        with open(
+            f"{here.parent.parent}/expected/tree_simple.tre.pruned", "r"
+        ) as expected_tree:
             expected_tree_content = expected_tree.read()
 
-        with open(f"{here.parent.parent.parent}/sample_files/tree_simple.tre.pruned", "r") as out_tree:
+        with open(
+            f"{here.parent.parent.parent}/sample_files/tree_simple.tre.pruned", "r"
+        ) as out_tree:
             out_tree_content = out_tree.read()
 
         assert expected_tree_content == out_tree_content
@@ -40,16 +44,21 @@ class TestPruneTree(object):
             f"{here.parent.parent.parent}/sample_files/tree_simple.tre",
             f"{here.parent.parent.parent}/sample_files/tree_simple_prune.txt",
             "-o",
-            f"{here.parent.parent.parent}/sample_files/tree_simple_pruned_custom_output.tre"
+            f"{here.parent.parent.parent}/sample_files/tree_simple_pruned_custom_output.tre",
         ]
 
         with patch.object(sys, "argv", testargs):
             Phykit()
 
-        with open(f"{here.parent.parent}/expected/tree_simple_pruned_custom_output.tre", "r") as expected_tree:
+        with open(
+            f"{here.parent.parent}/expected/tree_simple_pruned_custom_output.tre", "r"
+        ) as expected_tree:
             expected_tree_content = expected_tree.read()
 
-        with open(f"{here.parent.parent.parent}/sample_files/tree_simple_pruned_custom_output.tre", "r") as out_tree:
+        with open(
+            f"{here.parent.parent.parent}/sample_files/tree_simple_pruned_custom_output.tre",
+            "r",
+        ) as out_tree:
             out_tree_content = out_tree.read()
 
         assert expected_tree_content == out_tree_content
@@ -96,10 +105,14 @@ class TestPruneTree(object):
         with patch.object(sys, "argv", testargs):
             Phykit()
 
-        with open(f"{here.parent.parent}/expected/tree_simple.tre.pruned", "r") as expected_tree:
+        with open(
+            f"{here.parent.parent}/expected/tree_simple.tre.pruned", "r"
+        ) as expected_tree:
             expected_tree_content = expected_tree.read()
 
-        with open(f"{here.parent.parent.parent}/sample_files/tree_simple.tre.pruned", "r") as out_tree:
+        with open(
+            f"{here.parent.parent.parent}/sample_files/tree_simple.tre.pruned", "r"
+        ) as out_tree:
             out_tree_content = out_tree.read()
 
         assert expected_tree_content == out_tree_content

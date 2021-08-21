@@ -12,19 +12,29 @@ here = Path(__file__)
 def pytest_configure(config):
     config.addinivalue_line("markers", "integration: mark as integration test")
 
+
 # alignment fixtures
 @pytest.fixture
 def alignment_simple(mocker):
     return AlignIO.read(open(f"{here.parent}/sample_files/simple.fa"), "fasta")
 
+
 @pytest.fixture
 def alignment_complex(mocker):
-    return AlignIO.read(open(f"{here.parent}/sample_files/12_YPR191W_Anc_7.548_codon_aln.fasta.clipkit"), "fasta")
+    return AlignIO.read(
+        open(
+            f"{here.parent}/sample_files/12_YPR191W_Anc_7.548_codon_aln.fasta.clipkit"
+        ),
+        "fasta",
+    )
+
 
 @pytest.fixture
 def alignments(mocker):
-    alignment_list = f"{here.parent}/sample_files/alignment_list_for_create_concat_matrix.txt"
-    alignments = [line.rstrip('\n') for line in open(alignment_list)]
+    alignment_list = (
+        f"{here.parent}/sample_files/alignment_list_for_create_concat_matrix.txt"
+    )
+    alignments = [line.rstrip("\n") for line in open(alignment_list)]
     return alignments
 
 
@@ -32,19 +42,24 @@ def alignments(mocker):
 @pytest.fixture
 def tree_zero_branch_length(mocker):
     return Phylo.read(
-        f"{here.parent}/sample_files/tree_zero_branch_length.tre", "newick",
+        f"{here.parent}/sample_files/tree_zero_branch_length.tre",
+        "newick",
     )
 
 
 @pytest.fixture
 def tree_simple(mocker):
-    return Phylo.read(f"{here.parent}/sample_files/tree_simple.tre", "newick",)
+    return Phylo.read(
+        f"{here.parent}/sample_files/tree_simple.tre",
+        "newick",
+    )
 
 
 @pytest.fixture
 def tree_simple_other(mocker):
     return Phylo.read(
-        f"{here.parent}/sample_files/tree_simple_other_topology.tre", "newick",
+        f"{here.parent}/sample_files/tree_simple_other_topology.tre",
+        "newick",
     )
 
 
@@ -59,6 +74,6 @@ def tree_simple_outgroup(mocker):
 @pytest.fixture
 def small_aspergillus_tree(mocker):
     return Phylo.read(
-        f"{here.parent}/sample_files/small_Aspergillus_tree.tre", "newick",
+        f"{here.parent}/sample_files/small_Aspergillus_tree.tre",
+        "newick",
     )
-

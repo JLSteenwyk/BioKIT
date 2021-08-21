@@ -51,7 +51,7 @@ class TestCovaryingEvolutionaryRates(object):
             f"{here.parent.parent.parent}/sample_files/tree_simple_1.tre",
             "-r",
             f"{here.parent.parent.parent}/sample_files/tree_simple_2.tre",
-            "-v"
+            "-v",
         ]
         with patch.object(sys, "argv", testargs):
             Phykit()
@@ -63,7 +63,7 @@ class TestCovaryingEvolutionaryRates(object):
             call(f"{0.3588}\t{-0.1114}"),
             call(f"{0.3588}\t{0.179}"),
             call(f"{-0.1375}\t{-0.1157}"),
-            call(f"{-2.4235}\t{-1.4731}")
+            call(f"{-2.4235}\t{-1.4731}"),
         ]
 
     @patch("builtins.print")
@@ -151,7 +151,9 @@ class TestCovaryingEvolutionaryRates(object):
         assert pytest_wrapped_e.value.code == 2
 
     @patch("builtins.print")
-    def test_covarying_evolutionary_rates_tree_topologies_do_not_match(self, mocked_print):
+    def test_covarying_evolutionary_rates_tree_topologies_do_not_match(
+        self, mocked_print
+    ):
         testargs = [
             "phykit",
             "cover",

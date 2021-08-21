@@ -1,1 +1,0 @@
-from .tip_labels import TipLabels

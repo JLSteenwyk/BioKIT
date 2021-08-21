@@ -118,7 +118,9 @@ class TestGCContent(object):
         with patch.object(sys, "argv", testargs):
             with pytest.raises(SystemExit) as pytest_wrapped_e:
                 Phykit()
-        
+
         assert mocked_print.mock_calls == [
-            call("Input file has an unacceptable format. Please check input file argument."),
+            call(
+                "Input file has an unacceptable format. Please check input file argument."
+            ),
         ]

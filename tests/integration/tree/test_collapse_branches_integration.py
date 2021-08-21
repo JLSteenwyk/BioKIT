@@ -8,6 +8,7 @@ from phykit.phykit import Phykit
 
 here = Path(__file__)
 
+
 @pytest.mark.integration
 class TestCollapseBranches(object):
     @patch("builtins.print")
@@ -22,10 +23,16 @@ class TestCollapseBranches(object):
         with patch.object(sys, "argv", testargs):
             Phykit()
 
-        with open(f"{here.parent.parent}/expected/small_Aspergillus_tree.tre.collapsed_100.0.tre", "r") as expected_tree:
+        with open(
+            f"{here.parent.parent}/expected/small_Aspergillus_tree.tre.collapsed_100.0.tre",
+            "r",
+        ) as expected_tree:
             expected_tree_content = expected_tree.read()
 
-        with open(f"{here.parent.parent.parent}/sample_files/small_Aspergillus_tree.tre.collapsed_100.0.tre", "r") as out_tree:
+        with open(
+            f"{here.parent.parent.parent}/sample_files/small_Aspergillus_tree.tre.collapsed_100.0.tre",
+            "r",
+        ) as out_tree:
             out_tree_content = out_tree.read()
 
         assert expected_tree_content == out_tree_content
@@ -42,10 +49,16 @@ class TestCollapseBranches(object):
         with patch.object(sys, "argv", testargs):
             Phykit()
 
-        with open(f"{here.parent.parent}/expected/small_Aspergillus_tree.tre.collapsed_80.0.tre", "r") as expected_tree:
+        with open(
+            f"{here.parent.parent}/expected/small_Aspergillus_tree.tre.collapsed_80.0.tre",
+            "r",
+        ) as expected_tree:
             expected_tree_content = expected_tree.read()
 
-        with open(f"{here.parent.parent.parent}/sample_files/small_Aspergillus_tree.tre.collapsed_80.0.tre", "r") as out_tree:
+        with open(
+            f"{here.parent.parent.parent}/sample_files/small_Aspergillus_tree.tre.collapsed_80.0.tre",
+            "r",
+        ) as out_tree:
             out_tree_content = out_tree.read()
 
         assert expected_tree_content == out_tree_content
@@ -62,10 +75,16 @@ class TestCollapseBranches(object):
         with patch.object(sys, "argv", testargs):
             Phykit()
 
-        with open(f"{here.parent.parent}/expected/small_Aspergillus_tree.tre.collapsed_90.0.tre", "r") as expected_tree:
+        with open(
+            f"{here.parent.parent}/expected/small_Aspergillus_tree.tre.collapsed_90.0.tre",
+            "r",
+        ) as expected_tree:
             expected_tree_content = expected_tree.read()
 
-        with open(f"{here.parent.parent.parent}/sample_files/small_Aspergillus_tree.tre.collapsed_90.0.tre", "r") as out_tree:
+        with open(
+            f"{here.parent.parent.parent}/sample_files/small_Aspergillus_tree.tre.collapsed_90.0.tre",
+            "r",
+        ) as out_tree:
             out_tree_content = out_tree.read()
 
         assert expected_tree_content == out_tree_content
@@ -113,10 +132,16 @@ class TestCollapseBranches(object):
         with patch.object(sys, "argv", testargs):
             Phykit()
 
-        with open(f"{here.parent.parent}/expected/small_Aspergillus_tree.tre.collapsed_90.0.tre", "r") as expected_tree:
+        with open(
+            f"{here.parent.parent}/expected/small_Aspergillus_tree.tre.collapsed_90.0.tre",
+            "r",
+        ) as expected_tree:
             expected_tree_content = expected_tree.read()
 
-        with open(f"{here.parent.parent.parent}/sample_files/small_Aspergillus_tree.tre.collapsed_90.0.tre", "r") as out_tree:
+        with open(
+            f"{here.parent.parent.parent}/sample_files/small_Aspergillus_tree.tre.collapsed_90.0.tre",
+            "r",
+        ) as out_tree:
             out_tree_content = out_tree.read()
 
         assert expected_tree_content == out_tree_content
@@ -133,10 +158,16 @@ class TestCollapseBranches(object):
         with patch.object(sys, "argv", testargs):
             Phykit()
 
-        with open(f"{here.parent.parent}/expected/small_Aspergillus_tree.tre.collapsed_90.0.tre", "r") as expected_tree:
+        with open(
+            f"{here.parent.parent}/expected/small_Aspergillus_tree.tre.collapsed_90.0.tre",
+            "r",
+        ) as expected_tree:
             expected_tree_content = expected_tree.read()
 
-        with open(f"{here.parent.parent.parent}/sample_files/small_Aspergillus_tree.tre.collapsed_90.0.tre", "r") as out_tree:
+        with open(
+            f"{here.parent.parent.parent}/sample_files/small_Aspergillus_tree.tre.collapsed_90.0.tre",
+            "r",
+        ) as out_tree:
             out_tree_content = out_tree.read()
 
         assert expected_tree_content == out_tree_content
