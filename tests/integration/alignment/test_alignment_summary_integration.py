@@ -13,7 +13,7 @@ here = Path(__file__)
 @pytest.mark.integration
 class TestAlignmentSummary(object):
     @patch("builtins.print")
-    def test_alignment_summary_invalid_input(self, mocked_print):
+    def test_alignment_summary_invalid_input(self, mocked_print): # noqa
         with pytest.raises(SystemExit) as pytest_wrapped_e:
             Biokit()
 
