@@ -1,3 +1,4 @@
+from .alignment_summary import AlignmentSummary
 from .character_frequency import CharacterFrequency
 from .consensus_sequence import ConsensusSequence
 from .gc_content import GCContent

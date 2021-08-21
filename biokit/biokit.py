@@ -13,6 +13,7 @@ from argparse import (
 )
 
 from .services.text import (
+    AlignmentSummary,
     CharacterFrequency,
     ConsensusSequence,
     Faidx,
@@ -262,6 +263,42 @@ class Biokit(object):
         ))
 
     ## Alignment functions
+    @staticmethod
+    def alignment_summary(argv):
+        parser = ArgumentParser(add_help=True,
+            usage=SUPPRESS,
+            formatter_class=RawDescriptionHelpFormatter,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+
+                Summary statistics for an alignment. Reported
+                statistics include alignment length, number of taxa,
+                number of parsimony sites, number of variable sites,
+                number of constant sites, frequency of each character
+                (including gaps, which are considered to be '-' or '?'). 
+                
+                Aliases:
+                  alignment_summary, aln_summary
+                Command line interfaces: 
+                  bk_alignment_summary, bk_aln_summary
+
+                Usage:
+                biokit alignment_summary <fasta>
+
+                Options
+                =====================================================
+                <fasta>                     first argument after 
+                                            function name should be
+                                            a fasta file
+                """
+            ),
+        )
+
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        args = parser.parse_args(argv)
+        AlignmentSummary(args).run()
+
     @staticmethod
     def character_frequency(argv):
         parser = ArgumentParser(add_help=True,
