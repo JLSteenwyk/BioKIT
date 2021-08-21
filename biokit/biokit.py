@@ -61,7 +61,7 @@ ch = logging.StreamHandler()
 ch.setLevel(logging.INFO)
 logger.addHandler(ch)
 
-help_header = f"""
+help_header = fr"""
                  ____  _       _  _______ _______
                 |  _ \(_)     | |/ /_   _|__   __|
                 | |_) |_  ___ | ' /  | |    | |   
@@ -113,7 +113,7 @@ translation_table_codes = f"""
 
 
 class Biokit(object):
-    help_header = f"""
+    help_header = fr"""
                  ____  _       _  _______ _______ 
                 |  _ \(_)     | |/ /_   _|__   __|
                 | |_) |_  ___ | ' /  | |    | |   
