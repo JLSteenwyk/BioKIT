@@ -1,3 +1,5 @@
+import re
+
 from Bio import AlignIO
 from Bio.Align import AlignInfo
 
@@ -26,7 +28,7 @@ class ConsensusSequence(Alignment):
             threshold=threshold, ambiguous=ambiguous_character
         )
 
-        header = ">" + str(self.fasta) + ".consensus"
+        header = ">" + re.sub("^.*/", "", str(self.fasta)) + ".consensus"
         print(f"{header}\n{consensus}")
 
     def process_args(self, args):
