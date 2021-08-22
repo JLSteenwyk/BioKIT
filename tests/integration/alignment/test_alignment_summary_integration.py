@@ -12,7 +12,6 @@ here = Path(__file__)
 
 @pytest.mark.integration
 class TestAlignmentSummary(object):
-    @pytest.mark.slow
     def test_alignment_summary_invalid_input(self, mocked_print):  # noqa
         with pytest.raises(SystemExit) as pytest_wrapped_e:
             Biokit()
