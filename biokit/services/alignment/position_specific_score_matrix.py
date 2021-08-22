@@ -18,7 +18,7 @@ class PositionSpecificScoreMatrix(Alignment):
         my_pssm = summary_align.pos_specific_score_matrix(
             consensus, chars_to_ignore=self.ambiguous_character
         )
-        print(my_pssm)
+        print(vars(my_pssm))
 
     def process_args(self, args):
         return dict(

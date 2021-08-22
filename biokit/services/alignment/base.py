@@ -7,6 +7,8 @@ class Alignment(BaseService):
         *args,
         fasta=None,
         ambiguous_character=None,
+        threshold=None,
     ):
         self.fasta = fasta
         self.ambiguous_character = ambiguous_character
+        self.threshold = threshold

@@ -6,6 +6,7 @@ import sys
 import textwrap
 
 from biokit.biokit import Biokit
+from biokit.helpers.files import read_alignment_alignio
 
 here = Path(__file__)
 
@@ -49,3 +50,12 @@ class TestAlignmentSummary(object):
         with patch.object(sys, "argv", testargs):
             Biokit()
         assert mocked_print.mock_calls == [call(expected_result)]
+
+    @patch("builtins.print")
+    def test_alignment_summary_bad_file_path(self, mocker):
+        in_file = ""
+        mocker.patch("biokit.helpers.files.AlignIO.read", side_effect=ValueError())
+
+        with pytest.raises(Exception) as excinfo:
+            read_alignment_alignio(in_file)
+        assert "Input file could not be read" in str(excinfo.value)

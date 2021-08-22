@@ -1,9 +1,8 @@
 import collections
 import textwrap
 
-from Bio import AlignIO
-
 from .base import Alignment
+from ...helpers.files import read_alignment_alignio
 from ...helpers.calculate_character_frequencies import calculate_character_frequencies
 
 
@@ -12,7 +11,7 @@ class AlignmentSummary(Alignment):
         super().__init__(**self.process_args(args))
 
     def run(self):
-        alignment = AlignIO.read(open(self.fasta), "fasta")
+        alignment = read_alignment_alignio(self.fasta)
 
         # character frequency counting
         char_freq = calculate_character_frequencies(self.fasta)
