@@ -22,7 +22,7 @@ class TestConsensusSequence(object):
 
     @patch("builtins.print")
     def test_consensus_sequence_simple(self, mocked_print):
-        expected_result = """>/Users/jlsteenwyk/Desktop/GITHUB/BioKIT/tests/sample_files/simple.fa.consensus\nANNTNN"""
+        expected_result = """>simple.fa.consensus\nANNTNN"""
 
         testargs = [
             "biokit",
@@ -44,6 +44,7 @@ class TestConsensusSequence(object):
             '-t',
             '.1',
         ]
+
         with patch.object(sys, "argv", testargs):
             Biokit()
         assert mocked_print.mock_calls == [call(expected_result)]
