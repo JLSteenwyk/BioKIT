@@ -26,7 +26,6 @@ test.fast:
 	rm -rf output/
 	mkdir output/
 	python -m pytest --basetemp=output -m "integration and not slow"
-	rm test.fa test.occupancy test.partition
 
 # used by GitHub actions during CI workflow
 test.coverage: coverage.unit coverage.integration
