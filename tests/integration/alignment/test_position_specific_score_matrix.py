@@ -3,7 +3,6 @@ import pytest
 from mock import patch, call
 from pathlib import Path
 import sys
-import textwrap
 
 from biokit.biokit import Biokit
 
