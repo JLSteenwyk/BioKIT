@@ -1,10 +1,7 @@
 import pytest
 from argparse import Namespace
-from math import isclose
-from mock import patch, call
 
 from biokit.services.alignment.alignment_summary import AlignmentSummary
-from biokit.services.alignment.base import Alignment
 
 
 @pytest.fixture
