@@ -1,6 +1,7 @@
 import pytest
+import textwrap
 
-from mock import patch, call # noqa
+from mock import patch, call
 from pathlib import Path
 import sys
 
@@ -92,3 +93,53 @@ class TestRenameFastaEntries(object):
             output_file = output_file.read()
 
         assert expected_out == output_file
+
+    @patch("builtins.print")
+    def test_rename_fasta_entries_incorrect_input_alignment_file(self, mocked_print):
+        expected_call = textwrap.dedent(
+            f"""
+            {here.parent.parent.parent}/sample_files/simple. corresponds to no such file or directory.
+            Please double check pathing and filenames
+            """
+        )
+        testargs = [
+            "biokit",
+            "rename_fasta_entries",
+            f"{here.parent.parent.parent}/sample_files/simple.",
+            "-i",
+            f"{here.parent.parent.parent}/sample_files/simple_fasta_idmap.txt",
+        ]
+
+        with patch.object(sys, "argv", testargs):
+            with pytest.raises(SystemExit) as pytest_wrapped_e:
+                Biokit()
+
+        assert pytest_wrapped_e.type == SystemExit
+        mocked_print.assert_has_calls([
+            call(expected_call),
+        ])
+
+    @patch("builtins.print")
+    def test_rename_fasta_entries_incorrect_idmap(self, mocked_print):
+        expected_call = textwrap.dedent(
+            f"""
+            {here.parent.parent.parent}/sample_files/bad/path corresponds to no such file or directory.
+            Please double check pathing and filenames
+            """
+        )
+        testargs = [
+            "biokit",
+            "rename_fasta_entries",
+            f"{here.parent.parent.parent}/sample_files/simple.fa",
+            "-i",
+            f"{here.parent.parent.parent}/sample_files/bad/path",
+        ]
+
+        with patch.object(sys, "argv", testargs):
+            with pytest.raises(SystemExit) as pytest_wrapped_e:
+                Biokit()
+
+        assert pytest_wrapped_e.type == SystemExit
+        mocked_print.assert_has_calls([
+            call(expected_call),
+        ])

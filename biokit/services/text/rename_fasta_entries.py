@@ -1,4 +1,5 @@
 import sys
+import textwrap
 
 from Bio import SeqIO
 
@@ -45,8 +46,14 @@ class RenameFastaEntries(Text):
                         record.description = ""
                     SeqIO.write(record, output_file_path, "fasta")
             except FileNotFoundError:
-                print(f"{self.fasta} corresponds to no such file or directory.")
-                print("Please double check pathing and filenames")
+                print(
+                    textwrap.dedent(
+                        f"""
+                        {self.fasta} corresponds to no such file or directory.
+                        Please double check pathing and filenames
+                        """
+                    )
+                )
                 sys.exit()
 
     def idmap_to_dictionary(self, idmap: str) -> dict:
@@ -61,6 +68,12 @@ class RenameFastaEntries(Text):
                     idmap[key] = val
             return idmap
         except FileNotFoundError:
-            print(f"{self.idmap} corresponds to no such file or directory.")
-            print("Please double check pathing and filenames")
+            print(
+                textwrap.dedent(
+                    f"""
+                    {self.idmap} corresponds to no such file or directory.
+                    Please double check pathing and filenames
+                    """
+                )
+            )
             sys.exit()
