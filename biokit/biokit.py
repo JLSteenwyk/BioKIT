@@ -50,10 +50,12 @@ from .services.text import (
     CharacterFrequency,
     Faidx,
     FileFormatConverter,
+    MultipleLineToSingleLineFasta,
     RenameFastaEntries,
     ReorderBySequenceLength,
     SequenceComplement,
     SequenceLength,
+    SingleLineToMultipleLineFasta,
 )
 
 logger = logging.getLogger(__name__)
@@ -224,6 +226,9 @@ class Biokit(object):
                 file_format_converter (alias: format_converter; ffc)
                     - convert a multiple sequence file from one format
                       to another
+                multiple_line_to_single_line_fasta (alias: ml2sl)
+                    - reformats sequences that occur on multiple
+                      lines to be represented in a single line
                 rename_fasta_entries (alias: rename_fasta)
                     - rename entries in a FASTA file
                 reorder_by_sequence_length (alias: reorder_by_seq_len)
@@ -232,6 +237,9 @@ class Biokit(object):
                     - generate the complementary sequence for an alignment 
                 sequence_length (alias: seq_len)
                     - calculate the length of each FASTA entry
+                single_line_to_multiple_line_fasta (alias: sl2ml)
+                    - reformats sequences so that there are 60
+                      characters per sequence line
                 """  # noqa
             ),
         )
@@ -304,6 +312,8 @@ class Biokit(object):
             return self.faidx(argv)
         elif command in ["format_converter", "ffc"]:
             return self.file_format_converter(argv)
+        elif command in ["ml2sl"]:
+            return self.multiple_line_to_single_line_fasta(argv)
         elif command in ["rename_fasta"]:
             return self.rename_fasta_entries(argv)
         elif command in ["reorder_by_seq_len"]:
@@ -312,6 +322,8 @@ class Biokit(object):
             return self.sequence_complement(argv)
         elif command in ["seq_len"]:
             return self.sequence_length(argv)
+        elif command in ["sl2ml"]:
+            return self.single_line_to_multiple_line_fasta(argv)
         else:
             print(
                 "Invalid command option. See help for a complete list of commands and aliases."
@@ -1401,6 +1413,40 @@ class Biokit(object):
         FileFormatConverter(args).run()
 
     @staticmethod
+    def multiple_line_to_single_line_fasta(argv):
+        parser = ArgumentParser(
+            add_help=True,
+            usage=SUPPRESS,
+            formatter_class=RawDescriptionHelpFormatter,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+                Converts FASTA files with multiple lines
+                per sequence to a FASTA file with the sequence
+                on one line.
+
+                Aliases:
+                  multiple_line_to_single_line_fasta, ml2sl
+                Command line interfaces: 
+                  bk_multiple_line_to_single_line_fasta, bk_ml2sl
+                
+                Usage:
+                biokit multiple_line_to_single_line_fasta <fasta> 
+                    [-o/--output <output_file>]
+                
+                Options
+                =====================================================
+                <fasta>                     first argument after 
+                                            function name should be
+                                            a fasta file
+                """  # noqa
+            ),
+        )
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        args = parser.parse_args(argv)
+        MultipleLineToSingleLineFasta(args).run()
+
+    @staticmethod
     def rename_fasta_entries(argv):
         parser = ArgumentParser(
             add_help=True,
@@ -1562,6 +1608,40 @@ class Biokit(object):
         parser.add_argument("fasta", type=str, help=SUPPRESS)
         args = parser.parse_args(argv)
         SequenceLength(args).run()
+
+    @staticmethod
+    def single_line_to_multiple_line_fasta(argv):
+        parser = ArgumentParser(
+            add_help=True,
+            usage=SUPPRESS,
+            formatter_class=RawDescriptionHelpFormatter,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+                Converts FASTA files with single lines per
+                sequence to a FASTA file with the sequence
+                on multiple lines. Each line with have 60 
+                characters following standard NCBI format.
+
+                Aliases:
+                  single_line_to_multiple_line_fasta, sl2ml
+                Command line interfaces: 
+                  bk_single_line_to_multiple_line_fasta, bk_sl2ml
+                
+                Usage:
+                biokit single_line_to_multiple_line_fasta <fasta>
+                
+                Options
+                =====================================================
+                <fasta>                     first argument after 
+                                            function name should be
+                                            a fasta file
+                """  # noqa
+            ),
+        )
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        args = parser.parse_args(argv)
+        SingleLineToMultipleLineFasta(args).run()
 
 
 def main(argv=None):

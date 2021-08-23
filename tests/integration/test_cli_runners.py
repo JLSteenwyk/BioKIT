@@ -256,6 +256,16 @@ class TestCLIRunners(object):
         exit_status = os.system(cmd)
         assert exit_status == 256
 
+    def test_bk_multiple_line_to_single_line_fasta(self):
+        cmd = "bk_multiple_line_to_single_line_fasta -h"
+        exit_status = os.system(cmd)
+        assert exit_status == 32512
+
+    def test_bk_ml2sl(self):
+        cmd = "bk_ml2sl -h"
+        exit_status = os.system(cmd)
+        assert exit_status == 32512
+
     def test_bk_rename_fasta_entries(self):
         cmd = "bk_rename_fasta_entries -h"
         exit_status = os.system(cmd)
@@ -295,3 +305,13 @@ class TestCLIRunners(object):
         cmd = "bk_seq_len -h"
         exit_status = os.system(cmd)
         assert exit_status == 256
+
+    def test_bk_single_line_to_multiple_line_fasta(self):
+        cmd = "bk_single_line_to_multiple_line_fasta -h"
+        exit_status = os.system(cmd)
+        assert exit_status == 32512
+
+    def test_bk_sl2ml(self):
+        cmd = "bk_sl2ml -h"
+        exit_status = os.system(cmd)
+        assert exit_status == 32512
