@@ -59,3 +59,29 @@ class TestAlignmentSummary(object):
             call(expected_result_1),
             call(expected_result_2),
         ]
+
+    @patch("builtins.print")
+    def test_gc_content_second_position_simple_verbose_alias(self, mocked_print):
+        expected_result_0 = textwrap.dedent(
+            """lcl|NC_001133.9_cds_NP_009332.1_1\t0.4711"""
+        )
+        expected_result_1 = textwrap.dedent(
+            """lcl|NC_001133.9_cds_NP_878038.1_2\t0.3684"""
+        )
+        expected_result_2 = textwrap.dedent(
+            """lcl|NC_001133.9_cds_NP_009333.1_3\t0.3569"""
+        )
+
+        testargs = [
+            "biokit",
+            "gc2",
+            f"{here.parent.parent.parent}/sample_files/GCF_000146045.2_R64_cds_from_genomic.small.fna",
+            "-v",
+        ]
+        with patch.object(sys, "argv", testargs):
+            Biokit()
+        assert mocked_print.mock_calls == [
+            call(expected_result_0),
+            call(expected_result_1),
+            call(expected_result_2),
+        ]

@@ -85,3 +85,16 @@ class TestFastQReadLengths(object):
             call(expected_result_18),
             call(expected_result_19),
         ]
+
+    @patch("builtins.print")
+    def test_fastq_read_read_lengths_simple_alias(self, mocked_print):
+        expected_result = "292.15 +/- 20.4019"
+
+        testargs = [
+            "biokit",
+            "fastq_read_lens",
+            f"{here.parent.parent.parent}/sample_files/DRR284700_1_subset.fastq",
+        ]
+        with patch.object(sys, "argv", testargs):
+            Biokit()
+        assert mocked_print.mock_calls == [call(expected_result)]

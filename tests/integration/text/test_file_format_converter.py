@@ -221,3 +221,81 @@ class TestFileFormatConverter(object):
             output_file = output_file.read()
 
         assert expected_out == output_file
+
+    @patch("builtins.print")
+    def test_file_format_converter_invalid_format(self, mocked_print):
+        expected_out = "File format not acceptable. Please use one of the following: ['fasta', 'clustal', 'maf', 'mauve', 'phylip', 'phylip_sequential', 'phylip_relaxed', 'stockholm']"
+        testargs = [
+            "biokit",
+            "file_format_converter",
+            "-i",
+            f"{here.parent.parent.parent}/sample_files/simple.fa",
+            "-iff",
+            "fasta",
+            "-o",
+            f"{here.parent.parent.parent}/sample_files/simple.stockholm",
+            "-off",
+            "not_valid",
+        ]
+        with patch.object(sys, "argv", testargs):
+            Biokit()
+
+        assert mocked_print.mock_calls == [call(expected_out)]
+
+    @patch("builtins.print")
+    def test_file_format_converter_fasta2stockholm_alias0(self, mocked_print):
+        testargs = [
+            "biokit",
+            "format_converter",
+            "-i",
+            f"{here.parent.parent.parent}/sample_files/simple.fa",
+            "-iff",
+            "fasta",
+            "-o",
+            f"{here.parent.parent.parent}/sample_files/simple.stockholm",
+            "-off",
+            "stockholm",
+        ]
+        with patch.object(sys, "argv", testargs):
+            Biokit()
+
+        with open(
+            f"{here.parent.parent}/expected/simple.stockholm", "r"
+        ) as expected_out:
+            expected_out = expected_out.read()
+
+        with open(
+            f"{here.parent.parent.parent}/sample_files/simple.stockholm", "r"
+        ) as output_file:
+            output_file = output_file.read()
+
+        assert expected_out == output_file
+
+    @patch("builtins.print")
+    def test_file_format_converter_fasta2stockholm_alias1(self, mocked_print):
+        testargs = [
+            "biokit",
+            "ffc",
+            "-i",
+            f"{here.parent.parent.parent}/sample_files/simple.fa",
+            "-iff",
+            "fasta",
+            "-o",
+            f"{here.parent.parent.parent}/sample_files/simple.stockholm",
+            "-off",
+            "stockholm",
+        ]
+        with patch.object(sys, "argv", testargs):
+            Biokit()
+
+        with open(
+            f"{here.parent.parent}/expected/simple.stockholm", "r"
+        ) as expected_out:
+            expected_out = expected_out.read()
+
+        with open(
+            f"{here.parent.parent.parent}/sample_files/simple.stockholm", "r"
+        ) as output_file:
+            output_file = output_file.read()
+
+        assert expected_out == output_file

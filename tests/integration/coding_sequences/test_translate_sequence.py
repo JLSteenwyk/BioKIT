@@ -717,3 +717,53 @@ class TestRelativeSynonymousCodonUsage(object):
             out_fa_content = out_fa.read()
 
         assert expected_fa_content == out_fa_content
+
+    @patch("builtins.print")
+    def test_translate_sequence_tt_custom_alias0(self, mocked_print):
+        input_file = f"{here.parent.parent.parent}/sample_files/GCF_000146045.2_R64_cds_from_genomic.small.fna"
+
+        testargs = [
+            "biokit",
+            "translate_seq",
+            f"{here.parent.parent.parent}/sample_files/GCF_000146045.2_R64_cds_from_genomic.small.fna",
+            "-tt",
+            f"{here.parent.parent.parent}/sample_files/CUG_ala_code.txt",
+        ]
+        with patch.object(sys, "argv", testargs):
+            Biokit()
+
+        with open(
+            f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt50",
+            "r",
+        ) as expected_fa:
+            expected_fa_content = expected_fa.read()
+
+        with open(f"{input_file}.translated.fa", "r") as out_fa:
+            out_fa_content = out_fa.read()
+
+        assert expected_fa_content == out_fa_content
+
+    @patch("builtins.print")
+    def test_translate_sequence_tt_custom_alias1(self, mocked_print):
+        input_file = f"{here.parent.parent.parent}/sample_files/GCF_000146045.2_R64_cds_from_genomic.small.fna"
+
+        testargs = [
+            "biokit",
+            "trans_seq",
+            f"{here.parent.parent.parent}/sample_files/GCF_000146045.2_R64_cds_from_genomic.small.fna",
+            "-tt",
+            f"{here.parent.parent.parent}/sample_files/CUG_ala_code.txt",
+        ]
+        with patch.object(sys, "argv", testargs):
+            Biokit()
+
+        with open(
+            f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt50",
+            "r",
+        ) as expected_fa:
+            expected_fa_content = expected_fa.read()
+
+        with open(f"{input_file}.translated.fa", "r") as out_fa:
+            out_fa_content = out_fa.read()
+
+        assert expected_fa_content == out_fa_content

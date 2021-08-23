@@ -31,3 +31,16 @@ class TestSumOfScaffoldLengths(object):
         with patch.object(sys, "argv", testargs):
             Biokit()
         assert mocked_print.mock_calls == [call(expected_result)]
+
+    @patch("builtins.print")
+    def test_sum_of_scaffold_lengths_simple_alias(self, mocked_print):
+        expected_result = 12157105
+
+        testargs = [
+            "biokit",
+            "sum_of_contig_lengths",
+            f"{here.parent.parent.parent}/sample_files/GCF_000146045.2_R64_genomic.fna",
+        ]
+        with patch.object(sys, "argv", testargs):
+            Biokit()
+        assert mocked_print.mock_calls == [call(expected_result)]

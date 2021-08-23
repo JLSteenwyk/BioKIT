@@ -100,3 +100,16 @@ class TestGCContent(object):
             call(expected_result_15),
             call(expected_result_16),
         ]
+
+    @patch("builtins.print")
+    def test_gc_content_simple_alias(self, mocked_print):
+        expected_result = 0.2273
+
+        testargs = [
+            "biokit",
+            "gc",
+            f"{here.parent.parent.parent}/sample_files/simple.fa",
+        ]
+        with patch.object(sys, "argv", testargs):
+            Biokit()
+        assert mocked_print.mock_calls == [call(expected_result)]

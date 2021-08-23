@@ -437,3 +437,18 @@ class TestRelativeSynonymousCodonUsage(object):
         with patch.object(sys, "argv", testargs):
             Biokit()
         assert mocked_print.mock_calls == [call(expected_result)]
+
+    @patch("builtins.print")
+    def test_relative_synonymous_codon_usage_tt_custom_alias(self, mocked_print):
+        expected_result = "GGU\t2.6316\nCCA\t2.4286\nAGA\t2.2941\nGCU\t2.2131\nUUA\t2.0149\nUCU\t1.9355\nAUU\t1.9\nGAA\t1.7714\nACU\t1.7391\nUGU\t1.6667\nAAA\t1.5\nUUG\t1.4179\nAGG\t1.4118\nCAA\t1.3636\nGUU\t1.2881\nAGU\t1.2581\nUUU\t1.2558\nGAU\t1.2432\nCAU\t1.1667\nAAU\t1.0769\nGCC\t1.0656\nCGU\t1.0588\nACC\t1.0435\nGUG\t1.0169\nAUG\t1.0\nUAU\t1.0\nUAC\t1.0\nUGG\t1.0\nUCC\t0.9677\nUCA\t0.9677\nACA\t0.9565\nGUC\t0.9492\nAAC\t0.9231\nGCA\t0.9016\nCCU\t0.8571\nCAC\t0.8333\nGAC\t0.7568\nAUC\t0.75\nGUA\t0.7458\nUUC\t0.7442\nCGG\t0.7059\nCAG\t0.6364\nCUA\t0.597\nCUG\t0.5738\nGGA\t0.5263\nGGG\t0.5263\nCUU\t0.5224\nAAG\t0.5\nUCG\t0.4839\nCUC\t0.4478\nCCG\t0.4286\nAGC\t0.3871\nCGA\t0.3529\nAUA\t0.35\nUGC\t0.3333\nGGC\t0.3158\nCCC\t0.2857\nACG\t0.2609\nGCG\t0.2459\nGAG\t0.2286\nCGC\t0.1765\nUAA\t0\nUAG\t0\nUGA\t0"
+
+        testargs = [
+            "biokit",
+            "rscu",
+            f"{here.parent.parent.parent}/sample_files/GCF_000146045.2_R64_cds_from_genomic.small.fna",
+            "-tt",
+            f"{here.parent.parent.parent}/sample_files/CUG_ala_code.txt",
+        ]
+        with patch.object(sys, "argv", testargs):
+            Biokit()
+        assert mocked_print.mock_calls == [call(expected_result)]

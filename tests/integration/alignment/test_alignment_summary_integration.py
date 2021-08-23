@@ -49,3 +49,33 @@ class TestAlignmentSummary(object):
         with patch.object(sys, "argv", testargs):
             Biokit()
         assert mocked_print.mock_calls == [call(expected_result)]
+
+    @patch("builtins.print")
+    def test_alignment_summary_alias(self, mocked_print):
+        expected_result = textwrap.dedent(
+            """
+            General Characteristics
+            =======================
+            5\tNumber of taxa
+            6\tAlignment length
+            2\tParsimony informative sites
+            2\tVariable sites
+            1\tConstant sites
+
+            Character Frequencies
+            =====================
+            T\t6
+            G\t4
+            C\t1
+            A\t11
+            -\t8"""
+        )
+
+        testargs = [
+            "biokit",
+            "aln_summary",
+            f"{here.parent.parent.parent}/sample_files/simple.fa",
+        ]
+        with patch.object(sys, "argv", testargs):
+            Biokit()
+        assert mocked_print.mock_calls == [call(expected_result)]

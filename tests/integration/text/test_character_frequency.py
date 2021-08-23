@@ -93,3 +93,25 @@ class TestCharacterFrequency(object):
             call(expected_result_18),
             call(expected_result_19),
         ]
+
+    @pytest.mark.slow
+    @patch("builtins.print")
+    def test_character_frequency_simple_alias(self, mocked_print):
+        expected_result_0 = "C\t0.1909"
+        expected_result_1 = "A\t0.3098"
+        expected_result_2 = "T\t0.3087"
+        expected_result_3 = "G\t0.1906"
+
+        testargs = [
+            "biokit",
+            "char_freq",
+            f"{here.parent.parent.parent}/sample_files/GCF_000146045.2_R64_genomic.fna",
+        ]
+        with patch.object(sys, "argv", testargs):
+            Biokit()
+        assert mocked_print.mock_calls == [
+            call(expected_result_0),
+            call(expected_result_1),
+            call(expected_result_2),
+            call(expected_result_3),
+        ]

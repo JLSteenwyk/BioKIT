@@ -287,8 +287,6 @@ class Biokit(object):
             return self.genome_assembly_metrics(argv)
         elif command in ["longest_scaff", "longest_contig", "longest_cont"]:
             return self.longest_scaffold(argv)
-        elif command in ["num_of_scaffolds", "number_of_contigs", "num_of_cont"]:
-            return self.number_of_scaffolds(argv)
         elif command in [
             "number_of_large_scaffolds",
             "num_of_lrg_scaffolds",
@@ -296,6 +294,8 @@ class Biokit(object):
             "num_of_lrg_cont",
         ]:
             return self.number_of_large_scaffolds(argv)
+        elif command in ["num_of_scaffolds", "number_of_contigs", "num_of_cont"]:
+            return self.number_of_scaffolds(argv)
         elif command in ["sum_of_contig_lengths"]:
             return self.sum_of_scaffold_lengths(argv)
         # alias for sequence files

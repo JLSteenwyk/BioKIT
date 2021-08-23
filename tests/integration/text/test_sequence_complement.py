@@ -78,3 +78,20 @@ class TestSequenceComplement(object):
             call(expected_result_0),
             call(expected_result_1),
         ]
+
+    @patch("builtins.print")
+    def test_sequence_complement_multiple_entries_alias(self, mocked_print):
+        expected_result_0 = ">200_S38\ntaccgactgtaggagtgcgtcgaggtctgaacggacctagtcgaacgttgtgttaagatgcgttgtgaaccaatagagtgttgtatggtgctgttacgggggtgttgtggtggtggtttacaggggctgcgtcgtggtcgggatcgtttctagtggttcttgagtagtagtggcggtcagggtcgtcggtagcgtttatttcaccccccacgtcgacgacaacgcccgttacgtagtgggggtgtccgcggaggagttgttgggcctcgacgcggtccctctcgtcatcttccacttctagggttggaaggagggcgcggtctgagcgggtcgtgcaaacgttcggccgtcgccctcgaacgcgcgctagagtaatagtttcttgtcgtctagctcatggaatagaggcacgaagggccctaaccgcggagactccgacttgttctttggtcttaggtcctggacctctggctcgaatctctgcagctcttcctcgcgcgacgctttcacgccctcaactttttcaactcctgagccaacctcctacaagaaccgcgacagcgacacccataggtgcccctaccaatgagagttttgact"
+        expected_result_1 = ">203_S40\ntaccgactgtaggagtgcgtcgaggtctgaacggacctagtcgaacgttgtgttaagatgcgttgtgaaccaatagagtgttgtatggtgctgttacgggggtgttgtggtggtggtttacaggggctgcgtcgtggtcgggatcgtttctagtggttcttgagtagtagtggtggtcagggtcgtcggtagcgtttatttcaccccccacgtcgacgacaacgcccgttacgtagtgggggtgtccgcggaggagttgttgggcctcgacgcggtccctctcgtcatcttccacttctagggttggaaggagggcgcggtctgagcgggtcgtgcaaacgttcggccgtcgccctcgaacgcgcgctagagtaatagtttcttgtcgtctagctcatggaatagaggcacgaagggccctaaccgcggagactccgacttgttctttggtcttaggtcctggacctctggctcgaatctctgcagctcttcctcgcgcgacgctttcacgccctcaactttttcaactcctgagccaacctcctacaagaaccgcgacagcgacacccataggtgcccctaccaatgagagttttgact"
+
+        testargs = [
+            "biokit",
+            "seq_comp",
+            f"{here.parent.parent.parent}/sample_files/EOG091N44MS.fa",
+        ]
+        with patch.object(sys, "argv", testargs):
+            Biokit()
+        assert mocked_print.mock_calls == [
+            call(expected_result_0),
+            call(expected_result_1),
+        ]

@@ -48,3 +48,16 @@ class TestSequenceLength(object):
             call(expected_result_0),
             call(expected_result_1),
         ]
+
+    @patch("builtins.print")
+    def test_sequence_length_simple_alias(self, mocked_print):
+        expected_result_0 = "lcl|NC_001133.9_cds_NP_009332.1_1\t363"
+
+        testargs = [
+            "biokit",
+            "seq_len",
+            f"{here.parent.parent.parent}/sample_files/YAL068C_cds.fna",
+        ]
+        with patch.object(sys, "argv", testargs):
+            Biokit()
+        assert mocked_print.mock_calls == [call(expected_result_0)]

@@ -41,3 +41,25 @@ class TestConsensusSequence(object):
         with patch.object(sys, "argv", testargs):
             Biokit()
         assert mocked_print.mock_calls == [call(expected_result)]
+
+    @patch("builtins.print")
+    def test_pssm_simple_alias(self, mocked_print):
+        expected_result = {
+            "pssm": [
+                ("A", {"-": 0, "A": 5.0, "C": 0, "G": 0, "T": 0}),
+                ("X", {"-": 3.0, "A": 0, "C": 1.0, "G": 1.0, "T": 0}),
+                ("X", {"-": 0, "A": 2.0, "C": 0, "G": 3.0, "T": 0}),
+                ("T", {"-": 4.0, "A": 0, "C": 0, "G": 0, "T": 1.0}),
+                ("X", {"-": 0, "A": 2.0, "C": 0, "G": 0, "T": 3.0}),
+                ("X", {"-": 1.0, "A": 2.0, "C": 0, "G": 0, "T": 2.0}),
+            ]
+        }
+
+        testargs = [
+            "biokit",
+            "pssm",
+            f"{here.parent.parent.parent}/sample_files/simple.fa",
+        ]
+        with patch.object(sys, "argv", testargs):
+            Biokit()
+        assert mocked_print.mock_calls == [call(expected_result)]
