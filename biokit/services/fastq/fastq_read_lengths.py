@@ -16,11 +16,8 @@ class FastQReadLengths(FastQ):
                 read_lens.append(len(seq))
 
         if self.verbose:
-            try:
-                for read_len in read_lens:
-                    print(read_len)
-            except BrokenPipeError:
-                pass
+            for read_len in read_lens:
+                print(read_len)
         else:
             mean = round(stat.mean(read_lens), 4)
             stdev = round(stat.stdev(read_lens), 4)

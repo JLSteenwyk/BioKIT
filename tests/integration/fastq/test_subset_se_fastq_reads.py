@@ -43,6 +43,40 @@ class TestSubsetPEFastQReads(object):
         assert expected_fq_1 == output_fq_1
 
     @patch("builtins.print")
+    def test_subset_se_fastq_reads_percent(self, mocked_print):
+        input_file_1 = (
+            f"{here.parent.parent.parent}/sample_files/DRR284700_1_subset.fastq"
+        )
+        custom_out = (
+            f"{here.parent.parent.parent}/sample_files/DRR284700_1_subset.custom_out.fastq"
+        )
+
+        testargs = [
+            "biokit",
+            "subset_se_fastq_reads",
+            input_file_1,
+            "-s",
+            "154",
+            "-p",
+            "20",
+            "-o",
+            custom_out
+        ]
+
+        with patch.object(sys, "argv", testargs):
+            Biokit()
+
+        with open(
+            f"{here.parent.parent}/expected/DRR284700_1_subset.custom_out.fastq", "r"
+        ) as expected_fq_1:
+            expected_fq_1 = expected_fq_1.read()
+
+        with open(custom_out, "r") as output_fq_1:
+            output_fq_1 = output_fq_1.read()
+
+        assert expected_fq_1 == output_fq_1
+
+    @patch("builtins.print")
     def test_subset_se_fastq_reads_alias(self, mocked_print):
         input_file_1 = (
             f"{here.parent.parent.parent}/sample_files/DRR284700_1_subset.fastq"
