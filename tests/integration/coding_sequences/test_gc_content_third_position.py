@@ -37,18 +37,18 @@ class TestAlignmentSummary(object):
     @patch("builtins.print")
     def test_gc_content_third_position_simple_verbose(self, mocked_print):
         expected_result_0 = textwrap.dedent(
-            """lcl|NC_001133.9_cds_NP_009332.1_1\t0.4876"""
+            """lcl|NC_001133.9_cds_NP_009332.1_1\t0.5289"""
         )
         expected_result_1 = textwrap.dedent(
-            """lcl|NC_001133.9_cds_NP_878038.1_2\t0.4211"""
+            """lcl|NC_001133.9_cds_NP_878038.1_2\t0.4474"""
         )
         expected_result_2 = textwrap.dedent(
-            """lcl|NC_001133.9_cds_NP_009333.1_3\t0.3956"""
+            """lcl|NC_001133.9_cds_NP_009333.1_3\t0.33"""
         )
 
         testargs = [
             "biokit",
-            "gc_content_first_position",
+            "gc_content_third_position",
             f"{here.parent.parent.parent}/sample_files/GCF_000146045.2_R64_cds_from_genomic.small.fna",
             '-v',
         ]
