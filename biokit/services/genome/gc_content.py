@@ -1,5 +1,4 @@
 import re
-import sys
 
 from Bio import SeqIO
 
@@ -23,30 +22,15 @@ class GCContent(Genome):
         if self.verbose:
             for entry, seq in entry_and_seq.items():
                 seq, matches = self.find_matches_and_remove_gaps(seq)
-                try:
-                    print(f"{entry}\t{round(len(matches)/len(seq), 4)}")
-                except BrokenPipeError:
-                    pass
+                print(f"{entry}\t{round(len(matches)/len(seq), 4)}")
         else:
             all_seqs = []
             for entry, seq in entry_and_seq.items():
                 all_seqs.append(seq)
             all_seqs = "".join(all_seqs)
             all_seqs, matches = self.find_matches_and_remove_gaps(all_seqs)
-            try:
-                gc_content = round(len(matches) / len(all_seqs), 4)
-            except ZeroDivisionError:
-                try:
-                    print(
-                        "Input file has an unacceptable format. Please check input file argument."
-                    )
-                    sys.exit()
-                except BrokenPipeError:
-                    pass
-            try:
-                print(gc_content)
-            except BrokenPipeError:
-                pass
+            gc_content = round(len(matches) / len(all_seqs), 4)
+            print(gc_content)
 
     def find_matches_and_remove_gaps(self, seq: str):
         regex_pattern = re.compile("[GgCc]")

@@ -38,7 +38,7 @@ class TestGenomeAssemblyMetrics(object):
             0.3087\tFrequency of T\n\
             0.1909\tFrequency of C\n\
             0.1906\tFrequency of G" # noqa
-        ) 
+        )
 
         testargs = [
             "biokit",

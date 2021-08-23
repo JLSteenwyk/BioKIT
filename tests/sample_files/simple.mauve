@@ -1,0 +1,17 @@
+#FormatVersion Mauve1
+#Sequence1Entry	1
+#Sequence2Entry	2
+#Sequence3Entry	3
+#Sequence4Entry	4
+#Sequence5Entry	5
+> 1:0-0 + 1.fa # 1
+A?GTAT
+> 2:0-0 + 2.fa # 2
+A-G-AT
+> 3:0-0 + 3.fa # 3
+A-G-TA
+> 4:0-0 + 4.fa # 4
+AGA-TA
+> 5:0-0 + 5.fa # 5
+ACa-T-
+=

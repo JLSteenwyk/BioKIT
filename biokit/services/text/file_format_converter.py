@@ -19,12 +19,24 @@ class FileFormatConverter(Text):
             "stockholm",
         ]
 
-        if self.input_file_format and self.output_file_format in file_formats:
+        input_file_format = self.input_file_format
+        output_file_format = self.output_file_format
+        if input_file_format and output_file_format in file_formats:
+            if input_file_format == "phylip_sequential":
+                input_file_format = "phylip-sequential"
+            elif input_file_format == "phylip_relaxed":
+                input_file_format = "phylip-relaxed"
+
+            if output_file_format == "phylip_sequential":
+                output_file_format = "phylip-sequential"
+            elif output_file_format == "phylip_relaxed":
+                output_file_format = "phylip-relaxed"
+
             SeqIO.convert(
                 self.input_file,
-                self.input_file_format,
+                input_file_format,
                 self.output_file,
-                self.output_file_format,
+                output_file_format,
             )
         else:
             print(
