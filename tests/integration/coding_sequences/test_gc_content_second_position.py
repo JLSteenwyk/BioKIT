@@ -48,7 +48,7 @@ class TestAlignmentSummary(object):
 
         testargs = [
             "biokit",
-            "gc_content_first_position",
+            "gc_content_second_position",
             f"{here.parent.parent.parent}/sample_files/GCF_000146045.2_R64_cds_from_genomic.small.fna",
             '-v',
         ]

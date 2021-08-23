@@ -1,5 +1,3 @@
-import sys
-
 from Bio import SeqIO
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
@@ -13,7 +11,7 @@ class TranslateSequence(CodingSequence):
 
     def run(self):
         # get the translation table as a dictionary
-        translation_table = self.read_translation_table()
+        translation_table = self.read_translation_table(self.translation_table)
         records = SeqIO.parse(self.fasta, "fasta")
 
         with open(self.output_file_path, "w") as output_file_path:
@@ -22,7 +20,7 @@ class TranslateSequence(CodingSequence):
                 if len(seq_record._seq) % 3 == 0:
                     for position in range(0, len(seq_record._seq), 3):
                         codon = (
-                            seq_record._seq[position : position + 3]
+                            seq_record._seq[position:position + 3]
                             ._data.upper()
                             .replace("T", "U")
                         )
@@ -42,8 +40,13 @@ class TranslateSequence(CodingSequence):
         else:
             output_file_path = f"{args.output}"
 
+        if args.translation_table is None:
+            translation_table = 1
+        else:
+            translation_table = args.translation_table
+
         return dict(
             fasta=args.fasta,
-            translation_table=args.translation_table,
+            translation_table=translation_table,
             output_file_path=output_file_path,
         )
