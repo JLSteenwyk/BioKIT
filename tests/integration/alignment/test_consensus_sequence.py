@@ -41,8 +41,8 @@ class TestConsensusSequence(object):
             "biokit",
             "consensus_sequence",
             f"{here.parent.parent.parent}/sample_files/simple.fa",
-            '-t',
-            '.1',
+            "-t",
+            ".1",
         ]
 
         with patch.object(sys, "argv", testargs):

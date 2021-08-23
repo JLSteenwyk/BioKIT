@@ -20,7 +20,7 @@ class TranslateSequence(CodingSequence):
                 if len(seq_record._seq) % 3 == 0:
                     for position in range(0, len(seq_record._seq), 3):
                         codon = (
-                            seq_record._seq[position:position + 3]
+                            seq_record._seq[position : position + 3]
                             ._data.upper()
                             .replace("T", "U")
                         )

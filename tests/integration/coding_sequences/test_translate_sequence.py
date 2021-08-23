@@ -1,6 +1,6 @@
 import pytest
 
-from mock import patch, call # noqa
+from mock import patch, call  # noqa
 from pathlib import Path
 import sys
 
@@ -32,7 +32,10 @@ class TestRelativeSynonymousCodonUsage(object):
         with patch.object(sys, "argv", testargs):
             Biokit()
 
-        with open(f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.fna_trans_seq_default", "r") as expected_fa:
+        with open(
+            f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.fna_trans_seq_default",
+            "r",
+        ) as expected_fa:
             expected_fa_content = expected_fa.read()
 
         with open(f"{input_file}.translated.fa", "r") as out_fa:
@@ -54,7 +57,10 @@ class TestRelativeSynonymousCodonUsage(object):
         with patch.object(sys, "argv", testargs):
             Biokit()
 
-        with open(f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt1", "r") as expected_fa:
+        with open(
+            f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt1",
+            "r",
+        ) as expected_fa:
             expected_fa_content = expected_fa.read()
 
         with open(f"{input_file}.translated.fa", "r") as out_fa:
@@ -76,7 +82,10 @@ class TestRelativeSynonymousCodonUsage(object):
         with patch.object(sys, "argv", testargs):
             Biokit()
 
-        with open(f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt2", "r") as expected_fa:
+        with open(
+            f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt2",
+            "r",
+        ) as expected_fa:
             expected_fa_content = expected_fa.read()
 
         with open(f"{input_file}.translated.fa", "r") as out_fa:
@@ -98,7 +107,10 @@ class TestRelativeSynonymousCodonUsage(object):
         with patch.object(sys, "argv", testargs):
             Biokit()
 
-        with open(f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt3", "r") as expected_fa:
+        with open(
+            f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt3",
+            "r",
+        ) as expected_fa:
             expected_fa_content = expected_fa.read()
 
         with open(f"{input_file}.translated.fa", "r") as out_fa:
@@ -120,7 +132,10 @@ class TestRelativeSynonymousCodonUsage(object):
         with patch.object(sys, "argv", testargs):
             Biokit()
 
-        with open(f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt4", "r") as expected_fa:
+        with open(
+            f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt4",
+            "r",
+        ) as expected_fa:
             expected_fa_content = expected_fa.read()
 
         with open(f"{input_file}.translated.fa", "r") as out_fa:
@@ -142,7 +157,10 @@ class TestRelativeSynonymousCodonUsage(object):
         with patch.object(sys, "argv", testargs):
             Biokit()
 
-        with open(f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt5", "r") as expected_fa:
+        with open(
+            f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt5",
+            "r",
+        ) as expected_fa:
             expected_fa_content = expected_fa.read()
 
         with open(f"{input_file}.translated.fa", "r") as out_fa:
@@ -164,7 +182,10 @@ class TestRelativeSynonymousCodonUsage(object):
         with patch.object(sys, "argv", testargs):
             Biokit()
 
-        with open(f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt6", "r") as expected_fa:
+        with open(
+            f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt6",
+            "r",
+        ) as expected_fa:
             expected_fa_content = expected_fa.read()
 
         with open(f"{input_file}.translated.fa", "r") as out_fa:
@@ -186,7 +207,10 @@ class TestRelativeSynonymousCodonUsage(object):
         with patch.object(sys, "argv", testargs):
             Biokit()
 
-        with open(f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt9", "r") as expected_fa:
+        with open(
+            f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt9",
+            "r",
+        ) as expected_fa:
             expected_fa_content = expected_fa.read()
 
         with open(f"{input_file}.translated.fa", "r") as out_fa:
@@ -208,7 +232,10 @@ class TestRelativeSynonymousCodonUsage(object):
         with patch.object(sys, "argv", testargs):
             Biokit()
 
-        with open(f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt10", "r") as expected_fa:
+        with open(
+            f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt10",
+            "r",
+        ) as expected_fa:
             expected_fa_content = expected_fa.read()
 
         with open(f"{input_file}.translated.fa", "r") as out_fa:
@@ -230,7 +257,10 @@ class TestRelativeSynonymousCodonUsage(object):
         with patch.object(sys, "argv", testargs):
             Biokit()
 
-        with open(f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt11", "r") as expected_fa:
+        with open(
+            f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt11",
+            "r",
+        ) as expected_fa:
             expected_fa_content = expected_fa.read()
 
         with open(f"{input_file}.translated.fa", "r") as out_fa:
@@ -252,7 +282,10 @@ class TestRelativeSynonymousCodonUsage(object):
         with patch.object(sys, "argv", testargs):
             Biokit()
 
-        with open(f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt12", "r") as expected_fa:
+        with open(
+            f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt12",
+            "r",
+        ) as expected_fa:
             expected_fa_content = expected_fa.read()
 
         with open(f"{input_file}.translated.fa", "r") as out_fa:
@@ -274,7 +307,10 @@ class TestRelativeSynonymousCodonUsage(object):
         with patch.object(sys, "argv", testargs):
             Biokit()
 
-        with open(f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt13", "r") as expected_fa:
+        with open(
+            f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt13",
+            "r",
+        ) as expected_fa:
             expected_fa_content = expected_fa.read()
 
         with open(f"{input_file}.translated.fa", "r") as out_fa:
@@ -296,7 +332,10 @@ class TestRelativeSynonymousCodonUsage(object):
         with patch.object(sys, "argv", testargs):
             Biokit()
 
-        with open(f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt14", "r") as expected_fa:
+        with open(
+            f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt14",
+            "r",
+        ) as expected_fa:
             expected_fa_content = expected_fa.read()
 
         with open(f"{input_file}.translated.fa", "r") as out_fa:
@@ -318,7 +357,10 @@ class TestRelativeSynonymousCodonUsage(object):
         with patch.object(sys, "argv", testargs):
             Biokit()
 
-        with open(f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt16", "r") as expected_fa:
+        with open(
+            f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt16",
+            "r",
+        ) as expected_fa:
             expected_fa_content = expected_fa.read()
 
         with open(f"{input_file}.translated.fa", "r") as out_fa:
@@ -340,7 +382,10 @@ class TestRelativeSynonymousCodonUsage(object):
         with patch.object(sys, "argv", testargs):
             Biokit()
 
-        with open(f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt21", "r") as expected_fa:
+        with open(
+            f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt21",
+            "r",
+        ) as expected_fa:
             expected_fa_content = expected_fa.read()
 
         with open(f"{input_file}.translated.fa", "r") as out_fa:
@@ -362,7 +407,10 @@ class TestRelativeSynonymousCodonUsage(object):
         with patch.object(sys, "argv", testargs):
             Biokit()
 
-        with open(f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt22", "r") as expected_fa:
+        with open(
+            f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt22",
+            "r",
+        ) as expected_fa:
             expected_fa_content = expected_fa.read()
 
         with open(f"{input_file}.translated.fa", "r") as out_fa:
@@ -384,7 +432,10 @@ class TestRelativeSynonymousCodonUsage(object):
         with patch.object(sys, "argv", testargs):
             Biokit()
 
-        with open(f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt23", "r") as expected_fa:
+        with open(
+            f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt23",
+            "r",
+        ) as expected_fa:
             expected_fa_content = expected_fa.read()
 
         with open(f"{input_file}.translated.fa", "r") as out_fa:
@@ -406,7 +457,10 @@ class TestRelativeSynonymousCodonUsage(object):
         with patch.object(sys, "argv", testargs):
             Biokit()
 
-        with open(f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt24", "r") as expected_fa:
+        with open(
+            f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt24",
+            "r",
+        ) as expected_fa:
             expected_fa_content = expected_fa.read()
 
         with open(f"{input_file}.translated.fa", "r") as out_fa:
@@ -428,7 +482,10 @@ class TestRelativeSynonymousCodonUsage(object):
         with patch.object(sys, "argv", testargs):
             Biokit()
 
-        with open(f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt25", "r") as expected_fa:
+        with open(
+            f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt25",
+            "r",
+        ) as expected_fa:
             expected_fa_content = expected_fa.read()
 
         with open(f"{input_file}.translated.fa", "r") as out_fa:
@@ -450,7 +507,10 @@ class TestRelativeSynonymousCodonUsage(object):
         with patch.object(sys, "argv", testargs):
             Biokit()
 
-        with open(f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt26", "r") as expected_fa:
+        with open(
+            f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt26",
+            "r",
+        ) as expected_fa:
             expected_fa_content = expected_fa.read()
 
         with open(f"{input_file}.translated.fa", "r") as out_fa:
@@ -472,7 +532,10 @@ class TestRelativeSynonymousCodonUsage(object):
         with patch.object(sys, "argv", testargs):
             Biokit()
 
-        with open(f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt27", "r") as expected_fa:
+        with open(
+            f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt27",
+            "r",
+        ) as expected_fa:
             expected_fa_content = expected_fa.read()
 
         with open(f"{input_file}.translated.fa", "r") as out_fa:
@@ -494,7 +557,10 @@ class TestRelativeSynonymousCodonUsage(object):
         with patch.object(sys, "argv", testargs):
             Biokit()
 
-        with open(f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt28", "r") as expected_fa:
+        with open(
+            f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt28",
+            "r",
+        ) as expected_fa:
             expected_fa_content = expected_fa.read()
 
         with open(f"{input_file}.translated.fa", "r") as out_fa:
@@ -516,7 +582,10 @@ class TestRelativeSynonymousCodonUsage(object):
         with patch.object(sys, "argv", testargs):
             Biokit()
 
-        with open(f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt29", "r") as expected_fa:
+        with open(
+            f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt29",
+            "r",
+        ) as expected_fa:
             expected_fa_content = expected_fa.read()
 
         with open(f"{input_file}.translated.fa", "r") as out_fa:
@@ -538,7 +607,10 @@ class TestRelativeSynonymousCodonUsage(object):
         with patch.object(sys, "argv", testargs):
             Biokit()
 
-        with open(f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt30", "r") as expected_fa:
+        with open(
+            f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt30",
+            "r",
+        ) as expected_fa:
             expected_fa_content = expected_fa.read()
 
         with open(f"{input_file}.translated.fa", "r") as out_fa:
@@ -560,7 +632,10 @@ class TestRelativeSynonymousCodonUsage(object):
         with patch.object(sys, "argv", testargs):
             Biokit()
 
-        with open(f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt31", "r") as expected_fa:
+        with open(
+            f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt31",
+            "r",
+        ) as expected_fa:
             expected_fa_content = expected_fa.read()
 
         with open(f"{input_file}.translated.fa", "r") as out_fa:
@@ -582,7 +657,10 @@ class TestRelativeSynonymousCodonUsage(object):
         with patch.object(sys, "argv", testargs):
             Biokit()
 
-        with open(f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt33", "r") as expected_fa:
+        with open(
+            f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt33",
+            "r",
+        ) as expected_fa:
             expected_fa_content = expected_fa.read()
 
         with open(f"{input_file}.translated.fa", "r") as out_fa:
@@ -604,7 +682,10 @@ class TestRelativeSynonymousCodonUsage(object):
         with patch.object(sys, "argv", testargs):
             Biokit()
 
-        with open(f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt50", "r") as expected_fa:
+        with open(
+            f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt50",
+            "r",
+        ) as expected_fa:
             expected_fa_content = expected_fa.read()
 
         with open(f"{input_file}.translated.fa", "r") as out_fa:
@@ -620,13 +701,16 @@ class TestRelativeSynonymousCodonUsage(object):
             "biokit",
             "translate_sequence",
             f"{here.parent.parent.parent}/sample_files/GCF_000146045.2_R64_cds_from_genomic.small.fna",
-            '-tt',
+            "-tt",
             f"{here.parent.parent.parent}/sample_files/CUG_ala_code.txt",
         ]
         with patch.object(sys, "argv", testargs):
             Biokit()
 
-        with open(f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt50", "r") as expected_fa:
+        with open(
+            f"{here.parent.parent}/expected/GCF_000146045.2_R64_cds_from_genomic.small.fna.tt50",
+            "r",
+        ) as expected_fa:
             expected_fa_content = expected_fa.read()
 
         with open(f"{input_file}.translated.fa", "r") as out_fa:

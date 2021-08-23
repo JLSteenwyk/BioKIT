@@ -48,5 +48,5 @@ class GCContentFirstPosition(CodingSequence):
     def get_first_position_char(self, record, first_position_char: list):
         length_of_coding_seq = len(record._seq)
         for i in range(0, length_of_coding_seq, 3):
-            first_position_char.append(record._seq[i:i + 3][0])
+            first_position_char.append(record._seq[i : i + 3][0])
         return first_position_char

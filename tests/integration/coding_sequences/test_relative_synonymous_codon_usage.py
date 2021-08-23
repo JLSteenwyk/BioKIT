@@ -41,8 +41,8 @@ class TestRelativeSynonymousCodonUsage(object):
             "biokit",
             "relative_synonymous_codon_usage",
             f"{here.parent.parent.parent}/sample_files/GCF_000146045.2_R64_cds_from_genomic.small.fna",
-            '-tt',
-            '1',
+            "-tt",
+            "1",
         ]
         with patch.object(sys, "argv", testargs):
             Biokit()
@@ -56,8 +56,8 @@ class TestRelativeSynonymousCodonUsage(object):
             "biokit",
             "relative_synonymous_codon_usage",
             f"{here.parent.parent.parent}/sample_files/GCF_000146045.2_R64_cds_from_genomic.small.fna",
-            '-tt',
-            '2',
+            "-tt",
+            "2",
         ]
         with patch.object(sys, "argv", testargs):
             Biokit()
@@ -71,8 +71,8 @@ class TestRelativeSynonymousCodonUsage(object):
             "biokit",
             "relative_synonymous_codon_usage",
             f"{here.parent.parent.parent}/sample_files/GCF_000146045.2_R64_cds_from_genomic.small.fna",
-            '-tt',
-            '3',
+            "-tt",
+            "3",
         ]
         with patch.object(sys, "argv", testargs):
             Biokit()
@@ -86,8 +86,8 @@ class TestRelativeSynonymousCodonUsage(object):
             "biokit",
             "relative_synonymous_codon_usage",
             f"{here.parent.parent.parent}/sample_files/GCF_000146045.2_R64_cds_from_genomic.small.fna",
-            '-tt',
-            '4',
+            "-tt",
+            "4",
         ]
         with patch.object(sys, "argv", testargs):
             Biokit()
@@ -101,8 +101,8 @@ class TestRelativeSynonymousCodonUsage(object):
             "biokit",
             "relative_synonymous_codon_usage",
             f"{here.parent.parent.parent}/sample_files/GCF_000146045.2_R64_cds_from_genomic.small.fna",
-            '-tt',
-            '5',
+            "-tt",
+            "5",
         ]
         with patch.object(sys, "argv", testargs):
             Biokit()
@@ -116,8 +116,8 @@ class TestRelativeSynonymousCodonUsage(object):
             "biokit",
             "relative_synonymous_codon_usage",
             f"{here.parent.parent.parent}/sample_files/GCF_000146045.2_R64_cds_from_genomic.small.fna",
-            '-tt',
-            '6',
+            "-tt",
+            "6",
         ]
         with patch.object(sys, "argv", testargs):
             Biokit()
@@ -131,8 +131,8 @@ class TestRelativeSynonymousCodonUsage(object):
             "biokit",
             "relative_synonymous_codon_usage",
             f"{here.parent.parent.parent}/sample_files/GCF_000146045.2_R64_cds_from_genomic.small.fna",
-            '-tt',
-            '9',
+            "-tt",
+            "9",
         ]
         with patch.object(sys, "argv", testargs):
             Biokit()
@@ -146,8 +146,8 @@ class TestRelativeSynonymousCodonUsage(object):
             "biokit",
             "relative_synonymous_codon_usage",
             f"{here.parent.parent.parent}/sample_files/GCF_000146045.2_R64_cds_from_genomic.small.fna",
-            '-tt',
-            '10',
+            "-tt",
+            "10",
         ]
         with patch.object(sys, "argv", testargs):
             Biokit()
@@ -161,8 +161,8 @@ class TestRelativeSynonymousCodonUsage(object):
             "biokit",
             "relative_synonymous_codon_usage",
             f"{here.parent.parent.parent}/sample_files/GCF_000146045.2_R64_cds_from_genomic.small.fna",
-            '-tt',
-            '11',
+            "-tt",
+            "11",
         ]
         with patch.object(sys, "argv", testargs):
             Biokit()
@@ -176,8 +176,8 @@ class TestRelativeSynonymousCodonUsage(object):
             "biokit",
             "relative_synonymous_codon_usage",
             f"{here.parent.parent.parent}/sample_files/GCF_000146045.2_R64_cds_from_genomic.small.fna",
-            '-tt',
-            '12',
+            "-tt",
+            "12",
         ]
         with patch.object(sys, "argv", testargs):
             Biokit()
@@ -191,8 +191,8 @@ class TestRelativeSynonymousCodonUsage(object):
             "biokit",
             "relative_synonymous_codon_usage",
             f"{here.parent.parent.parent}/sample_files/GCF_000146045.2_R64_cds_from_genomic.small.fna",
-            '-tt',
-            '13',
+            "-tt",
+            "13",
         ]
         with patch.object(sys, "argv", testargs):
             Biokit()
@@ -206,8 +206,8 @@ class TestRelativeSynonymousCodonUsage(object):
             "biokit",
             "relative_synonymous_codon_usage",
             f"{here.parent.parent.parent}/sample_files/GCF_000146045.2_R64_cds_from_genomic.small.fna",
-            '-tt',
-            '14',
+            "-tt",
+            "14",
         ]
         with patch.object(sys, "argv", testargs):
             Biokit()
@@ -221,8 +221,8 @@ class TestRelativeSynonymousCodonUsage(object):
             "biokit",
             "relative_synonymous_codon_usage",
             f"{here.parent.parent.parent}/sample_files/GCF_000146045.2_R64_cds_from_genomic.small.fna",
-            '-tt',
-            '16',
+            "-tt",
+            "16",
         ]
         with patch.object(sys, "argv", testargs):
             Biokit()
@@ -236,8 +236,8 @@ class TestRelativeSynonymousCodonUsage(object):
             "biokit",
             "relative_synonymous_codon_usage",
             f"{here.parent.parent.parent}/sample_files/GCF_000146045.2_R64_cds_from_genomic.small.fna",
-            '-tt',
-            '21',
+            "-tt",
+            "21",
         ]
         with patch.object(sys, "argv", testargs):
             Biokit()
@@ -251,8 +251,8 @@ class TestRelativeSynonymousCodonUsage(object):
             "biokit",
             "relative_synonymous_codon_usage",
             f"{here.parent.parent.parent}/sample_files/GCF_000146045.2_R64_cds_from_genomic.small.fna",
-            '-tt',
-            '22',
+            "-tt",
+            "22",
         ]
         with patch.object(sys, "argv", testargs):
             Biokit()
@@ -266,8 +266,8 @@ class TestRelativeSynonymousCodonUsage(object):
             "biokit",
             "relative_synonymous_codon_usage",
             f"{here.parent.parent.parent}/sample_files/GCF_000146045.2_R64_cds_from_genomic.small.fna",
-            '-tt',
-            '23',
+            "-tt",
+            "23",
         ]
         with patch.object(sys, "argv", testargs):
             Biokit()
@@ -281,8 +281,8 @@ class TestRelativeSynonymousCodonUsage(object):
             "biokit",
             "relative_synonymous_codon_usage",
             f"{here.parent.parent.parent}/sample_files/GCF_000146045.2_R64_cds_from_genomic.small.fna",
-            '-tt',
-            '24',
+            "-tt",
+            "24",
         ]
         with patch.object(sys, "argv", testargs):
             Biokit()
@@ -296,8 +296,8 @@ class TestRelativeSynonymousCodonUsage(object):
             "biokit",
             "relative_synonymous_codon_usage",
             f"{here.parent.parent.parent}/sample_files/GCF_000146045.2_R64_cds_from_genomic.small.fna",
-            '-tt',
-            '25',
+            "-tt",
+            "25",
         ]
         with patch.object(sys, "argv", testargs):
             Biokit()
@@ -311,8 +311,8 @@ class TestRelativeSynonymousCodonUsage(object):
             "biokit",
             "relative_synonymous_codon_usage",
             f"{here.parent.parent.parent}/sample_files/GCF_000146045.2_R64_cds_from_genomic.small.fna",
-            '-tt',
-            '26',
+            "-tt",
+            "26",
         ]
         with patch.object(sys, "argv", testargs):
             Biokit()
@@ -326,8 +326,8 @@ class TestRelativeSynonymousCodonUsage(object):
             "biokit",
             "relative_synonymous_codon_usage",
             f"{here.parent.parent.parent}/sample_files/GCF_000146045.2_R64_cds_from_genomic.small.fna",
-            '-tt',
-            '27',
+            "-tt",
+            "27",
         ]
         with patch.object(sys, "argv", testargs):
             Biokit()
@@ -341,8 +341,8 @@ class TestRelativeSynonymousCodonUsage(object):
             "biokit",
             "relative_synonymous_codon_usage",
             f"{here.parent.parent.parent}/sample_files/GCF_000146045.2_R64_cds_from_genomic.small.fna",
-            '-tt',
-            '28',
+            "-tt",
+            "28",
         ]
         with patch.object(sys, "argv", testargs):
             Biokit()
@@ -356,8 +356,8 @@ class TestRelativeSynonymousCodonUsage(object):
             "biokit",
             "relative_synonymous_codon_usage",
             f"{here.parent.parent.parent}/sample_files/GCF_000146045.2_R64_cds_from_genomic.small.fna",
-            '-tt',
-            '29',
+            "-tt",
+            "29",
         ]
         with patch.object(sys, "argv", testargs):
             Biokit()
@@ -371,8 +371,8 @@ class TestRelativeSynonymousCodonUsage(object):
             "biokit",
             "relative_synonymous_codon_usage",
             f"{here.parent.parent.parent}/sample_files/GCF_000146045.2_R64_cds_from_genomic.small.fna",
-            '-tt',
-            '30',
+            "-tt",
+            "30",
         ]
         with patch.object(sys, "argv", testargs):
             Biokit()
@@ -386,8 +386,8 @@ class TestRelativeSynonymousCodonUsage(object):
             "biokit",
             "relative_synonymous_codon_usage",
             f"{here.parent.parent.parent}/sample_files/GCF_000146045.2_R64_cds_from_genomic.small.fna",
-            '-tt',
-            '31',
+            "-tt",
+            "31",
         ]
         with patch.object(sys, "argv", testargs):
             Biokit()
@@ -401,8 +401,8 @@ class TestRelativeSynonymousCodonUsage(object):
             "biokit",
             "relative_synonymous_codon_usage",
             f"{here.parent.parent.parent}/sample_files/GCF_000146045.2_R64_cds_from_genomic.small.fna",
-            '-tt',
-            '33',
+            "-tt",
+            "33",
         ]
         with patch.object(sys, "argv", testargs):
             Biokit()
@@ -416,8 +416,8 @@ class TestRelativeSynonymousCodonUsage(object):
             "biokit",
             "relative_synonymous_codon_usage",
             f"{here.parent.parent.parent}/sample_files/GCF_000146045.2_R64_cds_from_genomic.small.fna",
-            '-tt',
-            '50',
+            "-tt",
+            "50",
         ]
         with patch.object(sys, "argv", testargs):
             Biokit()
@@ -431,7 +431,7 @@ class TestRelativeSynonymousCodonUsage(object):
             "biokit",
             "relative_synonymous_codon_usage",
             f"{here.parent.parent.parent}/sample_files/GCF_000146045.2_R64_cds_from_genomic.small.fna",
-            '-tt',
+            "-tt",
             f"{here.parent.parent.parent}/sample_files/CUG_ala_code.txt",
         ]
         with patch.object(sys, "argv", testargs):

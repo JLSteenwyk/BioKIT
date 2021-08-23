@@ -59,7 +59,7 @@ class TestFastQReadLengths(object):
             "biokit",
             "fastq_read_lengths",
             f"{here.parent.parent.parent}/sample_files/DRR284700_1_subset.fastq",
-            '-v',
+            "-v",
         ]
         with patch.object(sys, "argv", testargs):
             Biokit()

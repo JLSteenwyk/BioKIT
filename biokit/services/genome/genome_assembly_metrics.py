@@ -1,4 +1,3 @@
-import sys
 import textwrap
 
 from .base import Genome
@@ -16,14 +15,13 @@ class GenomeAssemblyMetrics(Genome):
         n90 = self.calc_n90()
 
         char_freq = calculate_character_frequencies(self.fasta)
-        sum_of_chars = sum(char_freq.values())
-        gc_content = (char_freq["G"] + char_freq["C"]) / sum_of_chars
-        a_freq = char_freq["A"] / sum_of_chars
-        t_freq = char_freq["T"] / sum_of_chars
-        g_freq = char_freq["G"] / sum_of_chars
-        c_freq = char_freq["C"] / sum_of_chars
-
         assembly_size = self.sum_of_scaffold_lengths()
+
+        gc_content = (char_freq["G"] + char_freq["C"]) / assembly_size
+        a_freq = char_freq["A"] / assembly_size
+        t_freq = char_freq["T"] / assembly_size
+        g_freq = char_freq["G"] / assembly_size
+        c_freq = char_freq["C"] / assembly_size
 
         num_of_scaffolds = self.number_of_scaffolds()
 
@@ -35,7 +33,7 @@ class GenomeAssemblyMetrics(Genome):
         print(
             textwrap.dedent(
                 f"\
-            {sum_of_chars}\tAssembly size\n\
+            {assembly_size}\tAssembly size\n\
             {l50}\tL50\n\
             {l90}\tL90\n\
             {n50}\tN50\n\
