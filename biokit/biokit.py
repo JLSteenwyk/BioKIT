@@ -288,7 +288,6 @@ class Biokit(object):
         elif command in ["longest_scaff", "longest_contig", "longest_cont"]:
             return self.longest_scaffold(argv)
         elif command in [
-            "number_of_large_scaffolds",
             "num_of_lrg_scaffolds",
             "number_of_large_contigs",
             "num_of_lrg_cont",
