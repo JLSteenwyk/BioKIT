@@ -41,7 +41,7 @@ class TranslateSequence(CodingSequence):
             output_file_path = f"{args.output}"
 
         if args.translation_table is None:
-            translation_table = 1
+            translation_table = "1"
         else:
             translation_table = args.translation_table
 

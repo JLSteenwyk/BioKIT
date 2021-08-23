@@ -36,14 +36,22 @@ class RelativeSynonymousCodonUsage(CodingSequence):
 
         # calculate rscu
         rscu = dict()
-        for aa, codons in codon_table.items():
+        for _, codons in codon_table.items():
             observed_sum = 0
             for codon in codons:
-                observed_sum += codon_counts[codon]
+                try:
+                    observed_sum += codon_counts[codon]
+                except KeyError:
+                    observed_sum = 0
             for codon in codons:
-                rscu[codon] = round(
-                    codon_counts[codon] / (observed_sum / len(codons)), 4
-                )
+                try:
+                    rscu[codon] = round(
+                        codon_counts[codon] / (observed_sum / len(codons)), 4
+                    )
+                except ZeroDivisionError:
+                    rscu[codon] = 0
+                except KeyError:
+                    rscu[codon] = 0
 
         # reverse sort according to rscu values
         rscu = dict(sorted(rscu.items(), key=lambda item: item[1], reverse=True))

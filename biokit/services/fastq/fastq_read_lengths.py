@@ -12,7 +12,7 @@ class FastQReadLengths(FastQ):
     def run(self):
         read_lens = []
         with open(self.fastq) as in_handle:
-            for title, seq, qual in FastqGeneralIterator(in_handle):
+            for _, seq, _ in FastqGeneralIterator(in_handle):
                 read_lens.append(len(seq))
 
         if self.verbose:
@@ -22,8 +22,8 @@ class FastQReadLengths(FastQ):
             except BrokenPipeError:
                 pass
         else:
-            mean = stat.mean(read_lens)
-            stdev = stat.stdev(read_lens)
+            mean = round(stat.mean(read_lens), 4)
+            stdev = round(stat.stdev(read_lens), 4)
             print(f"{mean} +/- {stdev}")
 
     def process_args(self, args):

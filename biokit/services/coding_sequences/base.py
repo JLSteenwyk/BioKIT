@@ -114,4 +114,3 @@ class CodingSequence(BaseService):
                 line = line.split()
                 trans_table[line[0]] = line[1]
         return trans_table
-
