@@ -18,7 +18,7 @@ CLASSIFIERS = [
     "Topic :: Scientific/Engineering",
 ]
 
-REQUIRES = ["biopython==1.76", "numpy==1.18.2"]
+REQUIRES = ["biopython==1.76", "numpy==1.18.2", "cython"]
 
 setup(
     name="biokit",
