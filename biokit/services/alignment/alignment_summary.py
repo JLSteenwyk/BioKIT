@@ -64,7 +64,7 @@ class AlignmentSummary(Alignment):
             elif len(d) == 1 and len(num_occurences) == 1:
                 constant_sites += 1
             else:
-                1
+                pass
 
         return parsimony_informative_sites, variable_sites, constant_sites
 
