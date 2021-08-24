@@ -63,6 +63,7 @@ class TestGenomeAssemblyMetrics(object):
             17\tNumber of scaffolds\n\
             17\tNumber of large scaffolds\n\
             12157105\tSum length of large scaffolds\n\
+            1531933\tLongest scaffold\n\
             0.3098\tFrequency of A\n\
             0.3087\tFrequency of T\n\
             0.1909\tFrequency of C\n\

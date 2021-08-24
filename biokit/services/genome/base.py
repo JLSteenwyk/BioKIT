@@ -115,6 +115,17 @@ class Genome(BaseService):
                 return contig_len
                 break
 
+    def longest_scaffold(self):
+        # get contig lengths
+        records = SeqIO.parse(self.fasta, "fasta")
+        max_len = 0
+        for seq_record in records:
+            if len(seq_record) > max_len:
+                max_len = len(seq_record)
+
+        # get longest contig length
+        return max_len
+
     def number_of_large_scaffolds(self):
         """
         calculate the number of large scaffolds

@@ -395,6 +395,158 @@ Options: |br|
 
 |
 
+Genome functions
+----------------
+
+^^^^^
+
+GC content
+##########
+Function names: gc_content; gc |br|
+Command line interface: bk_gc_content; bk_gc
+
+Calculate GC content of a fasta file.
+
+GC content is the fraction of bases that are
+either guanines or cytosines. To obtain
+GC content per FASTA entry, use the verbose
+option.
+
+.. code-block:: shell
+
+   biokit gc_content <fasta> [-v/--verbose]
+
+Options: |br|
+*<fasta>*: first argument after function name should be a fasta file |br|
+*-v/\\-\\-verbose*: optional argument to print the GC content of each fasta entry
+
+|
+
+Genome assembly metrics
+#######################
+Function names: genome_assembly_metrics; assembly_metrics |br|
+Command line interface: bk_genome_assembly_metrics; bk_assembly_metrics
+
+Calculate L50, L90, N50, N90, GC content, assembly size,
+number of scaffolds, number and sum length
+of large scaffolds, frequency of A, T, C, and G.
+
+L50: The smallest number of contigs whose length sum makes up half of the genome size. |br|
+L90: The smallest number of contigs whose length sum makes up 90% of the genome size. |br|
+N50: The sequence length of the shortest contig at half of the genome size. |br|
+N90: The sequence length of the shortest contig at 90% of the genome size. |br|
+GC content: The fraction of bases that are either guanines or cytosines. |br|
+Assembly size: The sum length of all contigs in an assembly. |br|
+Number of scaffolds: The total number of scaffolds in an assembly. |br|
+Number of large scaffolds: The total number of scaffolds that are greater than the threshold for small scaffolds. |br|
+Sum length of large scaffolds: The sum length of all large scaffolds. |br|
+Frequency of A: The number of occurences of A corrected by assembly size. |br|
+Frequency of T: The number of occurences of T corrected by assembly size. |br|
+Frequency of C: The number of occurences of C corrected by assembly size. |br|
+Frequency of G: The number of occurences of G corrected by assembly size.
+
+.. code-block:: shell
+
+   biokit genome_assembly_metrics <fasta>
+
+Options: |br|
+*<fasta>*: first argument after function name should be a fasta file |br|
+*-t/\\-\\-threshold*: threshold for what is considered a large scaffold.
+Only scaffolds with a length greater than this value will be counted. Default: 500
+
+|
+
+L50
+###
+Function names: l50 |br|
+Command line interface: bk_l50
+
+Calculates L50 for a genome assembly.
+
+L50 is the smallest number of contigs whose length sum
+makes up half of the genome size.
+
+.. code-block:: shell
+
+   biokit l50 <fasta>
+
+Options: |br|
+*<fasta>*: first argument after function name should be a fasta file
+
+|
+
+L90
+###
+Function names: l90 |br|
+Command line interface: bk_l90
+
+Calculates L90 for a genome assembly.
+
+L90 is the smallest number of contigs whose length sum
+makes up 90% of the genome size.
+
+.. code-block:: shell
+
+   biokit l90 <fasta>
+
+Options: |br|
+*<fasta>*: first argument after function name should be a fasta file
+
+|
+
+Longest scaffold
+################
+Function names: longest_scaffold; longest_scaff; longest_contig; longest_cont |br|
+Command line interface: bk_longest_scaffold; bk_longest_scaff; bk_longest_contig; bk_longest_cont
+
+Determine the length of the longest scaffold in a genome assembly.
+
+.. code-block:: shell
+
+   biokit longest_scaffold <fasta>
+
+Options: |br|
+*<fasta>*: first argument after function name should be a fasta file
+
+|
+
+N50
+###
+Function names: n50 |br|
+Command line interface: bk_n50
+
+Calculates N50 for a genome assembly.
+
+N50 is the smallest number of contigs whose length sum
+makes up half of the genome size.
+
+.. code-block:: shell
+
+   biokit n50 <fasta>
+
+Options: |br|
+*<fasta>*: first argument after function name should be a fasta file
+
+|
+
+N90
+###
+Function names: n90 |br|
+Command line interface: bk_n90
+
+Calculates N90 for a genome assembly.
+
+N90 is the sequence length of the shortest contig at 90% of the genome size.
+
+.. code-block:: shell
+
+   biokit l90 <fasta>
+
+Options: |br|
+*<fasta>*: first argument after function name should be a fasta file
+
+|
+
 .. |br| raw:: html
 
   <br/>

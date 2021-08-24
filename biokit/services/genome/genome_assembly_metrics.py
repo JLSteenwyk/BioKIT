@@ -25,6 +25,8 @@ class GenomeAssemblyMetrics(Genome):
 
         num_of_scaffolds = self.number_of_scaffolds()
 
+        longest_scaffold = self.longest_scaffold()
+
         (
             num_of_large_scaffolds,
             len_of_large_scaffolds,
@@ -42,6 +44,7 @@ class GenomeAssemblyMetrics(Genome):
             {num_of_scaffolds}\tNumber of scaffolds\n\
             {num_of_large_scaffolds}\tNumber of large scaffolds\n\
             {len_of_large_scaffolds}\tSum length of large scaffolds\n\
+            {longest_scaffold}\tLongest scaffold\n\
             {round(a_freq, 4)}\tFrequency of A\n\
             {round(t_freq, 4)}\tFrequency of T\n\
             {round(c_freq, 4)}\tFrequency of C\n\

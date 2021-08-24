@@ -980,6 +980,9 @@ class Biokit(object):
                 {help_header}
                 
                 Calculate GC content of a fasta file.
+
+                GC content is the fraction of bases that are
+                either guanines or cytosines.
                 
                 Aliases:
                   gc_content, gc
@@ -1018,9 +1021,23 @@ class Biokit(object):
                 f"""\
                 {help_header}
                 
-                Calculate L50, L90, N50, N90, GC content, total
-                length, number of scaffolds, number and sum length
+                Calculate L50, L90, N50, N90, GC content, assembly size,
+                number of scaffolds, number and sum length
                 of large scaffolds, frequency of A, T, C, and G.
+
+                L50: The smallest number of contigs whose length sum makes up half of the genome size.
+                L90: The smallest number of contigs whose length sum makes up 90% of the genome size.
+                N50: The sequence length of the shortest contig at half of the genome size.
+                N90: The sequence length of the shortest contig at 90% of the genome size.
+                GC content: The fraction of bases that are either guanines or cytosines.
+                Assembly size: The sum length of all contigs in an assembly.
+                Number of scaffolds: The total number of scaffolds in an assembly.
+                Number of large scaffolds: The total number of scaffolds that are greater than the threshold for small scaffolds.
+                Sum length of large scaffolds: The sum length of all large scaffolds.
+                Frequency of A: The number of occurences of A corrected by assembly size.
+                Frequency of T: The number of occurences of T corrected by assembly size.
+                Frequency of C: The number of occurences of C corrected by assembly size.
+                Frequency of G: The number of occurences of G corrected by assembly size.
                 
                 Aliases:
                   genome_assembly_metrics, assembly_metrics
@@ -1061,6 +1078,9 @@ class Biokit(object):
                 {help_header}
                 
                 Calculates L50 for a genome assembly.
+
+                L50 is the smallest number of contigs whose length sum
+                makes up half of the genome size.
                 
                 Aliases:
                   l50
@@ -1093,6 +1113,9 @@ class Biokit(object):
                 {help_header}
                 
                 Calculates L90 for a genome assembly.
+
+                L90 is the smallest number of contigs whose length sum
+                makes up 90% of the genome size.
                 
                 Aliases:
                   l90
@@ -1124,7 +1147,7 @@ class Biokit(object):
                 f"""\
                 {help_header}
 
-                Calculate sequence length of each FASTA entry.
+                Determine the length of the longest scaffold in a genome assembly.
                 
                 Aliases:
                   longest_scaffold, longest_scaff, longest_contig, longest_cont
@@ -1158,6 +1181,8 @@ class Biokit(object):
                 {help_header}
                 
                 Calculates N50 for a genome assembly.
+
+                N50 is the sequence length of the shortest contig at half of the genome size.
                 
                 Aliases:
                   n50
@@ -1190,6 +1215,8 @@ class Biokit(object):
                 {help_header}
                 
                 Calculates N90 for a genome assembly.
+
+                N90 is the sequence length of the shortest contig at 90% of the genome size.
                 
                 Aliases:
                   n90
