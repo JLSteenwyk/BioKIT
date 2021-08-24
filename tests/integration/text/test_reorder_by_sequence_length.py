@@ -42,6 +42,30 @@ class TestReorderBySequenceLength(object):
         assert expected_out == output_file
 
     @patch("builtins.print")
+    def test_reorder_by_sequence_length_custom_out(self, mocked_print):
+        testargs = [
+            "biokit",
+            "reorder_by_sequence_length",
+            f"{here.parent.parent.parent}/sample_files/EOG091N44MS.fa",
+            "-o",
+            f"{here.parent.parent.parent}/sample_files/EOG091N44MS.custom_out.fa",
+        ]
+        with patch.object(sys, "argv", testargs):
+            Biokit()
+
+        with open(
+            f"{here.parent.parent}/expected/EOG091N44MS.custom_out.fa", "r"
+        ) as expected_out:
+            expected_out = expected_out.read()
+
+        with open(
+            f"{here.parent.parent.parent}/sample_files/EOG091N44MS.custom_out.fa", "r"
+        ) as output_file:
+            output_file = output_file.read()
+
+        assert expected_out == output_file
+
+    @patch("builtins.print")
     def test_reorder_by_sequence_length_alias(self, mocked_print):
         testargs = [
             "biokit",
