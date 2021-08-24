@@ -6,10 +6,10 @@
 ^^^^^
 
 
-BioKIT, a toolkit for the UNIX shell environment with numerous functions that process or conduct analyses
-on alignment, coding sequences, fastq files, and genome files.
+BioKIT, a versatile toolkit for processing or conducting analyses
+on alignments, coding sequences, fastq files, and genome files.
 
-If you found BioKIT useful, please cite *BioKIT: a toolkit for processing and analyzing bioinformatic data*. TBD. doi: |doiLink|_.
+If you found BioKIT useful, please cite *BioKIT: a UNIX toolkit for processing and analyzing bioinformatic data*. TBD. doi: |doiLink|_.
 
 .. _doiLink: ADD LINK TO PAPER HERE
 .. |doiLink| replace:: ADD DOI HERE
@@ -27,7 +27,7 @@ software dependency issues. To do so, execute the following commands:
 	python -m venv .venv
 	# activate virtual environment
 	source .venv/bin/activate
-	# install phykit
+	# install biokit
 	pip install biokit
 
 **Note, the virtual environment must be activated to use biokit.**

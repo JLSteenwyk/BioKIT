@@ -44,7 +44,7 @@ function, you can type:
 
 .. code-block:: shell
 
-   phykit aln_summary -h
+   biokit aln_summary -h
 
 |
 

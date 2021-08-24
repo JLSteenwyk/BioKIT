@@ -13,7 +13,7 @@ The Developers
 
 ^^^^^
 
-PhyKIT is developed and maintained by `Jacob L. Steenwyk <https://jlsteenwyk.github.io/>`_
+BioKIT is developed and maintained by `Jacob L. Steenwyk <https://jlsteenwyk.github.io/>`_
 and `Thomas J. Buida III <https://tjbiii.com/>`_.
 
 |
