@@ -20,7 +20,7 @@ sys.path.append(os.path.abspath("./_ext"))
 
 # -- Project information -----------------------------------------------------
 
-project = "phykit"
+project = "biokit"
 copyright = "2020 Jacob L. Steenwyk"
 author = "Jacob L. Steenwyk <jlsteenwyk@gmail.com>"
 
@@ -116,7 +116,7 @@ html_sidebars = {
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = "phykitdoc"
+htmlhelp_basename = "biokitdoc"
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -142,8 +142,8 @@ latex_elements = {
 latex_documents = [
     (
         master_doc,
-        "phykit.tex",
-        "phykit Documentation",
+        "biokit.tex",
+        "biokit Documentation",
         "Jacob L. Steenwyk \\textless{}jlsteenwyk@gmail.com\\textgreater{}",
         "manual",
     ),
@@ -154,7 +154,7 @@ latex_documents = [
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [(master_doc, "phykit", "phykit Documentation", [author], 1)]
+man_pages = [(master_doc, "biokit", "biokit Documentation", [author], 1)]
 
 
 # -- Options for Texinfo output ----------------------------------------------
@@ -165,10 +165,10 @@ man_pages = [(master_doc, "phykit", "phykit Documentation", [author], 1)]
 texinfo_documents = [
     (
         master_doc,
-        "phykit",
-        "phykit Documentation",
+        "biokit",
+        "biokit Documentation",
         author,
-        "phykit",
+        "biokit",
         "A data transformation engine.",
         "Miscellaneous",
     ),
