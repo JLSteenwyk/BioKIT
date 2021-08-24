@@ -3,7 +3,7 @@
 About
 =====
 
-**Phy**\logenomics tool\ **KIT** (**PhyKIT**) was developed as
+**Bio**\informatics tool\ **KIT** (**BioKIT**) was developed as
 part of `Jacob L. Steenwyk <https://jlsteenwyk.github.io/>`_'s graduate thesis work. 
 
 |
@@ -73,17 +73,12 @@ color extracted from a flexible source to the Hue light color. Find out more inf
    :target: https://github.com/TJBIII
    :width: 4.5% 
 
+|
 
 More Team Members
 -----------------
 
 ^^^^^
-
-PhyKIT has been made possible by other key personnel including `Antonis Rokas
-<https://as.vanderbilt.edu/rokaslab/>`_, `Abigail L. Labella <abigailleavittlabella.com>`_,
-Yuanning Li, and `Xing-Xing Shen <https://xingxingshen.github.io/>`_.
-
-|
 
 |ARokas|
 
@@ -110,61 +105,3 @@ tree of life, and the evolution of human pregnancy. Find out more information at
    :width: 4.5%
 
 |
-
-|ALLabella|
-
-|GoogleScholarLabella| |GitHubLabella| |TwitterLabella| 
-
-`Abigail L. LaBella <https://www.abigailleavittlabella.com/>`_  am a postdoctoral scholar at Vanderbilt University in the 
-lab of Dr. Antonis Rokas. Her research uses evolution to understand the relationship between phenotype, genotype, and environment. 
-This includes the evolution of human birth timing and disorders of pregnancy, and the evolution of silent
-codon positions in yeasts. During her research career she has worked with fungi, humans, beetles, fishes,
-limpets, clams, and lizards! For more information visit her `personal website <https://www.abigailleavittlabella.com/>`_.
-
-.. |ALLabella| image:: ../_static/img/Labella.jpg
-   :width: 35%
-
-.. |GoogleScholarLabella| image:: ../_static/img/GoogleScholar.png
-   :target: https://scholar.google.com/citations?user=rxdDvjEAAAAJ&hl=en&oi=ao
-   :width: 4.5%
-
-.. |TwitterLabella| image:: ../_static/img/Twitter.png
-   :target: https://twitter.com/AbbeAtSea
-   :width: 4.5%
-
-.. |GitHubLabella| image:: ../_static/img/Github.png
-   :target: https://github.com/alabella19
-   :width: 4.5%
-
-|
-
-|XXShen|
-
-|GoogleScholarShen| |GitHubShen| |TwitterShen| 
-
-`Xing-Xing Shen <https://xingxingshen.github.io/>`_ is an Assistant Professor of Institute of
-Insect Sciences at Zhejiang University. His lab is broadly interested in evolutionary biology,
-phylogenetics, comparative genomics, and bioinformatics. His current research mainly focus on:
-1) investigating phylogenetic relationships in animals and fungi using genome-scale data;
-2) identifying the factors that lead to phylogenetic incongruence;
-and 3) exploring insect species and ecological diversity. Find out more information at his
-`laboratory's website <https://xingxingshen.github.io/>`_.
-
-.. |XXShen| image:: ../_static/img/Shen.jpg
-   :width: 35%
-
-.. |GoogleScholarShen| image:: ../_static/img/GoogleScholar.png
-   :target: https://scholar.google.com/citations?user=aNqPBsEAAAAJ&hl=en
-   :width: 4.5%
-
-.. |TwitterShen| image:: ../_static/img/Twitter.png
-   :target: https://twitter.com/shenxingxing1
-   :width: 4.5%
-
-.. |GitHubShen| image:: ../_static/img/Github.png
-   :target: https://github.com/xingxingshen
-   :width: 4.5%
-
-
-Information about other team members coming soon!
-

@@ -9,10 +9,6 @@
 import os
 import sys
 
-from collections import OrderedDict
-
-import sphinx_rtd_theme
-
 # -- Path setup --------------------------------------------------------------
 
 # If extensions (or modules to document with autodoc) are in another directory,

@@ -441,7 +441,8 @@ class Biokit(object):
                   bk_position_specific_score_matrix, bk_pssm
 
                 Usage:
-                biokit position_specific_score_matrix <fasta> [-r/--reverse]
+                biokit position_specific_score_matrix <fasta> 
+                [-ac/--ambiguous_character <ambiguous character>]
 
                 Options
                 =====================================================

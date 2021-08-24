@@ -1,19 +1,18 @@
 .. image:: _static/img/logo.png
    :width: 55%
    :align: center
-   :target: https://jlsteenwyk.com/PhyKIT
+   :target: https://jlsteenwyk.com/BioKIT
 
 ^^^^^
 
 
-PhyKIT, a toolkit for the UNIX shell environment with numerous functions that process multiple
-sequence alignments and phylogenies for broad applications
+BioKIT, a toolkit for the UNIX shell environment with numerous functions that process or conduct analyses
+on alignment, coding sequences, fastq files, and genome files.
 
-If you found PhyKIT useful, please cite *PhyKIT: a broadly applicable UNIX shell toolkit for processing
-and analyzing phylogenomic data*. Bioinformatics. doi: |doiLink|_.
+If you found BioKIT useful, please cite *BioKIT: a toolkit for processing and analyzing bioinformatic data*. TBD. doi: |doiLink|_.
 
-.. _doiLink: https://academic.oup.com/bioinformatics/advance-article-abstract/doi/10.1093/bioinformatics/btab096/6131675?redirectedFrom=fulltext
-.. |doiLink| replace:: 10.1093/bioinformatics/btab096
+.. _doiLink: ADD LINK TO PAPER HERE
+.. |doiLink| replace:: ADD DOI HERE
 
 Quick Start
 -----------
@@ -29,11 +28,11 @@ software dependency issues. To do so, execute the following commands:
 	# activate virtual environment
 	source .venv/bin/activate
 	# install phykit
-	pip install phykit
+	pip install biokit
 
-**Note, the virtual environment must be activated to use phykit.**
+**Note, the virtual environment must be activated to use biokit.**
 
-After using PhyKIT, you may wish to deactivate your virtual environment and can do so using the following command:
+After using BioKIT, you may wish to deactivate your virtual environment and can do so using the following command:
 
 .. code-block:: shell
 
@@ -48,8 +47,8 @@ following commands:
 .. code-block:: shell
 
 	# download
-	git clone https://github.com/JLSteenwyk/PhyKIT.git
-	cd PhyKIT/
+	git clone https://github.com/JLSteenwyk/BioKIT.git
+	cd BioKIT/
 	# create virtual environment
 	python -m venv .venv
 	# activate virtual environment
@@ -64,7 +63,7 @@ To deactivate your virtual environment, use the following command:
 	# deactivate virtual environment
 	deactivate
 
-**Note, the virtual environment must be activated to use phykit.**
+**Note, the virtual environment must be activated to use biokit.**
 
 |
 
@@ -72,18 +71,20 @@ To install via anaconda, execute the following command:
 
 .. code-block:: shell
 
-	conda install -c jlsteenwyk phykit
+	conda install -c jlsteenwyk biokit
 
 Visit here for more information:
-https://anaconda.org/JLSteenwyk/phykit
+https://anaconda.org/JLSteenwyk/biokit
+
+|
 
 **2) Usage**
 
-Get the help message from PhyKIT:
+Get the help message from BioKIT:
 
 .. code-block:: shell
 
-	phykit -h
+	biokit -h
 
 |
 
