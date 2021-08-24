@@ -1,6 +1,5 @@
 from os import path
 import re
-import sys
 
 from Bio.SeqIO.QualityIO import FastqGeneralIterator
 
@@ -47,7 +46,7 @@ class TrimPEFastQ(FastQ):
                 trim_idx1 = None
                 trim_idx2 = None
 
-                ## read 1 handling
+                ## read 1 handling # noqa
                 # determine index to trim read at
                 for i in range(len(seq1)):
                     base_quality = quality_table[qual1[i]]
@@ -69,7 +68,7 @@ class TrimPEFastQ(FastQ):
                     cnt += 1
                     keep_1 = False
 
-                ## read 2 handling
+                ## read 2 handling # noqa
                 for j in range(len(seq2)):
                     base_quality = quality_table[qual2[j]]
                     if int(base_quality) < self.minimum:
@@ -130,7 +129,7 @@ class TrimPEFastQ(FastQ):
             f"Reads processed: {cnt}\nReads kept: {kept}\nReads removed: {removed}\n\nPairs kept: {pairs_kept}"
         )
 
-        ## write output files
+        # write output files
         # write paired output files
         if len(good_reads_paired1) != 0:
             output_file_paired_1 = re.sub(

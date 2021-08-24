@@ -288,6 +288,10 @@ class Biokit(object):
             return self.subset_pe_fastq_reads(argv)
         elif command in ["subset_se_fastq"]:
             return self.subset_se_fastq_reads(argv)
+        elif command in ["trim_pe_fastq_reads"]:
+            return self.trim_pe_fastq(argv)
+        elif command in ["trim_se_fastq_reads"]:
+            return self.trim_se_fastq(argv)
         # aliases for genomes
         elif command in ["gc"]:
             return self.gc_content(argv)
@@ -597,12 +601,17 @@ class Biokit(object):
             description=textwrap.dedent(
                 f"""\
                 {help_header}
+
                 Calculate relative synonymous codon usage.
 
                 Relative synonymous codon usage is the ratio
                 of the observed frequency of codons over the
                 expected frequency given that all the synonymous
                 codons for the same amino acids are used equally.
+
+                Custom genetic codes can be used as input and should
+                be formatted with the codon in first column and the 
+                resulting amino acid in the second column.
 
                 Aliases:
                   relative_synonymous_codon_usage, rscu
@@ -611,6 +620,7 @@ class Biokit(object):
                 
                 Usage:
                 biokit relative_synonymous_codon_usage <fasta> 
+                [-tt/--translation_table <code>]
                 
                 Options
                 =====================================================
@@ -621,7 +631,6 @@ class Biokit(object):
                 -tt/--translation_table     Code for the translation table
                                             to be used. Default: 1, which
                                             is the standard code.
-
 
                 {translation_table_codes}
                 """  # noqa
@@ -676,11 +685,11 @@ class Biokit(object):
                                             is the standard code.
                 
                 -o/--output                 optional argument to write
-                                            the reordered fasta file to.
+                                            the translated fasta file to.
                                             Default output has the same 
                                             name as the input file with
-                                            the suffix ".reordered.fa" added
-                                            to it.
+                                            the suffix ".translated.fa" 
+                                            added to it.
 
 
                 {translation_table_codes}
@@ -707,7 +716,13 @@ class Biokit(object):
                 f"""\
                 {help_header}
 
-                Quality trim single-end FastQ data.
+                Determine lengths of fastq reads.
+                
+                Using default arguments, the average and
+                standard deviation of read lengths in a
+                fastq file will be reported. To obtain
+                the lengths of all fastq reads, use the
+                verbose option.
                 
                 Aliases:
                   fastq_read_lengths, fastq_read_lens
@@ -746,7 +761,17 @@ class Biokit(object):
                 f"""\
                 {help_header}
 
-                Subset paired-end FastQ data.
+                Subset paired-end FASTQ data.
+
+                Subsetting FASTQ data may be helpful for 
+                running test scripts or achieving equal 
+                coverage between samples. A percentage of
+                total reads in paired-end FASTQ data can
+                be obtained with this function. Random
+                subsamples are obtained using seeds for
+                reproducibility. If no seed is specified,
+                a seed is generated based off of the date
+                and time.
                 
                 Aliases:
                   subset_pe_fastq_reads, subset_pe_fastq
@@ -754,7 +779,9 @@ class Biokit(object):
                   bk_subset_pe_fastq_reads, bk_subset_pe_fastq
 
                 Usage:
-                biokit subset_pe_fastq_reads <fasta>
+                biokit subset_pe_fastq_reads <fastq1> <fastq2>
+                [-p/--percent <percent> -s/--seed <seed> 
+                -o/--output_file <output_file>]
 
                 Options
                 =====================================================
@@ -772,8 +799,6 @@ class Biokit(object):
 
                 -s/--seed                   seed for random sampling.
                                             Default: date and time
-
-                -o/--output_file            output file name
                 """  # noqa
             ),
         )
@@ -782,9 +807,6 @@ class Biokit(object):
         parser.add_argument("fastq2", type=str, help=SUPPRESS)
         parser.add_argument("-p", "--percent", type=str, required=False, help=SUPPRESS)
         parser.add_argument("-s", "--seed", type=str, required=False, help=SUPPRESS)
-        parser.add_argument(
-            "-o", "--output_file", type=str, required=False, help=SUPPRESS
-        )
         args = parser.parse_args(argv)
         SubsetPEFastQReads(args).run()
 
@@ -846,15 +868,25 @@ class Biokit(object):
                 {help_header}
 
                 Quality trim paired-end FastQ data.
+
+                FASTQ data will be trimmed according to
+                quality score and length of the reads.
+                Users can specify quality and length
+                thresholds. Paired reads that are 
+                maintained and saved to files with the
+                suffix "_paired_trimmed.fq." Single
+                reads that passed quality thresholds are
+                saved to files with the suffix 
+                "_unpaired_trimmed.fq."
                 
                 Aliases:
-                  trim_pe_fastq
+                  trim_pe_fastq_reads, trim_pe_fastq
                 Command line interfaces: 
-                  bk_trim_pe_fastq
+                  bk_trim_pe_fastq_reads, bk_trim_pe_fastq
 
                 Usage:
-                biokit trim_pe_fastq <fastq1> <fastq2> [-m/--minimum 20
-                    -l/--length 20]
+                biokit trim_pe_fastq_reads <fastq1> <fastq2> 
+                [-m/--minimum 20 -l/--length 20]
 
                 Options
                 =====================================================
@@ -867,10 +899,10 @@ class Biokit(object):
                                             a fastq file
 
                 -m/--minimum                minimum quality of read 
-                                            to be kept (Default: 20)
+                                            to be kept. Default: 20
                 
                 -l/--length                 minimum length of read 
-                                            to be kept (Default: 20)
+                                            to be kept. Default: 20
                 """  # noqa
             ),
         )
@@ -893,14 +925,22 @@ class Biokit(object):
                 {help_header}
 
                 Quality trim single-end FastQ data.
+
+                FASTQ data will be trimmed according to
+                quality score and length of the reads.
+                Users can specify quality and length
+                thresholds. Output file has the suffix 
+                "_trimmed.fq" or can be named by the user 
+                with the output_file argument.
                 
                 Aliases:
-                  sum_of_scaffold_lengths, sum_of_scaff_lens
+                  trim_se_fastq_reads, trim_se_fastq
                 Command line interfaces: 
-                  bk_sequence_complement, bk_sum_of_scaff_lens
+                  bk_trim_se_fastq_reads, bk_trim_se_fastq
 
                 Usage:
-                biokit sum_of_scaffold_lengths <fasta> [-m/--minimum N]
+                biokit trim_se_fastq_reads <fastq>
+                [-m/--minimum 20 -l/--length 20]
 
                 Options
                 =====================================================
@@ -909,10 +949,10 @@ class Biokit(object):
                                             a fastq file
 
                 -m/--minimum                minimum quality of read 
-                                            to be kept (Default: 20)
+                                            to be kept. Default: 20
                 
                 -l/--length                 minimum length of read 
-                                            to be kept (Default: 20)
+                                            to be kept. Default: 20
 
                 -o/--output_file            output file name
                 """  # noqa

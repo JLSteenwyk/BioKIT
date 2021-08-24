@@ -3,7 +3,6 @@ from itertools import islice
 import math
 import random
 import re
-import sys
 
 from .base import FastQ
 

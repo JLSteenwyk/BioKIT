@@ -1,6 +1,4 @@
-from enum import Enum
 import re
-import sys
 
 from Bio import SeqIO
 
@@ -30,7 +28,6 @@ class GCContentSecondPosition(CodingSequence):
 
         else:
             second_position_char = []
-            number_of_second_positions = 0
 
             for record in records:
                 second_position_char = []
@@ -53,5 +50,5 @@ class GCContentSecondPosition(CodingSequence):
     def get_second_position_char(self, record, second_position_char: list):
         length_of_coding_seq = len(record._seq)
         for i in range(0, length_of_coding_seq, 3):
-            second_position_char.append(record._seq[i : i + 3][1])
+            second_position_char.append(record._seq[i:i + 3][1])
         return second_position_char

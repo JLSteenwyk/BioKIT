@@ -1,6 +1,5 @@
 from os import path
 import re
-import sys
 
 from Bio.SeqIO.QualityIO import FastqGeneralIterator
 

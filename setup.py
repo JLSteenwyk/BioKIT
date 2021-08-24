@@ -56,6 +56,10 @@ setup(
             "bk_subset_pe_fastq = biokit.biokit:subset_pe_fastq_reads",
             "bk_subset_se_fastq_reads = biokit.biokit:subset_se_fastq_reads",
             "bk_subset_se_fastq = biokit.biokit:subset_se_fastq_reads",
+            "bk_trim_pe_fastq = biokit.biokit:trim_pe_fastq",
+            "bk_trim_pe_fastq_reads = biokit.biokit:trim_pe_fastq",
+            "bk_trim_se_fastq = biokit.biokit:trim_se_fastq",
+            "bk_trim_se_fastq_reads = biokit.biokit:trim_se_fastq",
             "bk_gc_content = biokit.biokit:gc_content",  # genomes-based functions
             "bk_gc = biokit.biokit:gc_content",
             "bk_genome_assembly_metrics = biokit.biokit:genome_assembly_metrics",
