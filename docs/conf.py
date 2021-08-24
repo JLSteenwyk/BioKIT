@@ -21,7 +21,7 @@ sys.path.append(os.path.abspath("./_ext"))
 # -- Project information -----------------------------------------------------
 
 project = "biokit"
-copyright = "2020 Jacob L. Steenwyk"
+copyright = "2021 Jacob L. Steenwyk"
 author = "Jacob L. Steenwyk <jlsteenwyk@gmail.com>"
 
 # The short X.Y version
