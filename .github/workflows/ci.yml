@@ -76,7 +76,7 @@ jobs:
       - name: Install pipenv
         uses: dschep/install-pipenv-action@v1
       - name: Build docs
-        run:
+        run: |
           cd docs
           pipenv install
           pipenv run make html
