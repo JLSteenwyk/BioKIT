@@ -1292,12 +1292,18 @@ class Biokit(object):
                 f"""\
                 {help_header}
 
-                Calculate sequence length of each FASTA entry.
+                Calculate the number of scaffolds or entries
+                in a FASTA file. In this way, a user can also 
+                determine the number of predicted genes in a 
+                coding sequence or protein FASTA file with this
+                function.
                 
                 Aliases:
-                  number_of_scaffolds, num_of_scaffolds, number_of_contigs, num_of_cont
+                  number_of_scaffolds, num_of_scaffolds,
+                  number_of_contigs, num_of_cont
                 Command line interfaces: 
-                  bk_number_of_scaffolds, bk_num_of_scaffolds, bk_number_of_contigs, bk_num_of_cont
+                  bk_number_of_scaffolds, bk_num_of_scaffolds,
+                  bk_number_of_contigs, bk_num_of_cont
 
                 Usage:
                 biokit number_of_scaffolds <fasta>
@@ -1325,8 +1331,9 @@ class Biokit(object):
                 f"""\
                 {help_header}
 
-                Determine the sum of scaffold lengths. The
-                intended use of this function is to determine
+                Determine the sum of scaffold lengths. 
+                
+                The intended use of this function is to determine
                 the length of a genome assembly, but can also be
                 used, for example, to determine the sum length
                 of all coding sequences.
@@ -1334,7 +1341,7 @@ class Biokit(object):
                 Aliases:
                   sum_of_scaffold_lengths, sum_of_contig_lengths
                 Command line interfaces: 
-                  bk_sequence_complement, bk_sum_of_contig_lengths
+                  bk_sum_of_scaffold_lengths, bk_sum_of_contig_lengths
 
                 Usage:
                 biokit sum_of_scaffold_lengths <fasta>
@@ -1399,7 +1406,8 @@ class Biokit(object):
                 Extracts sequence entry from fasta file.
 
                 This function works similarly to the faidx function 
-                in samtools, but does not requiring an indexing function.
+                in samtools, but does not requiring an indexing the
+                sequence file.
 
                 Aliases:
                   faidx, get_entry, ge
@@ -1491,7 +1499,7 @@ class Biokit(object):
                 {help_header}
                 Converts FASTA files with multiple lines
                 per sequence to a FASTA file with the sequence
-                on one line.
+                represented on one line.
 
                 Aliases:
                   multiple_line_to_single_line_fasta, ml2sl
@@ -1500,13 +1508,16 @@ class Biokit(object):
                 
                 Usage:
                 biokit multiple_line_to_single_line_fasta <fasta> 
-                    [-o/--output <output_file>]
+                [-o/--output <output_file>]
                 
                 Options
                 =====================================================
                 <fasta>                     first argument after 
                                             function name should be
                                             a fasta file
+
+                -o/--output                 optional argument to name
+                                            the output file
                 """  # noqa
             ),
         )

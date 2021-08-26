@@ -540,10 +540,162 @@ N90 is the sequence length of the shortest contig at 90% of the genome size.
 
 .. code-block:: shell
 
-   biokit l90 <fasta>
+   biokit n90 <fasta>
 
 Options: |br|
 *<fasta>*: first argument after function name should be a fasta file
+
+|
+
+Number of large scaffolds
+#########################
+Function names: number_of_large_scaffolds; num_of_lrg_scaffolds; number_of_large_contigs; num_of_lrg_cont |br|
+Command line interface: bk_number_of_large_scaffolds; bk_num_of_lrg_scaffolds; bk_number_of_large_contigs; bk_num_of_lrg_cont
+
+Calculate number and total sequence length of
+large scaffolds. Each value is represented as
+column 1 and column 2 in the output, respectively.
+
+.. code-block:: shell
+
+   biokit number_of_large_scaffolds <fasta> [-t/--threshold <int>]
+
+Options: |br|
+*<fasta>*: first argument after function name should be a fasta file
+*-t/\\-\\-threshold*: threshold for what is considered
+a large scaffold. Only scaffolds with a length greater than this
+value will be counted. Default: 500
+
+|
+
+Number of scaffolds
+###################
+Function names: number_of_scaffolds; num_of_scaffolds; number_of_contigs; num_of_cont |br|
+Command line interface: bk_number_of_scaffolds; bk_num_of_scaffolds; bk_number_of_contigs; bk_num_of_cont
+
+Calculate the number of scaffolds or entries
+in a FASTA file. In this way, a user can also 
+determine the number of predicted genes in a 
+coding sequence or protein FASTA file with this
+function.
+
+.. code-block:: shell
+
+   biokit number_of_scaffolds <fasta>
+
+Options: |br|
+*<fasta>*: first argument after function name should be a fasta file
+
+|
+
+Sum of scaffold lengths
+#######################
+Function names: sum_of_scaffold_lengths; sum_of_contig_lengths |br|
+Command line interface: bk_sum_of_scaffold_lengths; bk_sum_of_contig_lengths
+
+Determine the sum of scaffold lengths. 
+                
+The intended use of this function is to determine
+the length of a genome assembly, but can also be
+used, for example, to determine the sum length
+of all coding sequences.
+
+.. code-block:: shell
+
+   biokit sum_of_scaffold_lengths <fasta>
+
+Options: |br|
+*<fasta>*: first argument after function name should be a fasta file
+
+|
+
+Sequence summary and processing functions
+-----------------------------------------
+
+^^^^^
+
+Character frequency
+###################
+Function names: character_frequency; char_freq |br|
+Command line interface: bk_character_frequency; bk_char_freq
+
+Calculate the frequency of characters in a FASTA file.
+
+This can be used to determine the frequency of A, T, C, and G
+in a genome or the frequency of amino acids in a proteome.
+
+.. code-block:: shell
+
+   biokit character_frequency <fasta> [-v/--verbose]
+
+Options: |br|
+*<fasta>*: first argument after function name should be a fasta file |br|
+
+|
+
+Get FASTA entry (faidx)
+#######################
+Function names: faidx; get_entry; ge |br|
+Command line interface: bk_faidx; bk_get_entry; bk_ge
+
+Extracts sequence entry from fasta file.
+
+This function works similarly to the faidx function 
+in samtools, but does not requiring an indexing the
+sequence file.
+
+.. code-block:: shell
+
+   biokit faidx <fasta> [-v/--verbose]
+
+Options: |br|
+*<fasta>*: first argument after function name should be a fasta file |br|
+*-e/\\-\\-entry*: entry name to be extracted from the inputted fasta file
+
+|
+
+File format converter
+#####################
+Function names: file_format_converter; format_converter; ffc |br|
+Command line interface: bk_file_format_converter; bk_format_converter; bk_ffc
+
+Converts a multiple sequence file from one format to another.
+
+Acceptable file formats include FASTA, Clustal, MAF, Mauve,
+Phylip, Phylip-sequential, Phylip-relaxed, and Stockholm.
+Input and output file formats are specified with the
+\\-\\-input_file_format and \\-\\-output_file_format arguments;
+input and output files are specified with the \\-\\-input_file
+and \\-\\-output_file arguments.
+
+.. code-block:: shell
+
+   biokit file_format_converter -i/--input_file <input_file> -iff/--input_file_format <input_file_format>  -o/--output_file <output_file> -off/--output_file_format <output_file_format>
+
+Options: |br|
+*-i/\\-\\-input_file*: input file name 
+*-iff/\\-\\-input_file_format*: input file format
+*-o/\\-\\-output_file*: output file name
+*-off/\\-\\-output_file_format*: output file format
+
+|
+
+Multiple line to single line FASTA
+##################################
+Function names: multiple_line_to_single_line_fasta; ml2sl |br|
+Command line interface: bk_multiple_line_to_single_line_fasta; bk_ml2sl
+
+Converts FASTA files with multiple lines
+per sequence to a FASTA file with the sequence
+represented on one line.
+
+.. code-block:: shell
+
+   biokit multiple_line_to_single_line_fasta <fasta> [-o/--output <output_file>]
+
+Options: |br|
+*<fasta>*: first argument after function name should be a fasta file |br|
+*-o/\\-\\-output*: optional argument to name the output file
 
 |
 
