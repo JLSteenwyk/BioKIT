@@ -119,12 +119,12 @@ class TestCLIRunners(object):
     def test_bk_trim_pe_fastq_reads(self):
         cmd = "bk_trim_pe_fastq_reads -h"
         exit_status = os.system(cmd)
-        assert exit_status == 32512
+        assert exit_status == 256
 
     def test_bk_trim_se_fastq_reads(self):
         cmd = "bk_trim_se_fastq_reads -h"
         exit_status = os.system(cmd)
-        assert exit_status == 32512
+        assert exit_status == 256
 
     def test_bk_subset_se_fastq_reads(self):
         cmd = "bk_subset_se_fastq_reads -h"
