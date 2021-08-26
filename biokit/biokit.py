@@ -159,16 +159,22 @@ class Biokit(object):
                 =======================
                 alignment_length (alias: aln_len)
                     - calculates the length of an alignment
+
                 alignment_summary (alias: aln_summary)
                     - calculate summary statistics for an alignment
+
                 consensus_sequence (alias: con_seq)
                     - create a consensus sequence from an alignment
+
                 constant_sites (alias: con_sites)
                     - calculate the number of constant sites in an alignment
+
                 parsimony_informative_sites (alias: pi_sites, pis)
                     - calculate the number of parsimony informative sites in an alignment
+
                 position_specific_score_matrix (alias: pssm)
                     - create a position specific score matrix for an alignment
+
                 variable_sites (alias: var_sites, vs)
                     - calculate the number of variable sites in an alignment
 
@@ -177,15 +183,19 @@ class Biokit(object):
                 gc_content_first_position (alias: gc1)
                     - calculate the GC content of the first position
                       among coding sequences
+
                 gc_content_second_position (alias: gc2)
                     - calculate the GC content of the second position
                       among coding sequences
+
                 gc_content_third_position (alias: gc3)
                     - calculate the GC content of the third position
                       among coding sequences
+
                 relative_synonymous_codon_usage (alias: rscu)
                     - calculate relative synonymous codon usage
                       to evaluate potential codon usage biases
+
                 translate_sequence (alias: translate_seq, trans_seq) 
                     - translate coding sequences to amino acids
 
@@ -193,14 +203,18 @@ class Biokit(object):
                 ========================
                 fastq_read_lengths (alias: fastq_read_lens)
                     - determine the lengths of fastq reads
+
                 subset_pe_fastq_reads (alias: subset_pe_fastq)
                     - subset paired-end fastq reads and
                       maintain pairing information
+
                 subset_se_fastq_reads (alias: subset_se_fastq)
                     - subset single-end fastq reads
+
                 trim_pe_fastq
                     - quality trim paired-end fastq reads
                       and maintain pairing information
+
                 trim_se_fastq
                     - quality trim single-end fastq reads
 
@@ -208,24 +222,33 @@ class Biokit(object):
                 ====================
                 gc_content (alias: gc)
                     - calculate the GC content of a FASTA file
+
                 genome_assembly_metrics (alias: assembly_metrics)
                     - calculate various genome assembly metrics
+
                 l50
                     - calculate the L50 of a genome assembly
+
                 l90
                     - calcualte the L90 of a genome assembly
+
                 longest_scaffold (alias: longest_scaff, longest_contig, longest_cont)
                     - determine the length of the longest
                       scaffold of a genome assembly
+
                 n50
                     - calculate the N50 of a genome assembly
+
                 n90
                     - calculate the N90 of a genome assembly
+
                 number_of_scaffolds (alias: num_of_scaffolds, number_of_contigs, num_of_cont)
                     - calculate the number of scaffolds in a
                       genome assembly
+
                 number_of_large_scaffolds (alias: num_of_lrg_scaffolds, number_of_large_contigs, num_of_lrg_cont)
                     - calculate the number of large scaffolds
+
                 sum_of_scaffold_lengths (alias: sum_of_contig_lengths)
                     - calculate sum of scaffold/contig lengths
 
@@ -233,22 +256,30 @@ class Biokit(object):
                 ===========================
                 character_frequency (alias: char_freq)
                     - determine the frequency of all observed characters
+
                 faidx (alias: get_entry; ge)
                     - extract query fasta entry from multi-fasta file
+
                 file_format_converter (alias: format_converter; ffc)
                     - convert a multiple sequence file from one format
                       to another
+
                 multiple_line_to_single_line_fasta (alias: ml2sl)
                     - reformats sequences that occur on multiple
                       lines to be represented in a single line
+
                 rename_fasta_entries (alias: rename_fasta)
                     - rename entries in a FASTA file
+
                 reorder_by_sequence_length (alias: reorder_by_seq_len)
                     - reorder sequences from longest to shortest in a FASTA file
+
                 sequence_complement (alias: seq_comp)
                     - generate the complementary sequence for an alignment 
+
                 sequence_length (alias: seq_len)
                     - calculate the length of each FASTA entry
+                    
                 single_line_to_multiple_line_fasta (alias: sl2ml)
                     - reformats sequences so that there are 60
                       characters per sequence line
