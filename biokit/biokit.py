@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from biokit.services.alignment.parsimony_informative_sites import ParsimonyInformativeSites
 import logging
 import sys
 import textwrap
@@ -12,9 +13,12 @@ from argparse import (
 )
 
 from .services.alignment import (
+    AlignmentLength,
     AlignmentSummary,
     ConsensusSequence,
+    ConstantSites,
     PositionSpecificScoreMatrix,
+    VariableSites,
 )
 
 from .services.coding_sequences import (
@@ -153,12 +157,20 @@ class Biokit(object):
 
                 Commands for alignments
                 =======================
+                alignment_length (alias: aln_len)
+                    - calculates the length of an alignment
                 alignment_summary (alias: aln_summary)
                     - calculate summary statistics for an alignment
                 consensus_sequence (alias: con_seq)
                     - create a consensus sequence from an alignment
+                constant_sites (alias: con_sites)
+                    - calculate the number of constant sites in an alignment
+                parsimony_informative_sites (alias: pi_sites, pis)
+                    - calculate the number of parsimony informative sites in an alignment
                 position_specific_score_matrix (alias: pssm)
                     - create a position specific score matrix for an alignment
+                variable_sites (alias: var_sites, vs)
+                    - calculate the number of variable sites in an alignment
 
                 Commands for coding sequences
                 =============================
@@ -264,12 +276,20 @@ class Biokit(object):
         if command in ["v"]:
             return self.version()
         # aliases for alignments
+        elif command in ["aln_len"]:
+            return self.alignment_length(argv)
         elif command in ["aln_summary"]:
             return self.alignment_summary(argv)
         elif command in ["con_seq"]:
             return self.consensus_sequence(argv)
+        elif command in ["con_sites"]:
+            return self.constant_sites(argv)
+        elif command in ["parsimony_informative_sites", "pi_sites", "pis"]:
+            return self.parsimony_informative_sites(argv)
         elif command in ["pssm"]:
             return self.position_specific_score_matrix(argv)
+        elif command in ["var_sites", "vs"]:
+            return self.variable_sites(argv)
         # aliases for coding sequences
         elif command in ["gc1"]:
             return self.gc_content_first_position(argv)
@@ -346,6 +366,39 @@ class Biokit(object):
         )
 
     # alignment functions
+    @staticmethod
+    def alignment_length(argv):
+        parser = ArgumentParser(
+            add_help=True,
+            usage=SUPPRESS,
+            formatter_class=RawDescriptionHelpFormatter,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+
+                Calculate the length of an alignment. 
+                
+                Aliases:
+                  alignment_length, aln_len
+                Command line interfaces: 
+                  bk_alignment_length, bk_aln_len
+
+                Usage:
+                biokit alignment_length <fasta>
+
+                Options
+                =====================================================
+                <fasta>                     first argument after 
+                                            function name should be
+                                            a fasta file
+                """  # noqa
+            ),
+        )
+
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        args = parser.parse_args(argv)
+        AlignmentLength(args).run()
+
     @staticmethod
     def alignment_summary(argv):
         parser = ArgumentParser(
@@ -428,6 +481,82 @@ class Biokit(object):
         ConsensusSequence(args).run()
 
     @staticmethod
+    def constant_sites(argv):
+        parser = ArgumentParser(
+            add_help=True,
+            usage=SUPPRESS,
+            formatter_class=RawDescriptionHelpFormatter,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+
+                Calculate the number of constant sites in an
+                alignment.
+
+                Constant sites are defined as a site in an
+                alignment with the same nucleotide or amino
+                acid sequence (excluding gaps) among all taxa.
+                
+                Aliases:
+                  constant_sites, con_sites
+                Command line interfaces: 
+                  bk_constant_sites, bk_con_sites
+
+                Usage:
+                biokit constant_sites <fasta>
+
+                Options
+                =====================================================
+                <fasta>                     first argument after 
+                                            function name should be
+                                            a fasta file
+                """  # noqa
+            ),
+        )
+
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        args = parser.parse_args(argv)
+        ConstantSites(args).run()
+
+    @staticmethod
+    def parsimony_informative_sites(argv):
+        parser = ArgumentParser(
+            add_help=True,
+            usage=SUPPRESS,
+            formatter_class=RawDescriptionHelpFormatter,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+
+                Calculate the number of parsimony informative
+                sites in an alignment.
+
+                Parsimony informative sites are defined as a
+                site in an alignment with at least two nucleotides
+                or amino acids that occur at least twice.
+                
+                Aliases:
+                  parsimony_informative_sites, pi_sites, pis
+                Command line interfaces: 
+                  bk_parsimony_informative_sites, bk_pi_sites, bk_pis
+
+                Usage:
+                biokit parsimony_informative_sites <fasta>
+
+                Options
+                =====================================================
+                <fasta>                     first argument after 
+                                            function name should be
+                                            a fasta file
+                """  # noqa
+            ),
+        )
+
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        args = parser.parse_args(argv)
+        ParsimonyInformativeSites(args).run()
+
+    @staticmethod
     def position_specific_score_matrix(argv):
         parser = ArgumentParser(
             add_help=True,
@@ -464,6 +593,44 @@ class Biokit(object):
         parser.add_argument("-ac", "--ambiguous_character", type=str, help=SUPPRESS)
         args = parser.parse_args(argv)
         PositionSpecificScoreMatrix(args).run()
+
+    @staticmethod
+    def variable_sites(argv):
+        parser = ArgumentParser(
+            add_help=True,
+            usage=SUPPRESS,
+            formatter_class=RawDescriptionHelpFormatter,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+
+                Calculate the number of variable sites in an
+                alignment.
+
+                Variable sites are defined as a site in an
+                alignment with at least two nucleotide or amino
+                acid characters among all taxa.
+                
+                Aliases:
+                  variable_sites, var_sites, vs
+                Command line interfaces: 
+                  bk_variable_sites, bk_var_sites, bk_vs
+
+                Usage:
+                biokit variable_sites <fasta>
+
+                Options
+                =====================================================
+                <fasta>                     first argument after 
+                                            function name should be
+                                            a fasta file
+                """  # noqa
+            ),
+        )
+
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        args = parser.parse_args(argv)
+        VariableSites(args).run()
 
     # coding sequence functions
     @staticmethod
@@ -1548,16 +1715,18 @@ class Biokit(object):
                 
                 Usage:
                 biokit rename_fasta_entries <fasta> -i/--idmap <idmap>
-                    [-o/--output <output_file>]
+                [-o/--output <output_file>]
                 
                 Options
                 =====================================================
                 <fasta>                     first argument after 
                                             function name should be
                                             a fasta file
+
                 -i/--idmap                  identifier map of current FASTA
                                             names (col1) and desired FASTA
                                             names (col2)
+
                 -o/--output                 optional argument to write
                                             the renamed fasta file to.
                                             Default output has the same 

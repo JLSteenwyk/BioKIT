@@ -72,6 +72,22 @@ Alignment-based functions
 
 ^^^^^
 
+Alignment length 
+################
+Function names: alignment_length; aln_len |br|
+Command line interface: bk_alignment_length; bk_aln_len
+
+Calculate the length of an alignment. 
+
+.. code-block:: shell
+
+	biokit alignment_length <fasta>
+
+Options: |br|
+*<alignment>*: first argument after function name should be an alignment file 
+
+|
+
 Alignment summary 
 #################
 Function names: alignment_summary; aln_summary |br|
@@ -110,6 +126,47 @@ Options: |br|
 
 |
 
+Constant sites
+##############
+Function names: constant_sites; con_sites |br|
+Command line interface: bk_constant_sites; bk_con_sites
+
+Calculate the number of constant sites in an alignment.
+
+Constant sites are defined as a site in an
+alignment with the same nucleotide or amino
+acid sequence (excluding gaps) among all taxa.
+
+.. code-block:: shell
+
+	biokit constant_sites <fasta>
+
+Options: |br|
+*<alignment>*: first argument after function name should be an alignment file 
+
+|
+
+Parsimony informative sites
+###########################
+Function names: parsimony_informative_sites; pi_sites; pis |br|
+Command line interface: bk_parsimony_informative_sites; bk_pi_sites; bk_pis
+
+Calculate the number of parsimony informative
+sites in an alignment.
+
+Parsimony informative sites are defined as a
+site in an alignment with at least two nucleotides
+or amino acids that occur at least twice.
+
+.. code-block:: shell
+
+	biokit parsimony_informative_sites <fasta>
+
+Options: |br|
+*<alignment>*: first argument after function name should be an alignment file 
+
+|
+
 Position specific score matrix
 ##############################
 Function names: position_specific_score_matrix; pssm |br|
@@ -124,6 +181,27 @@ Generates a position specific score matrix for an alignment.
 Options: |br|
 *<fasta>*: first argument after function name should be an alignment fasta file 
 *<ambiguous character>*: the ambiguity character to use. Default is 'N'
+
+|
+
+Variable sites
+##############
+Function names: variable_sites; var_sites; vs |br|
+Command line interface: bk_variable_sites; bk_var_sites; bk_vs
+
+Calculate the number of variable sites in an
+alignment.
+
+Variable sites are defined as a site in an
+alignment with at least two nucleotide or amino
+acid characters among all taxa.
+
+.. code-block:: shell
+
+	biokit variable_sites <fasta>
+
+Options: |br|
+*<alignment>*: first argument after function name should be an alignment file 
 
 |
 
@@ -696,6 +774,100 @@ represented on one line.
 Options: |br|
 *<fasta>*: first argument after function name should be a fasta file |br|
 *-o/\\-\\-output*: optional argument to name the output file
+
+|
+
+Rename FASTA entries
+####################
+Function names: rename_fasta_entries; rename_fasta |br|
+Command line interface: bk_rename_fasta_entries; bk_rename_fasta
+
+Renames fasta entries.
+
+Renaming fasta entries will follow the scheme of a tab-delimited
+file wherein the first column is the current fasta entry name and
+the second column is the new fasta entry name in the resulting 
+output alignment. 
+
+.. code-block:: shell
+
+   rename_fasta_entries <fasta> -i/--idmap <idmap> [-o/--output <output_file>]
+
+Options: |br|
+*<fasta>*: first argument after function name should be a fasta file |br|
+*-i/\\-\\-idmap*: identifier map of current FASTA names (col1) and desired FASTA names (col2) |br|
+*-o/\\-\\-output*: optional argument to name the output file
+
+|
+
+Reorder by sequence length
+##########################
+Function names: reorder_by_sequence_length; reorder_by_seq_len |br|
+Command line interface: bk_reorder_by_sequence_length; bk_reorder_by_seq_len
+
+Reorder FASTA file entries from the longest entry
+to the shortest entry. 
+
+.. code-block:: shell
+
+   biokit reorder_by_sequence_length <fasta> [-o/--output <output_file>]
+
+Options: |br|
+*<fasta>*: first argument after function name should be a fasta file |br|
+*-o/\\-\\-output*: optional argument to write the reordered fasta file to.
+Default output has the same name as the input file with the suffix
+".reordered.fa" added to it.
+
+|
+
+Sequence complement
+###################
+Function names: sequence_complement; seq_comp |br|
+Command line interface: bk_sequence_complement; bk_seq_comp
+
+Generates the sequence complement for all entries
+in a multi-FASTA file. To generate a reverse sequence
+complement, add the -r/--reverse argument.
+
+.. code-block:: shell
+
+   biokit sequence_complement <fasta> [-r/--reverse]
+
+Options: |br|
+*<fasta>*: first argument after function name should be a fasta file |br|
+*-r/\\-\\-reverse*: if used, the reverse complement sequence will be generated
+
+|
+
+Sequence length
+###############
+Function names: sequence_length; seq_len |br|
+Command line interface: bk_sequence_length; bk_seq_len
+
+Calculate sequence length of each FASTA entry.
+
+.. code-block:: shell
+
+   biokit sequence_complement <fasta>
+
+Options: |br|
+*<fasta>*: first argument after function name should be a fasta file |br|
+
+|
+
+Single line to multiple line fasta
+##################################
+Function names: single_line_to_multiple_line_fasta; sl2ml |br|
+Command line interface: bk_single_line_to_multiple_line_fasta; bk_sl2ml
+
+Calculate sequence length of each FASTA entry.
+
+.. code-block:: shell
+
+   biokit single_line_to_multiple_line_fasta <fasta>
+
+Options: |br|
+*<fasta>*: first argument after function name should be a fasta file |br|
 
 |
 

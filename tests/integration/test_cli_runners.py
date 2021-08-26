@@ -11,6 +11,16 @@ here = Path(__file__)
 @pytest.mark.slow
 @pytest.mark.integration
 class TestCLIRunners(object):
+    def test_bk_alignment_length(self):
+        cmd = "bk_alignment_length -h"
+        exit_status = os.system(cmd)
+        assert exit_status == 32512
+
+    def test_bk_aln_len(self):
+        cmd = "bk_aln_len -h"
+        exit_status = os.system(cmd)
+        assert exit_status == 32512
+
     def test_bk_alignment_summary(self):
         cmd = "bk_alignment_summary -h"
         exit_status = os.system(cmd)
@@ -31,6 +41,31 @@ class TestCLIRunners(object):
         exit_status = os.system(cmd)
         assert exit_status == 256
 
+    def test_bk_constant_sites(self):
+        cmd = "bk_constant_sites -h"
+        exit_status = os.system(cmd)
+        assert exit_status == 32512
+
+    def test_bk_con_sites(self):
+        cmd = "bk_con_sites -h"
+        exit_status = os.system(cmd)
+        assert exit_status == 32512
+
+    def test_bk_parsimony_informative_sites(self):
+        cmd = "bk_parsimony_informative_sites -h"
+        exit_status = os.system(cmd)
+        assert exit_status == 32512
+
+    def test_bk_pi_sites(self):
+        cmd = "bk_pi_sites -h"
+        exit_status = os.system(cmd)
+        assert exit_status == 32512
+
+    def test_bk_pis(self):
+        cmd = "bk_pis -h"
+        exit_status = os.system(cmd)
+        assert exit_status == 32512
+
     def test_bk_position_specific_score_matrix(self):
         cmd = "bk_position_specific_score_matrix -h"
         exit_status = os.system(cmd)
@@ -40,6 +75,21 @@ class TestCLIRunners(object):
         cmd = "bk_pssm -h"
         exit_status = os.system(cmd)
         assert exit_status == 256
+
+    def test_bk_variable_sites(self):
+        cmd = "bk_variable_sites -h"
+        exit_status = os.system(cmd)
+        assert exit_status == 32512
+
+    def test_bk_var_sites(self):
+        cmd = "bk_var_sites -h"
+        exit_status = os.system(cmd)
+        assert exit_status == 32512
+
+    def test_bk_vs(self):
+        cmd = "bk_vs -h"
+        exit_status = os.system(cmd)
+        assert exit_status == 32512
 
     def test_bk_gc_content_first_position(self):
         cmd = "bk_gc_content_first_position -h"
