@@ -194,7 +194,7 @@ class TestAlignmentRecoding(object):
             call(expected_result_3),
             call(expected_result_4),
         ]
-    
+
     @patch("builtins.print")
     def test_alignment_recoding_no_recoding_table(self, mocked_print):
         expected_call = textwrap.dedent(
@@ -215,3 +215,39 @@ class TestAlignmentRecoding(object):
         mocked_print.assert_has_calls([
             call(expected_call),
         ])
+
+    @patch("builtins.print")
+    def test_alignment_recoding_custom_code(self, mocked_print):
+        expected_result_0 = textwrap.dedent(
+            """>1\nR?RYRY"""
+        )
+        expected_result_1 = textwrap.dedent(
+            """>2\nR-R-RY"""
+        )
+        expected_result_2 = textwrap.dedent(
+            """>3\nR-R-YR"""
+        )
+        expected_result_3 = textwrap.dedent(
+            """>4\nRRR-YR"""
+        )
+        expected_result_4 = textwrap.dedent(
+            """>5\nRYR-Y-"""
+        )
+
+        testargs = [
+            "biokit",
+            "recode",
+            f"{here.parent.parent.parent}/sample_files/simple.fa",
+            "-c",
+            f"{here.parent.parent.parent.parent}/biokit/recoding_tables/RY-nucleotide.txt",
+
+        ]
+        with patch.object(sys, "argv", testargs):
+            Biokit()
+        assert mocked_print.mock_calls == [
+            call(expected_result_0),
+            call(expected_result_1),
+            call(expected_result_2),
+            call(expected_result_3),
+            call(expected_result_4),
+        ]
