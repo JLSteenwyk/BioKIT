@@ -88,6 +88,60 @@ Options: |br|
 
 |
 
+Alignment recoding 
+##################
+Function names: alignment_recoding; aln_recoding; recode |br|
+Command line interface: bk_alignment_recoding; bk_aln_recoding; bk_recode
+
+Recode alignments using reduced character states.
+
+Alignments can be recoded using established or
+custom recoding schemes. Recoding schemes are
+specified using the -c/--code argument. Custom
+recoding schemes can be used and should be formatted
+as a two column file wherein the first column is the
+recoded character and the second column is the character
+in the alignment.
+
+.. code-block:: shell
+
+	biokit alignment_recoding <fasta> [-c/--code <code>]
+
+Codes for which recoding scheme to use: |br|
+**RY-nucleotide** |br|
+R = purines (i.e., A and G) |br|
+Y = pyrimidines (i.e., T and C)
+
+**Dayhoff-6** |br|
+0 = A, G, P, S, and T |br|
+1 = D, E, N, and Q |br|
+2 = H, K, and R |br|
+3 = I, L, M, and V |br|
+4 = F, W, and Y |br|
+5 = C
+
+**SandR-6** |br|
+0 = A, P, S, and T |br|
+1 = D, E, N, and G |br|
+2 = Q, K, and R |br|
+3 = M, I, V, and L |br|
+4 = W and C |br|
+5 = F, Y, and H |br|
+
+**KGB-6** |br|
+0 = A, G, P, and S |br|
+1 = D, E, N, Q, H, K, R, and T |br|
+2 = M, I, and L |br|
+3 = W |br|
+4 = F and Y |br|
+5 = C and V |br|
+
+Options: |br|
+*<alignment>*: first argument after function name should be an alignment file |br|
+*-c/\\-\\-code*: argument to specify the recoding scheme to use 
+
+|
+
 Alignment summary 
 #################
 Function names: alignment_summary; aln_summary |br|

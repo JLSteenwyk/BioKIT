@@ -14,6 +14,7 @@ from argparse import (
 
 from .services.alignment import (
     AlignmentLength,
+    AlignmentRecoding,
     AlignmentSummary,
     ConsensusSequence,
     ConstantSites,
@@ -159,6 +160,9 @@ class Biokit(object):
                 =======================
                 alignment_length (alias: aln_len)
                     - calculates the length of an alignment
+
+                alignment_recoding (alias: aln_recoding, recode)
+                    - recode alignments using reduced character schemes
 
                 alignment_summary (alias: aln_summary)
                     - calculate summary statistics for an alignment
@@ -309,6 +313,8 @@ class Biokit(object):
         # aliases for alignments
         elif command in ["aln_len"]:
             return self.alignment_length(argv)
+        elif command in ["aln_recoding", "recode"]:
+            return self.alignment_recoding(argv)
         elif command in ["aln_summary"]:
             return self.alignment_summary(argv)
         elif command in ["con_seq"]:
@@ -431,6 +437,80 @@ class Biokit(object):
         AlignmentLength(args).run()
 
     @staticmethod
+    def alignment_recoding(argv):
+        parser = ArgumentParser(
+            add_help=True,
+            usage=SUPPRESS,
+            formatter_class=RawDescriptionHelpFormatter,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+
+                Recode alignments using reduced character states.
+
+                Alignments can be recoded using established or
+                custom recoding schemes. Recoding schemes are
+                specified using the -c/--code argument. Custom
+                recoding schemes can be used and should be formatted
+                as a two column file wherein the first column is the
+                recoded character and the second column is the character
+                in the alignment.
+                
+                Aliases:
+                  alignment_recoding, aln_recoding, recode
+                Command line interfaces: 
+                  bk_alignment_recoding, bk_aln_recoding, bk_recode
+
+                Usage:
+                biokit alignment_recoding <fasta> -c/--code <code>
+
+                Options
+                =====================================================
+                <fasta>                     first argument after 
+                                            function name should be
+                                            a fasta file
+
+                -c/--code                   recoding scheme to use
+
+                Codes for which recoding scheme to use
+                =====================================================
+                RY-nucleotide
+                    R = purines (i.e., A and G) 
+                    Y = pyrimidines (i.e., T and C)
+                
+                Dayhoff-6
+                    0 = A, G, P, S, and T
+                    1 = D, E, N, and Q
+                    2 = H, K, and R
+                    3 = I, L, M, and V
+                    4 = F, W, and Y
+                    5 = C
+
+                SandR-6
+                    0 = A, P, S, and T
+                    1 = D, E, N, and G
+                    2 = Q, K, and R
+                    3 = M, I, V, and L
+                    4 = W and C
+                    5 = F, Y, and H
+
+                KGB-6
+                    0 = A, G, P, and S
+                    1 = D, E, N, Q, H, K, R, and T
+                    2 = M, I, and L
+                    3 = W
+                    4 = F and Y
+                    5 = C and V
+                """  # noqa
+            ),
+        )
+
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        parser.add_argument("-c", "--code", type=str, help=SUPPRESS)
+        args = parser.parse_args(argv)
+        AlignmentRecoding(args).run()
+
+    @staticmethod
     def alignment_summary(argv):
         parser = ArgumentParser(
             add_help=True,
@@ -486,8 +566,8 @@ class Biokit(object):
                   bk_consensus_sequence, bk_con_seq
 
                 Usage:
-                biokit consensus_sequence <fasta> -t/--threshold <threshold>
-                -ac/--ambiguous_character <ambiguous character>
+                biokit consensus_sequence <fasta> [-t/--threshold <threshold>
+                -ac/--ambiguous_character <ambiguous character>]
 
                 Options
                 =====================================================

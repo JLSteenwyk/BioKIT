@@ -21,6 +21,21 @@ class TestCLIRunners(object):
         exit_status = os.system(cmd)
         assert exit_status == 256
 
+    def test_bk_alignment_recoding(self):
+        cmd = "bk_alignment_recoding -h"
+        exit_status = os.system(cmd)
+        assert exit_status == 256
+
+    def test_bk_aln_recoding(self):
+        cmd = "bk_aln_recoding -h"
+        exit_status = os.system(cmd)
+        assert exit_status == 256
+
+    def test_bk_recode(self):
+        cmd = "bk_recode -h"
+        exit_status = os.system(cmd)
+        assert exit_status == 256
+
     def test_bk_alignment_summary(self):
         cmd = "bk_alignment_summary -h"
         exit_status = os.system(cmd)

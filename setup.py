@@ -35,6 +35,9 @@ setup(
             "biokit = biokit.biokit:main",
             "bk_alignment_length = biokit.biokit:alignment_length",  # Alignment-based functions
             "bk_aln_len = biokit.biokit:alignment_length",
+            "bk_alignment_recoding = biokit.biokit:alignment_recoding",
+            "bk_aln_recoding = biokit.biokit:alignment_recoding",
+            "bk_recode = biokit.biokit:alignment_recoding",
             "bk_alignment_summary = biokit.biokit:alignment_summary",
             "bk_aln_summary = biokit.biokit:alignment_summary",
             "bk_consensus_sequence = biokit.biokit:consensus_sequence",
