@@ -11,6 +11,7 @@ class FastQReadLengths(FastQ):
 
     def run(self):
         read_lens = []
+
         with open(self.fastq) as in_handle:
             for _, seq, _ in FastqGeneralIterator(in_handle):
                 read_lens.append(len(seq))

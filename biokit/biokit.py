@@ -1008,7 +1008,7 @@ class Biokit(object):
                   bk_fastq_read_lengths, bk_fastq_read_lens
 
                 Usage:
-                biokit fastq_read_lengths <fasta> [-v/--verbose]
+                biokit fastq_read_lengths <fastq> [-v/--verbose]
 
                 Options
                 =====================================================
@@ -1050,6 +1050,8 @@ class Biokit(object):
                 reproducibility. If no seed is specified,
                 a seed is generated based off of the date
                 and time.
+
+                Output files will have the suffice "_subset.fq"
                 
                 Aliases:
                   subset_pe_fastq_reads, subset_pe_fastq
@@ -1058,8 +1060,7 @@ class Biokit(object):
 
                 Usage:
                 biokit subset_pe_fastq_reads <fastq1> <fastq2>
-                [-p/--percent <percent> -s/--seed <seed> 
-                -o/--output_file <output_file>]
+                [-p/--percent <percent> -s/--seed <seed>]
 
                 Options
                 =====================================================
@@ -1098,7 +1099,9 @@ class Biokit(object):
                 f"""\
                 {help_header}
 
-                Subset single-end FastQ data.
+                Subset single-end FASTQ data.
+
+                Output file will have the suffice "_subset.fq" 
                 
                 Aliases:
                   subset_se_fastq_reads, subset_se_fastq
@@ -1106,7 +1109,7 @@ class Biokit(object):
                   bk_subset_se_fastq_reads, bk_subset_se_fastq
 
                 Usage:
-                biokit subset_se_fastq_reads <fasta>
+                biokit subset_se_fastq_reads <fastq>
 
                 Options
                 =====================================================
@@ -1149,12 +1152,17 @@ class Biokit(object):
 
                 FASTQ data will be trimmed according to
                 quality score and length of the reads.
-                Users can specify quality and length
-                thresholds. Paired reads that are 
-                maintained and saved to files with the
-                suffix "_paired_trimmed.fq." Single
-                reads that passed quality thresholds are
-                saved to files with the suffix 
+                Specifically, the program will iterate
+                over a read and once a base with a quality
+                below quality threshold, the remainder
+                of the read will be trimmed. Thereafter,
+                the read is ensured to be long enough to kept.
+                Users can specify quality and length thresholds.
+                
+                Paired reads that are maintained and saved
+                to files with the suffix "_paired_trimmed.fq."
+                Single reads that passed quality thresholds
+                are saved to files with the suffix 
                 "_unpaired_trimmed.fq."
                 
                 Aliases:
@@ -1206,10 +1214,16 @@ class Biokit(object):
 
                 FASTQ data will be trimmed according to
                 quality score and length of the reads.
-                Users can specify quality and length
-                thresholds. Output file has the suffix 
-                "_trimmed.fq" or can be named by the user 
-                with the output_file argument.
+                Specifically, the program will iterate
+                over a read and once a base with a quality
+                below quality threshold, the remainder
+                of the read will be trimmed. Thereafter,
+                the read is ensured to be long enough to kept.
+                Users can specify quality and length thresholds.
+                
+                Output file has the suffix "_trimmed.fq"
+                or can be named by the user with the
+                output_file argument.
                 
                 Aliases:
                   trim_se_fastq_reads, trim_se_fastq
