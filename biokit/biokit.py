@@ -26,6 +26,7 @@ from .services.coding_sequences import (
     GCContentFirstPosition,
     GCContentSecondPosition,
     GCContentThirdPosition,
+    GeneWiseRelativeSynonymousCodonUsage,
     RelativeSynonymousCodonUsage,
     TranslateSequence,
 )
@@ -56,6 +57,8 @@ from .services.text import (
     Faidx,
     FileFormatConverter,
     MultipleLineToSingleLineFasta,
+    RemoveFastaEntry,
+    RemoveShortSequences,
     RenameFastaEntries,
     ReorderBySequenceLength,
     SequenceComplement,
@@ -196,6 +199,11 @@ class Biokit(object):
                     - calculate the GC content of the third position
                       among coding sequences
 
+                gene_wise_relative_synonymous_codon_usage (alias: gene_wise_rscu; gw_rscu)
+                    - calculates relative synonymous codon usage
+                      that has been adapted for single genes to
+                      assess codon usage bias on individual genes
+
                 relative_synonymous_codon_usage (alias: rscu)
                     - calculate relative synonymous codon usage
                       to evaluate potential codon usage biases
@@ -272,6 +280,12 @@ class Biokit(object):
                     - reformats sequences that occur on multiple
                       lines to be represented in a single line
 
+                remove_short_sequences (alias: remove_short_seqs)
+                    - remove short sequences from a FASTA file
+
+                remove_fasta_entry
+                    - remove entry in a FASTA file
+
                 rename_fasta_entries (alias: rename_fasta)
                     - rename entries in a FASTA file
 
@@ -334,6 +348,8 @@ class Biokit(object):
             return self.gc_content_second_position(argv)
         elif command in ["gc3"]:
             return self.gc_content_third_position(argv)
+        elif command in ["gene_wise_rscu", "gw_rscu"]:
+            return self.gene_wise_relative_synonymous_codon_usage(argv)
         elif command in ["rscu"]:
             return self.relative_synonymous_codon_usage(argv)
         elif command in ["translate_seq", "trans_seq"]:
@@ -375,6 +391,8 @@ class Biokit(object):
             return self.file_format_converter(argv)
         elif command in ["ml2sl"]:
             return self.multiple_line_to_single_line_fasta(argv)
+        elif command in ["remove_short_seqs"]:
+            return self.remove_short_sequences(argv)
         elif command in ["rename_fasta"]:
             return self.rename_fasta_entries(argv)
         elif command in ["reorder_by_seq_len"]:
@@ -869,6 +887,68 @@ class Biokit(object):
         )
         args = parser.parse_args(argv)
         GCContentThirdPosition(args).run()
+
+    # TODO: write docs for this function
+    @staticmethod
+    def gene_wise_relative_synonymous_codon_usage(argv):
+        parser = ArgumentParser(
+            add_help=True,
+            usage=SUPPRESS,
+            formatter_class=RawDescriptionHelpFormatter,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+
+                Calculate gene-wise relative synonymous codon usage (gw-RSCU).
+
+                Codon usage bias examines biases for codon usage of
+                a particular gene. We adapted RSCU to be applied to
+                individual genes rather than only codons. Specifically,
+                gw-RSCU is the mean (or median) RSCU value observed
+                in a particular gene. This provides insight into how
+                codon usage bias influences codon usage for a particular
+                gene. This function also outputs the standard deviation
+                of RSCU values for a given gene.
+
+                The output is col 1: the gene identifier; col 2: the
+                gw-RSCU based on the mean RSCU value observed in a gene;
+                col 3: the gw-RSCU based on the median RSCU value observed
+                in a gene; and the col 4: the standard deviation of
+                RSCU values observed in a gene.
+
+                Custom genetic codes can be used as input and should
+                be formatted with the codon in first column and the 
+                resulting amino acid in the second column.
+
+                Aliases:
+                  gene_wise_relative_synonymous_codon_usage, gene_wise_rscu, gw_rscu
+                Command line interfaces: 
+                  bk_gene_wise_relative_synonymous_codon_usage, bk_gene_wise_rscu, bk_gw_rscu
+                
+                Usage:
+                biokit gene_wise_relative_synonymous_codon_usage <fasta> 
+                [-tt/--translation_table <code>]
+                
+                Options
+                =====================================================
+                <fasta>                     first argument after 
+                                            function name should be
+                                            a fasta file
+
+                -tt/--translation_table     Code for the translation table
+                                            to be used. Default: 1, which
+                                            is the standard code.
+
+                {translation_table_codes}
+                """  # noqa
+            ),
+        )
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        parser.add_argument(
+            "-tt", "--translation_table", type=str, required=False, help=SUPPRESS
+        )
+        args = parser.parse_args(argv)
+        GeneWiseRelativeSynonymousCodonUsage(args).run()
 
     @staticmethod
     def relative_synonymous_codon_usage(argv):
@@ -1817,6 +1897,108 @@ class Biokit(object):
         args = parser.parse_args(argv)
         MultipleLineToSingleLineFasta(args).run()
 
+    # TODO: write docs for function
+    @staticmethod
+    def remove_fasta_entry(argv):
+        parser = ArgumentParser(
+            add_help=True,
+            usage=SUPPRESS,
+            formatter_class=RawDescriptionHelpFormatter,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+                Remove FASTA entry from multi-FASTA file.
+
+                Output will have the suffix "pruned.fa" unless
+                the user specifies a different output file name.
+
+                Aliases:
+                  remove_fasta_entry
+                Command line interfaces: 
+                  bk_remove_fasta_entry
+                
+                Usage:
+                biokit remove_fasta_entry <fasta> -e/--entry <entry>
+                [-o/--output <output_file>]
+                
+                Options
+                =====================================================
+                <fasta>                     first argument after 
+                                            function name should be
+                                            a fasta file
+
+                -e/--entry                  entry name to be removed
+                                            from the inputted fasta file
+
+                -o/--output                 optional argument to write
+                                            the renamed fasta file to.
+                                            Default output has the same 
+                                            name as the input file with
+                                            the suffix "pruned.fa" added
+                                            to it.
+                """  # noqa
+            ),
+        )
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        parser.add_argument("-e", "--entry", type=str, help=SUPPRESS)
+        parser.add_argument("-o", "--output", type=str, help=SUPPRESS)
+        args = parser.parse_args(argv)
+        RemoveFastaEntry(args).run()
+
+    # TODO: write docs for function
+    @staticmethod
+    def remove_short_sequences(argv):
+        parser = ArgumentParser(
+            add_help=True,
+            usage=SUPPRESS,
+            formatter_class=RawDescriptionHelpFormatter,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+                Remove short sequences from a multi-FASTA file.
+
+                Short sequences are defined as having a length
+                less than 500. Users can specify their own threshold.
+                All sequences greater than the threshold will be
+                kept in the resulting file.
+
+                Output will have the suffix "long_seqs.fa" unless
+                the user specifies a different output file name.
+
+                Aliases:
+                  remove_short_sequences; remove_short_seqs
+                Command line interfaces: 
+                  bk_remove_short_sequences; bk_remove_short_seqs
+                
+                Usage:
+                biokit remove_short_sequences <fasta> -t/--threshold
+                <entry> [-o/--output <output_file>]
+                
+                Options
+                =====================================================
+                <fasta>                     first argument after 
+                                            function name should be
+                                            a fasta file
+
+                -t/--threshold              threshold for short sequences.
+                                            Sequences greater than this
+                                            value will be kept.
+
+                -o/--output                 optional argument to write
+                                            the renamed fasta file to.
+                                            Default output has the same 
+                                            name as the input file with
+                                            the suffix "long_seqs.fa" added
+                                            to it.
+                """  # noqa
+            ),
+        )
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        parser.add_argument("-t", "--threshold", type=str, help=SUPPRESS)
+        parser.add_argument("-o", "--output", type=str, help=SUPPRESS)
+        args = parser.parse_args(argv)
+        RemoveShortSequences(args).run()
+
     @staticmethod
     def rename_fasta_entries(argv):
         parser = ArgumentParser(
@@ -2022,5 +2204,165 @@ def main(argv=None):
 
 
 # Alignment-based functions
+def alignment_length(argv=None):
+    Biokit.alignment_length(sys.argv[1:])
+
+
+def alignment_recoding(argv=None):
+    Biokit.alignment_recoding(sys.argv[1:])
+
+
+def alignment_summary(argv=None):
+    Biokit.alignment_summary(sys.argv[1:])
+
+
+def consensus_sequence(argv=None):
+    Biokit.consensus_sequence(sys.argv[1:])
+
+
+def constant_sites(argv=None):
+    Biokit.constant_sites(sys.argv[1:])
+
+
+def parsimony_informative_sites(argv=None):
+    Biokit.parsimony_informative_sites(sys.argv[1:])
+
+
+def position_specific_score_matrix(argv=None):
+    Biokit.position_specific_score_matrix(sys.argv[1:])
+
+
+def variable_sites(argv=None):
+    Biokit.variable_sites(sys.argv[1:])
+
+
+# Coding sequences-based functions
+def gc_content_first_position(argv=None):
+    Biokit.gc_content_first_position(sys.argv[1:])
+
+
+def gc_content_second_position(argv=None):
+    Biokit.gc_content_second_position(sys.argv[1:])
+
+
+def gc_content_third_position(argv=None):
+    Biokit.gc_content_third_position(sys.argv[1:])
+
+
+def gene_wise_relative_synonymous_codon_usage(argv=None):
+    Biokit.gene_wise_relative_synonymous_codon_usage(sys.argv[1:])
+
+
+def relative_synonymous_codon_usage(argv=None):
+    Biokit.relative_synonymous_codon_usage(sys.argv[1:])
+
+
+def translate_sequence(argv=None):
+    Biokit.translate_sequence(sys.argv[1:])
+
+
+# FASTQ-based functions
+def fastq_read_lengths(argv=None):
+    Biokit.fastq_read_lengths(sys.argv[1:])
+
+
+def subset_pe_fastq_reads(argv=None):
+    Biokit.subset_pe_fastq_reads(sys.argv[1:])
+
+
+def subset_se_fastq_reads(argv=None):
+    Biokit.subset_se_fastq_reads(sys.argv[1:])
+
+
+def trim_pe_fastq(argv=None):
+    Biokit.trim_pe_fastq(sys.argv[1:])
+
+
+def trim_se_fastq(argv=None):
+    Biokit.trim_se_fastq(sys.argv[1:])
+
+
+# genome-based functions
+def gc_content(argv=None):
+    Biokit.gc_content(sys.argv[1:])
+
+
+def genome_assembly_metrics(argv=None):
+    Biokit.genome_assembly_metrics(sys.argv[1:])
+
+
+def l50(argv=None):
+    Biokit.l50(sys.argv[1:])
+
+
+def l90(argv=None):
+    Biokit.l90(sys.argv[1:])
+
+
+def longest_scaffold(argv=None):
+    Biokit.longest_scaffold(sys.argv[1:])
+
+
+def n50(argv=None):
+    Biokit.n50(sys.argv[1:])
+
+
+def n90(argv=None):
+    Biokit.n90(sys.argv[1:])
+
+
+def number_of_large_scaffolds(argv=None):
+    Biokit.number_of_large_scaffolds(sys.argv[1:])
+
+
+def number_of_scaffolds(argv=None):
+    Biokit.number_of_scaffolds(sys.argv[1:])
+
+
+def sum_of_scaffold_lengths(argv=None):
+    Biokit.sum_of_scaffold_lengths(sys.argv[1:])
+
+
+# sequence-based functions
+def character_frequency(argv=None):
+    Biokit.character_frequency(sys.argv[1:])
+
+
 def faidx(argv=None):
     Biokit.faidx(sys.argv[1:])
+
+
+def file_format_converter(argv=None):
+    Biokit.file_format_converter(sys.argv[1:])
+
+
+def multiple_line_to_single_line_fasta(argv=None):
+    Biokit.multiple_line_to_single_line_fasta(sys.argv[1:])
+
+
+def remove_fasta_entry(argv=None):
+    Biokit.remove_fasta_entry(sys.argv[1:])
+
+
+def remove_short_sequences(argv=None):
+    Biokit.remove_short_sequences(sys.argv[1:])
+
+
+def rename_fasta_entries(argv=None):
+    Biokit.rename_fasta_entries(sys.argv[1:])
+
+
+def reorder_by_sequence_length(argv=None):
+    Biokit.reorder_by_sequence_length(sys.argv[1:])
+
+
+def sequence_complement(argv=None):
+    Biokit.sequence_complement(sys.argv[1:])
+
+
+def sequence_length(argv=None):
+    Biokit.sequence_length(sys.argv[1:])
+
+
+def single_line_to_multiple_line_fasta(argv=None):
+    Biokit.single_line_to_multiple_line_fasta(sys.argv[1:])
