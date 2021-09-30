@@ -324,6 +324,43 @@ Options: |br|
 
 |
 
+Gene-wise relative synonymous codon usage
+#########################################
+Function names: gene_wise_relative_synonymous_codon_usage; gene_wise_rscu; gw_rscu |br|
+Command line interface: bk_gene_wise_relative_synonymous_codon_usage; bk_gene_wise_rscu; bk_gw_rscu
+
+Calculate gene-wise relative synonymous codon usage (gw-RSCU).
+
+Codon usage bias examines biases for codon usage of
+a particular gene. We adapted RSCU to be applied to
+individual genes rather than only codons. Specifically,
+gw-RSCU is the mean (or median) RSCU value observed
+in a particular gene. This provides insight into how
+codon usage bias influences codon usage for a particular
+gene. This function also outputs the standard deviation
+of RSCU values for a given gene.
+
+The output is col 1: the gene identifier; col 2: the
+gw-RSCU based on the mean RSCU value observed in a gene;
+col 3: the gw-RSCU based on the median RSCU value observed
+in a gene; and the col 4: the standard deviation of
+RSCU values observed in a gene.
+
+Custom genetic codes can be used as input and should
+be formatted with the codon in first column and the 
+resulting amino acid in the second column.
+
+.. code-block:: shell
+
+   biokit gene_wise_relative_synonymous_codon_usage <fasta> [-tt/--translation_table <code>]
+
+Options: |br|
+*<fasta>*: first argument after function name should be a fasta file |br|
+*-tt/\\-\\-translation_table*: optional argument of the code for the translation
+table to be used. Default: 1, which is the standard code.
+
+|
+
 Relative synonymous codon usage
 ###############################
 Function names: relative_synonymous_codon_usage; rscu |br|
@@ -342,7 +379,7 @@ resulting amino acid in the second column.
 
 .. code-block:: shell
 
-   biokit relative_synonymous_codon_usage <fasta> [-v/--verbose]
+   biokit relative_synonymous_codon_usage <fasta> [-tt/--translation_table <code>]
 
 Options: |br|
 *<fasta>*: first argument after function name should be a fasta file |br|
@@ -828,6 +865,58 @@ represented on one line.
 Options: |br|
 *<fasta>*: first argument after function name should be a fasta file |br|
 *-o/\\-\\-output*: optional argument to name the output file
+
+|
+
+Remove FASTA entry
+##################
+Function names: remove_fasta_entry |br|
+Command line interface: bk_remove_fasta_entry
+
+Remove FASTA entry from multi-FASTA file.
+
+Output will have the suffix "pruned.fa" unless
+the user specifies a different output file name. 
+
+.. code-block:: shell
+
+   biokit remove_fasta_entry <fasta> -e/--entry <entry> [-o/--output <output_file>]
+
+Options: |br|
+*<fasta>*: first argument after function name should be a fasta file |br|
+*-e/\\-\\-entry*: entry name to be removed from the inputted fasta file |br|
+*-o/\\-\\-output*: optional argument to write the renamed fasta file to.
+Default output has the same name as the input file with the suffix "pruned.fa"
+added to it.
+
+|
+
+Remove short sequences
+######################
+Function names: remove_short_sequences; remove_short_seqs |br|
+Command line interface: bk_remove_short_sequences; bk_remove_short_seqs
+
+Remove short sequences from a multi-FASTA file.
+
+Short sequences are defined as having a length
+less than 500. Users can specify their own threshold.
+All sequences greater than the threshold will be
+kept in the resulting file.
+
+Output will have the suffix "long_seqs.fa" unless
+the user specifies a different output file name.
+
+.. code-block:: shell
+
+   biokit remove_short_sequences <fasta> -t/--threshold <threshold> [-o/--output <output_file>]
+
+Options: |br|
+*<fasta>*: first argument after function name should be a fasta file |br|
+*-t/\\-\\-threshold*: threshold for short sequences. Sequences greater 
+than this value will be kept |br|
+*-o/\\-\\-output*: optional argument to write the renamed fasta file to.
+Default output has the same name as the input file with the suffix "long_seqs.fa"
+added to it.
 
 |
 

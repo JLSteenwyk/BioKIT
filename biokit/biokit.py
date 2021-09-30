@@ -888,7 +888,6 @@ class Biokit(object):
         args = parser.parse_args(argv)
         GCContentThirdPosition(args).run()
 
-    # TODO: write docs for this function
     @staticmethod
     def gene_wise_relative_synonymous_codon_usage(argv):
         parser = ArgumentParser(
@@ -921,9 +920,9 @@ class Biokit(object):
                 resulting amino acid in the second column.
 
                 Aliases:
-                  gene_wise_relative_synonymous_codon_usage, gene_wise_rscu, gw_rscu
+                  gene_wise_relative_synonymous_codon_usage; gene_wise_rscu; gw_rscu
                 Command line interfaces: 
-                  bk_gene_wise_relative_synonymous_codon_usage, bk_gene_wise_rscu, bk_gw_rscu
+                  bk_gene_wise_relative_synonymous_codon_usage; bk_gene_wise_rscu; bk_gw_rscu
                 
                 Usage:
                 biokit gene_wise_relative_synonymous_codon_usage <fasta> 
@@ -1897,7 +1896,6 @@ class Biokit(object):
         args = parser.parse_args(argv)
         MultipleLineToSingleLineFasta(args).run()
 
-    # TODO: write docs for function
     @staticmethod
     def remove_fasta_entry(argv):
         parser = ArgumentParser(
@@ -1945,7 +1943,6 @@ class Biokit(object):
         args = parser.parse_args(argv)
         RemoveFastaEntry(args).run()
 
-    # TODO: write docs for function
     @staticmethod
     def remove_short_sequences(argv):
         parser = ArgumentParser(
@@ -1972,7 +1969,7 @@ class Biokit(object):
                 
                 Usage:
                 biokit remove_short_sequences <fasta> -t/--threshold
-                <entry> [-o/--output <output_file>]
+                <threshold> [-o/--output <output_file>]
                 
                 Options
                 =====================================================
@@ -1982,7 +1979,7 @@ class Biokit(object):
 
                 -t/--threshold              threshold for short sequences.
                                             Sequences greater than this
-                                            value will be kept.
+                                            value will be kept
 
                 -o/--output                 optional argument to write
                                             the renamed fasta file to.
