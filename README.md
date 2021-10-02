@@ -17,7 +17,7 @@
             <img src="https://img.shields.io/pypi/pyversions/biokit">
         </a>-->
         <a href="https://github.com/JLSteenwyk/BioKIT/actions" alt="Build">
-            <img src="https://img.shields.io/github/workflow/status/jlsteenwyk/biokit/CI/master">
+            <img src="https://img.shields.io/github/workflow/status/JLSteenwyk/BioKIT/CI">
         </a>
         <a href="https://codecov.io/gh/JLSteenwyk/BioKIT" alt="Coverage">
           <img src="https://codecov.io/gh/JLSteenwyk/BioKIT/branch/main/graph/badge.svg?token=5X9C6YAVIG">
