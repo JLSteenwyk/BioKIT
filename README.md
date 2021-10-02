@@ -3,7 +3,7 @@
     <img src="https://raw.githubusercontent.com/JLSteenwyk/biokit/master/docs/_static/img/logo.png" alt="Logo" width="400">
   </a>
   <p align="center">
-    <a href="https://jlsteenwyk.com/biokit/">Docs</a>
+    <a href="https://jlsteenwyk.com/BioKIT/">Docs</a>
     ·
     <a href="https://github.com/jlsteenwyk/biokit/issues">Report Bug</a>
     ·
@@ -16,11 +16,11 @@
         <!--<a href="https://pypi.org/project/biokit/" alt="PyPI - Python Version">
             <img src="https://img.shields.io/pypi/pyversions/biokit">
         </a>-->
-        <a href="https://github.com/JLSteenwyk/biokit/actions" alt="Build">
+        <a href="https://github.com/JLSteenwyk/BioKIT/actions" alt="Build">
             <img src="https://img.shields.io/github/workflow/status/jlsteenwyk/biokit/CI/master">
         </a>
-        <a href="https://codecov.io/gh/jlsteenwyk/biokit" alt="Coverage">
-          <img src="https://codecov.io/gh/jlsteenwyk/biokit/branch/master/graph/badge.svg?token=0J49I6441V">
+        <a href="https://codecov.io/gh/JLSteenwyk/BioKIT" alt="Coverage">
+          <img src="https://codecov.io/gh/JLSteenwyk/BioKIT/branch/main/graph/badge.svg?token=5X9C6YAVIG">
         </a>
         <a href="https://github.com/jlsteenwyk/biokit/graphs/contributors" alt="Contributors">
             <img src="https://img.shields.io/github/contributors/jlsteenwyk/biokit">
