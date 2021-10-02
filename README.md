@@ -32,8 +32,8 @@
     </p>
 </p>
 
-BioKIT is a UNIX shell toolkit for processing biological data.<br /><br />
-If you found biokit useful, please cite *biokit:*. JOURNAL. doi: [DOI](LINK).
+BioKIT is a UNIX shell toolkit for processing molecular sequence data.<br /><br />
+If you found biokit useful, please cite this GitHub repository. <!--*biokit:*. JOURNAL. doi: [DOI](LINK).-->
 <br /><br />
 
 ---
