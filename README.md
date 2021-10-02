@@ -13,9 +13,9 @@
         <a href="https://lbesson.mit-license.org/" alt="License">
             <img src="https://img.shields.io/badge/License-MIT-blue.svg">
         </a>
-        <a href="https://pypi.org/project/biokit/" alt="PyPI - Python Version">
+        <!--<a href="https://pypi.org/project/biokit/" alt="PyPI - Python Version">
             <img src="https://img.shields.io/pypi/pyversions/biokit">
-        </a>
+        </a>-->
         <a href="https://github.com/JLSteenwyk/biokit/actions" alt="Build">
             <img src="https://img.shields.io/github/workflow/status/jlsteenwyk/biokit/CI/master">
         </a>
