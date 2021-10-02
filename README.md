@@ -69,7 +69,7 @@ deactivate
 Similarly, to install from source, we strongly recommend using a virtual environment. To do so, use the following commands:
 ```shell
 # download
-git clone https://github.com/JLSteenwyk/biokit.git
+git clone https://github.com/JLSteenwyk/BioKIT.git
 cd biokit/
 # create virtual environment
 python -m venv .venv
