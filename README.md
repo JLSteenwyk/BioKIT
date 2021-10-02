@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/jlsteenwyk/biokit">
-    <img src="https://raw.githubusercontent.com/JLSteenwyk/biokit/master/docs/_static/img/biokit_logo.jpg" alt="Logo" width="400">
+    <img src="https://github.com/JLSteenwyk/BioKIT/blob/main/docs/_static/img/biokit_logo.jpg" alt="Logo" width="400">
   </a>
   <p align="center">
     <a href="https://jlsteenwyk.com/BioKIT/">Docs</a>
