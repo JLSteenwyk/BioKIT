@@ -80,7 +80,7 @@ jobs:
           cd docs
           pipenv install
           pipenv run make html
-          touch docs/_build/html/.nojekyll
+          touch _build/html/.nojekyll
           cd ..
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
