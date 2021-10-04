@@ -21,7 +21,7 @@ CLASSIFIERS = [
 REQUIRES = ["biopython==1.76", "numpy==1.18.2", "cython"]
 
 setup(
-    name="biokit",
+    name="jlsteenwyk-biokit",
     description="",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -81,7 +81,7 @@ setup(
             "bk_genome_assembly_metrics = biokit.biokit:genome_assembly_metrics",
             "bk_assembly_metrics = biokit.biokit:genome_assembly_metrics",
             "bk_l50 = biokit.biokit:l50",
-            "bk_l90 = biokit.biokit:bk_l90",
+            "bk_l90 = biokit.biokit:l90",
             "bk_longest_scaffold = biokit.biokit:longest_scaffold",
             "bk_longest_scaff = biokit.biokit:longest_scaffold",
             "bk_longest_contig = biokit.biokit:longest_scaffold",

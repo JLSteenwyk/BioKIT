@@ -13,9 +13,9 @@
         <a href="https://lbesson.mit-license.org/" alt="License">
             <img src="https://img.shields.io/badge/License-MIT-blue.svg">
         </a>
-        <!--<a href="https://pypi.org/project/biokit/" alt="PyPI - Python Version">
-            <img src="https://img.shields.io/pypi/pyversions/biokit">
-        </a>-->
+        <a href="https://pypi.org/project/jlsteenwyk-biokit/" alt="PyPI - Python Version">
+            <img src="https://img.shields.io/pypi/pyversions/jlsteenwyk-biokit">
+        </a>
         <a href="https://github.com/JLSteenwyk/BioKIT/actions" alt="Build">
             <img src="https://img.shields.io/github/workflow/status/JLSteenwyk/BioKIT/CI">
         </a>
@@ -33,7 +33,7 @@
 </p>
 
 BioKIT is a UNIX shell toolkit for processing molecular sequence data.<br /><br />
-If you found biokit useful, please cite this GitHub repository. <!--*biokit:*. JOURNAL. doi: [DOI](LINK).-->
+If you found biokit useful, please cite this GitHub repository. <!--*BioKIT: a versatile toolkit for processing and analyzing diverse types of sequence data*. bioRxiv. doi: [10.1101/2021.10.02.462868](https://www.biorxiv.org/content/10.1101/2021.10.02.462868v1).-->
 <br /><br />
 
 ---
@@ -53,7 +53,7 @@ python -m venv .venv
 # activate virtual environment
 source .venv/bin/activate
 # install biokit
-pip install biokit
+pip install jlsteenwyk-biokit
 ```
 
 **Note, the virtual environment must be activated to use biokit.**
@@ -89,10 +89,10 @@ deactivate
 
 To install via anaconda, execute the following command:
 ```shell
-conda install -c jlsteenwyk biokit
+conda install -c jlsteenwyk jlsteenwyk-biokit
 ```
 Visit here for more information:
-https://anaconda.org/JLSteenwyk/biokit
+https://anaconda.org/JLSteenwyk/jlsteenwyk-biokit
 
 <br />
 

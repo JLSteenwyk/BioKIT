@@ -9,10 +9,11 @@
 BioKIT, a versatile toolkit for processing or conducting analyses
 on alignments, coding sequences, fastq files, and genome files.
 
-If you found BioKIT useful, please cite *BioKIT: a UNIX toolkit for processing and analyzing bioinformatic data*. TBD. doi: |doiLink|_.
+If you found BioKIT useful, please cite *BioKIT: a versatile toolkit
+for processing and analyzing diverse types of sequence data*. bioRxiv. doi: |doiLink|_.
 
-.. _doiLink: ADD LINK TO PAPER HERE
-.. |doiLink| replace:: ADD DOI HERE
+.. _doiLink: https://www.biorxiv.org/content/10.1101/2021.10.02.462868v1
+.. |doiLink| replace:: 10.1101/2021.10.02.462868
 
 Quick Start
 -----------
@@ -28,7 +29,7 @@ software dependency issues. To do so, execute the following commands:
 	# activate virtual environment
 	source .venv/bin/activate
 	# install biokit
-	pip install biokit
+	pip install jlsteenwyk-biokit
 
 **Note, the virtual environment must be activated to use biokit.**
 
@@ -71,10 +72,10 @@ To install via anaconda, execute the following command:
 
 .. code-block:: shell
 
-	conda install -c jlsteenwyk biokit
+	conda install -c jlsteenwyk jlsteenwyk-biokit
 
 Visit here for more information:
-https://anaconda.org/JLSteenwyk/biokit
+https://anaconda.org/JLSteenwyk/jlsteenwyk-biokit
 
 |
 
