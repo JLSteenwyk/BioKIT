@@ -80,7 +80,8 @@ help_header = fr"""
                 |____/|_|\___/|_|\_\_____|  |_|   
                             
                 Version: {__version__}
-                Citation: Steenwyk et al. 2021, CITATION INFORMATION
+                Citation: Steenwyk et al. 2021, bioRxiv. DOI: 10.1101/2021.10.02.462868
+                https://www.biorxiv.org/content/10.1101/2021.10.02.462868v1
                 
 """  # noqa
 
@@ -132,7 +133,8 @@ class Biokit(object):
                 |____/|_|\___/|_|\_\_____|  |_|   
                             
                 Version: {__version__}
-                Citation: Steenwyk et al. 2021, CITATION INFORMATION
+                Citation: Steenwyk et al. 2021, bioRxiv. DOI: 10.1101/2021.10.02.462868
+                https://www.biorxiv.org/content/10.1101/2021.10.02.462868v1
 
     """  # noqa
 
