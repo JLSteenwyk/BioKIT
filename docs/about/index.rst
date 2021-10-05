@@ -105,3 +105,7 @@ tree of life, and the evolution of human pregnancy. Find out more information at
    :width: 4.5%
 
 |
+
+Information about other team members coming soon!
+
+|
