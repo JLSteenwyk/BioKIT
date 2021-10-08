@@ -106,6 +106,33 @@ tree of life, and the evolution of human pregnancy. Find out more information at
 
 |
 
+|MEMead|
+
+|GoogleScholarMead| |TwitterMead| 
+
+Matt is a postdoctoral scholar in the lab of Antonis Rokas at Vanderbilt University.
+He is interested in the evolution of pathogenicity, development, and regulatory networks
+in fungi. Outside of lab he enjoys reading, video games, and spending time with his family.
+You can contact Matt or find more information about him via 
+`LinkedIn <https://www.linkedin.com/in/matt-mead-253b609b/>`_. 
+
+.. |MEMead| image:: ../_static/img/MEMead.jpg
+   :width: 35%
+
+.. |GoogleScholarMead| image:: ../_static/img/GoogleScholar.png
+   :target: https://scholar.google.ca/citations?user=iM5iuGoAAAAJ&hl=en
+   :width: 4.5%
+
+.. |GitHubMead| image:: ../_static/img/Github.png
+   :target: https://github.com/meadm
+   :width: 4.5% 
+
+.. |TwitterMead| image:: ../_static/img/Twitter.png
+   :target: https://twitter.com/fungalmatt
+   :width: 4.5%
+
+|
+
 Information about other team members coming soon!
 
 |
