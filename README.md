@@ -33,7 +33,7 @@
 </p>
 
 BioKIT is a UNIX shell toolkit for processing molecular sequence data.<br /><br />
-If you found biokit useful, please cite the following: *BioKIT: a versatile toolkit for processing and analyzing diverse types of sequence data*. bioRxiv. doi: [10.1101/2021.10.02.462868](https://www.biorxiv.org/content/10.1101/2021.10.02.462868v1).
+If you found biokit useful, please cite the following: *BioKIT: a versatile toolkit for processing and analyzing diverse types of sequence data*. bioRxiv. doi: [10.1101/2021.10.02.462868](https://www.biorxiv.org/content/10.1101/2021.10.02.462868v2).
 <br /><br />
 
 ---

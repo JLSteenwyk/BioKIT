@@ -12,7 +12,7 @@ on alignments, coding sequences, fastq files, and genome files.
 If you found BioKIT useful, please cite *BioKIT: a versatile toolkit
 for processing and analyzing diverse types of sequence data*. bioRxiv. doi: |doiLink|_.
 
-.. _doiLink: https://www.biorxiv.org/content/10.1101/2021.10.02.462868v1
+.. _doiLink: https://www.biorxiv.org/content/10.1101/2021.10.02.462868v2
 .. |doiLink| replace:: 10.1101/2021.10.02.462868
 
 Quick Start
