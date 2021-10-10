@@ -106,9 +106,33 @@ tree of life, and the evolution of human pregnancy. Find out more information at
 
 |
 
+|CGGonçalves|
+
+|GoogleScholarCGGonçalves| |TwitterCGGonçalves| 
+
+Carla is a postdoctoral researcher currently working in the Yeast Genomics Lab at NOVA
+School of Science and Technology (Lisbon, Portugal). Her research broadly focuses on the
+study of the evolution of metabolism in fungi. She has been particularly interested in
+understanding how gene losses and gains have impacted metabolic remodeling and adaptation
+to sugar-rich environments in floral yeasts. Find out more information via
+`Twitter <https://twitter.com/ciggoncalves>`_.
+
+.. |CGGonçalves| image:: ../_static/img/Goncalves.png
+   :width: 35%
+
+.. |GoogleScholarCGGonçalves| image:: ../_static/img/GoogleScholar.png
+   :target: https://scholar.google.com/citations?user=hd5oGB0AAAAJ&hl=en&oi=ao
+   :width: 4.5%
+
+.. |TwitterCGGonçalves| image:: ../_static/img/Twitter.png
+   :target: https://twitter.com/ciggoncalves
+   :width: 4.5%
+
+|
+
 |MEMead|
 
-|GoogleScholarMead| |TwitterMead| 
+|GoogleScholarMead| |GitHubMead| |TwitterMead| 
 
 Matt is a postdoctoral scholar in the lab of Antonis Rokas at Vanderbilt University.
 He is interested in the evolution of pathogenicity, development, and regulatory networks
