@@ -4,7 +4,7 @@ About
 =====
 
 **Bio**\informatics tool\ **KIT** (**BioKIT**) was developed as
-part of `Jacob L. Steenwyk <https://jlsteenwyk.github.io/>`_'s graduate thesis work. 
+part of `Jacob L. Steenwyk <https://jlsteenwyk.com/>`_'s graduate thesis work. 
 
 |
 
