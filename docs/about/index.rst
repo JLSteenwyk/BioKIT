@@ -157,6 +157,33 @@ You can contact Matt or find more information about him via
 
 |
 
+|ALLabella|
+
+|GoogleScholarLabella| |GitHubLabella| |TwitterLabella| 
+
+`Abigail L. LaBella <https://www.abigailleavittlabella.com/>`_  am a postdoctoral scholar at Vanderbilt University in the 
+lab of Dr. Antonis Rokas. Her research uses evolution to understand the relationship between phenotype, genotype, and environment. 
+This includes the evolution of human birth timing and disorders of pregnancy, and the evolution of silent
+codon positions in yeasts. During her research career she has worked with fungi, humans, beetles, fishes,
+limpets, clams, and lizards! For more information visit her `personal website <https://www.abigailleavittlabella.com/>`_.
+
+.. |ALLabella| image:: ../_static/img/Labella.jpg
+   :width: 35%
+
+.. |GoogleScholarLabella| image:: ../_static/img/GoogleScholar.png
+   :target: https://scholar.google.com/citations?user=rxdDvjEAAAAJ&hl=en&oi=ao
+   :width: 4.5%
+
+.. |TwitterLabella| image:: ../_static/img/Twitter.png
+   :target: https://twitter.com/AbbeAtSea
+   :width: 4.5%
+
+.. |GitHubLabella| image:: ../_static/img/Github.png
+   :target: https://github.com/alabella19
+   :width: 4.5%
+
+|
+
 Information about other team members coming soon!
 
 |
