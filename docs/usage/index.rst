@@ -686,8 +686,7 @@ Command line interface: bk_n50
 
 Calculates N50 for a genome assembly.
 
-N50 is the smallest number of contigs whose length sum
-makes up half of the genome size.
+N50 is the sequence length of the shortest contig at 50% of the genome size.
 
 .. code-block:: shell
 
