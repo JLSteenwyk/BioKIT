@@ -130,6 +130,18 @@ to sugar-rich environments in floral yeasts. Find out more information via
 
 |
 
+|DCGoltz|
+
+Dayna is a Vanderbilt University graduate and studied Health Policy. Her interests and
+studies span fields related to medicine, global health, health disparities, and programming.
+She is currently planning to attend medical school beginning in 2022 and hopes to help
+shape the field of medicine and reduce health disparities using an interdisciplinary approach. 
+
+.. |DCGoltz| image:: ../_static/img/DCGoltz.jpg
+   :width: 35%
+
+|
+
 |MEMead|
 
 |GoogleScholarMead| |GitHubMead| |TwitterMead| 
