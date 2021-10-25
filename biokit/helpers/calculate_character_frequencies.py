@@ -11,7 +11,10 @@ def calculate_character_frequencies(fasta: str) -> dict:
     records = SeqIO.parse(fasta, "fasta")
     seqs = []
     for record in records:
-        seqs.append(record.seq._data.upper())
+        if isinstance(record.seq._data.upper(), str):
+            seqs.append(record.seq._data.upper())
+        else:
+            seqs.append(record.seq._data.decode("utf-8").upper())
     res = dict(Counter("".join(seqs)))
 
     return res
