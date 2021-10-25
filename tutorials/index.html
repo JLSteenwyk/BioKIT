@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tutorials &mdash; biokit  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/flavicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Change log" href="../change_log/index.html" />
+    <link rel="prev" title="Usage" href="../usage/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html">
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/index.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#summarize-genome-assembly-metrics">1. Summarize genome assembly metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#summarize-multiple-sequence-alignment-properties">2. Summarize multiple sequence alignment properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#calculate-relative-synonymous-codon-usage-bias">3. Calculate relative synonymous codon usage bias</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#estimating-codon-optimization">4. Estimating codon optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../change_log/index.html">Change log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../other_software/index.html">Other software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frequently_asked_questions/index.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">biokit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Tutorials</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="tutorials">
+<span id="id1"></span><h1>Tutorials<a class="headerlink" href="#tutorials" title="Permalink to this headline"></a></h1>
+<hr class="docutils" />
+<p>BioKIT can be used for a multitude of different types of analyses. Documentation here
+provides a step-by-step outline for how to conduct some of these analyses.</p>
+<ol class="arabic simple">
+<li><p>summarize genome assembly metrics,</p></li>
+<li><p>summarize multiple sequence alignment properties,</p></li>
+<li><p>calculate relative synonymous codon usage (RSCU), and</p></li>
+<li><p>calculate a novel metric for estimating codon optimization, gene-wise RSCU (or gw-RSCU).</p></li>
+</ol>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<section id="summarize-genome-assembly-metrics">
+<h2>1. Summarize genome assembly metrics<a class="headerlink" href="#summarize-genome-assembly-metrics" title="Permalink to this headline"></a></h2>
+<hr class="docutils" />
+<p>BioKIT implements numerous functions that can be used to evaluate diverse properties of a genome assembly.</p>
+<p>In this tutorial, we will examine the contig-level genome assembly of <em>Escherichia coli</em> strain ATCC 11775,
+which was obtained from NCBI in September of 2021. <br/></p>
+<p class="centered">
+<strong>Download test data:
+<a class="reference download internal" download="" href="../_downloads/a6809f690372503e9a440c4f5351157a/GCA_000734955.1_ASM73495v1_genomic.fna"><code class="xref download docutils literal notranslate"><span class="pre">E.</span> <span class="pre">coli</span> <span class="pre">strain</span> <span class="pre">ATCC</span> <span class="pre">11775</span> <span class="pre">genome</span> <span class="pre">assembly</span></code></a></strong></p><p>To calculate all genome assembly metrics, use the following command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit genome_assembly_metrics GCA_000734955.1_ASM73495v1_genomic.fna
+
+<span class="m">4980585</span> Assembly size
+<span class="m">14</span>      L50
+<span class="m">40</span>      L90
+<span class="m">124187</span>  N50
+<span class="m">33720</span>   N90
+<span class="m">0</span>.5062  GC content
+<span class="m">135</span>     Number of scaffolds
+<span class="m">93</span>      Number of large scaffolds
+<span class="m">4968723</span> Sum length of large scaffolds
+<span class="m">382114</span>  Longest scaffold
+<span class="m">0</span>.247   Frequency of A
+<span class="m">0</span>.2468  Frequency of T
+<span class="m">0</span>.2525  Frequency of C
+<span class="m">0</span>.2537  Frequency of G
+</pre></div>
+</div>
+<p>If all metrics are not needed, individual metrics can be calculated. For example,
+calculate N50 of the genome assembly using the following command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit n50 GCA_000734955.1_ASM73495v1_genomic.fna
+
+<span class="m">124187</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="summarize-multiple-sequence-alignment-properties">
+<h2>2. Summarize multiple sequence alignment properties<a class="headerlink" href="#summarize-multiple-sequence-alignment-properties" title="Permalink to this headline"></a></h2>
+<hr class="docutils" />
+<p>The properties of multiple sequence alignments are commonly reported in studies. To
+demonstrate how to calculate diverse properties of multiple sequence alignments, we
+will use the following single gene alignment from <a class="reference external" href="https://journals.asm.org/doi/10.1128/mbio.00925-19?permanently=true">Steenwyk et al. 2019, mBio</a>.</p>
+<p class="centered">
+<strong>Download test data:
+<a class="reference download internal" download="" href="../_downloads/b3b8b32d2254e806d4a91204bf0614ce/Steenwyk_etal_mBio_2019_EOG091N44MS.aln.fa"><code class="xref download docutils literal notranslate"><span class="pre">Steenwyk_etal_mBio_2019_EOG091N44MS.aln.fa</span></code></a></strong></p><p>To calculate diverse properties of the multiple sequence alignment, use the following
+command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit alignment_summary Steenwyk_etal_mBio_2019_EOG091N44MS.aln.fa
+
+General <span class="nv">Characteristics</span>
+<span class="o">=======================</span>
+<span class="m">90</span>      Number of taxa
+<span class="m">624</span>     Alignment length
+<span class="m">517</span>     Parsimony informative sites
+<span class="m">555</span>     Variable sites
+<span class="m">69</span>      Constant sites
+
+Character <span class="nv">Frequencies</span>
+<span class="o">=====================</span>
+T       <span class="m">8527</span>
+G       <span class="m">14835</span>
+C       <span class="m">15482</span>
+A       <span class="m">12966</span>
+-       <span class="m">4350</span>
+</pre></div>
+</div>
+<p>If all metrics are not needed, individual metrics can be calculated. For example,
+the number of constant sites can be calculated using the following command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit constant_sites Steenwyk_etal_mBio_2019_EOG091N44MS.aln.fa
+
+<span class="m">69</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="calculate-relative-synonymous-codon-usage-bias">
+<h2>3. Calculate relative synonymous codon usage bias<a class="headerlink" href="#calculate-relative-synonymous-codon-usage-bias" title="Permalink to this headline"></a></h2>
+<hr class="docutils" />
+<p>Patterns of codon usage can be examined to reveal biases favoring some codons over others.
+In this section, we will calculate patterns of relative synonymous codon usage (RSCU) among
+genes encoded in the genome of <em>Saccharomyces cerevisiae</em>, the model budding yeast.</p>
+<p class="centered">
+<strong>Download test data:
+<a class="reference download internal" download="" href="../_downloads/64dd148fa98c5be91afed219d664da9a/GCA_000146045.2_R64_cds_from_genomic.fna"><code class="xref download docutils literal notranslate"><span class="pre">GCA_000146045.2_R64_cds_from_genomic.fna</span></code></a></strong></p><p>To calculate RSCU, use the following command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit rscu GCA_000146045.2_R64_cds_from_genomic.fna
+
+AGA     <span class="m">2</span>.8425
+GGU     <span class="m">1</span>.8179
+UUG     <span class="m">1</span>.6747
+UUA     <span class="m">1</span>.6645
+CCA     <span class="m">1</span>.6281
+UCU     <span class="m">1</span>.5608
+GUU     <span class="m">1</span>.5466
+GCU     <span class="m">1</span>.4773
+UAA     <span class="m">1</span>.4221
+GAA     <span class="m">1</span>.4014
+AUU     <span class="m">1</span>.3807
+CAA     <span class="m">1</span>.371
+ACU     <span class="m">1</span>.3705
+GAU     <span class="m">1</span>.3024
+CAU     <span class="m">1</span>.2838
+AGG     <span class="m">1</span>.2789
+UCA     <span class="m">1</span>.2736
+UGU     <span class="m">1</span>.2424
+CCU     <span class="m">1</span>.2412
+ACA     <span class="m">1</span>.2315
+AAU     <span class="m">1</span>.1923
+UUU     <span class="m">1</span>.1892
+GCA     <span class="m">1</span>.1865
+AAA     <span class="m">1</span>.1684
+UAU     <span class="m">1</span>.1331
+AUG     <span class="m">1</span>.0
+UGG     <span class="m">1</span>.0
+AGU     <span class="m">0</span>.9759
+UCC     <span class="m">0</span>.9403
+GGA     <span class="m">0</span>.903
+UGA     <span class="m">0</span>.888
+GCC     <span class="m">0</span>.8851
+GUA     <span class="m">0</span>.8705
+UAC     <span class="m">0</span>.8669
+CUA     <span class="m">0</span>.8549
+CGU     <span class="m">0</span>.849
+ACC     <span class="m">0</span>.8452
+AUA     <span class="m">0</span>.8406
+AAG     <span class="m">0</span>.8316
+UUC     <span class="m">0</span>.8108
+GUC     <span class="m">0</span>.8093
+AAC     <span class="m">0</span>.8077
+GGC     <span class="m">0</span>.7898
+CUU     <span class="m">0</span>.7804
+AUC     <span class="m">0</span>.7787
+GUG     <span class="m">0</span>.7736
+UGC     <span class="m">0</span>.7576
+CAC     <span class="m">0</span>.7162
+GAC     <span class="m">0</span>.6976
+UAG     <span class="m">0</span>.6899
+CUG     <span class="m">0</span>.6745
+AGC     <span class="m">0</span>.6667
+CCC     <span class="m">0</span>.6332
+CAG     <span class="m">0</span>.629
+GAG     <span class="m">0</span>.5986
+UCG     <span class="m">0</span>.5827
+ACG     <span class="m">0</span>.5528
+CCG     <span class="m">0</span>.4974
+GGG     <span class="m">0</span>.4892
+GCG     <span class="m">0</span>.4512
+CGA     <span class="m">0</span>.4217
+CGC     <span class="m">0</span>.3587
+CUC     <span class="m">0</span>.351
+CGG     <span class="m">0</span>.2491
+</pre></div>
+</div>
+<p>Values greater than 1 are reflective of codons that are over represented whereas
+values less than 1 are reflective of codons that are under represented and values
+equal to one occur as expected under a neutral expectation. Here, AGA is the most
+over represented codon and CGG is the most under represented codon.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="estimating-codon-optimization">
+<h2>4. Estimating codon optimization<a class="headerlink" href="#estimating-codon-optimization" title="Permalink to this headline"></a></h2>
+<hr class="docutils" />
+<p>Estimates of codon optimization can be used to identify genes that are expressed at
+high levels and are important for organismal ecology. Here, we will calculate gw-RSCU,
+a measure of codon optimization, in the coding sequences of <em>Saccharomyces cerevisiae</em>,
+the model budding yeast.</p>
+<p class="centered">
+<strong>Download test data:
+<a class="reference download internal" download="" href="../_downloads/64dd148fa98c5be91afed219d664da9a/GCA_000146045.2_R64_cds_from_genomic.fna"><code class="xref download docutils literal notranslate"><span class="pre">GCA_000146045.2_R64_cds_from_genomic.fna</span></code></a></strong></p><p>To calculate gw-RSCU, use the following command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit gw_rscu GCA_000146045.2_R64_cds_from_genomic.fna
+
+lcl<span class="p">|</span>BK006935.2_cds_DAA06918.1_1 <span class="m">1</span>.1972  <span class="m">1</span>.0     <span class="m">0</span>.4678
+lcl<span class="p">|</span>BK006935.2_cds_DAA06919.1_2 <span class="m">1</span>.0037  <span class="m">0</span>.9515  <span class="m">0</span>.3458
+lcl<span class="p">|</span>BK006935.2_cds_DAA06920.1_3 <span class="m">1</span>.1878  <span class="m">1</span>.1892  <span class="m">0</span>.3918
+lcl<span class="p">|</span>BK006935.2_cds_DAA06921.1_4 <span class="m">1</span>.1082  <span class="m">0</span>.9759  <span class="m">0</span>.3646
+lcl<span class="p">|</span>BK006935.2_cds_DAA06922.1_5 <span class="m">1</span>.0679  <span class="m">1</span>.0     <span class="m">0</span>.3447
+lcl<span class="p">|</span>BK006935.2_cds_DAA06923.1_6 <span class="m">1</span>.1587  <span class="m">1</span>.1892  <span class="m">0</span>.3668
+lcl<span class="p">|</span>BK006935.2_cds_DAA06924.2_7 <span class="m">1</span>.1429  <span class="m">1</span>.1892  <span class="m">0</span>.5033
+lcl<span class="p">|</span>BK006935.2_cds_DAA06925.1_8 <span class="m">1</span>.2349  <span class="m">1</span>.2315  <span class="m">0</span>.4547
+lcl<span class="p">|</span>BK006935.2_cds_DAA06926.1_9 <span class="m">1</span>.1726  <span class="m">1</span>.2315  <span class="m">0</span>.3764
+...                             ...     ...     ...
+</pre></div>
+</div>
+<p>Here, only the first nine lines of the output are shown. The first column is the
+gene identifier, the second, third, and fourth columns are the mean, median, and
+standard deviation of RSCU values observed in the gene. Our analyses demonstrate
+that the mean gw-RSCU performs best to examine codon optimization. These metrics
+can also be used to examine gene-wise codon usage biases.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../usage/index.html" class="btn btn-neutral float-left" title="Usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../change_log/index.html" class="btn btn-neutral float-right" title="Change log" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021 Jacob L. Steenwyk.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-104875636-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-104875636-1', {
+          'anonymize_ip': false,
+      });
+    </script> 
+
+</body>
+</html>
