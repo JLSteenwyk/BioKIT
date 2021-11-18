@@ -10,12 +10,6 @@
     <a href="https://github.com/jlsteenwyk/biokit/issues">Request Feature</a>
   </p>
     <p align="center">
-        <a href="https://lbesson.mit-license.org/" alt="License">
-            <img src="https://img.shields.io/badge/License-MIT-blue.svg">
-        </a>
-        <a href="https://pypi.org/project/jlsteenwyk-biokit/" alt="PyPI - Python Version">
-            <img src="https://img.shields.io/pypi/pyversions/jlsteenwyk-biokit">
-        </a>
         <a href="https://github.com/JLSteenwyk/BioKIT/actions" alt="Build">
             <img src="https://img.shields.io/github/workflow/status/JLSteenwyk/BioKIT/CI">
         </a>
@@ -28,6 +22,16 @@
         <a href="https://twitter.com/intent/follow?screen_name=jlsteenwyk" alt="Author Twitter">
             <img src="https://img.shields.io/twitter/follow/jlsteenwyk?style=social&logo=twitter"
                 alt="follow on Twitter">
+        </a>
+        <br />
+        <a href="https://lbesson.mit-license.org/" alt="License">
+            <img src="https://img.shields.io/badge/License-MIT-blue.svg">
+        </a>
+        <a href="https://pypi.org/project/jlsteenwyk-biokit/" alt="PyPI - Python Version">
+            <img src="https://img.shields.io/pypi/pyversions/jlsteenwyk-biokit">
+        </a>
+        <a href="https://www.biorxiv.org/content/10.1101/2021.10.02.462868v2">
+          <img src="https://zenodo.org/badge/DOI/10.1101/2021.10.02.462868.svg">
         </a>
     </p>
 </p>
