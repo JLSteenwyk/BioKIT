@@ -990,7 +990,7 @@ Calculate sequence length of each FASTA entry.
 
 .. code-block:: shell
 
-   biokit sequence_complement <fasta>
+   biokit sequence_length <fasta>
 
 Options: |br|
 *<fasta>*: first argument after function name should be a fasta file |br|
