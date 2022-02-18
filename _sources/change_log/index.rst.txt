@@ -8,4 +8,6 @@ Change log
 
 Major changes to BioKIT are summarized here.
 
-Currently, there have been no major changes made to BioKIT.
+*0.0.9*: Functions that look at codons (e.g., RSCU and gw-RSCU) now can account for ambiguous codons.
+For example, codons that have ambiguous characters like the codon "CNN." These codons
+are skipped during analysis of RSCU and gw-RSCU.
