@@ -27,7 +27,8 @@ class GeneWiseRelativeSynonymousCodonUsage(CodingSequence):
                         ._data.upper()
                         .replace("T", "U")
                     )
-                    rscus_curr_gene.append(rscu[codon])
+                    if codon in translation_table.keys():
+                        rscus_curr_gene.append(rscu[codon])
                 temp = []
                 temp.append(seq_record.id)
                 temp.append(round(stat.mean(rscus_curr_gene), 4))

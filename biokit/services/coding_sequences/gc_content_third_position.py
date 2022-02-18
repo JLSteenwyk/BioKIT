@@ -1,5 +1,4 @@
 import re
-import sys
 
 from Bio import SeqIO
 
@@ -27,7 +26,6 @@ class GCContentThirdPosition(CodingSequence):
 
         else:
             third_position_char = []
-            number_of_third_positions = 0
 
             for record in records:
                 third_position_char = []

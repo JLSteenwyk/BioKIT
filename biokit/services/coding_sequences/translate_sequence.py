@@ -24,7 +24,10 @@ class TranslateSequence(CodingSequence):
                             ._data.upper()
                             .replace("T", "U")
                         )
-                        amino_acids.append(translation_table[codon])
+                        if codon in translation_table.keys():
+                            amino_acids.append(translation_table[codon])
+                        else:
+                            amino_acids.append("X")
                 translated_seq_record = SeqRecord(
                     Seq("".join(amino_acids)),
                     id=seq_record.id,

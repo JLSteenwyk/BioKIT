@@ -41,10 +41,11 @@ class CodingSequence(BaseService):
                         ._data.upper()
                         .replace("T", "U")
                     )
-                    if codon in codon_counts.keys():
-                        codon_counts[codon] += 1
-                    else:
-                        codon_counts[codon] = 1
+                    if codon in translation_table.keys():
+                        if codon in codon_counts.keys():
+                            codon_counts[codon] += 1
+                        else:
+                            codon_counts[codon] = 1
 
         # calculate rscu
         rscu = dict()
