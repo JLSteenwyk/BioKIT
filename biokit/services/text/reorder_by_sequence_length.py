@@ -1,6 +1,7 @@
 from Bio import SeqIO
 
 from .base import Text
+from ...helpers.files import read_and_parse_fasta_seqio
 
 
 class ReorderBySequenceLength(Text):
@@ -8,7 +9,7 @@ class ReorderBySequenceLength(Text):
         super().__init__(**self.process_args(args))
 
     def run(self):
-        records = SeqIO.parse(self.fasta, "fasta")
+        records = read_and_parse_fasta_seqio(self.fasta)
 
         record_lens = []
         for seq_record in records:

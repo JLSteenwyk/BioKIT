@@ -1,6 +1,7 @@
 from Bio import SeqIO
 
 from .base import Text
+from ...helpers.files import read_and_parse_fasta_seqio
 
 
 class RemoveShortSequences(Text):
@@ -8,7 +9,7 @@ class RemoveShortSequences(Text):
         super().__init__(**self.process_args(args))
 
     def run(self):
-        record_dict = SeqIO.parse(self.fasta, "fasta")
+        record_dict = read_and_parse_fasta_seqio(self.fasta)
 
         out_records = []
 

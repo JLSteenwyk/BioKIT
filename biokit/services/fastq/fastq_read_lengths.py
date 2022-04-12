@@ -1,4 +1,5 @@
 import statistics as stat
+import sys
 
 from Bio.SeqIO.QualityIO import FastqGeneralIterator
 
@@ -12,9 +13,13 @@ class FastQReadLengths(FastQ):
     def run(self):
         read_lens = []
 
-        with open(self.fastq) as in_handle:
-            for _, seq, _ in FastqGeneralIterator(in_handle):
+        if self.fastq == '-':
+            for _, seq, _ in FastqGeneralIterator(sys.stdin):
                 read_lens.append(len(seq))
+        else:
+            with open(self.fastq) as in_handle:
+                for _, seq, _ in FastqGeneralIterator(in_handle):
+                    read_lens.append(len(seq))
 
         if self.verbose:
             for read_len in read_lens:

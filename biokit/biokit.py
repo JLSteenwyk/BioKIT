@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-from biokit.services.alignment.parsimony_informative_sites import ParsimonyInformativeSites
 import logging
 import sys
 import textwrap
@@ -18,6 +17,7 @@ from .services.alignment import (
     AlignmentSummary,
     ConsensusSequence,
     ConstantSites,
+    ParsimonyInformativeSites,
     PositionSpecificScoreMatrix,
     VariableSites,
 )
@@ -35,7 +35,9 @@ from .services.fastq import (
     FastQReadLengths,
     SubsetPEFastQReads,
     SubsetSEFastQReads,
+    TrimPEAdaptersFastQ,
     TrimPEFastQ,
+    TrimSEAdaptersFastQ,
     TrimSEFastQ,
 )
 
@@ -122,6 +124,17 @@ translation_table_codes = f"""
                 for alanine.
 """  # noqa
 
+adapters_available = f"""
+                Adapaters available
+                =====================================================
+                NexteraPE-PE
+                TruSeq2-PE
+                TruSeq2-SE
+                TruSeq3-PE-2
+                TruSeq3-PE
+                TruSeq3-SE
+"""  # noqa
+
 
 class Biokit(object):
     help_header = fr"""
@@ -201,7 +214,7 @@ class Biokit(object):
                     - calculate the GC content of the third position
                       among coding sequences
 
-                gene_wise_relative_synonymous_codon_usage (alias: gene_wise_rscu; gw_rscu)
+                gene_wise_relative_synonymous_codon_usage (alias: gene_wise_rscu; gw_rscu; grscu)
                     - calculates relative synonymous codon usage
                       that has been adapted for single genes to
                       assess codon usage bias on individual genes
@@ -225,9 +238,15 @@ class Biokit(object):
                 subset_se_fastq_reads (alias: subset_se_fastq)
                     - subset single-end fastq reads
 
+                trim_pe_adapters_fastq
+                    - trim adapters from paired-end fastq reads
+
                 trim_pe_fastq
                     - quality trim paired-end fastq reads
                       and maintain pairing information
+
+                trim_se_adapters_fastq
+                    - trim adapters from single-end fastq reads
 
                 trim_se_fastq
                     - quality trim single-end fastq reads
@@ -350,7 +369,7 @@ class Biokit(object):
             return self.gc_content_second_position(argv)
         elif command in ["gc3"]:
             return self.gc_content_third_position(argv)
-        elif command in ["gene_wise_rscu", "gw_rscu"]:
+        elif command in ["gene_wise_rscu", "gw_rscu", "grscu"]:
             return self.gene_wise_relative_synonymous_codon_usage(argv)
         elif command in ["rscu"]:
             return self.relative_synonymous_codon_usage(argv)
@@ -363,8 +382,12 @@ class Biokit(object):
             return self.subset_pe_fastq_reads(argv)
         elif command in ["subset_se_fastq"]:
             return self.subset_se_fastq_reads(argv)
+        elif command in ["trim_pe_adapters_fastq_reads"]:
+            return self.trim_pe_adapters_fastq(argv)
         elif command in ["trim_pe_fastq_reads"]:
             return self.trim_pe_fastq(argv)
+        elif command in ["trim_se_adapters_fastq_reads"]:
+            return self.trim_se_adapters_fastq(argv)
         elif command in ["trim_se_fastq_reads"]:
             return self.trim_se_fastq(argv)
         # aliases for genomes
@@ -634,18 +657,22 @@ class Biokit(object):
                   bk_constant_sites, bk_con_sites
 
                 Usage:
-                biokit constant_sites <fasta>
+                biokit constant_sites <fasta> [-v/--verbose]
 
                 Options
                 =====================================================
                 <fasta>                     first argument after 
                                             function name should be
                                             a fasta file
+
+                 -v/--verbose               optional argument to print
+                                            site-by-site categorization
                 """  # noqa
             ),
         )
 
         parser.add_argument("fasta", type=str, help=SUPPRESS)
+        parser.add_argument("-v", "--verbose", action="store_true", required=False, help=SUPPRESS)
         args = parser.parse_args(argv)
         ConstantSites(args).run()
 
@@ -665,6 +692,9 @@ class Biokit(object):
                 Parsimony informative sites are defined as a
                 site in an alignment with at least two nucleotides
                 or amino acids that occur at least twice.
+
+                To obtain site-by-site summary of an alignment, 
+                use the -v/--verbose option. 
                 
                 Aliases:
                   parsimony_informative_sites, pi_sites, pis
@@ -672,18 +702,22 @@ class Biokit(object):
                   bk_parsimony_informative_sites, bk_pi_sites, bk_pis
 
                 Usage:
-                biokit parsimony_informative_sites <fasta>
+                biokit parsimony_informative_sites <fasta> [-v/--verbose]
 
                 Options
                 =====================================================
                 <fasta>                     first argument after 
                                             function name should be
                                             a fasta file
+                
+                 -v/--verbose               optional argument to print
+                                            site-by-site categorization
                 """  # noqa
             ),
         )
 
         parser.add_argument("fasta", type=str, help=SUPPRESS)
+        parser.add_argument("-v", "--verbose", action="store_true", required=False, help=SUPPRESS)
         args = parser.parse_args(argv)
         ParsimonyInformativeSites(args).run()
 
@@ -748,18 +782,22 @@ class Biokit(object):
                   bk_variable_sites, bk_var_sites, bk_vs
 
                 Usage:
-                biokit variable_sites <fasta>
+                biokit variable_sites <fasta> [-v/--verbose]
 
                 Options
                 =====================================================
                 <fasta>                     first argument after 
                                             function name should be
                                             a fasta file
+
+                 -v/--verbose               optional argument to print
+                                            site-by-site categorization
                 """  # noqa
             ),
         )
 
         parser.add_argument("fasta", type=str, help=SUPPRESS)
+        parser.add_argument("-v", "--verbose", action="store_true", required=False, help=SUPPRESS)
         args = parser.parse_args(argv)
         VariableSites(args).run()
 
@@ -922,9 +960,9 @@ class Biokit(object):
                 resulting amino acid in the second column.
 
                 Aliases:
-                  gene_wise_relative_synonymous_codon_usage; gene_wise_rscu; gw_rscu
+                  gene_wise_relative_synonymous_codon_usage; gene_wise_rscu; gw_rscu; grscu
                 Command line interfaces: 
-                  bk_gene_wise_relative_synonymous_codon_usage; bk_gene_wise_rscu; bk_gw_rscu
+                  bk_gene_wise_relative_synonymous_codon_usage; bk_gene_wise_rscu; bk_gw_rscu; bk_grscu
                 
                 Usage:
                 biokit gene_wise_relative_synonymous_codon_usage <fasta> 
@@ -1220,6 +1258,60 @@ class Biokit(object):
         SubsetSEFastQReads(args).run()
 
     @staticmethod
+    def trim_pe_adapters_fastq(argv):
+        parser = ArgumentParser(
+            add_help=True,
+            usage=SUPPRESS,
+            formatter_class=RawDescriptionHelpFormatter,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+
+                Trim adapters from paired-end FastQ data.
+
+                FASTQ data will be trimmed according to
+                exact match to known adapter sequences.
+                
+                Output file has the suffix "_adapter_removed.fq"
+                or can be named by the user with the
+                output_file argument.
+
+                Aliases:
+                  trim_pe_adapters_fastq_reads, trim_pe_adapters_fastq
+                Command line interfaces: 
+                  bk_trim_pe_adapters_fastq_reads, bk_trim_pe_adapters_fastq
+
+                Usage:
+                biokit trim_pe_adapters_fastq <fastq>
+                [-a/--adapters TruSeq2-PE -l/--length 20]
+                
+
+                Options
+                =====================================================
+                <fastq>                     first argument after 
+                                            function name should be
+                                            a fastq file
+
+                -a/--adapters               adapter sequences to trim.
+                                            Default: TruSeq2-PE
+                
+                -l/--length                 minimum length of read 
+                                            to be kept. Default: 20
+
+                {adapters_available}
+                
+                """  # noqa
+            ),
+        )
+
+        parser.add_argument("fastq1", type=str, help=SUPPRESS)
+        parser.add_argument("fastq2", type=str, help=SUPPRESS)
+        parser.add_argument("-a", "--adapters", type=str, required=False, help=SUPPRESS)
+        parser.add_argument("-l", "--length", type=str, required=False, help=SUPPRESS)
+        args = parser.parse_args(argv)
+        TrimPEAdaptersFastQ(args).run()
+
+    @staticmethod
     def trim_pe_fastq(argv):
         parser = ArgumentParser(
             add_help=True,
@@ -1280,6 +1372,63 @@ class Biokit(object):
         parser.add_argument("-l", "--length", type=str, required=False, help=SUPPRESS)
         args = parser.parse_args(argv)
         TrimPEFastQ(args).run()
+
+    @staticmethod
+    def trim_se_adapters_fastq(argv):
+        parser = ArgumentParser(
+            add_help=True,
+            usage=SUPPRESS,
+            formatter_class=RawDescriptionHelpFormatter,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+
+                Trim adapters from single-end FastQ data.
+
+                FASTQ data will be trimmed according to
+                exact match to known adapter sequences.
+                
+                Output file has the suffix "_adapter_removed.fq"
+                or can be named by the user with the
+                output_file argument.
+
+                Aliases:
+                  trim_se_adapters_fastq_reads, trim_se_adapters_fastq
+                Command line interfaces: 
+                  bk_trim_se_adapters_fastq_reads, bk_trim_se_adapters_fastq
+
+                Usage:
+                biokit trim_se_adapters_fastq <fastq>
+                [-a/--adapters TruSeq2-SE -l/--length 20]
+
+                Options
+                =====================================================
+                <fastq>                     first argument after 
+                                            function name should be
+                                            a fastq file
+
+                -a/--adapters               adapter sequences to trim.
+                                            Default: TruSeq2-SE
+                
+                -l/--length                 minimum length of read 
+                                            to be kept. Default: 20
+
+                -o/--output_file            output file name
+
+                {adapters_available}
+                
+                """  # noqa
+            ),
+        )
+
+        parser.add_argument("fastq", type=str, help=SUPPRESS)
+        parser.add_argument("-a", "--adapters", type=str, required=False, help=SUPPRESS)
+        parser.add_argument("-l", "--length", type=str, required=False, help=SUPPRESS)
+        parser.add_argument(
+            "-o", "--output_file", type=str, required=False, help=SUPPRESS
+        )
+        args = parser.parse_args(argv)
+        TrimSEAdaptersFastQ(args).run()
 
     @staticmethod
     def trim_se_fastq(argv):
@@ -2273,8 +2422,16 @@ def subset_se_fastq_reads(argv=None):
     Biokit.subset_se_fastq_reads(sys.argv[1:])
 
 
+def trim_pe_adapters_fastq(argv=None):
+    Biokit.trim_pe_adapters_fastq(sys.argv[1:])
+
+
 def trim_pe_fastq(argv=None):
     Biokit.trim_pe_fastq(sys.argv[1:])
+
+
+def trim_se_adapters_fastq(argv=None):
+    Biokit.trim_se_adapters_fastq(sys.argv[1:])
 
 
 def trim_se_fastq(argv=None):

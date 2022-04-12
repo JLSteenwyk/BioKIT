@@ -21,7 +21,7 @@ class TestVariableSites(object):
 
     @patch("builtins.print")
     def test_variable_sites_simple(self, mocked_print):
-        expected_result = 4
+        expected_result = 3
 
         testargs = [
             "biokit",
@@ -34,7 +34,7 @@ class TestVariableSites(object):
 
     @patch("builtins.print")
     def test_variable_sites_alias0(self, mocked_print):
-        expected_result = 4
+        expected_result = 3
 
         testargs = [
             "biokit",
@@ -47,7 +47,7 @@ class TestVariableSites(object):
 
     @patch("builtins.print")
     def test_variable_sites_alias1(self, mocked_print):
-        expected_result = 4
+        expected_result = 3
 
         testargs = [
             "biokit",

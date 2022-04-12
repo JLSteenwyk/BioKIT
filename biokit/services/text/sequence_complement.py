@@ -1,6 +1,5 @@
-from Bio import SeqIO
-
 from .base import Text
+from ...helpers.files import read_and_parse_fasta_seqio
 
 
 class SequenceComplement(Text):
@@ -8,7 +7,7 @@ class SequenceComplement(Text):
         super().__init__(**self.process_args(args))
 
     def run(self):
-        records = SeqIO.parse(self.fasta, "fasta")
+        records = read_and_parse_fasta_seqio(self.fasta)
         if not self.reverse:
             for seq_record in records:
                 print(f">{seq_record.id}\n{seq_record.seq.complement()}")

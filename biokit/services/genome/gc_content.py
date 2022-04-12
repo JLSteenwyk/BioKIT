@@ -1,8 +1,7 @@
 import re
 
-from Bio import SeqIO
-
 from .base import Genome
+from ...helpers.files import read_and_parse_fasta_seqio
 
 
 class GCContent(Genome):
@@ -11,7 +10,7 @@ class GCContent(Genome):
 
     def run(self):
         # create biopython object of sequences
-        records = SeqIO.parse(self.fasta, "fasta")
+        records = read_and_parse_fasta_seqio(self.fasta)
 
         # initialize and populate dict for
         # holding the entry sequences

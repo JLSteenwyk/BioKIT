@@ -28,8 +28,8 @@ class TestAlignmentSummary(object):
             =======================
             5\tNumber of taxa
             6\tAlignment length
-            2\tParsimony informative sites
-            4\tVariable sites
+            3\tParsimony informative sites
+            3\tVariable sites
             1\tConstant sites
 
             Character Frequencies
@@ -58,8 +58,8 @@ class TestAlignmentSummary(object):
             =======================
             5\tNumber of taxa
             6\tAlignment length
-            2\tParsimony informative sites
-            4\tVariable sites
+            3\tParsimony informative sites
+            3\tVariable sites
             1\tConstant sites
 
             Character Frequencies
@@ -89,8 +89,8 @@ class TestAlignmentSummary(object):
             8\tNumber of taxa
             17143\tAlignment length
             3767\tParsimony informative sites
-            6619\tVariable sites
-            10524\tConstant sites
+            3767\tVariable sites
+            13210\tConstant sites
 
             Character Frequencies
             =====================

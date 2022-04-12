@@ -12,9 +12,13 @@ class ParsimonyInformativeSites(Alignment):
         # alignment length
         aln_len = alignment.get_alignment_length()
 
-        pis, _, _ = self.determine_pis_vs_cs(alignment, aln_len)
+        pis, _, _, site_summary = self.determine_pis_vs_cs(alignment, aln_len)
 
-        print(pis)
+        if self.verbose:
+            for i in site_summary:
+                print(f"{i[0]}\t{i[1]}")
+        else:
+            print(pis)
 
     def process_args(self, args):
-        return dict(fasta=args.fasta)
+        return dict(fasta=args.fasta, verbose=args.verbose)

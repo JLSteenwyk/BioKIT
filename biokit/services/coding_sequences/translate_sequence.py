@@ -3,6 +3,7 @@ from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 
 from .base import CodingSequence
+from ...helpers.files import read_and_parse_fasta_seqio
 
 
 class TranslateSequence(CodingSequence):
@@ -12,7 +13,7 @@ class TranslateSequence(CodingSequence):
     def run(self):
         # get the translation table as a dictionary
         translation_table = self.read_translation_table(self.translation_table)
-        records = SeqIO.parse(self.fasta, "fasta")
+        records = read_and_parse_fasta_seqio(self.fasta)
 
         with open(self.output_file_path, "w") as output_file_path:
             for seq_record in records:
@@ -39,9 +40,12 @@ class TranslateSequence(CodingSequence):
 
     def process_args(self, args):
         if args.output is None:
-            output_file_path = f"{args.fasta}.translated.fa"
+            output_file_path = f"{args.fasta}.translated.fa"            
         else:
             output_file_path = f"{args.output}"
+
+        if output_file_path == "-.translated.fa":
+            output_file_path = "translated_seq.fa"
 
         if args.translation_table is None:
             translation_table = "1"

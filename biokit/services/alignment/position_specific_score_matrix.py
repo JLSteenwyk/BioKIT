@@ -1,7 +1,7 @@
-from Bio import AlignIO
 from Bio.Align import AlignInfo
 
 from .base import Alignment
+from ...helpers.files import read_alignment_alignio
 
 
 class PositionSpecificScoreMatrix(Alignment):
@@ -9,7 +9,7 @@ class PositionSpecificScoreMatrix(Alignment):
         super().__init__(**self.process_args(args))
 
     def run(self):
-        alignment = AlignIO.read(self.fasta, "fasta")
+        alignment = read_alignment_alignio(self.fasta)
         for seqrecord in alignment:
             seqrecord.seq._data = seqrecord.seq._data.upper()
             seqrecord.seq._data = seqrecord.seq._data.replace("?", "-")

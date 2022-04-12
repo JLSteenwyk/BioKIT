@@ -193,10 +193,11 @@ acid sequence (excluding gaps) among all taxa.
 
 .. code-block:: shell
 
-	biokit constant_sites <fasta>
+	biokit constant_sites <fasta> [-v/\\-\\-verbose]
 
 Options: |br|
 *<alignment>*: first argument after function name should be an alignment file 
+*-v/\\-\\-verbose*: optional argument to print site-by-site categorization
 
 |
 
@@ -214,10 +215,11 @@ or amino acids that occur at least twice.
 
 .. code-block:: shell
 
-	biokit parsimony_informative_sites <fasta>
+	biokit parsimony_informative_sites <fasta> [-v/\\-\\-verbose]
 
 Options: |br|
-*<alignment>*: first argument after function name should be an alignment file 
+*<alignment>*: first argument after function name should be an alignment file |br|
+*-v/\\-\\-verbose*: optional argument to print site-by-site categorization
 
 |
 
@@ -252,10 +254,11 @@ acid characters among all taxa.
 
 .. code-block:: shell
 
-	biokit variable_sites <fasta>
+	biokit variable_sites <fasta> [-v/\\-\\-verbose]
 
 Options: |br|
 *<alignment>*: first argument after function name should be an alignment file 
+*-v/\\-\\-verbose*: optional argument to print site-by-site categorization
 
 |
 
@@ -324,25 +327,25 @@ Options: |br|
 
 |
 
-Gene-wise relative synonymous codon usage
-#########################################
-Function names: gene_wise_relative_synonymous_codon_usage; gene_wise_rscu; gw_rscu |br|
-Command line interface: bk_gene_wise_relative_synonymous_codon_usage; bk_gene_wise_rscu; bk_gw_rscu
+Gene-wise relative synonymous codon usage (gRSCU)
+#################################################
+Function names: gene_wise_relative_synonymous_codon_usage; gene_wise_rscu; gw_rscu; grscu |br|
+Command line interface: bk_gene_wise_relative_synonymous_codon_usage; bk_gene_wise_rscu; bk_gw_rscu; bk_grscu
 
-Calculate gene-wise relative synonymous codon usage (gw-RSCU).
+Calculate gene-wise relative synonymous codon usage (gRSCU).
 
 Codon usage bias examines biases for codon usage of
 a particular gene. We adapted RSCU to be applied to
 individual genes rather than only codons. Specifically,
-gw-RSCU is the mean (or median) RSCU value observed
+gRSCU is the mean (or median) RSCU value observed
 in a particular gene. This provides insight into how
 codon usage bias influences codon usage for a particular
 gene. This function also outputs the standard deviation
 of RSCU values for a given gene.
 
 The output is col 1: the gene identifier; col 2: the
-gw-RSCU based on the mean RSCU value observed in a gene;
-col 3: the gw-RSCU based on the median RSCU value observed
+gRSCU based on the mean RSCU value observed in a gene;
+col 3: the gRSCU based on the median RSCU value observed
 in a gene; and the col 4: the standard deviation of
 RSCU values observed in a gene.
 
@@ -509,6 +512,41 @@ Options: |br|
 
 |
 
+Trim PE adapters FASTQ reads
+############################
+Function names: trim_pe_adapters_fastq_reads; trim_pe_adapters_fastq |br|
+Command line interface: bk_trim_pe_adapters_fastq_reads; bk_trim_pe_adapters_fastq
+
+Trim adapters from paired-end FastQ data.
+
+FASTQ data will be trimmed according to
+exact match to known adapter sequences.
+
+Output file has the suffix "_adapter_removed.fq"
+or can be named by the user with the
+output_file argument.
+
+.. code-block:: shell
+
+   biokit trim_pe_adapters_fastq_reads <fastq1> <fastq2> [-a/--adapters TruSeq2-PE -l/--length 20]
+
+
+Adapaters available: |br|
+NexteraPE-PE |br|
+TruSeq2-PE |br|
+TruSeq2-SE |br|
+TruSeq3-PE-2 |br|
+TruSeq3-PE |br|
+TruSeq3-SE
+
+Options: |br|
+*<fastq1>*: first argument after function name should be the name of one of the fastq files |br|
+*<fastq2>*: first argument after function name should be the name of the other fastq file |br|
+*-a/\\-\\-adapters*: adapter sequences to trim. Default: TruSeq2-PE |br|
+*-l/\\-\\-length*: minimum length of read to be kept. Default: 20
+
+|
+
 Trim PE FASTQ reads
 ###################
 Function names: trim_pe_fastq_reads; trim_pe_fastq |br|
@@ -535,6 +573,32 @@ Options: |br|
 *<fastq2>*: first argument after function name should be the name of the other fastq file |br|
 *-m/\\-\\-minimum*: minimum quality of read to be kept. Default: 20 |br|
 *-l/\\-\\-length*: minimum length of read to be kept. Default: 20
+
+|
+
+Trim SE adapters FASTQ reads
+############################
+Function names: trim_se_adapters_fastq_reads; trim_se_adapters_fastq |br|
+Command line interface: bk_trim_se_adapters_fastq_reads; bk_trim_se_adapters_fastq
+
+Trim adapters from single-end FastQ data.
+
+FASTQ data will be trimmed according to
+exact match to known adapter sequences.
+
+Output file has the suffix "_adapter_removed.fq"
+or can be named by the user with the
+output_file argument.
+
+.. code-block:: shell
+
+   biokit trim_se_adapters_fastq_reads <fastq> [-a/--adapters TruSeq2-SE -l/--length 20]
+
+Options: |br|
+*<fastq>*: first argument after function name should be the fastq file |br|
+*-a/\\-\\-adapters*: adapter sequences to trim. Default: TruSeq2-SE |br|
+*-l/\\-\\-length*: minimum length of read to be kept. Default: 20 |br|
+*-o/\\-\\-output_file*: name of the output file of trimmed reads
 
 |
 

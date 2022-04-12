@@ -1,2 +1,3 @@
 include biokit/recoding_tables/*
 include biokit/tables/*
+include biokit/adapters/*

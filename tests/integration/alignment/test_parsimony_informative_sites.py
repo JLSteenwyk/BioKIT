@@ -21,7 +21,7 @@ class TestParsimonyInformativeSites(object):
 
     @patch("builtins.print")
     def test_parsimony_informative_sites_simple(self, mocked_print):
-        expected_result = 2
+        expected_result = 3
 
         testargs = [
             "biokit",
@@ -34,7 +34,7 @@ class TestParsimonyInformativeSites(object):
 
     @patch("builtins.print")
     def test_parsimony_informative_sites_alias0(self, mocked_print):
-        expected_result = 2
+        expected_result = 3
 
         testargs = [
             "biokit",
@@ -47,7 +47,7 @@ class TestParsimonyInformativeSites(object):
 
     @patch("builtins.print")
     def test_parsimony_informative_sites_alias1(self, mocked_print):
-        expected_result = 2
+        expected_result = 3
 
         testargs = [
             "biokit",

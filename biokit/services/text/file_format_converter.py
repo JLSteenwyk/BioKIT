@@ -1,3 +1,5 @@
+import sys
+
 from Bio import SeqIO
 
 from .base import Text
@@ -44,8 +46,12 @@ class FileFormatConverter(Text):
             )
 
     def process_args(self, args):
+        if args.input_file == '-':
+            input_file = sys.stdin
+        else:
+            input_file = args.input_file
         return dict(
-            input_file=args.input_file,
+            input_file=input_file,
             output_file_format=args.output_file_format,
             input_file_format=args.input_file_format,
             output_file=args.output_file,

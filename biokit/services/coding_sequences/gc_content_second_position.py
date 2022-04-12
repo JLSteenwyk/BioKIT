@@ -1,8 +1,7 @@
 import re
 
-from Bio import SeqIO
-
 from .base import CodingSequence
+from ...helpers.files import read_and_parse_fasta_seqio
 
 
 class GCContentSecondPosition(CodingSequence):
@@ -11,7 +10,7 @@ class GCContentSecondPosition(CodingSequence):
 
     def run(self):
         # create biopython object of sequences
-        records = SeqIO.parse(self.fasta, "fasta")
+        records = read_and_parse_fasta_seqio(self.fasta)
 
         if self.verbose:
             for record in records:

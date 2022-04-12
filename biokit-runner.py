@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """Convenience wrapper for running biokit directly from source tree."""
-import sys
+import sys  # noqa
 
 from biokit.biokit import Biokit
 

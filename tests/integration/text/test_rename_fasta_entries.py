@@ -96,12 +96,6 @@ class TestRenameFastaEntries(object):
 
     @patch("builtins.print")
     def test_rename_fasta_entries_incorrect_input_alignment_file(self, mocked_print):
-        expected_call = textwrap.dedent(
-            f"""
-            {here.parent.parent.parent}/sample_files/simple. corresponds to no such file or directory.
-            Please double check pathing and filenames
-            """
-        )
         testargs = [
             "biokit",
             "rename_fasta_entries",
@@ -111,13 +105,14 @@ class TestRenameFastaEntries(object):
         ]
 
         with patch.object(sys, "argv", testargs):
-            with pytest.raises(SystemExit) as pytest_wrapped_e:
+            with pytest.raises(Exception, match=r".*Input file could not be read.*") as pytest_wrapped_e:
                 Biokit()
 
-        assert pytest_wrapped_e.type == SystemExit
-        mocked_print.assert_has_calls([
-            call(expected_call),
-        ])
+        assert pytest_wrapped_e.type == Exception
+        # mocked_print.assert_has_calls([
+        #     call(expected_call),
+        # ])
+
 
     @patch("builtins.print")
     def test_rename_fasta_entries_incorrect_idmap(self, mocked_print):

@@ -25,7 +25,7 @@ class AlignmentSummary(Alignment):
         alignment_length = alignment.get_alignment_length()
 
         # number of parsimony informative, variable, and constant sites
-        pis, vs, cs = self.determine_pis_vs_cs(alignment, alignment_length)
+        pis, vs, cs, _ = self.determine_pis_vs_cs(alignment, alignment_length)
 
         # print out results
         self.print_alignment_summary(

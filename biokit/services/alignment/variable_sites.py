@@ -12,9 +12,13 @@ class VariableSites(Alignment):
         # alignment length
         aln_len = alignment.get_alignment_length()
 
-        _, vs, _ = self.determine_pis_vs_cs(alignment, aln_len)
+        _, vs, _, site_summary = self.determine_pis_vs_cs(alignment, aln_len)
 
-        print(vs)
+        if self.verbose:
+            for i in site_summary:
+                print(f"{i[0]}\t{i[1]}")
+        else:
+            print(vs)
 
     def process_args(self, args):
-        return dict(fasta=args.fasta)
+        return dict(fasta=args.fasta, verbose=args.verbose)

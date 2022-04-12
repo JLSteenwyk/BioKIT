@@ -1,9 +1,9 @@
 import re
 
-from Bio import AlignIO
 from Bio.Align import AlignInfo
 
 from .base import Alignment
+from ...helpers.files import read_alignment_alignio
 
 
 class ConsensusSequence(Alignment):
@@ -11,7 +11,7 @@ class ConsensusSequence(Alignment):
         super().__init__(**self.process_args(args))
 
     def run(self):
-        alignment = AlignIO.read(self.fasta, "fasta")
+        alignment = read_alignment_alignio(self.fasta)
         summary_align = AlignInfo.SummaryInfo(alignment)
 
         if not self.ambiguous_character:

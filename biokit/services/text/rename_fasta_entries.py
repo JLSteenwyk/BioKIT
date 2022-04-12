@@ -4,6 +4,7 @@ import textwrap
 from Bio import SeqIO
 
 from .base import Text
+from ...helpers.files import read_and_parse_fasta_seqio
 
 
 class RenameFastaEntries(Text):
@@ -12,7 +13,7 @@ class RenameFastaEntries(Text):
 
     def run(self):
         # create biopython object of sequences
-        records = SeqIO.parse(self.fasta, "fasta")
+        records = read_and_parse_fasta_seqio(self.fasta)
 
         # save idmap to a dictionary
         idmap = self.idmap_to_dictionary(self.idmap)
@@ -25,6 +26,9 @@ class RenameFastaEntries(Text):
             output_file_path = f"{args.fasta}.renamed.fa"
         else:
             output_file_path = f"{args.output}"
+
+        if output_file_path == '-.renamed.fa':
+            output_file_path = 'renamed.fa'
 
         return dict(
             fasta=args.fasta, idmap=args.idmap, output_file_path=output_file_path

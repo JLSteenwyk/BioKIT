@@ -1,8 +1,7 @@
 import re
 
-from Bio import SeqIO
-
 from .base import CodingSequence
+from ...helpers.files import read_and_parse_fasta_seqio
 
 
 class GCContentFirstPosition(CodingSequence):
@@ -11,7 +10,7 @@ class GCContentFirstPosition(CodingSequence):
 
     def run(self):
         # create biopython object of sequences
-        records = SeqIO.parse(self.fasta, "fasta")
+        records = read_and_parse_fasta_seqio(self.fasta)
 
         if self.verbose:
             for record in records:
@@ -48,5 +47,5 @@ class GCContentFirstPosition(CodingSequence):
     def get_first_position_char(self, record, first_position_char: list):
         length_of_coding_seq = len(record._seq)
         for i in range(0, length_of_coding_seq, 3):
-            first_position_char.append(record._seq[i : i + 3][0])
+            first_position_char.append(record._seq[i: i + 3][0])
         return first_position_char

@@ -1,6 +1,5 @@
-from Bio import SeqIO
-
 from .base import Text
+from ...helpers.files import read_and_parse_fasta_seqio
 
 
 class SingleLineToMultipleLineFasta(Text):
@@ -9,7 +8,7 @@ class SingleLineToMultipleLineFasta(Text):
 
     def run(self):
         # create biopython object of sequences
-        records = SeqIO.parse(self.fasta, "fasta")
+        records = read_and_parse_fasta_seqio(self.fasta)
 
         res_records = []
         for record in records:

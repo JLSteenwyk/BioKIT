@@ -1,5 +1,6 @@
-from Bio import SeqIO
 from collections import Counter
+
+from ..helpers.files import read_and_parse_fasta_seqio
 
 
 def calculate_character_frequencies(fasta: str) -> dict:
@@ -8,7 +9,7 @@ def calculate_character_frequencies(fasta: str) -> dict:
     FASTA file
     """
     # get contig lengths
-    records = SeqIO.parse(fasta, "fasta")
+    records = read_and_parse_fasta_seqio(fasta)
     seqs = []
     for record in records:
         if isinstance(record.seq._data.upper(), str):

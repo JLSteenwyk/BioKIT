@@ -1,6 +1,7 @@
 from Bio import SeqIO
 
 from ..base import BaseService
+from ...helpers.files import read_and_parse_fasta_seqio
 
 
 class Genome(BaseService):
@@ -20,7 +21,7 @@ class Genome(BaseService):
         calculate L50 of a genome assembly
         """
         # get contig lengths
-        records = SeqIO.parse(self.fasta, "fasta")
+        records = read_and_parse_fasta_seqio(self.fasta)
         contig_lens = []
         for seq_record in records:
             contig_lens.append(len(seq_record))
@@ -39,14 +40,13 @@ class Genome(BaseService):
             l50 += 1
             if n50 >= threshold:
                 return l50
-                break
 
     def calc_l90(self):
         """
         calculate L90 of a genome assembly
         """
         # get contig lengths
-        records = SeqIO.parse(self.fasta, "fasta")
+        records = read_and_parse_fasta_seqio(self.fasta)
         contig_lens = []
         for seq_record in records:
             contig_lens.append(len(seq_record))
@@ -72,7 +72,7 @@ class Genome(BaseService):
         calculate n50 of a genome assembly
         """
         # get contig lengths
-        records = SeqIO.parse(self.fasta, "fasta")
+        records = read_and_parse_fasta_seqio(self.fasta)
         contig_lens = []
         for seq_record in records:
             contig_lens.append(len(seq_record))
@@ -96,7 +96,7 @@ class Genome(BaseService):
         calculate n90 of a genome assembly
         """
         # get contig lengths
-        records = SeqIO.parse(self.fasta, "fasta")
+        records = read_and_parse_fasta_seqio(self.fasta)
         contig_lens = []
         for seq_record in records:
             contig_lens.append(len(seq_record))
@@ -117,7 +117,7 @@ class Genome(BaseService):
 
     def longest_scaffold(self):
         # get contig lengths
-        records = SeqIO.parse(self.fasta, "fasta")
+        records = read_and_parse_fasta_seqio(self.fasta)
         max_len = 0
         for seq_record in records:
             if len(seq_record) > max_len:
@@ -130,7 +130,7 @@ class Genome(BaseService):
         """
         calculate the number of large scaffolds
         """
-        records = SeqIO.parse(self.fasta, "fasta")
+        records = read_and_parse_fasta_seqio(self.fasta)
         cnt = 0
         total_len = 0
         for seq_record in records:
@@ -145,9 +145,9 @@ class Genome(BaseService):
         count number of scaffolds
         """
         # get contig lengths
-        records = SeqIO.parse(self.fasta, "fasta")
+        records = read_and_parse_fasta_seqio(self.fasta)
         cnt = 0
-        for record in records:
+        for _ in records:
             cnt += 1
         return cnt
 
@@ -156,7 +156,7 @@ class Genome(BaseService):
         sum of scaffold lengths
         """
         # get contig lengths
-        records = SeqIO.parse(self.fasta, "fasta")
+        records = read_and_parse_fasta_seqio(self.fasta)
         cnt = 0
         for record in records:
             cnt += len(record)

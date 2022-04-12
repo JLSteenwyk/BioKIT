@@ -33,6 +33,7 @@ class TrimSEFastQ(FastQ):
                     if int(base_quality) < self.minimum:
                         trim_idx = i
                         break
+
                 # if there is no base below the quality threshold
                 # save the whole read
                 if not trim_idx and trim_idx != 0:

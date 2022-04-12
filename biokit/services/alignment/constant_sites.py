@@ -12,9 +12,13 @@ class ConstantSites(Alignment):
         # alignment length
         aln_len = alignment.get_alignment_length()
 
-        _, _, cs = self.determine_pis_vs_cs(alignment, aln_len)
+        _, _, cs, site_summary = self.determine_pis_vs_cs(alignment, aln_len)
 
-        print(cs)
+        if self.verbose:
+            for i in site_summary:
+                print(f"{i[0]}\t{i[1]}")
+        else:
+            print(cs)
 
     def process_args(self, args):
-        return dict(fasta=args.fasta)
+        return dict(fasta=args.fasta, verbose=args.verbose)
