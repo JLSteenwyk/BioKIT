@@ -64,7 +64,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#gc-content-first-codon-position">GC content first codon position</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gc-content-second-codon-position">GC content second codon position</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gc-content-third-codon-position">GC content third codon position</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#gene-wise-relative-synonymous-codon-usage">Gene-wise relative synonymous codon usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gene-wise-relative-synonymous-codon-usage-grscu">Gene-wise relative synonymous codon usage (gRSCU)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#relative-synonymous-codon-usage">Relative synonymous codon usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#translate-sequence">Translate sequence</a></li>
 </ul>
@@ -73,7 +73,9 @@
 <li class="toctree-l3"><a class="reference internal" href="#fastq-read-lengths">FASTQ read lengths</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#subset-pe-fastq-reads">Subset PE FASTQ reads</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#subset-se-fastq-reads">Subset SE FASTQ reads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#trim-pe-adapters-fastq-reads">Trim PE adapters FASTQ reads</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#trim-pe-fastq-reads">Trim PE FASTQ reads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#trim-se-adapters-fastq-reads">Trim SE adapters FASTQ reads</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#trim-se-fastq-reads">Trim SE FASTQ reads</a></li>
 </ul>
 </li>
@@ -299,11 +301,12 @@ Command line interface: bk_constant_sites; bk_con_sites</p>
 <p>Constant sites are defined as a site in an
 alignment with the same nucleotide or amino
 acid sequence (excluding gaps) among all taxa.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit constant_sites &lt;fasta&gt;
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit constant_sites &lt;fasta&gt; <span class="o">[</span>-v/<span class="se">\\</span>-<span class="se">\\</span>-verbose<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
-<em>&lt;alignment&gt;</em>: first argument after function name should be an alignment file</p>
+<em>&lt;alignment&gt;</em>: first argument after function name should be an alignment file
+<em>-v/\-\-verbose</em>: optional argument to print site-by-site categorization</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -317,11 +320,12 @@ sites in an alignment.</p>
 <p>Parsimony informative sites are defined as a
 site in an alignment with at least two nucleotides
 or amino acids that occur at least twice.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit parsimony_informative_sites &lt;fasta&gt;
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit parsimony_informative_sites &lt;fasta&gt; <span class="o">[</span>-v/<span class="se">\\</span>-<span class="se">\\</span>-verbose<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
-<em>&lt;alignment&gt;</em>: first argument after function name should be an alignment file</p>
+<em>&lt;alignment&gt;</em>: first argument after function name should be an alignment file <br/>
+<em>-v/\-\-verbose</em>: optional argument to print site-by-site categorization</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -350,11 +354,12 @@ alignment.</p>
 <p>Variable sites are defined as a site in an
 alignment with at least two nucleotide or amino
 acid characters among all taxa.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit variable_sites &lt;fasta&gt;
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit variable_sites &lt;fasta&gt; <span class="o">[</span>-v/<span class="se">\\</span>-<span class="se">\\</span>-verbose<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
-<em>&lt;alignment&gt;</em>: first argument after function name should be an alignment file</p>
+<em>&lt;alignment&gt;</em>: first argument after function name should be an alignment file
+<em>-v/\-\-verbose</em>: optional argument to print site-by-site categorization</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -417,22 +422,22 @@ divisible by three.</p>
 <div class="line"><br /></div>
 </div>
 </section>
-<section id="gene-wise-relative-synonymous-codon-usage">
-<h3>Gene-wise relative synonymous codon usage<a class="headerlink" href="#gene-wise-relative-synonymous-codon-usage" title="Permalink to this headline"></a></h3>
-<p>Function names: gene_wise_relative_synonymous_codon_usage; gene_wise_rscu; gw_rscu <br/>
-Command line interface: bk_gene_wise_relative_synonymous_codon_usage; bk_gene_wise_rscu; bk_gw_rscu</p>
-<p>Calculate gene-wise relative synonymous codon usage (gw-RSCU).</p>
+<section id="gene-wise-relative-synonymous-codon-usage-grscu">
+<h3>Gene-wise relative synonymous codon usage (gRSCU)<a class="headerlink" href="#gene-wise-relative-synonymous-codon-usage-grscu" title="Permalink to this headline"></a></h3>
+<p>Function names: gene_wise_relative_synonymous_codon_usage; gene_wise_rscu; gw_rscu; grscu <br/>
+Command line interface: bk_gene_wise_relative_synonymous_codon_usage; bk_gene_wise_rscu; bk_gw_rscu; bk_grscu</p>
+<p>Calculate gene-wise relative synonymous codon usage (gRSCU).</p>
 <p>Codon usage bias examines biases for codon usage of
 a particular gene. We adapted RSCU to be applied to
 individual genes rather than only codons. Specifically,
-gw-RSCU is the mean (or median) RSCU value observed
+gRSCU is the mean (or median) RSCU value observed
 in a particular gene. This provides insight into how
 codon usage bias influences codon usage for a particular
 gene. This function also outputs the standard deviation
 of RSCU values for a given gene.</p>
 <p>The output is col 1: the gene identifier; col 2: the
-gw-RSCU based on the mean RSCU value observed in a gene;
-col 3: the gw-RSCU based on the median RSCU value observed
+gRSCU based on the mean RSCU value observed in a gene;
+col 3: the gRSCU based on the median RSCU value observed
 in a gene; and the col 4: the standard deviation of
 RSCU values observed in a gene.</p>
 <p>Custom genetic codes can be used as input and should
@@ -578,6 +583,35 @@ and time.</p>
 <div class="line"><br /></div>
 </div>
 </section>
+<section id="trim-pe-adapters-fastq-reads">
+<h3>Trim PE adapters FASTQ reads<a class="headerlink" href="#trim-pe-adapters-fastq-reads" title="Permalink to this headline"></a></h3>
+<p>Function names: trim_pe_adapters_fastq_reads; trim_pe_adapters_fastq <br/>
+Command line interface: bk_trim_pe_adapters_fastq_reads; bk_trim_pe_adapters_fastq</p>
+<p>Trim adapters from paired-end FastQ data.</p>
+<p>FASTQ data will be trimmed according to
+exact match to known adapter sequences.</p>
+<p>Output file has the suffix “_adapter_removed.fq”
+or can be named by the user with the
+output_file argument.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit trim_pe_adapters_fastq_reads &lt;fastq1&gt; &lt;fastq2&gt; <span class="o">[</span>-a/--adapters TruSeq2-PE -l/--length <span class="m">20</span><span class="o">]</span>
+</pre></div>
+</div>
+<p>Adapaters available: <br/>
+NexteraPE-PE <br/>
+TruSeq2-PE <br/>
+TruSeq2-SE <br/>
+TruSeq3-PE-2 <br/>
+TruSeq3-PE <br/>
+TruSeq3-SE</p>
+<p>Options: <br/>
+<em>&lt;fastq1&gt;</em>: first argument after function name should be the name of one of the fastq files <br/>
+<em>&lt;fastq2&gt;</em>: first argument after function name should be the name of the other fastq file <br/>
+<em>-a/\-\-adapters</em>: adapter sequences to trim. Default: TruSeq2-PE <br/>
+<em>-l/\-\-length</em>: minimum length of read to be kept. Default: 20</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
 <section id="trim-pe-fastq-reads">
 <h3>Trim PE FASTQ reads<a class="headerlink" href="#trim-pe-fastq-reads" title="Permalink to this headline"></a></h3>
 <p>Function names: trim_pe_fastq_reads; trim_pe_fastq <br/>
@@ -600,6 +634,28 @@ saved to files with the suffix
 <em>&lt;fastq2&gt;</em>: first argument after function name should be the name of the other fastq file <br/>
 <em>-m/\-\-minimum</em>: minimum quality of read to be kept. Default: 20 <br/>
 <em>-l/\-\-length</em>: minimum length of read to be kept. Default: 20</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="trim-se-adapters-fastq-reads">
+<h3>Trim SE adapters FASTQ reads<a class="headerlink" href="#trim-se-adapters-fastq-reads" title="Permalink to this headline"></a></h3>
+<p>Function names: trim_se_adapters_fastq_reads; trim_se_adapters_fastq <br/>
+Command line interface: bk_trim_se_adapters_fastq_reads; bk_trim_se_adapters_fastq</p>
+<p>Trim adapters from single-end FastQ data.</p>
+<p>FASTQ data will be trimmed according to
+exact match to known adapter sequences.</p>
+<p>Output file has the suffix “_adapter_removed.fq”
+or can be named by the user with the
+output_file argument.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit trim_se_adapters_fastq_reads &lt;fastq&gt; <span class="o">[</span>-a/--adapters TruSeq2-SE -l/--length <span class="m">20</span><span class="o">]</span>
+</pre></div>
+</div>
+<p>Options: <br/>
+<em>&lt;fastq&gt;</em>: first argument after function name should be the fastq file <br/>
+<em>-a/\-\-adapters</em>: adapter sequences to trim. Default: TruSeq2-SE <br/>
+<em>-l/\-\-length</em>: minimum length of read to be kept. Default: 20 <br/>
+<em>-o/\-\-output_file</em>: name of the output file of trimmed reads</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -1032,7 +1088,7 @@ Command line interface: bk_single_line_to_multiple_line_fasta; bk_sl2ml</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2021 Jacob L. Steenwyk.</p>
+    <p>&#169; Copyright 2022 Jacob L. Steenwyk.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
