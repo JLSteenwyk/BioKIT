@@ -24,7 +24,7 @@ Calling functions
    biokit <command> [optional command arguments]
 
 Command specific help messages can be viewed by adding a 
--h/\\-\\-help argument after the command. For example, to see the
+-h/\-\-help argument after the command. For example, to see the
 to see the help message for the command 'alignment_summary', execute:
 
 .. code-block:: shell
@@ -138,7 +138,7 @@ Y = pyrimidines (i.e., T and C)
 
 Options: |br|
 *<alignment>*: first argument after function name should be an alignment file |br|
-*-c/\\-\\-code*: argument to specify the recoding scheme to use 
+*-c/\-\-code*: argument to specify the recoding scheme to use 
 
 |
 
@@ -193,11 +193,11 @@ acid sequence (excluding gaps) among all taxa.
 
 .. code-block:: shell
 
-	biokit constant_sites <fasta> [-v/\\-\\-verbose]
+	biokit constant_sites <fasta> [-v/\-\-verbose]
 
 Options: |br|
 *<alignment>*: first argument after function name should be an alignment file 
-*-v/\\-\\-verbose*: optional argument to print site-by-site categorization
+*-v/\-\-verbose*: optional argument to print site-by-site categorization
 
 |
 
@@ -215,11 +215,11 @@ or amino acids that occur at least twice.
 
 .. code-block:: shell
 
-	biokit parsimony_informative_sites <fasta> [-v/\\-\\-verbose]
+	biokit parsimony_informative_sites <fasta> [-v/\-\-verbose]
 
 Options: |br|
 *<alignment>*: first argument after function name should be an alignment file |br|
-*-v/\\-\\-verbose*: optional argument to print site-by-site categorization
+*-v/\-\-verbose*: optional argument to print site-by-site categorization
 
 |
 
@@ -254,11 +254,11 @@ acid characters among all taxa.
 
 .. code-block:: shell
 
-	biokit variable_sites <fasta> [-v/\\-\\-verbose]
+	biokit variable_sites <fasta> [-v/\-\-verbose]
 
 Options: |br|
 *<alignment>*: first argument after function name should be an alignment file 
-*-v/\\-\\-verbose*: optional argument to print site-by-site categorization
+*-v/\-\-verbose*: optional argument to print site-by-site categorization
 
 |
 
@@ -283,7 +283,7 @@ divisible by three.
 
 Options: |br|
 *<fasta>*: first argument after function name should be a fasta file |br|
-*-v/\\-\\-verbose*: optional argument to print the GC content of each fasta entry
+*-v/\-\-verbose*: optional argument to print the GC content of each fasta entry
 
 |
 
@@ -303,7 +303,7 @@ divisible by three.
 
 Options: |br|
 *<fasta>*: first argument after function name should be a fasta file |br|
-*-v/\\-\\-verbose*: optional argument to print the GC content of each fasta entry
+*-v/\-\-verbose*: optional argument to print the GC content of each fasta entry
 
 |
 
@@ -323,7 +323,7 @@ divisible by three.
 
 Options: |br|
 *<fasta>*: first argument after function name should be a fasta file |br|
-*-v/\\-\\-verbose*: optional argument to print the GC content of each fasta entry
+*-v/\-\-verbose*: optional argument to print the GC content of each fasta entry
 
 |
 
@@ -359,7 +359,7 @@ resulting amino acid in the second column.
 
 Options: |br|
 *<fasta>*: first argument after function name should be a fasta file |br|
-*-tt/\\-\\-translation_table*: optional argument of the code for the translation
+*-tt/\-\-translation_table*: optional argument of the code for the translation
 table to be used. Default: 1, which is the standard code.
 
 |
@@ -386,7 +386,7 @@ resulting amino acid in the second column.
 
 Options: |br|
 *<fasta>*: first argument after function name should be a fasta file |br|
-*-tt/\\-\\-translation_table*: optional argument of the code for the translation
+*-tt/\-\-translation_table*: optional argument of the code for the translation
 table to be used. Default: 1, which is the standard code.
 
 |
@@ -413,9 +413,9 @@ resulting amino acid in the second column.
 
 Options: |br|
 *<fasta>*: first argument after function name should be a fasta file |br|
-*-tt/\\-\\-translation_table*: optional argument of the code for the translation
+*-tt/\-\-translation_table*: optional argument of the code for the translation
 table to be used. Default: 1, which is the standard code.
-*-o/\\-\\-output*: optional argument to write the translated fasta file to.
+*-o/\-\-output*: optional argument to write the translated fasta file to.
 Default output has the same name as the input file with the suffix ".translated.fa" added
 to it.
 
@@ -445,7 +445,7 @@ verbose option.
 
 Options: |br|
 *<fastq>*: first argument after function name should be a FASTQ file |br|
-*-v/\\-\\-verbose*: print length of each FASTQ read
+*-v/\-\-verbose*: print length of each FASTQ read
 
 |
 
@@ -476,8 +476,8 @@ Files are outputed with the suffix "_subset.fq"
 Options: |br|
 *<fastq1>*: first argument after function name should be the name of one of the fastq files |br|
 *<fastq2>*: first argument after function name should be the name of the other fastq file |br|
-*-p/\\-\\-percent*: percentage of reads to maintain in subsetted data |br|
-*-s/\\-\\-seed*: seed for random sampling
+*-p/\-\-percent*: percentage of reads to maintain in subsetted data |br|
+*-s/\-\-seed*: seed for random sampling
 
 |
 
@@ -506,9 +506,9 @@ Output files will have the suffix "_subset.fq"
 
 Options: |br|
 *<fastq>*: first argument after function name should be the name of one of the fastq files |br|
-*-p/\\-\\-percent*: percentage of reads to maintain in subsetted data |br|
-*-s/\\-\\-seed*: seed for random sampling |br|
-*-o/\\-\\-output_file*: specify the name of the output file
+*-p/\-\-percent*: percentage of reads to maintain in subsetted data |br|
+*-s/\-\-seed*: seed for random sampling |br|
+*-o/\-\-output_file*: specify the name of the output file
 
 |
 
@@ -542,8 +542,8 @@ TruSeq3-SE
 Options: |br|
 *<fastq1>*: first argument after function name should be the name of one of the fastq files |br|
 *<fastq2>*: first argument after function name should be the name of the other fastq file |br|
-*-a/\\-\\-adapters*: adapter sequences to trim. Default: TruSeq2-PE |br|
-*-l/\\-\\-length*: minimum length of read to be kept. Default: 20
+*-a/\-\-adapters*: adapter sequences to trim. Default: TruSeq2-PE |br|
+*-l/\-\-length*: minimum length of read to be kept. Default: 20
 
 |
 
@@ -571,8 +571,8 @@ saved to files with the suffix
 Options: |br|
 *<fastq1>*: first argument after function name should be the name of one of the fastq files |br|
 *<fastq2>*: first argument after function name should be the name of the other fastq file |br|
-*-m/\\-\\-minimum*: minimum quality of read to be kept. Default: 20 |br|
-*-l/\\-\\-length*: minimum length of read to be kept. Default: 20
+*-m/\-\-minimum*: minimum quality of read to be kept. Default: 20 |br|
+*-l/\-\-length*: minimum length of read to be kept. Default: 20
 
 |
 
@@ -596,9 +596,9 @@ output_file argument.
 
 Options: |br|
 *<fastq>*: first argument after function name should be the fastq file |br|
-*-a/\\-\\-adapters*: adapter sequences to trim. Default: TruSeq2-SE |br|
-*-l/\\-\\-length*: minimum length of read to be kept. Default: 20 |br|
-*-o/\\-\\-output_file*: name of the output file of trimmed reads
+*-a/\-\-adapters*: adapter sequences to trim. Default: TruSeq2-SE |br|
+*-l/\-\-length*: minimum length of read to be kept. Default: 20 |br|
+*-o/\-\-output_file*: name of the output file of trimmed reads
 
 |
 
@@ -622,9 +622,9 @@ with the output_file argument.
 
 Options: |br|
 *<fastq>*: first argument after function name should be the fastq file |br|
-*-m/\\-\\-minimum*: minimum quality of read to be kept. Default: 20 |br|
-*-l/\\-\\-length*: minimum length of read to be kept. Default: 20 |br|
-*-o/\\-\\-output_file*: name of the output file of trimmed reads
+*-m/\-\-minimum*: minimum quality of read to be kept. Default: 20 |br|
+*-l/\-\-length*: minimum length of read to be kept. Default: 20 |br|
+*-o/\-\-output_file*: name of the output file of trimmed reads
 
 |
 
@@ -651,7 +651,7 @@ option.
 
 Options: |br|
 *<fasta>*: first argument after function name should be a fasta file |br|
-*-v/\\-\\-verbose*: optional argument to print the GC content of each fasta entry
+*-v/\-\-verbose*: optional argument to print the GC content of each fasta entry
 
 |
 
@@ -684,7 +684,7 @@ Frequency of G: The number of occurences of G corrected by assembly size.
 
 Options: |br|
 *<fasta>*: first argument after function name should be a fasta file |br|
-*-t/\\-\\-threshold*: threshold for what is considered a large scaffold.
+*-t/\-\-threshold*: threshold for what is considered a large scaffold.
 Only scaffolds with a length greater than this value will be counted. Default: 500
 
 |
@@ -794,7 +794,7 @@ column 1 and column 2 in the output, respectively.
 
 Options: |br|
 *<fasta>*: first argument after function name should be a fasta file
-*-t/\\-\\-threshold*: threshold for what is considered
+*-t/\-\-threshold*: threshold for what is considered
 a large scaffold. Only scaffolds with a length greater than this
 value will be counted. Default: 500
 
@@ -882,7 +882,7 @@ sequence file.
 
 Options: |br|
 *<fasta>*: first argument after function name should be a fasta file |br|
-*-e/\\-\\-entry*: entry name to be extracted from the inputted fasta file
+*-e/\-\-entry*: entry name to be extracted from the inputted fasta file
 
 |
 
@@ -896,19 +896,19 @@ Converts a multiple sequence file from one format to another.
 Acceptable file formats include FASTA, Clustal, MAF, Mauve,
 Phylip, Phylip-sequential, Phylip-relaxed, and Stockholm.
 Input and output file formats are specified with the
-\\-\\-input_file_format and \\-\\-output_file_format arguments;
-input and output files are specified with the \\-\\-input_file
-and \\-\\-output_file arguments.
+\-\-input_file_format and \-\-output_file_format arguments;
+input and output files are specified with the \-\-input_file
+and \-\-output_file arguments.
 
 .. code-block:: shell
 
    biokit file_format_converter -i/--input_file <input_file> -iff/--input_file_format <input_file_format>  -o/--output_file <output_file> -off/--output_file_format <output_file_format>
 
 Options: |br|
-*-i/\\-\\-input_file*: input file name 
-*-iff/\\-\\-input_file_format*: input file format
-*-o/\\-\\-output_file*: output file name
-*-off/\\-\\-output_file_format*: output file format
+*-i/\-\-input_file*: input file name 
+*-iff/\-\-input_file_format*: input file format
+*-o/\-\-output_file*: output file name
+*-off/\-\-output_file_format*: output file format
 
 |
 
@@ -927,7 +927,7 @@ represented on one line.
 
 Options: |br|
 *<fasta>*: first argument after function name should be a fasta file |br|
-*-o/\\-\\-output*: optional argument to name the output file
+*-o/\-\-output*: optional argument to name the output file
 
 |
 
@@ -947,8 +947,8 @@ the user specifies a different output file name.
 
 Options: |br|
 *<fasta>*: first argument after function name should be a fasta file |br|
-*-e/\\-\\-entry*: entry name to be removed from the inputted fasta file |br|
-*-o/\\-\\-output*: optional argument to write the renamed fasta file to.
+*-e/\-\-entry*: entry name to be removed from the inputted fasta file |br|
+*-o/\-\-output*: optional argument to write the renamed fasta file to.
 Default output has the same name as the input file with the suffix "pruned.fa"
 added to it.
 
@@ -975,9 +975,9 @@ the user specifies a different output file name.
 
 Options: |br|
 *<fasta>*: first argument after function name should be a fasta file |br|
-*-t/\\-\\-threshold*: threshold for short sequences. Sequences greater 
+*-t/\-\-threshold*: threshold for short sequences. Sequences greater 
 than this value will be kept |br|
-*-o/\\-\\-output*: optional argument to write the renamed fasta file to.
+*-o/\-\-output*: optional argument to write the renamed fasta file to.
 Default output has the same name as the input file with the suffix "long_seqs.fa"
 added to it.
 
@@ -1001,8 +1001,8 @@ output alignment.
 
 Options: |br|
 *<fasta>*: first argument after function name should be a fasta file |br|
-*-i/\\-\\-idmap*: identifier map of current FASTA names (col1) and desired FASTA names (col2) |br|
-*-o/\\-\\-output*: optional argument to name the output file
+*-i/\-\-idmap*: identifier map of current FASTA names (col1) and desired FASTA names (col2) |br|
+*-o/\-\-output*: optional argument to name the output file
 
 |
 
@@ -1020,7 +1020,7 @@ to the shortest entry.
 
 Options: |br|
 *<fasta>*: first argument after function name should be a fasta file |br|
-*-o/\\-\\-output*: optional argument to write the reordered fasta file to.
+*-o/\-\-output*: optional argument to write the reordered fasta file to.
 Default output has the same name as the input file with the suffix
 ".reordered.fa" added to it.
 
@@ -1041,7 +1041,7 @@ complement, add the -r/--reverse argument.
 
 Options: |br|
 *<fasta>*: first argument after function name should be a fasta file |br|
-*-r/\\-\\-reverse*: if used, the reverse complement sequence will be generated
+*-r/\-\-reverse*: if used, the reverse complement sequence will be generated
 
 |
 

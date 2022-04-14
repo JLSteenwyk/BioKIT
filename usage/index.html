@@ -155,7 +155,7 @@ files, and genomes.</p>
 </pre></div>
 </div>
 <p>Command specific help messages can be viewed by adding a
--h/\-\-help argument after the command. For example, to see the
+-h/--help argument after the command. For example, to see the
 to see the help message for the command ‘alignment_summary’, execute:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit alignment_summary -h
 <span class="c1"># or</span>
@@ -254,7 +254,7 @@ Y = pyrimidines (i.e., T and C)</p>
 5 = C and V <br/></p>
 <p>Options: <br/>
 <em>&lt;alignment&gt;</em>: first argument after function name should be an alignment file <br/>
-<em>-c/\-\-code</em>: argument to specify the recoding scheme to use</p>
+<em>-c/--code</em>: argument to specify the recoding scheme to use</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -301,12 +301,12 @@ Command line interface: bk_constant_sites; bk_con_sites</p>
 <p>Constant sites are defined as a site in an
 alignment with the same nucleotide or amino
 acid sequence (excluding gaps) among all taxa.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit constant_sites &lt;fasta&gt; <span class="o">[</span>-v/<span class="se">\\</span>-<span class="se">\\</span>-verbose<span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit constant_sites &lt;fasta&gt; <span class="o">[</span>-v/<span class="se">\-\-</span>verbose<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
 <em>&lt;alignment&gt;</em>: first argument after function name should be an alignment file
-<em>-v/\-\-verbose</em>: optional argument to print site-by-site categorization</p>
+<em>-v/--verbose</em>: optional argument to print site-by-site categorization</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -320,12 +320,12 @@ sites in an alignment.</p>
 <p>Parsimony informative sites are defined as a
 site in an alignment with at least two nucleotides
 or amino acids that occur at least twice.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit parsimony_informative_sites &lt;fasta&gt; <span class="o">[</span>-v/<span class="se">\\</span>-<span class="se">\\</span>-verbose<span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit parsimony_informative_sites &lt;fasta&gt; <span class="o">[</span>-v/<span class="se">\-\-</span>verbose<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
 <em>&lt;alignment&gt;</em>: first argument after function name should be an alignment file <br/>
-<em>-v/\-\-verbose</em>: optional argument to print site-by-site categorization</p>
+<em>-v/--verbose</em>: optional argument to print site-by-site categorization</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -354,12 +354,12 @@ alignment.</p>
 <p>Variable sites are defined as a site in an
 alignment with at least two nucleotide or amino
 acid characters among all taxa.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit variable_sites &lt;fasta&gt; <span class="o">[</span>-v/<span class="se">\\</span>-<span class="se">\\</span>-verbose<span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit variable_sites &lt;fasta&gt; <span class="o">[</span>-v/<span class="se">\-\-</span>verbose<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
 <em>&lt;alignment&gt;</em>: first argument after function name should be an alignment file
-<em>-v/\-\-verbose</em>: optional argument to print site-by-site categorization</p>
+<em>-v/--verbose</em>: optional argument to print site-by-site categorization</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -381,7 +381,7 @@ divisible by three.</p>
 </div>
 <p>Options: <br/>
 <em>&lt;fasta&gt;</em>: first argument after function name should be a fasta file <br/>
-<em>-v/\-\-verbose</em>: optional argument to print the GC content of each fasta entry</p>
+<em>-v/--verbose</em>: optional argument to print the GC content of each fasta entry</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -399,7 +399,7 @@ divisible by three.</p>
 </div>
 <p>Options: <br/>
 <em>&lt;fasta&gt;</em>: first argument after function name should be a fasta file <br/>
-<em>-v/\-\-verbose</em>: optional argument to print the GC content of each fasta entry</p>
+<em>-v/--verbose</em>: optional argument to print the GC content of each fasta entry</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -417,7 +417,7 @@ divisible by three.</p>
 </div>
 <p>Options: <br/>
 <em>&lt;fasta&gt;</em>: first argument after function name should be a fasta file <br/>
-<em>-v/\-\-verbose</em>: optional argument to print the GC content of each fasta entry</p>
+<em>-v/--verbose</em>: optional argument to print the GC content of each fasta entry</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -448,7 +448,7 @@ resulting amino acid in the second column.</p>
 </div>
 <p>Options: <br/>
 <em>&lt;fasta&gt;</em>: first argument after function name should be a fasta file <br/>
-<em>-tt/\-\-translation_table</em>: optional argument of the code for the translation
+<em>-tt/--translation_table</em>: optional argument of the code for the translation
 table to be used. Default: 1, which is the standard code.</p>
 <div class="line-block">
 <div class="line"><br /></div>
@@ -471,7 +471,7 @@ resulting amino acid in the second column.</p>
 </div>
 <p>Options: <br/>
 <em>&lt;fasta&gt;</em>: first argument after function name should be a fasta file <br/>
-<em>-tt/\-\-translation_table</em>: optional argument of the code for the translation
+<em>-tt/--translation_table</em>: optional argument of the code for the translation
 table to be used. Default: 1, which is the standard code.</p>
 <div class="line-block">
 <div class="line"><br /></div>
@@ -495,9 +495,9 @@ resulting amino acid in the second column.</p>
 </div>
 <p>Options: <br/>
 <em>&lt;fasta&gt;</em>: first argument after function name should be a fasta file <br/>
-<em>-tt/\-\-translation_table</em>: optional argument of the code for the translation
+<em>-tt/--translation_table</em>: optional argument of the code for the translation
 table to be used. Default: 1, which is the standard code.
-<em>-o/\-\-output</em>: optional argument to write the translated fasta file to.
+<em>-o/--output</em>: optional argument to write the translated fasta file to.
 Default output has the same name as the input file with the suffix “.translated.fa” added
 to it.</p>
 <div class="line-block">
@@ -523,7 +523,7 @@ verbose option.</p>
 </div>
 <p>Options: <br/>
 <em>&lt;fastq&gt;</em>: first argument after function name should be a FASTQ file <br/>
-<em>-v/\-\-verbose</em>: print length of each FASTQ read</p>
+<em>-v/--verbose</em>: print length of each FASTQ read</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -550,8 +550,8 @@ information is maintained.</p>
 <p>Options: <br/>
 <em>&lt;fastq1&gt;</em>: first argument after function name should be the name of one of the fastq files <br/>
 <em>&lt;fastq2&gt;</em>: first argument after function name should be the name of the other fastq file <br/>
-<em>-p/\-\-percent</em>: percentage of reads to maintain in subsetted data <br/>
-<em>-s/\-\-seed</em>: seed for random sampling</p>
+<em>-p/--percent</em>: percentage of reads to maintain in subsetted data <br/>
+<em>-s/--seed</em>: seed for random sampling</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -576,9 +576,9 @@ and time.</p>
 </div>
 <p>Options: <br/>
 <em>&lt;fastq&gt;</em>: first argument after function name should be the name of one of the fastq files <br/>
-<em>-p/\-\-percent</em>: percentage of reads to maintain in subsetted data <br/>
-<em>-s/\-\-seed</em>: seed for random sampling <br/>
-<em>-o/\-\-output_file</em>: specify the name of the output file</p>
+<em>-p/--percent</em>: percentage of reads to maintain in subsetted data <br/>
+<em>-s/--seed</em>: seed for random sampling <br/>
+<em>-o/--output_file</em>: specify the name of the output file</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -606,8 +606,8 @@ TruSeq3-SE</p>
 <p>Options: <br/>
 <em>&lt;fastq1&gt;</em>: first argument after function name should be the name of one of the fastq files <br/>
 <em>&lt;fastq2&gt;</em>: first argument after function name should be the name of the other fastq file <br/>
-<em>-a/\-\-adapters</em>: adapter sequences to trim. Default: TruSeq2-PE <br/>
-<em>-l/\-\-length</em>: minimum length of read to be kept. Default: 20</p>
+<em>-a/--adapters</em>: adapter sequences to trim. Default: TruSeq2-PE <br/>
+<em>-l/--length</em>: minimum length of read to be kept. Default: 20</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -632,8 +632,8 @@ saved to files with the suffix
 <p>Options: <br/>
 <em>&lt;fastq1&gt;</em>: first argument after function name should be the name of one of the fastq files <br/>
 <em>&lt;fastq2&gt;</em>: first argument after function name should be the name of the other fastq file <br/>
-<em>-m/\-\-minimum</em>: minimum quality of read to be kept. Default: 20 <br/>
-<em>-l/\-\-length</em>: minimum length of read to be kept. Default: 20</p>
+<em>-m/--minimum</em>: minimum quality of read to be kept. Default: 20 <br/>
+<em>-l/--length</em>: minimum length of read to be kept. Default: 20</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -653,9 +653,9 @@ output_file argument.</p>
 </div>
 <p>Options: <br/>
 <em>&lt;fastq&gt;</em>: first argument after function name should be the fastq file <br/>
-<em>-a/\-\-adapters</em>: adapter sequences to trim. Default: TruSeq2-SE <br/>
-<em>-l/\-\-length</em>: minimum length of read to be kept. Default: 20 <br/>
-<em>-o/\-\-output_file</em>: name of the output file of trimmed reads</p>
+<em>-a/--adapters</em>: adapter sequences to trim. Default: TruSeq2-SE <br/>
+<em>-l/--length</em>: minimum length of read to be kept. Default: 20 <br/>
+<em>-o/--output_file</em>: name of the output file of trimmed reads</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -676,9 +676,9 @@ with the output_file argument.</p>
 </div>
 <p>Options: <br/>
 <em>&lt;fastq&gt;</em>: first argument after function name should be the fastq file <br/>
-<em>-m/\-\-minimum</em>: minimum quality of read to be kept. Default: 20 <br/>
-<em>-l/\-\-length</em>: minimum length of read to be kept. Default: 20 <br/>
-<em>-o/\-\-output_file</em>: name of the output file of trimmed reads</p>
+<em>-m/--minimum</em>: minimum quality of read to be kept. Default: 20 <br/>
+<em>-l/--length</em>: minimum length of read to be kept. Default: 20 <br/>
+<em>-o/--output_file</em>: name of the output file of trimmed reads</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -701,7 +701,7 @@ option.</p>
 </div>
 <p>Options: <br/>
 <em>&lt;fasta&gt;</em>: first argument after function name should be a fasta file <br/>
-<em>-v/\-\-verbose</em>: optional argument to print the GC content of each fasta entry</p>
+<em>-v/--verbose</em>: optional argument to print the GC content of each fasta entry</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -731,7 +731,7 @@ Frequency of G: The number of occurences of G corrected by assembly size.</p>
 </div>
 <p>Options: <br/>
 <em>&lt;fasta&gt;</em>: first argument after function name should be a fasta file <br/>
-<em>-t/\-\-threshold</em>: threshold for what is considered a large scaffold.
+<em>-t/--threshold</em>: threshold for what is considered a large scaffold.
 Only scaffolds with a length greater than this value will be counted. Default: 500</p>
 <div class="line-block">
 <div class="line"><br /></div>
@@ -825,7 +825,7 @@ column 1 and column 2 in the output, respectively.</p>
 </div>
 <p>Options: <br/>
 <em>&lt;fasta&gt;</em>: first argument after function name should be a fasta file
-<em>-t/\-\-threshold</em>: threshold for what is considered
+<em>-t/--threshold</em>: threshold for what is considered
 a large scaffold. Only scaffolds with a length greater than this
 value will be counted. Default: 500</p>
 <div class="line-block">
@@ -901,7 +901,7 @@ sequence file.</p>
 </div>
 <p>Options: <br/>
 <em>&lt;fasta&gt;</em>: first argument after function name should be a fasta file <br/>
-<em>-e/\-\-entry</em>: entry name to be extracted from the inputted fasta file</p>
+<em>-e/--entry</em>: entry name to be extracted from the inputted fasta file</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -914,17 +914,17 @@ Command line interface: bk_file_format_converter; bk_format_converter; bk_ffc</p
 <p>Acceptable file formats include FASTA, Clustal, MAF, Mauve,
 Phylip, Phylip-sequential, Phylip-relaxed, and Stockholm.
 Input and output file formats are specified with the
-\-\-input_file_format and \-\-output_file_format arguments;
-input and output files are specified with the \-\-input_file
-and \-\-output_file arguments.</p>
+--input_file_format and --output_file_format arguments;
+input and output files are specified with the --input_file
+and --output_file arguments.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit file_format_converter -i/--input_file &lt;input_file&gt; -iff/--input_file_format &lt;input_file_format&gt;  -o/--output_file &lt;output_file&gt; -off/--output_file_format &lt;output_file_format&gt;
 </pre></div>
 </div>
 <p>Options: <br/>
-<em>-i/\-\-input_file</em>: input file name
-<em>-iff/\-\-input_file_format</em>: input file format
-<em>-o/\-\-output_file</em>: output file name
-<em>-off/\-\-output_file_format</em>: output file format</p>
+<em>-i/--input_file</em>: input file name
+<em>-iff/--input_file_format</em>: input file format
+<em>-o/--output_file</em>: output file name
+<em>-off/--output_file_format</em>: output file format</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -941,7 +941,7 @@ represented on one line.</p>
 </div>
 <p>Options: <br/>
 <em>&lt;fasta&gt;</em>: first argument after function name should be a fasta file <br/>
-<em>-o/\-\-output</em>: optional argument to name the output file</p>
+<em>-o/--output</em>: optional argument to name the output file</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -958,8 +958,8 @@ the user specifies a different output file name.</p>
 </div>
 <p>Options: <br/>
 <em>&lt;fasta&gt;</em>: first argument after function name should be a fasta file <br/>
-<em>-e/\-\-entry</em>: entry name to be removed from the inputted fasta file <br/>
-<em>-o/\-\-output</em>: optional argument to write the renamed fasta file to.
+<em>-e/--entry</em>: entry name to be removed from the inputted fasta file <br/>
+<em>-o/--output</em>: optional argument to write the renamed fasta file to.
 Default output has the same name as the input file with the suffix “pruned.fa”
 added to it.</p>
 <div class="line-block">
@@ -982,9 +982,9 @@ the user specifies a different output file name.</p>
 </div>
 <p>Options: <br/>
 <em>&lt;fasta&gt;</em>: first argument after function name should be a fasta file <br/>
-<em>-t/\-\-threshold</em>: threshold for short sequences. Sequences greater
+<em>-t/--threshold</em>: threshold for short sequences. Sequences greater
 than this value will be kept <br/>
-<em>-o/\-\-output</em>: optional argument to write the renamed fasta file to.
+<em>-o/--output</em>: optional argument to write the renamed fasta file to.
 Default output has the same name as the input file with the suffix “long_seqs.fa”
 added to it.</p>
 <div class="line-block">
@@ -1005,8 +1005,8 @@ output alignment.</p>
 </div>
 <p>Options: <br/>
 <em>&lt;fasta&gt;</em>: first argument after function name should be a fasta file <br/>
-<em>-i/\-\-idmap</em>: identifier map of current FASTA names (col1) and desired FASTA names (col2) <br/>
-<em>-o/\-\-output</em>: optional argument to name the output file</p>
+<em>-i/--idmap</em>: identifier map of current FASTA names (col1) and desired FASTA names (col2) <br/>
+<em>-o/--output</em>: optional argument to name the output file</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -1022,7 +1022,7 @@ to the shortest entry.</p>
 </div>
 <p>Options: <br/>
 <em>&lt;fasta&gt;</em>: first argument after function name should be a fasta file <br/>
-<em>-o/\-\-output</em>: optional argument to write the reordered fasta file to.
+<em>-o/--output</em>: optional argument to write the reordered fasta file to.
 Default output has the same name as the input file with the suffix
 “.reordered.fa” added to it.</p>
 <div class="line-block">
@@ -1041,7 +1041,7 @@ complement, add the -r/–reverse argument.</p>
 </div>
 <p>Options: <br/>
 <em>&lt;fasta&gt;</em>: first argument after function name should be a fasta file <br/>
-<em>-r/\-\-reverse</em>: if used, the reverse complement sequence will be generated</p>
+<em>-r/--reverse</em>: if used, the reverse complement sequence will be generated</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>

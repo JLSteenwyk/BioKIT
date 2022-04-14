@@ -89,6 +89,17 @@ Get the help message from BioKIT:
 
 |
 
+After successful installation, BioKIT can be used in diverse applications.
+In this figure, we showcase three examples, which cover a small number of
+total possibilities, where BioKIT can be used. For each example, steps
+that can be executed by BioKIT are shown in bold.
+
+|workflows|
+
+.. |workflows| image:: ../_static/img/workflows.png 
+   :width: 100%
+
+
 ^^^^
 
 
