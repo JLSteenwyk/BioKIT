@@ -96,7 +96,7 @@ that can be executed by BioKIT are shown in bold.
 
 |workflows|
 
-.. |workflows| image:: ../_static/img/workflows.png 
+.. |workflows| image:: _static/img/workflows.png 
    :width: 100%
 
 
