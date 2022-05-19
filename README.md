@@ -34,15 +34,15 @@
             <img src="https://img.shields.io/pypi/pyversions/jlsteenwyk-biokit">
         </a>
         <br />
-        <a href="https://www.biorxiv.org/content/10.1101/2021.10.02.462868v2">
-          <img src="https://zenodo.org/badge/DOI/10.1101/2021.10.02.462868.svg">
+        <a href="https://academic.oup.com/genetics/advance-article/doi/10.1093/genetics/iyac079/6583183?login=true">
+          <img src="https://zenodo.org/badge/DOI/10.1093/genetics/iyac079.svg">
         </a>
         <a href="https://patreon.com/jlsteenwyk"><img src="https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3Djlsteenwyk%26type%3Dpatrons&style=flat" alt="Support me on Patreon" /></a>
     </p>
 </p>
 
 BioKIT is a UNIX shell toolkit for processing molecular sequence data.<br /><br />
-If you found biokit useful, please cite the following: *BioKIT: a versatile toolkit for processing and analyzing diverse types of sequence data*. bioRxiv. doi: [10.1101/2021.10.02.462868](https://www.biorxiv.org/content/10.1101/2021.10.02.462868v2).
+If you found biokit useful, please cite the following: *BioKIT: a versatile toolkit for processing and analyzing diverse types of sequence data*. GENETICS. doi: [10.1101/2021.10.02.462868](https://academic.oup.com/genetics/advance-article/doi/10.1093/genetics/iyac079/6583183).
 <br /><br />
 
 ---
