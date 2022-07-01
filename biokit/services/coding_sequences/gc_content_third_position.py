@@ -46,7 +46,9 @@ class GCContentThirdPosition(CodingSequence):
 
     def get_third_position_char(self, record, third_position_char: list):
         length_of_coding_seq = len(record._seq)
-        for i in range(0, length_of_coding_seq):
-            if (i + 1) % 3 == 0:
-                third_position_char.append(record._seq[i])
+        for i in range(0, length_of_coding_seq, 3):
+            try:
+                third_position_char.append(record._seq[i:i + 3][2])
+            except IndexError:
+                continue
         return third_position_char

@@ -49,5 +49,8 @@ class GCContentSecondPosition(CodingSequence):
     def get_second_position_char(self, record, second_position_char: list):
         length_of_coding_seq = len(record._seq)
         for i in range(0, length_of_coding_seq, 3):
-            second_position_char.append(record._seq[i:i + 3][1])
+            try:
+                second_position_char.append(record._seq[i:i + 3][1])
+            except IndexError:
+                continue
         return second_position_char
