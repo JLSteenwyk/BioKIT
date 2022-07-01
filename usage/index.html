@@ -16,6 +16,7 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -138,7 +139,7 @@
            <div itemprop="articleBody">
              
   <section id="usage">
-<span id="id1"></span><h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h1>
+<span id="id1"></span><h1>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h1>
 <p>BioKIT helps process and analyze data for bioinformatics research.</p>
 <p>Generally, all functions are designed to help understand the contents of
 various files including those representing alignments, coding sequences, fastq
@@ -147,10 +148,10 @@ files, and genomes.</p>
 <div class="line"><br /></div>
 </div>
 <section id="general-usage">
-<h2>General usage<a class="headerlink" href="#general-usage" title="Permalink to this headline"></a></h2>
+<h2>General usage<a class="headerlink" href="#general-usage" title="Permalink to this heading"></a></h2>
 <hr class="docutils" />
 <section id="calling-functions">
-<h3>Calling functions<a class="headerlink" href="#calling-functions" title="Permalink to this headline"></a></h3>
+<h3>Calling functions<a class="headerlink" href="#calling-functions" title="Permalink to this heading"></a></h3>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit &lt;command&gt; <span class="o">[</span>optional <span class="nb">command</span> arguments<span class="o">]</span>
 </pre></div>
 </div>
@@ -167,7 +168,7 @@ biokit alignment_summary --help
 </div>
 </section>
 <section id="function-aliases">
-<h3>Function aliases<a class="headerlink" href="#function-aliases" title="Permalink to this headline"></a></h3>
+<h3>Function aliases<a class="headerlink" href="#function-aliases" title="Permalink to this heading"></a></h3>
 <p>Each function comes with aliases to save the user some
 key strokes. For example, to get the help message for the ‘alignment_summary’
 function, you can type:</p>
@@ -179,7 +180,7 @@ function, you can type:</p>
 </div>
 </section>
 <section id="command-line-interfaces">
-<h3>Command line interfaces<a class="headerlink" href="#command-line-interfaces" title="Permalink to this headline"></a></h3>
+<h3>Command line interfaces<a class="headerlink" href="#command-line-interfaces" title="Permalink to this heading"></a></h3>
 <p>All functions (including aliases) can also be executed using
 a command-line interface that starts with <em>bk_</em>. For example, instead of typing
 the previous command to get the help message of the alignment_summary function,
@@ -196,10 +197,10 @@ bk_aln_summary -h
 </section>
 </section>
 <section id="alignment-based-functions">
-<h2>Alignment-based functions<a class="headerlink" href="#alignment-based-functions" title="Permalink to this headline"></a></h2>
+<h2>Alignment-based functions<a class="headerlink" href="#alignment-based-functions" title="Permalink to this heading"></a></h2>
 <hr class="docutils" />
 <section id="alignment-length">
-<h3>Alignment length<a class="headerlink" href="#alignment-length" title="Permalink to this headline"></a></h3>
+<h3>Alignment length<a class="headerlink" href="#alignment-length" title="Permalink to this heading"></a></h3>
 <p>Function names: alignment_length; aln_len <br/>
 Command line interface: bk_alignment_length; bk_aln_len</p>
 <p>Calculate the length of an alignment.</p>
@@ -213,7 +214,7 @@ Command line interface: bk_alignment_length; bk_aln_len</p>
 </div>
 </section>
 <section id="alignment-recoding">
-<h3>Alignment recoding<a class="headerlink" href="#alignment-recoding" title="Permalink to this headline"></a></h3>
+<h3>Alignment recoding<a class="headerlink" href="#alignment-recoding" title="Permalink to this heading"></a></h3>
 <p>Function names: alignment_recoding; aln_recoding; recode <br/>
 Command line interface: bk_alignment_recoding; bk_aln_recoding; bk_recode</p>
 <p>Recode alignments using reduced character states.</p>
@@ -260,7 +261,7 @@ Y = pyrimidines (i.e., T and C)</p>
 </div>
 </section>
 <section id="alignment-summary">
-<h3>Alignment summary<a class="headerlink" href="#alignment-summary" title="Permalink to this headline"></a></h3>
+<h3>Alignment summary<a class="headerlink" href="#alignment-summary" title="Permalink to this heading"></a></h3>
 <p>Function names: alignment_summary; aln_summary <br/>
 Command line interface: bk_alignment_summary; bk_aln_summary</p>
 <p>Summary statistics for an alignment. Reported
@@ -278,7 +279,7 @@ number of constant sites, frequency of each character
 </div>
 </section>
 <section id="consensus-sequence">
-<h3>Consensus sequence<a class="headerlink" href="#consensus-sequence" title="Permalink to this headline"></a></h3>
+<h3>Consensus sequence<a class="headerlink" href="#consensus-sequence" title="Permalink to this heading"></a></h3>
 <p>Function names: consensus_sequence; con_seq <br/>
 Command line interface: bk_consensus_sequence; bk_con_seq</p>
 <p>Generates a consequence from a multiple sequence alignment file in FASTA format.</p>
@@ -294,7 +295,7 @@ Command line interface: bk_consensus_sequence; bk_con_seq</p>
 </div>
 </section>
 <section id="constant-sites">
-<h3>Constant sites<a class="headerlink" href="#constant-sites" title="Permalink to this headline"></a></h3>
+<h3>Constant sites<a class="headerlink" href="#constant-sites" title="Permalink to this heading"></a></h3>
 <p>Function names: constant_sites; con_sites <br/>
 Command line interface: bk_constant_sites; bk_con_sites</p>
 <p>Calculate the number of constant sites in an alignment.</p>
@@ -312,7 +313,7 @@ acid sequence (excluding gaps) among all taxa.</p>
 </div>
 </section>
 <section id="parsimony-informative-sites">
-<h3>Parsimony informative sites<a class="headerlink" href="#parsimony-informative-sites" title="Permalink to this headline"></a></h3>
+<h3>Parsimony informative sites<a class="headerlink" href="#parsimony-informative-sites" title="Permalink to this heading"></a></h3>
 <p>Function names: parsimony_informative_sites; pi_sites; pis <br/>
 Command line interface: bk_parsimony_informative_sites; bk_pi_sites; bk_pis</p>
 <p>Calculate the number of parsimony informative
@@ -331,7 +332,7 @@ or amino acids that occur at least twice.</p>
 </div>
 </section>
 <section id="position-specific-score-matrix">
-<h3>Position specific score matrix<a class="headerlink" href="#position-specific-score-matrix" title="Permalink to this headline"></a></h3>
+<h3>Position specific score matrix<a class="headerlink" href="#position-specific-score-matrix" title="Permalink to this heading"></a></h3>
 <p>Function names: position_specific_score_matrix; pssm <br/>
 Command line interface: bk_position_specific_score_matrix; bk_pssm</p>
 <p>Generates a position specific score matrix for an alignment.</p>
@@ -346,7 +347,7 @@ Command line interface: bk_position_specific_score_matrix; bk_pssm</p>
 </div>
 </section>
 <section id="variable-sites">
-<h3>Variable sites<a class="headerlink" href="#variable-sites" title="Permalink to this headline"></a></h3>
+<h3>Variable sites<a class="headerlink" href="#variable-sites" title="Permalink to this heading"></a></h3>
 <p>Function names: variable_sites; var_sites; vs <br/>
 Command line interface: bk_variable_sites; bk_var_sites; bk_vs</p>
 <p>Calculate the number of variable sites in an
@@ -366,10 +367,10 @@ acid characters among all taxa.</p>
 </section>
 </section>
 <section id="coding-sequence-based-functions">
-<h2>Coding sequence-based functions<a class="headerlink" href="#coding-sequence-based-functions" title="Permalink to this headline"></a></h2>
+<h2>Coding sequence-based functions<a class="headerlink" href="#coding-sequence-based-functions" title="Permalink to this heading"></a></h2>
 <hr class="docutils" />
 <section id="gc-content-first-codon-position">
-<h3>GC content first codon position<a class="headerlink" href="#gc-content-first-codon-position" title="Permalink to this headline"></a></h3>
+<h3>GC content first codon position<a class="headerlink" href="#gc-content-first-codon-position" title="Permalink to this heading"></a></h3>
 <p>Function names: gc_content_first_position; gc1 <br/>
 Command line interface: bk_gc_content_first_position; bk_gc1</p>
 <p>Calculate GC content of the first codon position.
@@ -387,7 +388,7 @@ divisible by three.</p>
 </div>
 </section>
 <section id="gc-content-second-codon-position">
-<h3>GC content second codon position<a class="headerlink" href="#gc-content-second-codon-position" title="Permalink to this headline"></a></h3>
+<h3>GC content second codon position<a class="headerlink" href="#gc-content-second-codon-position" title="Permalink to this heading"></a></h3>
 <p>Function names: gc_content_second_position; gc2 <br/>
 Command line interface: bk_gc_content_second_position; bk_gc2</p>
 <p>Calculate GC content of the second codon position.
@@ -405,7 +406,7 @@ divisible by three.</p>
 </div>
 </section>
 <section id="gc-content-third-codon-position">
-<h3>GC content third codon position<a class="headerlink" href="#gc-content-third-codon-position" title="Permalink to this headline"></a></h3>
+<h3>GC content third codon position<a class="headerlink" href="#gc-content-third-codon-position" title="Permalink to this heading"></a></h3>
 <p>Function names: gc_content_third_position; gc3 <br/>
 Command line interface: bk_gc_content_third_position; bk_gc3</p>
 <p>Calculate GC content of the third codon position.
@@ -423,7 +424,7 @@ divisible by three.</p>
 </div>
 </section>
 <section id="gene-wise-relative-synonymous-codon-usage-grscu">
-<h3>Gene-wise relative synonymous codon usage (gRSCU)<a class="headerlink" href="#gene-wise-relative-synonymous-codon-usage-grscu" title="Permalink to this headline"></a></h3>
+<h3>Gene-wise relative synonymous codon usage (gRSCU)<a class="headerlink" href="#gene-wise-relative-synonymous-codon-usage-grscu" title="Permalink to this heading"></a></h3>
 <p>Function names: gene_wise_relative_synonymous_codon_usage; gene_wise_rscu; gw_rscu; grscu <br/>
 Command line interface: bk_gene_wise_relative_synonymous_codon_usage; bk_gene_wise_rscu; bk_gw_rscu; bk_grscu</p>
 <p>Calculate gene-wise relative synonymous codon usage (gRSCU).</p>
@@ -455,7 +456,7 @@ table to be used. Default: 1, which is the standard code.</p>
 </div>
 </section>
 <section id="relative-synonymous-codon-usage">
-<h3>Relative synonymous codon usage<a class="headerlink" href="#relative-synonymous-codon-usage" title="Permalink to this headline"></a></h3>
+<h3>Relative synonymous codon usage<a class="headerlink" href="#relative-synonymous-codon-usage" title="Permalink to this heading"></a></h3>
 <p>Function names: relative_synonymous_codon_usage; rscu <br/>
 Command line interface: bk_relative_synonymous_codon_usage; bk_rscu</p>
 <p>Calculate relative synonymous codon usage.</p>
@@ -478,7 +479,7 @@ table to be used. Default: 1, which is the standard code.</p>
 </div>
 </section>
 <section id="translate-sequence">
-<h3>Translate sequence<a class="headerlink" href="#translate-sequence" title="Permalink to this headline"></a></h3>
+<h3>Translate sequence<a class="headerlink" href="#translate-sequence" title="Permalink to this heading"></a></h3>
 <p>Function names: translate_sequence; translate_seq; trans_seq <br/>
 Command line interface: bk_translate_sequence; bk_translate_seq; bk_trans_seq</p>
 <p>Translates coding sequences to amino acid
@@ -506,10 +507,10 @@ to it.</p>
 </section>
 </section>
 <section id="fastq-file-functions">
-<h2>FASTQ file functions<a class="headerlink" href="#fastq-file-functions" title="Permalink to this headline"></a></h2>
+<h2>FASTQ file functions<a class="headerlink" href="#fastq-file-functions" title="Permalink to this heading"></a></h2>
 <hr class="docutils" />
 <section id="fastq-read-lengths">
-<h3>FASTQ read lengths<a class="headerlink" href="#fastq-read-lengths" title="Permalink to this headline"></a></h3>
+<h3>FASTQ read lengths<a class="headerlink" href="#fastq-read-lengths" title="Permalink to this heading"></a></h3>
 <p>Function names: fastq_read_lengths; fastq_read_lens <br/>
 Command line interface: bk_fastq_read_lengths; bk_fastq_read_lens</p>
 <p>Determine lengths of FASTQ reads.</p>
@@ -529,7 +530,7 @@ verbose option.</p>
 </div>
 </section>
 <section id="subset-pe-fastq-reads">
-<h3>Subset PE FASTQ reads<a class="headerlink" href="#subset-pe-fastq-reads" title="Permalink to this headline"></a></h3>
+<h3>Subset PE FASTQ reads<a class="headerlink" href="#subset-pe-fastq-reads" title="Permalink to this heading"></a></h3>
 <p>Function names: subset_pe_fastq_reads; subset_pe_fastq <br/>
 Command line interface: bk_subset_pe_fastq_reads; bk_subset_pe_fastq</p>
 <p>Subset paired-end FASTQ data.</p>
@@ -557,7 +558,7 @@ information is maintained.</p>
 </div>
 </section>
 <section id="subset-se-fastq-reads">
-<h3>Subset SE FASTQ reads<a class="headerlink" href="#subset-se-fastq-reads" title="Permalink to this headline"></a></h3>
+<h3>Subset SE FASTQ reads<a class="headerlink" href="#subset-se-fastq-reads" title="Permalink to this heading"></a></h3>
 <p>Function names: subset_se_fastq_reads; subset_se_fastq <br/>
 Command line interface: bk_subset_se_fastq_reads; bk_subset_se_fastq</p>
 <p>Subset single-end FASTQ data.</p>
@@ -584,7 +585,7 @@ and time.</p>
 </div>
 </section>
 <section id="trim-pe-adapters-fastq-reads">
-<h3>Trim PE adapters FASTQ reads<a class="headerlink" href="#trim-pe-adapters-fastq-reads" title="Permalink to this headline"></a></h3>
+<h3>Trim PE adapters FASTQ reads<a class="headerlink" href="#trim-pe-adapters-fastq-reads" title="Permalink to this heading"></a></h3>
 <p>Function names: trim_pe_adapters_fastq_reads; trim_pe_adapters_fastq <br/>
 Command line interface: bk_trim_pe_adapters_fastq_reads; bk_trim_pe_adapters_fastq</p>
 <p>Trim adapters from paired-end FastQ data.</p>
@@ -613,7 +614,7 @@ TruSeq3-SE</p>
 </div>
 </section>
 <section id="trim-pe-fastq-reads">
-<h3>Trim PE FASTQ reads<a class="headerlink" href="#trim-pe-fastq-reads" title="Permalink to this headline"></a></h3>
+<h3>Trim PE FASTQ reads<a class="headerlink" href="#trim-pe-fastq-reads" title="Permalink to this heading"></a></h3>
 <p>Function names: trim_pe_fastq_reads; trim_pe_fastq <br/>
 Command line interface: bk_trim_pe_fastq_reads; bk_trim_pe_fastq</p>
 <p>Quality trim paired-end FastQ data.</p>
@@ -639,7 +640,7 @@ saved to files with the suffix
 </div>
 </section>
 <section id="trim-se-adapters-fastq-reads">
-<h3>Trim SE adapters FASTQ reads<a class="headerlink" href="#trim-se-adapters-fastq-reads" title="Permalink to this headline"></a></h3>
+<h3>Trim SE adapters FASTQ reads<a class="headerlink" href="#trim-se-adapters-fastq-reads" title="Permalink to this heading"></a></h3>
 <p>Function names: trim_se_adapters_fastq_reads; trim_se_adapters_fastq <br/>
 Command line interface: bk_trim_se_adapters_fastq_reads; bk_trim_se_adapters_fastq</p>
 <p>Trim adapters from single-end FastQ data.</p>
@@ -661,7 +662,7 @@ output_file argument.</p>
 </div>
 </section>
 <section id="trim-se-fastq-reads">
-<h3>Trim SE FASTQ reads<a class="headerlink" href="#trim-se-fastq-reads" title="Permalink to this headline"></a></h3>
+<h3>Trim SE FASTQ reads<a class="headerlink" href="#trim-se-fastq-reads" title="Permalink to this heading"></a></h3>
 <p>Function names: trim_se_fastq_reads; trim_se_fastq <br/>
 Command line interface: bk_trim_se_fastq_reads; bk_trim_se_fastq</p>
 <p>Quality trim single-end FastQ data.</p>
@@ -685,10 +686,10 @@ with the output_file argument.</p>
 </section>
 </section>
 <section id="genome-functions">
-<h2>Genome functions<a class="headerlink" href="#genome-functions" title="Permalink to this headline"></a></h2>
+<h2>Genome functions<a class="headerlink" href="#genome-functions" title="Permalink to this heading"></a></h2>
 <hr class="docutils" />
 <section id="gc-content">
-<h3>GC content<a class="headerlink" href="#gc-content" title="Permalink to this headline"></a></h3>
+<h3>GC content<a class="headerlink" href="#gc-content" title="Permalink to this heading"></a></h3>
 <p>Function names: gc_content; gc <br/>
 Command line interface: bk_gc_content; bk_gc</p>
 <p>Calculate GC content of a fasta file.</p>
@@ -707,7 +708,7 @@ option.</p>
 </div>
 </section>
 <section id="genome-assembly-metrics">
-<h3>Genome assembly metrics<a class="headerlink" href="#genome-assembly-metrics" title="Permalink to this headline"></a></h3>
+<h3>Genome assembly metrics<a class="headerlink" href="#genome-assembly-metrics" title="Permalink to this heading"></a></h3>
 <p>Function names: genome_assembly_metrics; assembly_metrics <br/>
 Command line interface: bk_genome_assembly_metrics; bk_assembly_metrics</p>
 <p>Calculate L50, L90, N50, N90, GC content, assembly size,
@@ -738,7 +739,7 @@ Only scaffolds with a length greater than this value will be counted. Default: 5
 </div>
 </section>
 <section id="l50">
-<h3>L50<a class="headerlink" href="#l50" title="Permalink to this headline"></a></h3>
+<h3>L50<a class="headerlink" href="#l50" title="Permalink to this heading"></a></h3>
 <p>Function names: l50 <br/>
 Command line interface: bk_l50</p>
 <p>Calculates L50 for a genome assembly.</p>
@@ -754,7 +755,7 @@ makes up half of the genome size.</p>
 </div>
 </section>
 <section id="l90">
-<h3>L90<a class="headerlink" href="#l90" title="Permalink to this headline"></a></h3>
+<h3>L90<a class="headerlink" href="#l90" title="Permalink to this heading"></a></h3>
 <p>Function names: l90 <br/>
 Command line interface: bk_l90</p>
 <p>Calculates L90 for a genome assembly.</p>
@@ -770,7 +771,7 @@ makes up 90% of the genome size.</p>
 </div>
 </section>
 <section id="longest-scaffold">
-<h3>Longest scaffold<a class="headerlink" href="#longest-scaffold" title="Permalink to this headline"></a></h3>
+<h3>Longest scaffold<a class="headerlink" href="#longest-scaffold" title="Permalink to this heading"></a></h3>
 <p>Function names: longest_scaffold; longest_scaff; longest_contig; longest_cont <br/>
 Command line interface: bk_longest_scaffold; bk_longest_scaff; bk_longest_contig; bk_longest_cont</p>
 <p>Determine the length of the longest scaffold in a genome assembly.</p>
@@ -784,7 +785,7 @@ Command line interface: bk_longest_scaffold; bk_longest_scaff; bk_longest_contig
 </div>
 </section>
 <section id="n50">
-<h3>N50<a class="headerlink" href="#n50" title="Permalink to this headline"></a></h3>
+<h3>N50<a class="headerlink" href="#n50" title="Permalink to this heading"></a></h3>
 <p>Function names: n50 <br/>
 Command line interface: bk_n50</p>
 <p>Calculates N50 for a genome assembly.</p>
@@ -799,7 +800,7 @@ Command line interface: bk_n50</p>
 </div>
 </section>
 <section id="n90">
-<h3>N90<a class="headerlink" href="#n90" title="Permalink to this headline"></a></h3>
+<h3>N90<a class="headerlink" href="#n90" title="Permalink to this heading"></a></h3>
 <p>Function names: n90 <br/>
 Command line interface: bk_n90</p>
 <p>Calculates N90 for a genome assembly.</p>
@@ -814,7 +815,7 @@ Command line interface: bk_n90</p>
 </div>
 </section>
 <section id="number-of-large-scaffolds">
-<h3>Number of large scaffolds<a class="headerlink" href="#number-of-large-scaffolds" title="Permalink to this headline"></a></h3>
+<h3>Number of large scaffolds<a class="headerlink" href="#number-of-large-scaffolds" title="Permalink to this heading"></a></h3>
 <p>Function names: number_of_large_scaffolds; num_of_lrg_scaffolds; number_of_large_contigs; num_of_lrg_cont <br/>
 Command line interface: bk_number_of_large_scaffolds; bk_num_of_lrg_scaffolds; bk_number_of_large_contigs; bk_num_of_lrg_cont</p>
 <p>Calculate number and total sequence length of
@@ -833,7 +834,7 @@ value will be counted. Default: 500</p>
 </div>
 </section>
 <section id="number-of-scaffolds">
-<h3>Number of scaffolds<a class="headerlink" href="#number-of-scaffolds" title="Permalink to this headline"></a></h3>
+<h3>Number of scaffolds<a class="headerlink" href="#number-of-scaffolds" title="Permalink to this heading"></a></h3>
 <p>Function names: number_of_scaffolds; num_of_scaffolds; number_of_contigs; num_of_cont <br/>
 Command line interface: bk_number_of_scaffolds; bk_num_of_scaffolds; bk_number_of_contigs; bk_num_of_cont</p>
 <p>Calculate the number of scaffolds or entries
@@ -851,7 +852,7 @@ function.</p>
 </div>
 </section>
 <section id="sum-of-scaffold-lengths">
-<h3>Sum of scaffold lengths<a class="headerlink" href="#sum-of-scaffold-lengths" title="Permalink to this headline"></a></h3>
+<h3>Sum of scaffold lengths<a class="headerlink" href="#sum-of-scaffold-lengths" title="Permalink to this heading"></a></h3>
 <p>Function names: sum_of_scaffold_lengths; sum_of_contig_lengths <br/>
 Command line interface: bk_sum_of_scaffold_lengths; bk_sum_of_contig_lengths</p>
 <p>Determine the sum of scaffold lengths.</p>
@@ -870,10 +871,10 @@ of all coding sequences.</p>
 </section>
 </section>
 <section id="sequence-summary-and-processing-functions">
-<h2>Sequence summary and processing functions<a class="headerlink" href="#sequence-summary-and-processing-functions" title="Permalink to this headline"></a></h2>
+<h2>Sequence summary and processing functions<a class="headerlink" href="#sequence-summary-and-processing-functions" title="Permalink to this heading"></a></h2>
 <hr class="docutils" />
 <section id="character-frequency">
-<h3>Character frequency<a class="headerlink" href="#character-frequency" title="Permalink to this headline"></a></h3>
+<h3>Character frequency<a class="headerlink" href="#character-frequency" title="Permalink to this heading"></a></h3>
 <p>Function names: character_frequency; char_freq <br/>
 Command line interface: bk_character_frequency; bk_char_freq</p>
 <p>Calculate the frequency of characters in a FASTA file.</p>
@@ -889,7 +890,7 @@ in a genome or the frequency of amino acids in a proteome.</p>
 </div>
 </section>
 <section id="get-fasta-entry-faidx">
-<h3>Get FASTA entry (faidx)<a class="headerlink" href="#get-fasta-entry-faidx" title="Permalink to this headline"></a></h3>
+<h3>Get FASTA entry (faidx)<a class="headerlink" href="#get-fasta-entry-faidx" title="Permalink to this heading"></a></h3>
 <p>Function names: faidx; get_entry; ge <br/>
 Command line interface: bk_faidx; bk_get_entry; bk_ge</p>
 <p>Extracts sequence entry from fasta file.</p>
@@ -907,7 +908,7 @@ sequence file.</p>
 </div>
 </section>
 <section id="file-format-converter">
-<h3>File format converter<a class="headerlink" href="#file-format-converter" title="Permalink to this headline"></a></h3>
+<h3>File format converter<a class="headerlink" href="#file-format-converter" title="Permalink to this heading"></a></h3>
 <p>Function names: file_format_converter; format_converter; ffc <br/>
 Command line interface: bk_file_format_converter; bk_format_converter; bk_ffc</p>
 <p>Converts a multiple sequence file from one format to another.</p>
@@ -930,7 +931,7 @@ and --output_file arguments.</p>
 </div>
 </section>
 <section id="multiple-line-to-single-line-fasta">
-<h3>Multiple line to single line FASTA<a class="headerlink" href="#multiple-line-to-single-line-fasta" title="Permalink to this headline"></a></h3>
+<h3>Multiple line to single line FASTA<a class="headerlink" href="#multiple-line-to-single-line-fasta" title="Permalink to this heading"></a></h3>
 <p>Function names: multiple_line_to_single_line_fasta; ml2sl <br/>
 Command line interface: bk_multiple_line_to_single_line_fasta; bk_ml2sl</p>
 <p>Converts FASTA files with multiple lines
@@ -947,7 +948,7 @@ represented on one line.</p>
 </div>
 </section>
 <section id="remove-fasta-entry">
-<h3>Remove FASTA entry<a class="headerlink" href="#remove-fasta-entry" title="Permalink to this headline"></a></h3>
+<h3>Remove FASTA entry<a class="headerlink" href="#remove-fasta-entry" title="Permalink to this heading"></a></h3>
 <p>Function names: remove_fasta_entry <br/>
 Command line interface: bk_remove_fasta_entry</p>
 <p>Remove FASTA entry from multi-FASTA file.</p>
@@ -967,7 +968,7 @@ added to it.</p>
 </div>
 </section>
 <section id="remove-short-sequences">
-<h3>Remove short sequences<a class="headerlink" href="#remove-short-sequences" title="Permalink to this headline"></a></h3>
+<h3>Remove short sequences<a class="headerlink" href="#remove-short-sequences" title="Permalink to this heading"></a></h3>
 <p>Function names: remove_short_sequences; remove_short_seqs <br/>
 Command line interface: bk_remove_short_sequences; bk_remove_short_seqs</p>
 <p>Remove short sequences from a multi-FASTA file.</p>
@@ -992,7 +993,7 @@ added to it.</p>
 </div>
 </section>
 <section id="rename-fasta-entries">
-<h3>Rename FASTA entries<a class="headerlink" href="#rename-fasta-entries" title="Permalink to this headline"></a></h3>
+<h3>Rename FASTA entries<a class="headerlink" href="#rename-fasta-entries" title="Permalink to this heading"></a></h3>
 <p>Function names: rename_fasta_entries; rename_fasta <br/>
 Command line interface: bk_rename_fasta_entries; bk_rename_fasta</p>
 <p>Renames fasta entries.</p>
@@ -1012,7 +1013,7 @@ output alignment.</p>
 </div>
 </section>
 <section id="reorder-by-sequence-length">
-<h3>Reorder by sequence length<a class="headerlink" href="#reorder-by-sequence-length" title="Permalink to this headline"></a></h3>
+<h3>Reorder by sequence length<a class="headerlink" href="#reorder-by-sequence-length" title="Permalink to this heading"></a></h3>
 <p>Function names: reorder_by_sequence_length; reorder_by_seq_len <br/>
 Command line interface: bk_reorder_by_sequence_length; bk_reorder_by_seq_len</p>
 <p>Reorder FASTA file entries from the longest entry
@@ -1030,7 +1031,7 @@ Default output has the same name as the input file with the suffix
 </div>
 </section>
 <section id="sequence-complement">
-<h3>Sequence complement<a class="headerlink" href="#sequence-complement" title="Permalink to this headline"></a></h3>
+<h3>Sequence complement<a class="headerlink" href="#sequence-complement" title="Permalink to this heading"></a></h3>
 <p>Function names: sequence_complement; seq_comp <br/>
 Command line interface: bk_sequence_complement; bk_seq_comp</p>
 <p>Generates the sequence complement for all entries
@@ -1047,7 +1048,7 @@ complement, add the -r/–reverse argument.</p>
 </div>
 </section>
 <section id="sequence-length">
-<h3>Sequence length<a class="headerlink" href="#sequence-length" title="Permalink to this headline"></a></h3>
+<h3>Sequence length<a class="headerlink" href="#sequence-length" title="Permalink to this heading"></a></h3>
 <p>Function names: sequence_length; seq_len <br/>
 Command line interface: bk_sequence_length; bk_seq_len</p>
 <p>Calculate sequence length of each FASTA entry.</p>
@@ -1061,7 +1062,7 @@ Command line interface: bk_sequence_length; bk_seq_len</p>
 </div>
 </section>
 <section id="single-line-to-multiple-line-fasta">
-<h3>Single line to multiple line fasta<a class="headerlink" href="#single-line-to-multiple-line-fasta" title="Permalink to this headline"></a></h3>
+<h3>Single line to multiple line fasta<a class="headerlink" href="#single-line-to-multiple-line-fasta" title="Permalink to this heading"></a></h3>
 <p>Function names: single_line_to_multiple_line_fasta; sl2ml <br/>
 Command line interface: bk_single_line_to_multiple_line_fasta; bk_sl2ml</p>
 <p>Calculate sequence length of each FASTA entry.</p>
