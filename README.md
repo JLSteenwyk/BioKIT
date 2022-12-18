@@ -11,7 +11,7 @@
   </p>
     <p align="center">
         <a href="https://github.com/JLSteenwyk/BioKIT/actions" alt="Build">
-            <img src="https://img.shields.io/github/actions/workflow/status/JLSteenwyk/BioKIT/ci.yml?branch=master">
+            <img src="https://img.shields.io/github/actions/workflow/status/JLSteenwyk/BioKIT/ci.yml?branch=main">
         </a>
         <a href="https://codecov.io/gh/JLSteenwyk/BioKIT" alt="Coverage">
           <img src="https://codecov.io/gh/JLSteenwyk/BioKIT/branch/main/graph/badge.svg?token=5X9C6YAVIG">
