@@ -12,14 +12,12 @@ CLASSIFIERS = [
     "Operating System :: OS Independent",
     "Intended Audience :: Science/Research",
     "Programming Language :: Python",
-    "Programming Language :: Python :: 3.6",
-    "Programming Language :: Python :: 3.7",
-    "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
     "Topic :: Scientific/Engineering",
 ]
 
-REQUIRES = ["biopython==1.76", "numpy==1.18.2", "cython"]
+REQUIRES = ["biopython==1.76", "numpy==1.24.0", "cython"]
 
 setup(
     name="jlsteenwyk-biokit",
