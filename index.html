@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Quick Start &mdash; biokit  documentation</title>
@@ -13,12 +13,11 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -30,12 +29,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="#">
-            <img src="_static/logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="#">
+            
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -63,7 +66,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="#" class="icon icon-home"></a></li>
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">Quick Start</li>
       <li class="wy-breadcrumbs-aside">
       </li>
@@ -80,16 +83,16 @@ on alignments, coding sequences, fastq files, and genome files.</p>
 <p>If you found BioKIT useful, please cite <em>BioKIT: a versatile toolkit
 for processing and analyzing diverse types of sequence data</em>. Genetics. doi: <a class="reference external" href="https://academic.oup.com/genetics/advance-article/doi/10.1093/genetics/iyac079/6583183">10.1093/genetics/iyac079</a>.</p>
 <section id="quick-start">
-<h1>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this heading"></a></h1>
+<h1>Quick Start<a class="headerlink" href="#quick-start" title="Link to this heading"></a></h1>
 <p><strong>1) Installation</strong></p>
 <p>To install using <em>pip</em>, we strongly recommend building a virtual environment to avoid
 software dependency issues. To do so, execute the following commands:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># create virtual environment</span>
-python -m venv .venv
+python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
 <span class="c1"># activate virtual environment</span>
-<span class="nb">source</span> .venv/bin/activate
+<span class="nb">source</span><span class="w"> </span>.venv/bin/activate
 <span class="c1"># install biokit</span>
-pip install jlsteenwyk-biokit
+pip<span class="w"> </span>install<span class="w"> </span>jlsteenwyk-biokit
 </pre></div>
 </div>
 <p><strong>Note, the virtual environment must be activated to use biokit.</strong></p>
@@ -104,14 +107,14 @@ deactivate
 <p>Similarly, to install from source, we strongly recommend using a virtual environment. To do so, use the
 following commands:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># download</span>
-git clone https://github.com/JLSteenwyk/BioKIT.git
-<span class="nb">cd</span> BioKIT/
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/JLSteenwyk/BioKIT.git
+<span class="nb">cd</span><span class="w"> </span>BioKIT/
 <span class="c1"># create virtual environment</span>
-python -m venv .venv
+python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
 <span class="c1"># activate virtual environment</span>
-<span class="nb">source</span> .venv/bin/activate
+<span class="nb">source</span><span class="w"> </span>.venv/bin/activate
 <span class="c1"># install</span>
-make install
+make<span class="w"> </span>install
 </pre></div>
 </div>
 <p>To deactivate your virtual environment, use the following command:</p>
@@ -124,7 +127,7 @@ deactivate
 <div class="line"><br /></div>
 </div>
 <p>To install via anaconda, execute the following command:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>conda install -c jlsteenwyk jlsteenwyk-biokit
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>jlsteenwyk<span class="w"> </span>jlsteenwyk-biokit
 </pre></div>
 </div>
 <p>Visit here for more information:
@@ -134,7 +137,7 @@ deactivate
 </div>
 <p><strong>2) Usage</strong></p>
 <p>Get the help message from BioKIT:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit -h
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>-h
 </pre></div>
 </div>
 <div class="line-block">

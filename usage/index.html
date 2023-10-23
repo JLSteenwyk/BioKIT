@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Usage &mdash; biokit  documentation</title>
@@ -13,12 +13,11 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -31,12 +30,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html">
-            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -129,7 +132,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">Usage</li>
       <li class="wy-breadcrumbs-aside">
       </li>
@@ -140,7 +143,7 @@
            <div itemprop="articleBody">
              
   <section id="usage">
-<span id="id1"></span><h1>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h1>
+<span id="id1"></span><h1>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h1>
 <p>BioKIT helps process and analyze data for bioinformatics research.</p>
 <p>Generally, all functions are designed to help understand the contents of
 various files including those representing alignments, coding sequences, fastq
@@ -149,19 +152,19 @@ files, and genomes.</p>
 <div class="line"><br /></div>
 </div>
 <section id="general-usage">
-<h2>General usage<a class="headerlink" href="#general-usage" title="Permalink to this heading"></a></h2>
+<h2>General usage<a class="headerlink" href="#general-usage" title="Link to this heading"></a></h2>
 <hr class="docutils" />
 <section id="calling-functions">
-<h3>Calling functions<a class="headerlink" href="#calling-functions" title="Permalink to this heading"></a></h3>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit &lt;command&gt; <span class="o">[</span>optional <span class="nb">command</span> arguments<span class="o">]</span>
+<h3>Calling functions<a class="headerlink" href="#calling-functions" title="Link to this heading"></a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>&lt;command&gt;<span class="w"> </span><span class="o">[</span>optional<span class="w"> </span><span class="nb">command</span><span class="w"> </span>arguments<span class="o">]</span>
 </pre></div>
 </div>
 <p>Command specific help messages can be viewed by adding a
 -h/--help argument after the command. For example, to see the
 to see the help message for the command ‘alignment_summary’, execute:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit alignment_summary -h
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>alignment_summary<span class="w"> </span>-h
 <span class="c1"># or</span>
-biokit alignment_summary --help
+biokit<span class="w"> </span>alignment_summary<span class="w"> </span>--help
 </pre></div>
 </div>
 <div class="line-block">
@@ -169,11 +172,11 @@ biokit alignment_summary --help
 </div>
 </section>
 <section id="function-aliases">
-<h3>Function aliases<a class="headerlink" href="#function-aliases" title="Permalink to this heading"></a></h3>
+<h3>Function aliases<a class="headerlink" href="#function-aliases" title="Link to this heading"></a></h3>
 <p>Each function comes with aliases to save the user some
 key strokes. For example, to get the help message for the ‘alignment_summary’
 function, you can type:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit aln_summary -h
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>aln_summary<span class="w"> </span>-h
 </pre></div>
 </div>
 <div class="line-block">
@@ -181,14 +184,14 @@ function, you can type:</p>
 </div>
 </section>
 <section id="command-line-interfaces">
-<h3>Command line interfaces<a class="headerlink" href="#command-line-interfaces" title="Permalink to this heading"></a></h3>
+<h3>Command line interfaces<a class="headerlink" href="#command-line-interfaces" title="Link to this heading"></a></h3>
 <p>All functions (including aliases) can also be executed using
 a command-line interface that starts with <em>bk_</em>. For example, instead of typing
 the previous command to get the help message of the alignment_summary function,
 you can type:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>bk_alignment_summary -h
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>bk_alignment_summary<span class="w"> </span>-h
 <span class="c1"># or</span>
-bk_aln_summary -h
+bk_aln_summary<span class="w"> </span>-h
 </pre></div>
 </div>
 <p>All possible function names are specified at the top of each function section.</p>
@@ -198,14 +201,14 @@ bk_aln_summary -h
 </section>
 </section>
 <section id="alignment-based-functions">
-<h2>Alignment-based functions<a class="headerlink" href="#alignment-based-functions" title="Permalink to this heading"></a></h2>
+<h2>Alignment-based functions<a class="headerlink" href="#alignment-based-functions" title="Link to this heading"></a></h2>
 <hr class="docutils" />
 <section id="alignment-length">
-<h3>Alignment length<a class="headerlink" href="#alignment-length" title="Permalink to this heading"></a></h3>
+<h3>Alignment length<a class="headerlink" href="#alignment-length" title="Link to this heading"></a></h3>
 <p>Function names: alignment_length; aln_len <br/>
 Command line interface: bk_alignment_length; bk_aln_len</p>
 <p>Calculate the length of an alignment.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit alignment_length &lt;fasta&gt;
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>alignment_length<span class="w"> </span>&lt;fasta&gt;
 </pre></div>
 </div>
 <p>Options: <br/>
@@ -215,7 +218,7 @@ Command line interface: bk_alignment_length; bk_aln_len</p>
 </div>
 </section>
 <section id="alignment-recoding">
-<h3>Alignment recoding<a class="headerlink" href="#alignment-recoding" title="Permalink to this heading"></a></h3>
+<h3>Alignment recoding<a class="headerlink" href="#alignment-recoding" title="Link to this heading"></a></h3>
 <p>Function names: alignment_recoding; aln_recoding; recode <br/>
 Command line interface: bk_alignment_recoding; bk_aln_recoding; bk_recode</p>
 <p>Recode alignments using reduced character states.</p>
@@ -226,7 +229,7 @@ recoding schemes can be used and should be formatted
 as a two column file wherein the first column is the
 recoded character and the second column is the character
 in the alignment.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit alignment_recoding &lt;fasta&gt; <span class="o">[</span>-c/--code &lt;code&gt;<span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>alignment_recoding<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-c/--code<span class="w"> </span>&lt;code&gt;<span class="o">]</span>
 </pre></div>
 </div>
 <p>Codes for which recoding scheme to use: <br/>
@@ -262,7 +265,7 @@ Y = pyrimidines (i.e., T and C)</p>
 </div>
 </section>
 <section id="alignment-summary">
-<h3>Alignment summary<a class="headerlink" href="#alignment-summary" title="Permalink to this heading"></a></h3>
+<h3>Alignment summary<a class="headerlink" href="#alignment-summary" title="Link to this heading"></a></h3>
 <p>Function names: alignment_summary; aln_summary <br/>
 Command line interface: bk_alignment_summary; bk_aln_summary</p>
 <p>Summary statistics for an alignment. Reported
@@ -270,7 +273,7 @@ statistics include alignment length, number of taxa,
 number of parsimony sites, number of variable sites,
 number of constant sites, frequency of each character
 (including gaps, which are considered to be ‘-’ or ‘?’).</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit alignment_summary &lt;fasta&gt;
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>alignment_summary<span class="w"> </span>&lt;fasta&gt;
 </pre></div>
 </div>
 <p>Options: <br/>
@@ -280,11 +283,11 @@ number of constant sites, frequency of each character
 </div>
 </section>
 <section id="consensus-sequence">
-<h3>Consensus sequence<a class="headerlink" href="#consensus-sequence" title="Permalink to this heading"></a></h3>
+<h3>Consensus sequence<a class="headerlink" href="#consensus-sequence" title="Link to this heading"></a></h3>
 <p>Function names: consensus_sequence; con_seq <br/>
 Command line interface: bk_consensus_sequence; bk_con_seq</p>
 <p>Generates a consequence from a multiple sequence alignment file in FASTA format.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit consensus_sequence &lt;fasta&gt; -t/--threshold &lt;threshold&gt; -ac/--ambiguous_character &lt;ambiguous character&gt;
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>consensus_sequence<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span>-t/--threshold<span class="w"> </span>&lt;threshold&gt;<span class="w"> </span>-ac/--ambiguous_character<span class="w"> </span>&lt;ambiguous<span class="w"> </span>character&gt;
 </pre></div>
 </div>
 <p>Options: <br/>
@@ -296,14 +299,14 @@ Command line interface: bk_consensus_sequence; bk_con_seq</p>
 </div>
 </section>
 <section id="constant-sites">
-<h3>Constant sites<a class="headerlink" href="#constant-sites" title="Permalink to this heading"></a></h3>
+<h3>Constant sites<a class="headerlink" href="#constant-sites" title="Link to this heading"></a></h3>
 <p>Function names: constant_sites; con_sites <br/>
 Command line interface: bk_constant_sites; bk_con_sites</p>
 <p>Calculate the number of constant sites in an alignment.</p>
 <p>Constant sites are defined as a site in an
 alignment with the same nucleotide or amino
 acid sequence (excluding gaps) among all taxa.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit constant_sites &lt;fasta&gt; <span class="o">[</span>-v/<span class="se">\-\-</span>verbose<span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>constant_sites<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-v/<span class="se">\-\-</span>verbose<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
@@ -314,7 +317,7 @@ acid sequence (excluding gaps) among all taxa.</p>
 </div>
 </section>
 <section id="parsimony-informative-sites">
-<h3>Parsimony informative sites<a class="headerlink" href="#parsimony-informative-sites" title="Permalink to this heading"></a></h3>
+<h3>Parsimony informative sites<a class="headerlink" href="#parsimony-informative-sites" title="Link to this heading"></a></h3>
 <p>Function names: parsimony_informative_sites; pi_sites; pis <br/>
 Command line interface: bk_parsimony_informative_sites; bk_pi_sites; bk_pis</p>
 <p>Calculate the number of parsimony informative
@@ -322,7 +325,7 @@ sites in an alignment.</p>
 <p>Parsimony informative sites are defined as a
 site in an alignment with at least two nucleotides
 or amino acids that occur at least twice.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit parsimony_informative_sites &lt;fasta&gt; <span class="o">[</span>-v/<span class="se">\-\-</span>verbose<span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>parsimony_informative_sites<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-v/<span class="se">\-\-</span>verbose<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
@@ -333,11 +336,11 @@ or amino acids that occur at least twice.</p>
 </div>
 </section>
 <section id="position-specific-score-matrix">
-<h3>Position specific score matrix<a class="headerlink" href="#position-specific-score-matrix" title="Permalink to this heading"></a></h3>
+<h3>Position specific score matrix<a class="headerlink" href="#position-specific-score-matrix" title="Link to this heading"></a></h3>
 <p>Function names: position_specific_score_matrix; pssm <br/>
 Command line interface: bk_position_specific_score_matrix; bk_pssm</p>
 <p>Generates a position specific score matrix for an alignment.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit position_specific_score_matrix &lt;fasta&gt; <span class="o">[</span>-ac/--ambiguous_character &lt;ambiguous character&gt;<span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>position_specific_score_matrix<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-ac/--ambiguous_character<span class="w"> </span>&lt;ambiguous<span class="w"> </span>character&gt;<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
@@ -348,7 +351,7 @@ Command line interface: bk_position_specific_score_matrix; bk_pssm</p>
 </div>
 </section>
 <section id="variable-sites">
-<h3>Variable sites<a class="headerlink" href="#variable-sites" title="Permalink to this heading"></a></h3>
+<h3>Variable sites<a class="headerlink" href="#variable-sites" title="Link to this heading"></a></h3>
 <p>Function names: variable_sites; var_sites; vs <br/>
 Command line interface: bk_variable_sites; bk_var_sites; bk_vs</p>
 <p>Calculate the number of variable sites in an
@@ -356,7 +359,7 @@ alignment.</p>
 <p>Variable sites are defined as a site in an
 alignment with at least two nucleotide or amino
 acid characters among all taxa.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit variable_sites &lt;fasta&gt; <span class="o">[</span>-v/<span class="se">\-\-</span>verbose<span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>variable_sites<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-v/<span class="se">\-\-</span>verbose<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
@@ -368,17 +371,17 @@ acid characters among all taxa.</p>
 </section>
 </section>
 <section id="coding-sequence-based-functions">
-<h2>Coding sequence-based functions<a class="headerlink" href="#coding-sequence-based-functions" title="Permalink to this heading"></a></h2>
+<h2>Coding sequence-based functions<a class="headerlink" href="#coding-sequence-based-functions" title="Link to this heading"></a></h2>
 <hr class="docutils" />
 <section id="gc-content-first-codon-position">
-<h3>GC content first codon position<a class="headerlink" href="#gc-content-first-codon-position" title="Permalink to this heading"></a></h3>
+<h3>GC content first codon position<a class="headerlink" href="#gc-content-first-codon-position" title="Link to this heading"></a></h3>
 <p>Function names: gc_content_first_position; gc1 <br/>
 Command line interface: bk_gc_content_first_position; bk_gc1</p>
 <p>Calculate GC content of the first codon position.
 The input must be the coding sequence of a gene or
 genes. All genes are assumed to have sequence lengths
 divisible by three.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit gc_content_first_position &lt;fasta&gt; <span class="o">[</span>-v/--verbose<span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>gc_content_first_position<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-v/--verbose<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
@@ -389,14 +392,14 @@ divisible by three.</p>
 </div>
 </section>
 <section id="gc-content-second-codon-position">
-<h3>GC content second codon position<a class="headerlink" href="#gc-content-second-codon-position" title="Permalink to this heading"></a></h3>
+<h3>GC content second codon position<a class="headerlink" href="#gc-content-second-codon-position" title="Link to this heading"></a></h3>
 <p>Function names: gc_content_second_position; gc2 <br/>
 Command line interface: bk_gc_content_second_position; bk_gc2</p>
 <p>Calculate GC content of the second codon position.
 The input must be the coding sequence of a gene or
 genes. All genes are assumed to have sequence lengths
 divisible by three.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit gc_content_second_position &lt;fasta&gt; <span class="o">[</span>-v/--verbose<span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>gc_content_second_position<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-v/--verbose<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
@@ -407,14 +410,14 @@ divisible by three.</p>
 </div>
 </section>
 <section id="gc-content-third-codon-position">
-<h3>GC content third codon position<a class="headerlink" href="#gc-content-third-codon-position" title="Permalink to this heading"></a></h3>
+<h3>GC content third codon position<a class="headerlink" href="#gc-content-third-codon-position" title="Link to this heading"></a></h3>
 <p>Function names: gc_content_third_position; gc3 <br/>
 Command line interface: bk_gc_content_third_position; bk_gc3</p>
 <p>Calculate GC content of the third codon position.
 The input must be the coding sequence of a gene or
 genes. All genes are assumed to have sequence lengths
 divisible by three.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit gc_content_third_position &lt;fasta&gt; <span class="o">[</span>-v/--verbose<span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>gc_content_third_position<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-v/--verbose<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
@@ -425,7 +428,7 @@ divisible by three.</p>
 </div>
 </section>
 <section id="gene-wise-relative-synonymous-codon-usage-grscu">
-<h3>Gene-wise relative synonymous codon usage (gRSCU)<a class="headerlink" href="#gene-wise-relative-synonymous-codon-usage-grscu" title="Permalink to this heading"></a></h3>
+<h3>Gene-wise relative synonymous codon usage (gRSCU)<a class="headerlink" href="#gene-wise-relative-synonymous-codon-usage-grscu" title="Link to this heading"></a></h3>
 <p>Function names: gene_wise_relative_synonymous_codon_usage; gene_wise_rscu; gw_rscu; grscu <br/>
 Command line interface: bk_gene_wise_relative_synonymous_codon_usage; bk_gene_wise_rscu; bk_gw_rscu; bk_grscu</p>
 <p>Calculate gene-wise relative synonymous codon usage (gRSCU).</p>
@@ -445,7 +448,7 @@ RSCU values observed in a gene.</p>
 <p>Custom genetic codes can be used as input and should
 be formatted with the codon in first column and the
 resulting amino acid in the second column.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit gene_wise_relative_synonymous_codon_usage &lt;fasta&gt; <span class="o">[</span>-tt/--translation_table &lt;code&gt;<span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>gene_wise_relative_synonymous_codon_usage<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-tt/--translation_table<span class="w"> </span>&lt;code&gt;<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
@@ -457,7 +460,7 @@ table to be used. Default: 1, which is the standard code.</p>
 </div>
 </section>
 <section id="relative-synonymous-codon-usage">
-<h3>Relative synonymous codon usage<a class="headerlink" href="#relative-synonymous-codon-usage" title="Permalink to this heading"></a></h3>
+<h3>Relative synonymous codon usage<a class="headerlink" href="#relative-synonymous-codon-usage" title="Link to this heading"></a></h3>
 <p>Function names: relative_synonymous_codon_usage; rscu <br/>
 Command line interface: bk_relative_synonymous_codon_usage; bk_rscu</p>
 <p>Calculate relative synonymous codon usage.</p>
@@ -468,7 +471,7 @@ codons for the same amino acids are used equally.</p>
 <p>Custom genetic codes can be used as input and should
 be formatted with the codon in first column and the
 resulting amino acid in the second column.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit relative_synonymous_codon_usage &lt;fasta&gt; <span class="o">[</span>-tt/--translation_table &lt;code&gt;<span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>relative_synonymous_codon_usage<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-tt/--translation_table<span class="w"> </span>&lt;code&gt;<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
@@ -480,7 +483,7 @@ table to be used. Default: 1, which is the standard code.</p>
 </div>
 </section>
 <section id="translate-sequence">
-<h3>Translate sequence<a class="headerlink" href="#translate-sequence" title="Permalink to this heading"></a></h3>
+<h3>Translate sequence<a class="headerlink" href="#translate-sequence" title="Link to this heading"></a></h3>
 <p>Function names: translate_sequence; translate_seq; trans_seq <br/>
 Command line interface: bk_translate_sequence; bk_translate_seq; bk_trans_seq</p>
 <p>Translates coding sequences to amino acid
@@ -492,7 +495,7 @@ the standard genetic code is used.</p>
 <p>Custom genetic codes can be used as input and should
 be formatted with the codon in first column and the
 resulting amino acid in the second column.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit translate_sequence &lt;fasta&gt; <span class="o">[</span>-tt/--translation_table &lt;code&gt; -o/--output &lt;output_file&gt;<span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>translate_sequence<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-tt/--translation_table<span class="w"> </span>&lt;code&gt;<span class="w"> </span>-o/--output<span class="w"> </span>&lt;output_file&gt;<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
@@ -508,10 +511,10 @@ to it.</p>
 </section>
 </section>
 <section id="fastq-file-functions">
-<h2>FASTQ file functions<a class="headerlink" href="#fastq-file-functions" title="Permalink to this heading"></a></h2>
+<h2>FASTQ file functions<a class="headerlink" href="#fastq-file-functions" title="Link to this heading"></a></h2>
 <hr class="docutils" />
 <section id="fastq-read-lengths">
-<h3>FASTQ read lengths<a class="headerlink" href="#fastq-read-lengths" title="Permalink to this heading"></a></h3>
+<h3>FASTQ read lengths<a class="headerlink" href="#fastq-read-lengths" title="Link to this heading"></a></h3>
 <p>Function names: fastq_read_lengths; fastq_read_lens <br/>
 Command line interface: bk_fastq_read_lengths; bk_fastq_read_lens</p>
 <p>Determine lengths of FASTQ reads.</p>
@@ -520,7 +523,7 @@ standard deviation of read lengths in a
 FASTQ file will be reported. To obtain
 the lengths of all FASTQ reads, use the
 verbose option.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit fastq_read_lengths &lt;fasta&gt; <span class="o">[</span>-tt/--translation_table &lt;code&gt; -o/--output &lt;output_file&gt;<span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>fastq_read_lengths<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-tt/--translation_table<span class="w"> </span>&lt;code&gt;<span class="w"> </span>-o/--output<span class="w"> </span>&lt;output_file&gt;<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
@@ -531,7 +534,7 @@ verbose option.</p>
 </div>
 </section>
 <section id="subset-pe-fastq-reads">
-<h3>Subset PE FASTQ reads<a class="headerlink" href="#subset-pe-fastq-reads" title="Permalink to this heading"></a></h3>
+<h3>Subset PE FASTQ reads<a class="headerlink" href="#subset-pe-fastq-reads" title="Link to this heading"></a></h3>
 <p>Function names: subset_pe_fastq_reads; subset_pe_fastq <br/>
 Command line interface: bk_subset_pe_fastq_reads; bk_subset_pe_fastq</p>
 <p>Subset paired-end FASTQ data.</p>
@@ -546,7 +549,7 @@ a seed is generated based off of the date
 and time. During subsampling, paired-end
 information is maintained.</p>
 <p>Files are outputed with the suffix “_subset.fq”</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit subset_pe_fastq_reads &lt;fastq1&gt; &lt;fastq2&gt; <span class="o">[</span>-p/--percent &lt;percent&gt; -s/--seed &lt;seed&gt; -o/--output_file &lt;output_file&gt;<span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>subset_pe_fastq_reads<span class="w"> </span>&lt;fastq1&gt;<span class="w"> </span>&lt;fastq2&gt;<span class="w"> </span><span class="o">[</span>-p/--percent<span class="w"> </span>&lt;percent&gt;<span class="w"> </span>-s/--seed<span class="w"> </span>&lt;seed&gt;<span class="w"> </span>-o/--output_file<span class="w"> </span>&lt;output_file&gt;<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
@@ -559,7 +562,7 @@ information is maintained.</p>
 </div>
 </section>
 <section id="subset-se-fastq-reads">
-<h3>Subset SE FASTQ reads<a class="headerlink" href="#subset-se-fastq-reads" title="Permalink to this heading"></a></h3>
+<h3>Subset SE FASTQ reads<a class="headerlink" href="#subset-se-fastq-reads" title="Link to this heading"></a></h3>
 <p>Function names: subset_se_fastq_reads; subset_se_fastq <br/>
 Command line interface: bk_subset_se_fastq_reads; bk_subset_se_fastq</p>
 <p>Subset single-end FASTQ data.</p>
@@ -573,7 +576,7 @@ reproducibility. If no seed is specified,
 a seed is generated based off of the date
 and time.</p>
 <p>Output files will have the suffix “_subset.fq”</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit subset_se_fastq_reads &lt;fastq&gt; <span class="o">[</span>-p/--percent &lt;percent&gt; -s/--seed &lt;seed&gt; -o/--output_file &lt;output_file&gt;<span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>subset_se_fastq_reads<span class="w"> </span>&lt;fastq&gt;<span class="w"> </span><span class="o">[</span>-p/--percent<span class="w"> </span>&lt;percent&gt;<span class="w"> </span>-s/--seed<span class="w"> </span>&lt;seed&gt;<span class="w"> </span>-o/--output_file<span class="w"> </span>&lt;output_file&gt;<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
@@ -586,7 +589,7 @@ and time.</p>
 </div>
 </section>
 <section id="trim-pe-adapters-fastq-reads">
-<h3>Trim PE adapters FASTQ reads<a class="headerlink" href="#trim-pe-adapters-fastq-reads" title="Permalink to this heading"></a></h3>
+<h3>Trim PE adapters FASTQ reads<a class="headerlink" href="#trim-pe-adapters-fastq-reads" title="Link to this heading"></a></h3>
 <p>Function names: trim_pe_adapters_fastq_reads; trim_pe_adapters_fastq <br/>
 Command line interface: bk_trim_pe_adapters_fastq_reads; bk_trim_pe_adapters_fastq</p>
 <p>Trim adapters from paired-end FastQ data.</p>
@@ -595,7 +598,7 @@ exact match to known adapter sequences.</p>
 <p>Output file has the suffix “_adapter_removed.fq”
 or can be named by the user with the
 output_file argument.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit trim_pe_adapters_fastq_reads &lt;fastq1&gt; &lt;fastq2&gt; <span class="o">[</span>-a/--adapters TruSeq2-PE -l/--length <span class="m">20</span><span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>trim_pe_adapters_fastq_reads<span class="w"> </span>&lt;fastq1&gt;<span class="w"> </span>&lt;fastq2&gt;<span class="w"> </span><span class="o">[</span>-a/--adapters<span class="w"> </span>TruSeq2-PE<span class="w"> </span>-l/--length<span class="w"> </span><span class="m">20</span><span class="o">]</span>
 </pre></div>
 </div>
 <p>Adapaters available: <br/>
@@ -615,7 +618,7 @@ TruSeq3-SE</p>
 </div>
 </section>
 <section id="trim-pe-fastq-reads">
-<h3>Trim PE FASTQ reads<a class="headerlink" href="#trim-pe-fastq-reads" title="Permalink to this heading"></a></h3>
+<h3>Trim PE FASTQ reads<a class="headerlink" href="#trim-pe-fastq-reads" title="Link to this heading"></a></h3>
 <p>Function names: trim_pe_fastq_reads; trim_pe_fastq <br/>
 Command line interface: bk_trim_pe_fastq_reads; bk_trim_pe_fastq</p>
 <p>Quality trim paired-end FastQ data.</p>
@@ -628,7 +631,7 @@ suffix “_paired_trimmed.fq.” Single
 reads that passed quality thresholds are
 saved to files with the suffix
 “_unpaired_trimmed.fq.”</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit trim_pe_fastq_reads &lt;fastq1&gt; &lt;fastq2&gt; <span class="o">[</span>-m/--minimum <span class="m">20</span> -l/--length <span class="m">20</span><span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>trim_pe_fastq_reads<span class="w"> </span>&lt;fastq1&gt;<span class="w"> </span>&lt;fastq2&gt;<span class="w"> </span><span class="o">[</span>-m/--minimum<span class="w"> </span><span class="m">20</span><span class="w"> </span>-l/--length<span class="w"> </span><span class="m">20</span><span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
@@ -641,7 +644,7 @@ saved to files with the suffix
 </div>
 </section>
 <section id="trim-se-adapters-fastq-reads">
-<h3>Trim SE adapters FASTQ reads<a class="headerlink" href="#trim-se-adapters-fastq-reads" title="Permalink to this heading"></a></h3>
+<h3>Trim SE adapters FASTQ reads<a class="headerlink" href="#trim-se-adapters-fastq-reads" title="Link to this heading"></a></h3>
 <p>Function names: trim_se_adapters_fastq_reads; trim_se_adapters_fastq <br/>
 Command line interface: bk_trim_se_adapters_fastq_reads; bk_trim_se_adapters_fastq</p>
 <p>Trim adapters from single-end FastQ data.</p>
@@ -650,7 +653,7 @@ exact match to known adapter sequences.</p>
 <p>Output file has the suffix “_adapter_removed.fq”
 or can be named by the user with the
 output_file argument.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit trim_se_adapters_fastq_reads &lt;fastq&gt; <span class="o">[</span>-a/--adapters TruSeq2-SE -l/--length <span class="m">20</span><span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>trim_se_adapters_fastq_reads<span class="w"> </span>&lt;fastq&gt;<span class="w"> </span><span class="o">[</span>-a/--adapters<span class="w"> </span>TruSeq2-SE<span class="w"> </span>-l/--length<span class="w"> </span><span class="m">20</span><span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
@@ -663,7 +666,7 @@ output_file argument.</p>
 </div>
 </section>
 <section id="trim-se-fastq-reads">
-<h3>Trim SE FASTQ reads<a class="headerlink" href="#trim-se-fastq-reads" title="Permalink to this heading"></a></h3>
+<h3>Trim SE FASTQ reads<a class="headerlink" href="#trim-se-fastq-reads" title="Link to this heading"></a></h3>
 <p>Function names: trim_se_fastq_reads; trim_se_fastq <br/>
 Command line interface: bk_trim_se_fastq_reads; bk_trim_se_fastq</p>
 <p>Quality trim single-end FastQ data.</p>
@@ -673,7 +676,7 @@ Users can specify quality and length
 thresholds. Output file has the suffix
 “_trimmed.fq” or can be named by the user
 with the output_file argument.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit trim_se_fastq_reads &lt;fastq&gt; <span class="o">[</span>-m/--minimum <span class="m">20</span> -l/--length <span class="m">20</span><span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>trim_se_fastq_reads<span class="w"> </span>&lt;fastq&gt;<span class="w"> </span><span class="o">[</span>-m/--minimum<span class="w"> </span><span class="m">20</span><span class="w"> </span>-l/--length<span class="w"> </span><span class="m">20</span><span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
@@ -687,10 +690,10 @@ with the output_file argument.</p>
 </section>
 </section>
 <section id="genome-functions">
-<h2>Genome functions<a class="headerlink" href="#genome-functions" title="Permalink to this heading"></a></h2>
+<h2>Genome functions<a class="headerlink" href="#genome-functions" title="Link to this heading"></a></h2>
 <hr class="docutils" />
 <section id="gc-content">
-<h3>GC content<a class="headerlink" href="#gc-content" title="Permalink to this heading"></a></h3>
+<h3>GC content<a class="headerlink" href="#gc-content" title="Link to this heading"></a></h3>
 <p>Function names: gc_content; gc <br/>
 Command line interface: bk_gc_content; bk_gc</p>
 <p>Calculate GC content of a fasta file.</p>
@@ -698,7 +701,7 @@ Command line interface: bk_gc_content; bk_gc</p>
 either guanines or cytosines. To obtain
 GC content per FASTA entry, use the verbose
 option.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit gc_content &lt;fasta&gt; <span class="o">[</span>-v/--verbose<span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>gc_content<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-v/--verbose<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
@@ -709,7 +712,7 @@ option.</p>
 </div>
 </section>
 <section id="genome-assembly-metrics">
-<h3>Genome assembly metrics<a class="headerlink" href="#genome-assembly-metrics" title="Permalink to this heading"></a></h3>
+<h3>Genome assembly metrics<a class="headerlink" href="#genome-assembly-metrics" title="Link to this heading"></a></h3>
 <p>Function names: genome_assembly_metrics; assembly_metrics <br/>
 Command line interface: bk_genome_assembly_metrics; bk_assembly_metrics</p>
 <p>Calculate L50, L90, N50, N90, GC content, assembly size,
@@ -728,7 +731,7 @@ Frequency of A: The number of occurences of A corrected by assembly size. <br/>
 Frequency of T: The number of occurences of T corrected by assembly size. <br/>
 Frequency of C: The number of occurences of C corrected by assembly size. <br/>
 Frequency of G: The number of occurences of G corrected by assembly size.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit genome_assembly_metrics &lt;fasta&gt;
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>genome_assembly_metrics<span class="w"> </span>&lt;fasta&gt;
 </pre></div>
 </div>
 <p>Options: <br/>
@@ -740,13 +743,13 @@ Only scaffolds with a length greater than this value will be counted. Default: 5
 </div>
 </section>
 <section id="l50">
-<h3>L50<a class="headerlink" href="#l50" title="Permalink to this heading"></a></h3>
+<h3>L50<a class="headerlink" href="#l50" title="Link to this heading"></a></h3>
 <p>Function names: l50 <br/>
 Command line interface: bk_l50</p>
 <p>Calculates L50 for a genome assembly.</p>
 <p>L50 is the smallest number of contigs whose length sum
 makes up half of the genome size.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit l50 &lt;fasta&gt;
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>l50<span class="w"> </span>&lt;fasta&gt;
 </pre></div>
 </div>
 <p>Options: <br/>
@@ -756,13 +759,13 @@ makes up half of the genome size.</p>
 </div>
 </section>
 <section id="l90">
-<h3>L90<a class="headerlink" href="#l90" title="Permalink to this heading"></a></h3>
+<h3>L90<a class="headerlink" href="#l90" title="Link to this heading"></a></h3>
 <p>Function names: l90 <br/>
 Command line interface: bk_l90</p>
 <p>Calculates L90 for a genome assembly.</p>
 <p>L90 is the smallest number of contigs whose length sum
 makes up 90% of the genome size.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit l90 &lt;fasta&gt;
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>l90<span class="w"> </span>&lt;fasta&gt;
 </pre></div>
 </div>
 <p>Options: <br/>
@@ -772,11 +775,11 @@ makes up 90% of the genome size.</p>
 </div>
 </section>
 <section id="longest-scaffold">
-<h3>Longest scaffold<a class="headerlink" href="#longest-scaffold" title="Permalink to this heading"></a></h3>
+<h3>Longest scaffold<a class="headerlink" href="#longest-scaffold" title="Link to this heading"></a></h3>
 <p>Function names: longest_scaffold; longest_scaff; longest_contig; longest_cont <br/>
 Command line interface: bk_longest_scaffold; bk_longest_scaff; bk_longest_contig; bk_longest_cont</p>
 <p>Determine the length of the longest scaffold in a genome assembly.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit longest_scaffold &lt;fasta&gt;
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>longest_scaffold<span class="w"> </span>&lt;fasta&gt;
 </pre></div>
 </div>
 <p>Options: <br/>
@@ -786,12 +789,12 @@ Command line interface: bk_longest_scaffold; bk_longest_scaff; bk_longest_contig
 </div>
 </section>
 <section id="n50">
-<h3>N50<a class="headerlink" href="#n50" title="Permalink to this heading"></a></h3>
+<h3>N50<a class="headerlink" href="#n50" title="Link to this heading"></a></h3>
 <p>Function names: n50 <br/>
 Command line interface: bk_n50</p>
 <p>Calculates N50 for a genome assembly.</p>
 <p>N50 is the sequence length of the shortest contig at 50% of the genome size.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit n50 &lt;fasta&gt;
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>n50<span class="w"> </span>&lt;fasta&gt;
 </pre></div>
 </div>
 <p>Options: <br/>
@@ -801,12 +804,12 @@ Command line interface: bk_n50</p>
 </div>
 </section>
 <section id="n90">
-<h3>N90<a class="headerlink" href="#n90" title="Permalink to this heading"></a></h3>
+<h3>N90<a class="headerlink" href="#n90" title="Link to this heading"></a></h3>
 <p>Function names: n90 <br/>
 Command line interface: bk_n90</p>
 <p>Calculates N90 for a genome assembly.</p>
 <p>N90 is the sequence length of the shortest contig at 90% of the genome size.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit n90 &lt;fasta&gt;
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>n90<span class="w"> </span>&lt;fasta&gt;
 </pre></div>
 </div>
 <p>Options: <br/>
@@ -816,13 +819,13 @@ Command line interface: bk_n90</p>
 </div>
 </section>
 <section id="number-of-large-scaffolds">
-<h3>Number of large scaffolds<a class="headerlink" href="#number-of-large-scaffolds" title="Permalink to this heading"></a></h3>
+<h3>Number of large scaffolds<a class="headerlink" href="#number-of-large-scaffolds" title="Link to this heading"></a></h3>
 <p>Function names: number_of_large_scaffolds; num_of_lrg_scaffolds; number_of_large_contigs; num_of_lrg_cont <br/>
 Command line interface: bk_number_of_large_scaffolds; bk_num_of_lrg_scaffolds; bk_number_of_large_contigs; bk_num_of_lrg_cont</p>
 <p>Calculate number and total sequence length of
 large scaffolds. Each value is represented as
 column 1 and column 2 in the output, respectively.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit number_of_large_scaffolds &lt;fasta&gt; <span class="o">[</span>-t/--threshold &lt;int&gt;<span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>number_of_large_scaffolds<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-t/--threshold<span class="w"> </span>&lt;int&gt;<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
@@ -835,7 +838,7 @@ value will be counted. Default: 500</p>
 </div>
 </section>
 <section id="number-of-scaffolds">
-<h3>Number of scaffolds<a class="headerlink" href="#number-of-scaffolds" title="Permalink to this heading"></a></h3>
+<h3>Number of scaffolds<a class="headerlink" href="#number-of-scaffolds" title="Link to this heading"></a></h3>
 <p>Function names: number_of_scaffolds; num_of_scaffolds; number_of_contigs; num_of_cont <br/>
 Command line interface: bk_number_of_scaffolds; bk_num_of_scaffolds; bk_number_of_contigs; bk_num_of_cont</p>
 <p>Calculate the number of scaffolds or entries
@@ -843,7 +846,7 @@ in a FASTA file. In this way, a user can also
 determine the number of predicted genes in a
 coding sequence or protein FASTA file with this
 function.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit number_of_scaffolds &lt;fasta&gt;
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>number_of_scaffolds<span class="w"> </span>&lt;fasta&gt;
 </pre></div>
 </div>
 <p>Options: <br/>
@@ -853,7 +856,7 @@ function.</p>
 </div>
 </section>
 <section id="sum-of-scaffold-lengths">
-<h3>Sum of scaffold lengths<a class="headerlink" href="#sum-of-scaffold-lengths" title="Permalink to this heading"></a></h3>
+<h3>Sum of scaffold lengths<a class="headerlink" href="#sum-of-scaffold-lengths" title="Link to this heading"></a></h3>
 <p>Function names: sum_of_scaffold_lengths; sum_of_contig_lengths <br/>
 Command line interface: bk_sum_of_scaffold_lengths; bk_sum_of_contig_lengths</p>
 <p>Determine the sum of scaffold lengths.</p>
@@ -861,7 +864,7 @@ Command line interface: bk_sum_of_scaffold_lengths; bk_sum_of_contig_lengths</p>
 the length of a genome assembly, but can also be
 used, for example, to determine the sum length
 of all coding sequences.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit sum_of_scaffold_lengths &lt;fasta&gt;
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>sum_of_scaffold_lengths<span class="w"> </span>&lt;fasta&gt;
 </pre></div>
 </div>
 <p>Options: <br/>
@@ -872,16 +875,16 @@ of all coding sequences.</p>
 </section>
 </section>
 <section id="sequence-summary-and-processing-functions">
-<h2>Sequence summary and processing functions<a class="headerlink" href="#sequence-summary-and-processing-functions" title="Permalink to this heading"></a></h2>
+<h2>Sequence summary and processing functions<a class="headerlink" href="#sequence-summary-and-processing-functions" title="Link to this heading"></a></h2>
 <hr class="docutils" />
 <section id="character-frequency">
-<h3>Character frequency<a class="headerlink" href="#character-frequency" title="Permalink to this heading"></a></h3>
+<h3>Character frequency<a class="headerlink" href="#character-frequency" title="Link to this heading"></a></h3>
 <p>Function names: character_frequency; char_freq <br/>
 Command line interface: bk_character_frequency; bk_char_freq</p>
 <p>Calculate the frequency of characters in a FASTA file.</p>
 <p>This can be used to determine the frequency of A, T, C, and G
 in a genome or the frequency of amino acids in a proteome.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit character_frequency &lt;fasta&gt; <span class="o">[</span>-v/--verbose<span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>character_frequency<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-v/--verbose<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
@@ -891,14 +894,14 @@ in a genome or the frequency of amino acids in a proteome.</p>
 </div>
 </section>
 <section id="get-fasta-entry-faidx">
-<h3>Get FASTA entry (faidx)<a class="headerlink" href="#get-fasta-entry-faidx" title="Permalink to this heading"></a></h3>
+<h3>Get FASTA entry (faidx)<a class="headerlink" href="#get-fasta-entry-faidx" title="Link to this heading"></a></h3>
 <p>Function names: faidx; get_entry; ge <br/>
 Command line interface: bk_faidx; bk_get_entry; bk_ge</p>
 <p>Extracts sequence entry from fasta file.</p>
 <p>This function works similarly to the faidx function
 in samtools, but does not requiring an indexing the
 sequence file.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit faidx &lt;fasta&gt; <span class="o">[</span>-v/--verbose<span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>faidx<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-v/--verbose<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
@@ -909,7 +912,7 @@ sequence file.</p>
 </div>
 </section>
 <section id="file-format-converter">
-<h3>File format converter<a class="headerlink" href="#file-format-converter" title="Permalink to this heading"></a></h3>
+<h3>File format converter<a class="headerlink" href="#file-format-converter" title="Link to this heading"></a></h3>
 <p>Function names: file_format_converter; format_converter; ffc <br/>
 Command line interface: bk_file_format_converter; bk_format_converter; bk_ffc</p>
 <p>Converts a multiple sequence file from one format to another.</p>
@@ -919,7 +922,7 @@ Input and output file formats are specified with the
 --input_file_format and --output_file_format arguments;
 input and output files are specified with the --input_file
 and --output_file arguments.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit file_format_converter -i/--input_file &lt;input_file&gt; -iff/--input_file_format &lt;input_file_format&gt;  -o/--output_file &lt;output_file&gt; -off/--output_file_format &lt;output_file_format&gt;
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>file_format_converter<span class="w"> </span>-i/--input_file<span class="w"> </span>&lt;input_file&gt;<span class="w"> </span>-iff/--input_file_format<span class="w"> </span>&lt;input_file_format&gt;<span class="w">  </span>-o/--output_file<span class="w"> </span>&lt;output_file&gt;<span class="w"> </span>-off/--output_file_format<span class="w"> </span>&lt;output_file_format&gt;
 </pre></div>
 </div>
 <p>Options: <br/>
@@ -932,13 +935,13 @@ and --output_file arguments.</p>
 </div>
 </section>
 <section id="multiple-line-to-single-line-fasta">
-<h3>Multiple line to single line FASTA<a class="headerlink" href="#multiple-line-to-single-line-fasta" title="Permalink to this heading"></a></h3>
+<h3>Multiple line to single line FASTA<a class="headerlink" href="#multiple-line-to-single-line-fasta" title="Link to this heading"></a></h3>
 <p>Function names: multiple_line_to_single_line_fasta; ml2sl <br/>
 Command line interface: bk_multiple_line_to_single_line_fasta; bk_ml2sl</p>
 <p>Converts FASTA files with multiple lines
 per sequence to a FASTA file with the sequence
 represented on one line.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit multiple_line_to_single_line_fasta &lt;fasta&gt; <span class="o">[</span>-o/--output &lt;output_file&gt;<span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>multiple_line_to_single_line_fasta<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-o/--output<span class="w"> </span>&lt;output_file&gt;<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
@@ -949,13 +952,13 @@ represented on one line.</p>
 </div>
 </section>
 <section id="remove-fasta-entry">
-<h3>Remove FASTA entry<a class="headerlink" href="#remove-fasta-entry" title="Permalink to this heading"></a></h3>
+<h3>Remove FASTA entry<a class="headerlink" href="#remove-fasta-entry" title="Link to this heading"></a></h3>
 <p>Function names: remove_fasta_entry <br/>
 Command line interface: bk_remove_fasta_entry</p>
 <p>Remove FASTA entry from multi-FASTA file.</p>
 <p>Output will have the suffix “pruned.fa” unless
 the user specifies a different output file name.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit remove_fasta_entry &lt;fasta&gt; -e/--entry &lt;entry&gt; <span class="o">[</span>-o/--output &lt;output_file&gt;<span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>remove_fasta_entry<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span>-e/--entry<span class="w"> </span>&lt;entry&gt;<span class="w"> </span><span class="o">[</span>-o/--output<span class="w"> </span>&lt;output_file&gt;<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
@@ -969,7 +972,7 @@ added to it.</p>
 </div>
 </section>
 <section id="remove-short-sequences">
-<h3>Remove short sequences<a class="headerlink" href="#remove-short-sequences" title="Permalink to this heading"></a></h3>
+<h3>Remove short sequences<a class="headerlink" href="#remove-short-sequences" title="Link to this heading"></a></h3>
 <p>Function names: remove_short_sequences; remove_short_seqs <br/>
 Command line interface: bk_remove_short_sequences; bk_remove_short_seqs</p>
 <p>Remove short sequences from a multi-FASTA file.</p>
@@ -979,7 +982,7 @@ All sequences greater than the threshold will be
 kept in the resulting file.</p>
 <p>Output will have the suffix “long_seqs.fa” unless
 the user specifies a different output file name.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit remove_short_sequences &lt;fasta&gt; -t/--threshold &lt;threshold&gt; <span class="o">[</span>-o/--output &lt;output_file&gt;<span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>remove_short_sequences<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span>-t/--threshold<span class="w"> </span>&lt;threshold&gt;<span class="w"> </span><span class="o">[</span>-o/--output<span class="w"> </span>&lt;output_file&gt;<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
@@ -994,7 +997,7 @@ added to it.</p>
 </div>
 </section>
 <section id="rename-fasta-entries">
-<h3>Rename FASTA entries<a class="headerlink" href="#rename-fasta-entries" title="Permalink to this heading"></a></h3>
+<h3>Rename FASTA entries<a class="headerlink" href="#rename-fasta-entries" title="Link to this heading"></a></h3>
 <p>Function names: rename_fasta_entries; rename_fasta <br/>
 Command line interface: bk_rename_fasta_entries; bk_rename_fasta</p>
 <p>Renames fasta entries.</p>
@@ -1002,7 +1005,7 @@ Command line interface: bk_rename_fasta_entries; bk_rename_fasta</p>
 file wherein the first column is the current fasta entry name and
 the second column is the new fasta entry name in the resulting
 output alignment.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>rename_fasta_entries &lt;fasta&gt; -i/--idmap &lt;idmap&gt; <span class="o">[</span>-o/--output &lt;output_file&gt;<span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>rename_fasta_entries<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span>-i/--idmap<span class="w"> </span>&lt;idmap&gt;<span class="w"> </span><span class="o">[</span>-o/--output<span class="w"> </span>&lt;output_file&gt;<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
@@ -1014,12 +1017,12 @@ output alignment.</p>
 </div>
 </section>
 <section id="reorder-by-sequence-length">
-<h3>Reorder by sequence length<a class="headerlink" href="#reorder-by-sequence-length" title="Permalink to this heading"></a></h3>
+<h3>Reorder by sequence length<a class="headerlink" href="#reorder-by-sequence-length" title="Link to this heading"></a></h3>
 <p>Function names: reorder_by_sequence_length; reorder_by_seq_len <br/>
 Command line interface: bk_reorder_by_sequence_length; bk_reorder_by_seq_len</p>
 <p>Reorder FASTA file entries from the longest entry
 to the shortest entry.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit reorder_by_sequence_length &lt;fasta&gt; <span class="o">[</span>-o/--output &lt;output_file&gt;<span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>reorder_by_sequence_length<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-o/--output<span class="w"> </span>&lt;output_file&gt;<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
@@ -1032,13 +1035,13 @@ Default output has the same name as the input file with the suffix
 </div>
 </section>
 <section id="sequence-complement">
-<h3>Sequence complement<a class="headerlink" href="#sequence-complement" title="Permalink to this heading"></a></h3>
+<h3>Sequence complement<a class="headerlink" href="#sequence-complement" title="Link to this heading"></a></h3>
 <p>Function names: sequence_complement; seq_comp <br/>
 Command line interface: bk_sequence_complement; bk_seq_comp</p>
 <p>Generates the sequence complement for all entries
 in a multi-FASTA file. To generate a reverse sequence
 complement, add the -r/–reverse argument.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit sequence_complement &lt;fasta&gt; <span class="o">[</span>-r/--reverse<span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>sequence_complement<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-r/--reverse<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
@@ -1049,11 +1052,11 @@ complement, add the -r/–reverse argument.</p>
 </div>
 </section>
 <section id="sequence-length">
-<h3>Sequence length<a class="headerlink" href="#sequence-length" title="Permalink to this heading"></a></h3>
+<h3>Sequence length<a class="headerlink" href="#sequence-length" title="Link to this heading"></a></h3>
 <p>Function names: sequence_length; seq_len <br/>
 Command line interface: bk_sequence_length; bk_seq_len</p>
 <p>Calculate sequence length of each FASTA entry.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit sequence_length &lt;fasta&gt;
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>sequence_length<span class="w"> </span>&lt;fasta&gt;
 </pre></div>
 </div>
 <p>Options: <br/>
@@ -1063,11 +1066,11 @@ Command line interface: bk_sequence_length; bk_seq_len</p>
 </div>
 </section>
 <section id="single-line-to-multiple-line-fasta">
-<h3>Single line to multiple line fasta<a class="headerlink" href="#single-line-to-multiple-line-fasta" title="Permalink to this heading"></a></h3>
+<h3>Single line to multiple line fasta<a class="headerlink" href="#single-line-to-multiple-line-fasta" title="Link to this heading"></a></h3>
 <p>Function names: single_line_to_multiple_line_fasta; sl2ml <br/>
 Command line interface: bk_single_line_to_multiple_line_fasta; bk_sl2ml</p>
 <p>Calculate sequence length of each FASTA entry.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit single_line_to_multiple_line_fasta &lt;fasta&gt;
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>single_line_to_multiple_line_fasta<span class="w"> </span>&lt;fasta&gt;
 </pre></div>
 </div>
 <p>Options: <br/>
