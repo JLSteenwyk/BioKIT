@@ -11,8 +11,7 @@ class PositionSpecificScoreMatrix(Alignment):
     def run(self):
         alignment = read_alignment_alignio(self.fasta)
         for seqrecord in alignment:
-            seqrecord.seq._data = seqrecord.seq._data.upper()
-            seqrecord.seq._data = seqrecord.seq._data.replace("?", "-")
+            seqrecord.seq._data = seqrecord.seq._data.upper().replace(b"?", b"-")
         summary_align = AlignInfo.SummaryInfo(alignment)
         consensus = summary_align.dumb_consensus()
         my_pssm = summary_align.pos_specific_score_matrix(

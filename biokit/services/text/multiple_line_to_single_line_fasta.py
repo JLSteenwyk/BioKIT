@@ -14,7 +14,7 @@ class MultipleLineToSingleLineFasta(Text):
         res_records = []
         for record in records:
             res_records.append(">" + record.id)
-            res_records.append(record.seq._data)
+            res_records.append(record.seq._data.decode("utf-8"))
 
         print('\n'.join(res_records))
 
