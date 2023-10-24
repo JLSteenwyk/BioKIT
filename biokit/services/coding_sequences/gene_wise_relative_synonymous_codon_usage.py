@@ -24,8 +24,10 @@ class GeneWiseRelativeSynonymousCodonUsage(CodingSequence):
                 for position in range(0, len(seq_record._seq), 3):
                     codon = (
                         seq_record._seq[position:position + 3]
-                        ._data.upper()
-                        .replace("T", "U")
+                        ._data
+                        .upper()
+                        .replace(b"T", b"U")
+                        .decode("utf-8")
                     )
                     if codon in translation_table.keys():
                         rscus_curr_gene.append(rscu[codon])

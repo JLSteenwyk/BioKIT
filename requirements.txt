@@ -1,4 +1,4 @@
-biopython==1.76
+biopython==1.81
 coverage==7.3.2
 Cython==3.0.4
 exceptiongroup==1.1.3
