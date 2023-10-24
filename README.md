@@ -33,11 +33,9 @@
         <a href="https://pypi.org/project/jlsteenwyk-biokit/" alt="PyPI - Python Version">
             <img src="https://img.shields.io/pypi/pyversions/jlsteenwyk-biokit">
         </a>
-        <br />
         <a href="https://academic.oup.com/genetics/advance-article/doi/10.1093/genetics/iyac079/6583183?login=true">
           <img src="https://zenodo.org/badge/DOI/10.1093/genetics/iyac079.svg">
         </a>
-        <a href="https://patreon.com/jlsteenwyk"><img src="https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3Djlsteenwyk%26type%3Dpatrons&style=flat" alt="Support me on Patreon" /></a>
     </p>
 </p>
 
