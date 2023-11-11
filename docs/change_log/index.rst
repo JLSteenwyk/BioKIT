@@ -21,3 +21,5 @@ The name gw-RSCU has been shortened to gRSCU.
 *0.0.9*: Functions that look at codons (e.g., RSCU and gw-RSCU) now can account for ambiguous codons.
 For example, codons that have ambiguous characters like the codon "CNN." These codons
 are skipped during analysis of RSCU and gw-RSCU.
+
+*1.0.1*: Added "X" as a gap character during alignment recoding

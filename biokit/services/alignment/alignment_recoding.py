@@ -27,7 +27,7 @@ class AlignmentRecoding(Alignment):
             recoded_sequence_i = []
             for j in range(alignment.get_alignment_length()):
                 sequence_ij = alignment[i, j].upper()
-                if sequence_ij in ["?", "-"]:
+                if sequence_ij in ["?", "-", "X"]:
                     recoded_sequence_i.append(sequence_ij)
                 else:
                     recoded_sequence_i.append(recoding_table[sequence_ij])
