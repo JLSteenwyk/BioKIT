@@ -23,3 +23,5 @@ For example, codons that have ambiguous characters like the codon "CNN." These c
 are skipped during analysis of RSCU and gw-RSCU.
 
 *1.0.1*: Added "X" as a gap character during alignment recoding
+
+*1.1.0*: Added Dayhoff-9, -12, -15, and -18 recoding schemes 
