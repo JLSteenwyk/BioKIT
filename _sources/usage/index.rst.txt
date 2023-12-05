@@ -110,15 +110,7 @@ in the alignment.
 Codes for which recoding scheme to use: |br|
 **RY-nucleotide** |br|
 R = purines (i.e., A and G) |br|
-Y = pyrimidines (i.e., T and C)
-
-**Dayhoff-6** |br|
-0 = A, G, P, S, and T |br|
-1 = D, E, N, and Q |br|
-2 = H, K, and R |br|
-3 = I, L, M, and V |br|
-4 = F, W, and Y |br|
-5 = C
+Y = pyrimidines (i.e., T and C) |br|
 
 **SandR-6** |br|
 0 = A, P, S, and T |br|
@@ -135,6 +127,76 @@ Y = pyrimidines (i.e., T and C)
 3 = W |br|
 4 = F and Y |br|
 5 = C and V |br|
+
+**Dayhoff-6** |br|
+0 = A, G, P, S, and T |br|
+1 = D, E, N, and Q |br|
+2 = H, K, and R |br|
+3 = I, L, M, and V |br|
+4 = F, W, and Y |br|
+5 = C |br|
+
+**Dayhoff-9** |br|
+0 = D, E, H, N, and Q |br|
+1 = I, L, M, and V |br|
+2 = F and Y |br|
+3 = A, S, and T |br|
+4 = K and R |br|
+5 = G |br|
+6 = P |br|
+7 = C |br|
+8 = W |br|
+
+**Dayhoff-12** |br|
+0 = D, E, and Q |br|
+1 = M, L, I, and V |br|
+2 = F and Y |br|
+3 = K, H, and R |br|
+4 = G |br|
+5 = A |br|
+6 = P |br|
+7 = S |br|
+8 = T |br|
+9 = N |br|
+A = W |br|
+B = C |br|
+
+**Dayhoff-15** |br|
+0 = D, E, and Q |br|
+1 = M and L |br|
+2 = I and V |br|
+3 = F and Y |br|
+4 = G |br|
+5 = A |br|
+6 = P |br|
+7 = S |br|
+8 = T |br|
+9 = N |br|
+A = K |br|
+B = H |br|
+C = R |br|
+D = W |br|
+E = C |br|
+
+**Dayhoff-18** |br|
+0 = F and Y |br|
+1 = M and L |br|
+2 = I |br|
+3 = V |br|
+4 = G |br|
+5 = A |br|
+6 = P |br|
+7 = S |br|
+8 = T |br|
+9 = D |br|
+A = E |br|
+B = Q |br|
+C = N |br|
+D = K |br|
+E = H |br|
+F = R |br|
+G = W |br|
+H = C |br|
 
 Options: |br|
 *<alignment>*: first argument after function name should be an alignment file |br|
