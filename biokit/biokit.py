@@ -521,14 +521,6 @@ class Biokit(object):
                     R = purines (i.e., A and G) 
                     Y = pyrimidines (i.e., T and C)
                 
-                Dayhoff-6
-                    0 = A, G, P, S, and T
-                    1 = D, E, N, and Q
-                    2 = H, K, and R
-                    3 = I, L, M, and V
-                    4 = F, W, and Y
-                    5 = C
-
                 SandR-6
                     0 = A, P, S, and T
                     1 = D, E, N, and G
@@ -544,6 +536,76 @@ class Biokit(object):
                     3 = W
                     4 = F and Y
                     5 = C and V
+
+                Dayhoff-6
+                    0 = A, G, P, S, and T
+                    1 = D, E, N, and Q
+                    2 = H, K, and R
+                    3 = I, L, M, and V
+                    4 = F, W, and Y
+                    5 = C
+
+                Dayhoff-9
+                    0 = D, E, H, N, and Q
+                    1 = I, L, M, and V
+                    2 = F and Y
+                    3 = A, S, and T
+                    4 = K and R
+                    5 = G
+                    6 = P
+                    7 = C
+                    8 = W
+
+                Dayhoff-12
+                    0 = D, E, and Q
+                    1 = M, L, I, and V
+                    2 = F and Y
+                    3 = K, H, and R
+                    4 = G
+                    5 = A
+                    6 = P
+                    7 = S
+                    8 = T
+                    9 = N
+                    A = W
+                    B = C
+                
+                Dayhoff-15
+                    0 = D, E, and Q
+                    1 = M and L
+                    2 = I and V
+                    3 = F and Y
+                    4 = G
+                    5 = A
+                    6 = P
+                    7 = S
+                    8 = T
+                    9 = N
+                    A = K
+                    B = H
+                    C = R
+                    D = W
+                    E = C
+                
+                Dayhoff-18
+                    0 = F and Y
+                    1 = M and L
+                    2 = I
+                    3 = V
+                    4 = G
+                    5 = A
+                    6 = P
+                    7 = S
+                    8 = T
+                    9 = D
+                    A = E
+                    B = Q
+                    C = N
+                    D = K
+                    E = H
+                    F = R
+                    G = W
+                    H = C
                 """  # noqa
             ),
         )

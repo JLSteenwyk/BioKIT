@@ -33,8 +33,8 @@ class AlignmentRecoding(Alignment):
                     recoded_sequence_i.append(recoding_table[sequence_ij])
 
             recoded_alignment[alignment[i].id] = recoded_sequence_i
-
-        return(recoded_alignment)
+        
+        return recoded_alignment
 
     def read_recoding_table(self, recoding: str) -> dict:
         """
@@ -48,12 +48,20 @@ class AlignmentRecoding(Alignment):
             sys.exit()
         elif recoding == "RY-nucleotide":
             pathing = path.join(here, "../../recoding_tables/RY-nucleotide.txt")
-        elif recoding == "Dayhoff-6":
-            pathing = path.join(here, "../../recoding_tables/Dayhoff-6.txt")
         elif recoding == "SandR-6":
             pathing = path.join(here, "../../recoding_tables/S_and_R-6.txt")
         elif recoding == "KGB-6":
             pathing = path.join(here, "../../recoding_tables/KGB-6.txt")
+        elif recoding == "Dayhoff-6":
+            pathing = path.join(here, "../../recoding_tables/Dayhoff-6.txt")
+        elif recoding == "Dayhoff-9":
+            pathing = path.join(here, "../../recoding_tables/Dayhoff-9.txt")
+        elif recoding == "Dayhoff-12":
+            pathing = path.join(here, "../../recoding_tables/Dayhoff-12.txt")
+        elif recoding == "Dayhoff-15":
+            pathing = path.join(here, "../../recoding_tables/Dayhoff-15.txt")
+        elif recoding == "Dayhoff-18":
+            pathing = path.join(here, "../../recoding_tables/Dayhoff-18.txt")
         # case handling for a custom translation table
         else:
             pathing = str(recoding)
