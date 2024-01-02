@@ -82,8 +82,8 @@ help_header = fr"""
                 |____/|_|\___/|_|\_\_____|  |_|   
                             
                 Version: {__version__}
-                Citation: Steenwyk et al. 2021, bioRxiv. DOI: 10.1101/2021.10.02.462868
-                https://www.biorxiv.org/content/10.1101/2021.10.02.462868v1
+                Citation: Steenwyk et al. 2022, GENETICS. DOI: 10.1093/genetics/iyac079
+                https://academic.oup.com/genetics/article/221/3/iyac079/6583183
                 
 """  # noqa
 
