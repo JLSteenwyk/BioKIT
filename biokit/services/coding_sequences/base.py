@@ -57,7 +57,7 @@ class CodingSequence(BaseService):
                 try:
                     observed_sum += codon_counts[codon]
                 except KeyError:
-                    observed_sum = 0
+                    pass
             for codon in codons:
                 try:
                     rscu[codon] = round(
