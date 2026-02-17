@@ -113,7 +113,6 @@ class TestRenameFastaEntries(object):
         #     call(expected_call),
         # ])
 
-
     @patch("builtins.print")
     def test_rename_fasta_entries_incorrect_idmap(self, mocked_print):
         expected_call = textwrap.dedent(

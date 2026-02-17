@@ -1,4 +1,5 @@
 from os import path
+from collections import Counter
 
 from Bio import SeqIO
 
@@ -31,41 +32,32 @@ class CodingSequence(BaseService):
                 codon_table[v] = [k]
 
         # get counts of codons
-        codon_counts = dict()
+        codon_counts = Counter()
         records = SeqIO.parse(self.fasta, "fasta")
+        valid_codons = set(translation_table.keys())
         for seq_record in records:
-            if len(seq_record._seq) % 3 == 0:
-                for position in range(0, len(seq_record._seq), 3):
-                    codon = (
-                        seq_record._seq[position:position + 3]
-                        ._data
-                        .upper()
-                        .replace(b"T", b"U")
-                        .decode("utf-8")
-                    )
-                    if codon in translation_table.keys():
-                        if codon in codon_counts.keys():
-                            codon_counts[codon] += 1
-                        else:
-                            codon_counts[codon] = 1
+            sequence = str(seq_record.seq).upper().replace("T", "U")
+            if len(sequence) % 3 != 0:
+                continue
+            for position in range(0, len(sequence), 3):
+                codon = sequence[position:position + 3]
+                if codon in valid_codons:
+                    codon_counts[codon] += 1
 
         # calculate rscu
         rscu = dict()
         for _, codons in codon_table.items():
             observed_sum = 0
             for codon in codons:
-                try:
-                    observed_sum += codon_counts[codon]
-                except KeyError:
-                    pass
+                observed_sum += codon_counts.get(codon, 0)
             for codon in codons:
-                try:
-                    rscu[codon] = round(
-                        codon_counts[codon] / (observed_sum / len(codons)), 4
-                    )
-                except ZeroDivisionError:
+                codon_count = codon_counts.get(codon, 0)
+                if codon_count == 0:
                     rscu[codon] = 0
-                except KeyError:
+                    continue
+                try:
+                    rscu[codon] = round(codon_count / (observed_sum / len(codons)), 4)
+                except ZeroDivisionError:
                     rscu[codon] = 0
 
         return rscu

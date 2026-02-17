@@ -1,5 +1,3 @@
-from Bio import SeqIO
-
 from ..base import BaseService
 from ...helpers.files import read_and_parse_fasta_seqio
 

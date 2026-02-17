@@ -1,5 +1,3 @@
-import re
-
 from .base import CodingSequence
 from ...helpers.files import read_and_parse_fasta_seqio
 
@@ -19,11 +17,8 @@ class GCContentSecondPosition(CodingSequence):
                     record, second_position_char
                 )
 
-                _, matches = self.find_matches("".join(second_position_char))
-
-                print(
-                    f"{record.id}\t{round(len(matches)/len(second_position_char), 4)}"
-                )
+                gc_content = self.calculate_gc_content("".join(second_position_char))
+                print(f"{record.id}\t{gc_content}")
 
         else:
             second_position_char = []
@@ -34,23 +29,19 @@ class GCContentSecondPosition(CodingSequence):
                     record, second_position_char
                 )
 
-            _, matches = self.find_matches("".join(second_position_char))
-
-            print(f"{round(len(matches)/len(second_position_char), 4)}")
+            gc_content = self.calculate_gc_content("".join(second_position_char))
+            print(f"{gc_content}")
 
     def process_args(self, args):
         return dict(fasta=args.fasta, verbose=args.verbose)
 
-    def find_matches(self, seq: str):
-        regex_pattern = re.compile("[GgCc]")
-        matches = regex_pattern.findall(seq)
-        return seq, matches
+    def calculate_gc_content(self, seq: str) -> float:
+        if not seq:
+            return 0
+        gc_count = seq.count("G") + seq.count("g") + seq.count("C") + seq.count("c")
+        return round(gc_count / len(seq), 4)
 
     def get_second_position_char(self, record, second_position_char: list):
-        length_of_coding_seq = len(record._seq)
-        for i in range(0, length_of_coding_seq, 3):
-            try:
-                second_position_char.append(record._seq[i:i + 3][1])
-            except IndexError:
-                continue
+        sequence = str(record.seq)
+        second_position_char.extend(sequence[1::3])
         return second_position_char

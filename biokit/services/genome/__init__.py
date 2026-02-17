@@ -8,3 +8,16 @@ from .n90 import N90
 from .number_of_large_scaffolds import NumberOfLargeScaffolds
 from .number_of_scaffolds import NumberOfScaffolds
 from .sum_of_scaffold_lengths import SumOfScaffoldLengths
+
+__all__ = [
+    "GCContent",
+    "GenomeAssemblyMetrics",
+    "L50",
+    "L90",
+    "LongestScaffold",
+    "N50",
+    "N90",
+    "NumberOfLargeScaffolds",
+    "NumberOfScaffolds",
+    "SumOfScaffoldLengths",
+]

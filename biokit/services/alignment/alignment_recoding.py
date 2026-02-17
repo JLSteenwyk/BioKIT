@@ -33,7 +33,7 @@ class AlignmentRecoding(Alignment):
                     recoded_sequence_i.append(recoding_table[sequence_ij])
 
             recoded_alignment[alignment[i].id] = recoded_sequence_i
-        
+
         return recoded_alignment
 
     def read_recoding_table(self, recoding: str) -> dict:
