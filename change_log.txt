@@ -29,3 +29,7 @@ Fixed bug in RSCU calculations
 Added structured output support (tsv/json/yaml) to additional commands and
 expanded integration coverage with output format consistency and CLI output
 contract tests.
+
+1.1.5
+Updated dependency pinning to fix installation failures and moved supported
+Python versions to 3.11, 3.12, and 3.13 only.

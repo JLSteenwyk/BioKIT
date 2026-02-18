@@ -12,9 +12,9 @@ CLASSIFIERS = [
     "Operating System :: OS Independent",
     "Intended Audience :: Science/Research",
     "Programming Language :: Python",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Topic :: Scientific/Engineering",
 ]
 
@@ -129,6 +129,7 @@ setup(
         ]
     },
     version=__version__,
+    python_requires=">=3.11",
     include_package_data=True,
     install_requires=REQUIRES,
 )

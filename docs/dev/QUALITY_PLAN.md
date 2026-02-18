@@ -60,7 +60,7 @@ Acceptance:
 - Add smoke coverage for default/verbose file-output modes.
 
 Acceptance:
-- CI covers at least 3.9, 3.10, 3.11 for tests and quality checks.
+- CI covers at least 3.11, 3.12, 3.13 for tests and quality checks.
 - All existing and new tests pass.
 
 ### PR 6: Security and Release Guardrails
