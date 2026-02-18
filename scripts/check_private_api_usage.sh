@@ -8,7 +8,11 @@ trap 'rm -f "${CURRENT_FILE}"' EXIT
 
 cd "${ROOT_DIR}"
 
-rg -n --no-heading "\._seq|\._data" biokit tests -S > "${CURRENT_FILE}" || true
+if command -v rg >/dev/null 2>&1; then
+  rg -n --no-heading "\._seq|\._data" biokit tests -S > "${CURRENT_FILE}" || true
+else
+  grep -RInE "\._seq|\._data" biokit tests > "${CURRENT_FILE}" || true
+fi
 
 if ! diff -u "${ALLOWLIST_FILE}" "${CURRENT_FILE}"; then
   echo
