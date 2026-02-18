@@ -39,7 +39,7 @@
 </p>
 
 BioKIT is a UNIX shell toolkit for processing molecular sequence data.<br /><br />
-If you found biokit useful, please cite the following: *BioKIT: a versatile toolkit for processing and analyzing diverse types of sequence data*. Genetics. doi: [10.1101/2021.10.02.462868](https://academic.oup.com/genetics/advance-article/doi/10.1093/genetics/iyac079/6583183).
+If you found BioKIT useful, please cite the following: *BioKIT: a versatile toolkit for processing and analyzing diverse types of sequence data*. Genetics. doi: [10.1093/genetics/iyac079](https://academic.oup.com/genetics/advance-article/doi/10.1093/genetics/iyac079/6583183).
 <br /><br />
 
 ---
@@ -76,7 +76,7 @@ Similarly, to install from source, we strongly recommend using a virtual environ
 ```shell
 # download
 git clone https://github.com/JLSteenwyk/BioKIT.git
-cd biokit/
+cd BioKIT/
 # create virtual environment
 python -m venv .venv
 # activate virtual environment
@@ -107,3 +107,9 @@ To test biokit installation, launch the help message
 ```shell
 biokit -h
 ```
+
+## Development
+
+Common local quality checks and profiling workflows are documented in:
+
+- `docs/dev/developer_workflow.rst`

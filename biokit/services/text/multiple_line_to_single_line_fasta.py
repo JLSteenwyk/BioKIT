@@ -1,24 +1,28 @@
+from typing import Any
+
 from .base import Text
 
 from ...helpers.files import read_and_parse_fasta_seqio
 
 
 class MultipleLineToSingleLineFasta(Text):
-    def __init__(self, args) -> None:
+    def __init__(self, args: Any) -> None:
         super().__init__(**self.process_args(args))
 
-    def run(self):
+    def run(self) -> None:
         # create biopython object of sequences
+        if self.fasta is None:
+            raise ValueError("fasta cannot be None")
         records = read_and_parse_fasta_seqio(self.fasta)
 
-        res_records = []
+        res_records: list[str] = []
         for record in records:
             res_records.append(">" + record.id)
-            res_records.append(record.seq._data.decode("utf-8"))
+            res_records.append(str(record.seq))
 
         print('\n'.join(res_records))
 
-    def process_args(self, args):
+    def process_args(self, args: Any) -> dict[str, str]:
         return dict(
             fasta=args.fasta
         )

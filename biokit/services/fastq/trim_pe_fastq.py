@@ -13,6 +13,7 @@ class TrimPEFastQ(FastQ):
         super().__init__(**self.process_args(args))
 
     def run(self):
+        output_format = self.normalize_output_format(self.output_format)
         # read in quality table
         quality_table = dict()
         pathing = path.join(here, "../../tables/ascii_base_33.txt")
@@ -53,9 +54,10 @@ class TrimPEFastQ(FastQ):
                     if int(base_quality) < self.minimum:
                         trim_idx1 = i
                         break
+                trim_end1 = trim_idx1 if trim_idx1 is not None else len(seq1)
                 # if there is no base below the quality threshold
                 # save the whole read
-                if not trim_idx1 and trim_idx1 != 0:
+                if trim_idx1 is None:
                     kept += 1
                     cnt += 1
                 # if the trimming idx is longer than the length
@@ -74,9 +76,10 @@ class TrimPEFastQ(FastQ):
                     if int(base_quality) < self.minimum:
                         trim_idx2 = j
                         break
+                trim_end2 = trim_idx2 if trim_idx2 is not None else len(seq2)
                 # if there is no base below the quality threshold
                 # save the whole read
-                if not trim_idx2 and trim_idx2 != 0:
+                if trim_idx2 is None:
                     kept += 1
                     cnt += 1
                 # if the trimming idx is longer than the length
@@ -91,26 +94,25 @@ class TrimPEFastQ(FastQ):
 
                 # save good reads to lists
                 if keep_1 and keep_2:
-                    seq1 = seq1[:i]
-                    qual1 = qual1[:i]
+                    seq1 = seq1[:trim_end1]
+                    qual1 = qual1[:trim_end1]
                     good_reads_paired1.append("@" + title1)
                     good_reads_paired1.append(seq1)
                     good_reads_paired1.append("+" + title1)
                     good_reads_paired1.append(qual1)
 
-                    seq2 = seq2[:j]
-                    qual2 = qual2[:j]
+                    seq2 = seq2[:trim_end2]
+                    qual2 = qual2[:trim_end2]
                     good_reads_paired2.append("@" + title2)
                     good_reads_paired2.append(seq2)
                     good_reads_paired2.append("+" + title2)
                     good_reads_paired2.append(qual2)
 
-                    kept += 1
                     pairs_kept += 1
 
                 elif keep_1 and not keep_2:
-                    seq1 = seq1[:i]
-                    qual1 = qual1[:i]
+                    seq1 = seq1[:trim_end1]
+                    qual1 = qual1[:trim_end1]
                     good_reads_unpaired1.append("@" + title1)
                     good_reads_unpaired1.append(seq1)
                     good_reads_unpaired1.append("+" + title1)
@@ -118,16 +120,29 @@ class TrimPEFastQ(FastQ):
 
                 # logic == not keep_1 and keep_2
                 else:
-                    seq2 = seq2[:j]
-                    qual2 = qual2[:j]
+                    seq2 = seq2[:trim_end2]
+                    qual2 = qual2[:trim_end2]
                     good_reads_unpaired2.append("@" + title2)
                     good_reads_unpaired2.append(seq2)
                     good_reads_unpaired2.append("+" + title2)
                     good_reads_unpaired2.append(qual2)
 
-        print(
-            f"Reads processed: {cnt}\nReads kept: {kept}\nReads removed: {removed}\n\nPairs kept: {pairs_kept}"
-        )
+        if output_format == "tsv":
+            print(
+                f"Reads processed: {cnt}\nReads kept: {kept}\nReads removed: {removed}\n\nPairs kept: {pairs_kept}"
+            )
+        else:
+            print(
+                self.format_object(
+                    {
+                        "reads_processed": cnt,
+                        "reads_kept": kept,
+                        "reads_removed": removed,
+                        "pairs_kept": pairs_kept,
+                    },
+                    output_format,
+                )
+            )
 
         # write output files
         # write paired output files
@@ -174,4 +189,5 @@ class TrimPEFastQ(FastQ):
             fastq2=args.fastq2,
             minimum=minimum,
             length=length,
+            output_format=getattr(args, "format", None),
         )

@@ -1,5 +1,6 @@
 import collections
 import textwrap
+from typing import Any
 
 from .base import Alignment
 from ...helpers.files import read_alignment_alignio
@@ -7,10 +8,13 @@ from ...helpers.calculate_character_frequencies import calculate_character_frequ
 
 
 class AlignmentSummary(Alignment):
-    def __init__(self, args) -> None:
+    def __init__(self, args: Any) -> None:
         super().__init__(**self.process_args(args))
 
-    def run(self):
+    def run(self) -> None:
+        if self.fasta is None:
+            raise ValueError("fasta cannot be None")
+        output_format = self.normalize_output_format(self.output_format)
         alignment = read_alignment_alignio(self.fasta)
 
         # character frequency counting
@@ -28,16 +32,30 @@ class AlignmentSummary(Alignment):
         pis, vs, cs, _ = self.determine_pis_vs_cs(alignment, alignment_length)
 
         # print out results
-        self.print_alignment_summary(
-            number_of_taxa,
-            alignment_length,
-            pis,
-            vs,
-            cs,
-            char_freq,
-        )
+        if output_format == "tsv":
+            self.print_alignment_summary(
+                number_of_taxa,
+                alignment_length,
+                pis,
+                vs,
+                cs,
+                char_freq,
+            )
+            return
 
-    def combine_gaps(self, char_freq: dict) -> dict:
+        out = {
+            "number_of_taxa": number_of_taxa,
+            "alignment_length": alignment_length,
+            "parsimony_informative_sites": pis,
+            "variable_sites": vs,
+            "constant_sites": cs,
+            "character_frequencies": {
+                key: value for key, value in sorted(char_freq.items(), key=lambda item: item[0])
+            },
+        }
+        print(self.format_object(out, output_format))
+
+    def combine_gaps(self, char_freq: dict[str, int]) -> dict[str, int]:
         """
         combine counts for '?' and '-' characters,
         which represents gaps
@@ -55,8 +73,8 @@ class AlignmentSummary(Alignment):
         parsimony_informative_sites: int,
         variable_sites: int,
         constant_sites: int,
-        char_freq: dict,
-    ):
+        char_freq: dict[str, int],
+    ) -> None:
         """
         print summary results
         """
@@ -79,5 +97,5 @@ class AlignmentSummary(Alignment):
 
         print(out_str)
 
-    def process_args(self, args):
-        return dict(fasta=args.fasta)
+    def process_args(self, args: Any) -> dict[str, str | None]:
+        return dict(fasta=args.fasta, output_format=getattr(args, "format", None))

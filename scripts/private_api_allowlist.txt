@@ -1,0 +1,1 @@
+biokit/services/alignment/position_specific_score_matrix.py:144:            seqrecord.seq._data = seqrecord.seq._data.upper().replace(b"?", b"-")

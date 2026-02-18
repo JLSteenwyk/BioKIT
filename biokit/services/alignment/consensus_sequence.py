@@ -1,5 +1,6 @@
 import re
 from collections import Counter
+from typing import Any
 
 from Bio.Seq import Seq
 
@@ -7,12 +8,17 @@ from .base import Alignment
 from ...helpers.files import read_alignment_alignio
 
 
-def _dumb_consensus(alignment, threshold=0.7, ambiguous="X", require_multiple=False):
+def _dumb_consensus(
+    alignment: Any,
+    threshold: float = 0.7,
+    ambiguous: str = "X",
+    require_multiple: bool = False,
+) -> Seq:
     consensus = ""
     con_len = alignment.get_alignment_length()
 
     for n in range(con_len):
-        atom_dict = Counter()
+        atom_dict: Counter[str] = Counter()
         num_atoms = 0
 
         for record in alignment:
@@ -44,10 +50,12 @@ def _dumb_consensus(alignment, threshold=0.7, ambiguous="X", require_multiple=Fa
 
 
 class ConsensusSequence(Alignment):
-    def __init__(self, args) -> None:
+    def __init__(self, args: Any) -> None:
         super().__init__(**self.process_args(args))
 
-    def run(self):
+    def run(self) -> None:
+        if self.fasta is None:
+            raise ValueError("fasta cannot be None")
         alignment = read_alignment_alignio(self.fasta)
 
         if not self.ambiguous_character:
@@ -68,7 +76,7 @@ class ConsensusSequence(Alignment):
         header = ">" + re.sub("^.*/", "", str(self.fasta)) + ".consensus"
         print(f"{header}\n{consensus}")
 
-    def process_args(self, args):
+    def process_args(self, args: Any) -> dict[str, Any]:
         return dict(
             fasta=args.fasta,
             threshold=args.threshold,

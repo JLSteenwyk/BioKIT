@@ -1,0 +1,6 @@
+-r requirements.txt
+flake8==7.3.0
+mypy==1.18.2
+pip-audit==2.10.0
+pre-commit==4.3.0
+pytest-benchmark==5.2.3

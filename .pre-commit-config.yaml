@@ -1,0 +1,28 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: check-yaml
+      - id: check-added-large-files
+
+  - repo: https://github.com/pycqa/flake8
+    rev: 7.3.0
+    hooks:
+      - id: flake8
+        additional_dependencies: []
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.18.2
+    hooks:
+      - id: mypy
+        args: ["biokit/helpers", "biokit/services/coding_sequences", "biokit/services/alignment", "biokit/services/text"]
+
+  - repo: local
+    hooks:
+      - id: private-api-guard
+        name: private-api-guard
+        entry: bash scripts/check_private_api_usage.sh
+        language: system
+        pass_filenames: false

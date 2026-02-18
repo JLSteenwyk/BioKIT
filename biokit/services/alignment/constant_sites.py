@@ -1,12 +1,17 @@
+from typing import Any
+
 from .base import Alignment
 from ...helpers.files import read_alignment_alignio
 
 
 class ConstantSites(Alignment):
-    def __init__(self, args) -> None:
+    def __init__(self, args: Any) -> None:
         super().__init__(**self.process_args(args))
 
-    def run(self):
+    def run(self) -> None:
+        if self.fasta is None:
+            raise ValueError("fasta cannot be None")
+        output_format = self.normalize_output_format(self.output_format)
         alignment = read_alignment_alignio(self.fasta)
 
         # alignment length
@@ -14,11 +19,20 @@ class ConstantSites(Alignment):
 
         _, _, cs, site_summary = self.determine_pis_vs_cs(alignment, aln_len)
 
-        if self.verbose:
+        if output_format == "tsv" and self.verbose:
             for i in site_summary:
                 print(f"{i[0]}\t{i[1]}")
-        else:
+        elif output_format == "tsv":
             print(cs)
+        elif self.verbose:
+            rows = [{"site_index": i[0], "classification": i[1]} for i in site_summary]
+            print(self.format_rows(rows, output_format))
+        else:
+            print(self.format_object({"constant_sites": cs}, output_format))
 
-    def process_args(self, args):
-        return dict(fasta=args.fasta, verbose=args.verbose)
+    def process_args(self, args: Any) -> dict[str, Any | None]:
+        return dict(
+            fasta=args.fasta,
+            verbose=args.verbose,
+            output_format=getattr(args, "format", None),
+        )

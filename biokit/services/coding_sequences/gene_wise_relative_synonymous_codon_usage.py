@@ -1,59 +1,78 @@
 import statistics as stat
-
-from Bio import SeqIO
+from typing import Any
 
 from .base import CodingSequence
+from ...helpers.files import iter_fasta_entries
 
 
 class GeneWiseRelativeSynonymousCodonUsage(CodingSequence):
-    def __init__(self, args) -> None:
+    def __init__(self, args: Any) -> None:
         super().__init__(**self.process_args(args))
 
-    def run(self):
+    def run(self) -> None:
+        output_format = self.normalize_output_format(self.output_format)
         translation_table = self.read_translation_table(self.translation_table)  # noqa
 
         # get rscu values
         rscu = self.calculate_rscu(translation_table)
 
-        records = SeqIO.parse(self.fasta, "fasta")
-
-        gw_rscu = []
-        for seq_record in records:
-            if len(seq_record._seq) % 3 == 0:
-                rscus_curr_gene = []
-                for position in range(0, len(seq_record._seq), 3):
-                    codon = (
-                        seq_record._seq[position:position + 3]
-                        ._data
-                        .upper()
-                        .replace(b"T", b"U")
-                        .decode("utf-8")
-                    )
-                    if codon in translation_table.keys():
-                        rscus_curr_gene.append(rscu[codon])
-                temp = []
-                temp.append(seq_record.id)
-                temp.append(round(stat.mean(rscus_curr_gene), 4))
-                temp.append(round(stat.median(rscus_curr_gene), 4))
-                temp.append(round(stat.stdev(rscus_curr_gene), 4))
-                gw_rscu.append(temp)
-
-        res = ""
-        i = 1
-        num_genes = len(gw_rscu)
-        for gene_stats in gw_rscu:
-            if i != num_genes:
-                res += f"{gene_stats[0]}\t{gene_stats[1]}\t{gene_stats[2]}\t{gene_stats[3]}\n"
-                i += 1
+        gw_rscu: list[tuple[str, float, float, float]] = []
+        translation_table_keys = set(translation_table.keys())
+        if self.fasta is None:
+            raise ValueError("fasta cannot be None")
+        for seq_id, seq in iter_fasta_entries(self.fasta):
+            sequence = seq.upper().replace("T", "U")
+            if len(sequence) % 3 != 0:
+                continue
+            rscus_curr_gene: list[float] = []
+            for position in range(0, len(sequence), 3):
+                codon = sequence[position:position + 3]
+                if codon in translation_table_keys:
+                    rscus_curr_gene.append(float(rscu[codon]))
+            if not rscus_curr_gene:
+                continue
+            if len(rscus_curr_gene) >= 2:
+                std_dev = round(stat.stdev(rscus_curr_gene), 4)
             else:
-                res += f"{gene_stats[0]}\t{gene_stats[1]}\t{gene_stats[2]}\t{gene_stats[3]}"
+                std_dev = 0.0
+            gw_rscu.append(
+                (
+                    seq_id,
+                    round(stat.mean(rscus_curr_gene), 4),
+                    round(stat.median(rscus_curr_gene), 4),
+                    std_dev,
+                )
+            )
 
-        print(res)
+        if output_format == "tsv":
+            print(
+                "\n".join(
+                    f"{gene_stats[0]}\t{gene_stats[1]}\t{gene_stats[2]}\t{gene_stats[3]}"
+                    for gene_stats in gw_rscu
+                )
+            )
+            return
 
-    def process_args(self, args):
+        rows = [
+            {
+                "gene_id": gene_id,
+                "mean_rscu": mean_rscu,
+                "median_rscu": median_rscu,
+                "stddev_rscu": stddev_rscu,
+            }
+            for gene_id, mean_rscu, median_rscu, stddev_rscu in gw_rscu
+        ]
+        rows.sort(key=lambda row: row["gene_id"])
+        print(self.format_rows(rows, output_format))
+
+    def process_args(self, args: Any) -> dict[str, str | None]:
         if args.translation_table is None:
             translation_table = "1"
         else:
             translation_table = args.translation_table
 
-        return dict(fasta=args.fasta, translation_table=translation_table)
+        return dict(
+            fasta=args.fasta,
+            translation_table=translation_table,
+            output_format=getattr(args, "format", None),
+        )

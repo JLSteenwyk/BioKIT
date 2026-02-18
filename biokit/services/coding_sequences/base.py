@@ -1,30 +1,24 @@
 from os import path
 from collections import Counter
-
-from Bio import SeqIO
+from typing import Any
 
 from ..base import BaseService
+from ...helpers.files import iter_fasta_entries
 
 here = path.dirname(__file__)
 
 
 class CodingSequence(BaseService):
-    def __init__(
-        self,
-        *args,
-        fasta=None,
-        verbose=None,
-        translation_table=None,
-        output_file_path=None,
-    ):
-        self.fasta = fasta
-        self.verbose = verbose
-        self.translation_table = translation_table
-        self.output_file_path = output_file_path
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        self.fasta: str | None = kwargs.get("fasta")
+        self.verbose: bool | None = kwargs.get("verbose")
+        self.translation_table: str | None = kwargs.get("translation_table")
+        self.output_file_path: str | None = kwargs.get("output_file_path")
+        self.output_format: str | None = kwargs.get("output_format")
 
-    def calculate_rscu(self, translation_table) -> dict:
+    def calculate_rscu(self, translation_table: dict[str, str]) -> dict[str, float | int]:
         # get codon_table
-        codon_table = dict()
+        codon_table: dict[str, list[str]] = {}
         for k, v in translation_table.items():
             if v in codon_table.keys():
                 codon_table[v].append(k)
@@ -32,11 +26,12 @@ class CodingSequence(BaseService):
                 codon_table[v] = [k]
 
         # get counts of codons
-        codon_counts = Counter()
-        records = SeqIO.parse(self.fasta, "fasta")
+        codon_counts: Counter[str] = Counter()
+        if self.fasta is None:
+            raise ValueError("fasta cannot be None")
         valid_codons = set(translation_table.keys())
-        for seq_record in records:
-            sequence = str(seq_record.seq).upper().replace("T", "U")
+        for _, seq in iter_fasta_entries(self.fasta):
+            sequence = seq.upper().replace("T", "U")
             if len(sequence) % 3 != 0:
                 continue
             for position in range(0, len(sequence), 3):
@@ -45,7 +40,7 @@ class CodingSequence(BaseService):
                     codon_counts[codon] += 1
 
         # calculate rscu
-        rscu = dict()
+        rscu: dict[str, float | int] = {}
         for _, codons in codon_table.items():
             observed_sum = 0
             for codon in codons:
@@ -62,12 +57,44 @@ class CodingSequence(BaseService):
 
         return rscu
 
-    def read_translation_table(self, translation_table: str) -> dict:
+    @staticmethod
+    def calculate_gc_content(seq: str) -> float | int:
+        if not seq:
+            return 0
+        gc_count = seq.count("G") + seq.count("g") + seq.count("C") + seq.count("c")
+        return round(gc_count / len(seq), 4)
+
+    @staticmethod
+    def get_codon_position_chars(sequence: str, codon_position: int) -> str:
+        return sequence[codon_position::3]
+
+    def gc_content_by_codon_position(
+        self, codon_position: int
+    ) -> list[str]:
+        if self.fasta is None:
+            raise ValueError("fasta cannot be None")
+        output_lines: list[str] = []
+        aggregated_chars: list[str] = []
+
+        for seq_id, seq in iter_fasta_entries(self.fasta):
+            position_chars = self.get_codon_position_chars(seq, codon_position)
+            if self.verbose:
+                gc_content = self.calculate_gc_content(position_chars)
+                output_lines.append(f"{seq_id}\t{gc_content}")
+            else:
+                aggregated_chars.extend(position_chars)
+
+        if not self.verbose:
+            output_lines.append(str(self.calculate_gc_content("".join(aggregated_chars))))
+
+        return output_lines
+
+    def read_translation_table(self, translation_table: str | None) -> dict[str, str]:
         """
         return translation table with codons as keys and amino acids as values
         """
 
-        trans_table = dict()
+        trans_table: dict[str, str] = {}
 
         if translation_table is None or translation_table == "1":
             pathing = path.join(here, "../../tables/standard_genetic_code.txt")
@@ -154,6 +181,6 @@ class CodingSequence(BaseService):
 
         with open(pathing) as code:
             for line in code:
-                line = line.split()
-                trans_table[line[0]] = line[1]
+                parts = line.split()
+                trans_table[parts[0]] = parts[1]
         return trans_table

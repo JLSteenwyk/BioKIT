@@ -1,4 +1,5 @@
 from collections import Counter
+from typing import Any
 from Bio.Seq import Seq
 
 from .base import Alignment
@@ -6,13 +7,13 @@ from ...helpers.files import read_alignment_alignio
 
 
 class PSSM:
-    def __init__(self, pssm):
+    def __init__(self, pssm: list[tuple[str, dict[str, float]]]) -> None:
         self.pssm = pssm
 
-    def __getitem__(self, pos):
+    def __getitem__(self, pos: int) -> dict[str, float]:
         return self.pssm[pos][1]
 
-    def __str__(self):
+    def __str__(self) -> str:
         out = " "
         all_residues = sorted(self.pssm[0][1])
 
@@ -29,12 +30,17 @@ class PSSM:
         return out
 
 
-def _dumb_consensus(alignment, threshold=0.7, ambiguous="X", require_multiple=False):
+def _dumb_consensus(
+    alignment: Any,
+    threshold: float = 0.7,
+    ambiguous: str = "X",
+    require_multiple: bool = False,
+) -> Seq:
     consensus = ""
     con_len = alignment.get_alignment_length()
 
     for n in range(con_len):
-        atom_dict = Counter()
+        atom_dict: Counter[str] = Counter()
         num_atoms = 0
 
         for record in alignment:
@@ -65,14 +71,18 @@ def _dumb_consensus(alignment, threshold=0.7, ambiguous="X", require_multiple=Fa
     return Seq(consensus)
 
 
-def _get_all_letters(alignment):
+def _get_all_letters(alignment: Any) -> str:
     set_letters = set()
     for record in alignment:
         set_letters.update(record.seq)
     return "".join(sorted(set_letters))
 
 
-def _pos_specific_score_matrix(alignment, axis_seq=None, chars_to_ignore=None):
+def _pos_specific_score_matrix(
+    alignment: Any,
+    axis_seq: Seq | None = None,
+    chars_to_ignore: list[str] | str | None = None,
+) -> PSSM:
     all_letters = _get_all_letters(alignment)
     if not all_letters:
         raise ValueError("_get_all_letters returned empty string")
@@ -99,9 +109,9 @@ def _pos_specific_score_matrix(alignment, axis_seq=None, chars_to_ignore=None):
     else:
         left_seq = _dumb_consensus(alignment)
 
-    pssm_info = []
+    pssm_info: list[tuple[str, dict[str, float]]] = []
     for residue_num in range(len(left_seq)):
-        score_dict = dict.fromkeys(all_letters, 0)
+        score_dict: dict[str, float] = dict.fromkeys(all_letters, 0)
         for record in alignment:
             try:
                 this_residue = record.seq[residue_num]
@@ -123,10 +133,12 @@ def _pos_specific_score_matrix(alignment, axis_seq=None, chars_to_ignore=None):
 
 
 class PositionSpecificScoreMatrix(Alignment):
-    def __init__(self, args) -> None:
+    def __init__(self, args: Any) -> None:
         super().__init__(**self.process_args(args))
 
-    def run(self):
+    def run(self) -> None:
+        if self.fasta is None:
+            raise ValueError("fasta cannot be None")
         alignment = read_alignment_alignio(self.fasta)
         for seqrecord in alignment:
             seqrecord.seq._data = seqrecord.seq._data.upper().replace(b"?", b"-")
@@ -138,7 +150,7 @@ class PositionSpecificScoreMatrix(Alignment):
         )
         print(vars(my_pssm))
 
-    def process_args(self, args):
+    def process_args(self, args: Any) -> dict[str, Any]:
         return dict(
             fasta=args.fasta,
             ambiguous_character=args.ambiguous_character,

@@ -23,13 +23,13 @@ Calling functions
 
    biokit <command> [optional command arguments]
 
-Command specific help messages can be viewed by adding a 
+Command specific help messages can be viewed by adding a
 -h/\-\-help argument after the command. For example, to see the
-to see the help message for the command 'alignment_summary', execute:
+help message for the command 'alignment_summary', execute:
 
 .. code-block:: shell
 
-   biokit alignment_summary -h 
+   biokit alignment_summary -h
    # or
    biokit alignment_summary --help
 
@@ -63,7 +63,7 @@ you can type:
    bk_aln_summary -h
 
 
-All possible function names are specified at the top of each function section. 
+All possible function names are specified at the top of each function section.
 
 |
 
@@ -72,23 +72,23 @@ Alignment-based functions
 
 ^^^^^
 
-Alignment length 
+Alignment length
 ################
 Function names: alignment_length; aln_len |br|
 Command line interface: bk_alignment_length; bk_aln_len
 
-Calculate the length of an alignment. 
+Calculate the length of an alignment.
 
 .. code-block:: shell
 
 	biokit alignment_length <fasta>
 
 Options: |br|
-*<alignment>*: first argument after function name should be an alignment file 
+*<alignment>*: first argument after function name should be an alignment file
 
 |
 
-Alignment recoding 
+Alignment recoding
 ##################
 Function names: alignment_recoding; aln_recoding; recode |br|
 Command line interface: bk_alignment_recoding; bk_aln_recoding; bk_recode
@@ -200,11 +200,11 @@ H = C |br|
 
 Options: |br|
 *<alignment>*: first argument after function name should be an alignment file |br|
-*-c/\-\-code*: argument to specify the recoding scheme to use 
+*-c/\-\-code*: argument to specify the recoding scheme to use
 
 |
 
-Alignment summary 
+Alignment summary
 #################
 Function names: alignment_summary; aln_summary |br|
 Command line interface: bk_alignment_summary; bk_aln_summary
@@ -213,14 +213,15 @@ Summary statistics for an alignment. Reported
 statistics include alignment length, number of taxa,
 number of parsimony sites, number of variable sites,
 number of constant sites, frequency of each character
-(including gaps, which are considered to be '-' or '?'). 
+(including gaps, which are considered to be '-' or '?').
 
 .. code-block:: shell
 
-	biokit alignment_summary <fasta>
+	biokit alignment_summary <fasta> [-f/--format <tsv|json|yaml>]
 
 Options: |br|
-*<alignment>*: first argument after function name should be an alignment file 
+*<alignment>*: first argument after function name should be an alignment file |br|
+*-f/\-\-format*: output format (tsv, json, yaml). Default: tsv
 
 |
 
@@ -236,8 +237,8 @@ Generates a consequence from a multiple sequence alignment file in FASTA format.
 	biokit consensus_sequence <fasta> -t/--threshold <threshold> -ac/--ambiguous_character <ambiguous character>
 
 Options: |br|
-*<fasta>*: first argument after function name should be an alignment fasta file 
-*<threshold>*: threshold for how common a residue must be to be represented  
+*<fasta>*: first argument after function name should be an alignment fasta file
+*<threshold>*: threshold for how common a residue must be to be represented
 *<ambiguous character>*: the ambiguity character to use. Default is 'N'
 
 |
@@ -255,11 +256,12 @@ acid sequence (excluding gaps) among all taxa.
 
 .. code-block:: shell
 
-	biokit constant_sites <fasta> [-v/\-\-verbose]
+	biokit constant_sites <fasta> [-v/\-\-verbose] [-f/--format <tsv|json|yaml>]
 
 Options: |br|
-*<alignment>*: first argument after function name should be an alignment file 
-*-v/\-\-verbose*: optional argument to print site-by-site categorization
+*<alignment>*: first argument after function name should be an alignment file
+*-v/\-\-verbose*: optional argument to print site-by-site categorization |br|
+*-f/\-\-format*: output format (tsv, json, yaml). Default: tsv
 
 |
 
@@ -277,11 +279,12 @@ or amino acids that occur at least twice.
 
 .. code-block:: shell
 
-	biokit parsimony_informative_sites <fasta> [-v/\-\-verbose]
+	biokit parsimony_informative_sites <fasta> [-v/\-\-verbose] [-f/--format <tsv|json|yaml>]
 
 Options: |br|
 *<alignment>*: first argument after function name should be an alignment file |br|
-*-v/\-\-verbose*: optional argument to print site-by-site categorization
+*-v/\-\-verbose*: optional argument to print site-by-site categorization |br|
+*-f/\-\-format*: output format (tsv, json, yaml). Default: tsv
 
 |
 
@@ -297,7 +300,7 @@ Generates a position specific score matrix for an alignment.
 	biokit position_specific_score_matrix <fasta> [-ac/--ambiguous_character <ambiguous character>]
 
 Options: |br|
-*<fasta>*: first argument after function name should be an alignment fasta file 
+*<fasta>*: first argument after function name should be an alignment fasta file
 *<ambiguous character>*: the ambiguity character to use. Default is 'N'
 
 |
@@ -316,11 +319,12 @@ acid characters among all taxa.
 
 .. code-block:: shell
 
-	biokit variable_sites <fasta> [-v/\-\-verbose]
+	biokit variable_sites <fasta> [-v/\-\-verbose] [-f/--format <tsv|json|yaml>]
 
 Options: |br|
-*<alignment>*: first argument after function name should be an alignment file 
-*-v/\-\-verbose*: optional argument to print site-by-site categorization
+*<alignment>*: first argument after function name should be an alignment file |br|
+*-v/\-\-verbose*: optional argument to print site-by-site categorization |br|
+*-f/\-\-format*: output format (tsv, json, yaml). Default: tsv
 
 |
 
@@ -412,17 +416,19 @@ in a gene; and the col 4: the standard deviation of
 RSCU values observed in a gene.
 
 Custom genetic codes can be used as input and should
-be formatted with the codon in first column and the 
+be formatted with the codon in the first column and the
 resulting amino acid in the second column.
 
 .. code-block:: shell
 
-   biokit gene_wise_relative_synonymous_codon_usage <fasta> [-tt/--translation_table <code>]
+   biokit gene_wise_relative_synonymous_codon_usage <fasta>
+   [-tt/--translation_table <code>] [-f/--format <tsv|json|yaml>]
 
 Options: |br|
 *<fasta>*: first argument after function name should be a fasta file |br|
 *-tt/\-\-translation_table*: optional argument of the code for the translation
-table to be used. Default: 1, which is the standard code.
+table to be used. Default: 1, which is the standard code. |br|
+*-f/\-\-format*: output format (tsv, json, yaml). Default: tsv
 
 |
 
@@ -439,17 +445,19 @@ expected frequency given that all the synonymous
 codons for the same amino acids are used equally.
 
 Custom genetic codes can be used as input and should
-be formatted with the codon in first column and the 
+be formatted with the codon in the first column and the
 resulting amino acid in the second column.
 
 .. code-block:: shell
 
-   biokit relative_synonymous_codon_usage <fasta> [-tt/--translation_table <code>]
+   biokit relative_synonymous_codon_usage <fasta>
+   [-tt/--translation_table <code>] [-f/--format <tsv|json|yaml>]
 
 Options: |br|
 *<fasta>*: first argument after function name should be a fasta file |br|
 *-tt/\-\-translation_table*: optional argument of the code for the translation
-table to be used. Default: 1, which is the standard code.
+table to be used. Default: 1, which is the standard code. |br|
+*-f/\-\-format*: output format (tsv, json, yaml). Default: tsv
 
 |
 
@@ -466,7 +474,7 @@ Glu or STOP in the Blastocrithidia Nuclear Code),
 the standard genetic code is used.
 
 Custom genetic codes can be used as input and should
-be formatted with the codon in first column and the 
+be formatted with the codon in the first column and the
 resulting amino acid in the second column.
 
 .. code-block:: shell
@@ -494,7 +502,7 @@ Function names: fastq_read_lengths; fastq_read_lens |br|
 Command line interface: bk_fastq_read_lengths; bk_fastq_read_lens
 
 Determine lengths of FASTQ reads.
-                
+
 Using default arguments, the average and
 standard deviation of read lengths in a
 FASTQ file will be reported. To obtain
@@ -503,11 +511,12 @@ verbose option.
 
 .. code-block:: shell
 
-   biokit fastq_read_lengths <fasta> [-tt/--translation_table <code> -o/--output <output_file>]
+   biokit fastq_read_lengths <fastq> [-v/--verbose] [-f/--format <tsv|json|yaml>]
 
 Options: |br|
 *<fastq>*: first argument after function name should be a FASTQ file |br|
-*-v/\-\-verbose*: print length of each FASTQ read
+*-v/\-\-verbose*: print length of each FASTQ read |br|
+*-f/\-\-format*: output format (tsv, json, yaml). Default: tsv
 
 |
 
@@ -518,8 +527,8 @@ Command line interface: bk_subset_pe_fastq_reads; bk_subset_pe_fastq
 
 Subset paired-end FASTQ data.
 
-Subsetting FASTQ data may be helpful for 
-running test scripts or achieving equal 
+Subsetting FASTQ data may be helpful for
+running test scripts or achieving equal
 coverage between samples. A percentage of
 total reads in paired-end FASTQ data can
 be obtained with this function. Random
@@ -529,7 +538,7 @@ a seed is generated based off of the date
 and time. During subsampling, paired-end
 information is maintained.
 
-Files are outputed with the suffix "_subset.fq"
+Files are output with the suffix "_subset.fq"
 
 .. code-block:: shell
 
@@ -550,8 +559,8 @@ Command line interface: bk_subset_se_fastq_reads; bk_subset_se_fastq
 
 Subset single-end FASTQ data.
 
-Subsetting FASTQ data may be helpful for 
-running test scripts or achieving equal 
+Subsetting FASTQ data may be helpful for
+running test scripts or achieving equal
 coverage between samples. A percentage of
 total reads in single-end FASTQ data can
 be obtained with this function. Random
@@ -579,7 +588,7 @@ Trim PE adapters FASTQ reads
 Function names: trim_pe_adapters_fastq_reads; trim_pe_adapters_fastq |br|
 Command line interface: bk_trim_pe_adapters_fastq_reads; bk_trim_pe_adapters_fastq
 
-Trim adapters from paired-end FastQ data.
+Trim adapters from paired-end FASTQ data.
 
 FASTQ data will be trimmed according to
 exact match to known adapter sequences.
@@ -590,10 +599,11 @@ output_file argument.
 
 .. code-block:: shell
 
-   biokit trim_pe_adapters_fastq_reads <fastq1> <fastq2> [-a/--adapters TruSeq2-PE -l/--length 20]
+   biokit trim_pe_adapters_fastq <fastq1> <fastq2> [-a/--adapters TruSeq2-PE -l/--length 20]
+   [-f/--format <tsv|json|yaml>]
 
 
-Adapaters available: |br|
+Adapters available: |br|
 NexteraPE-PE |br|
 TruSeq2-PE |br|
 TruSeq2-SE |br|
@@ -605,7 +615,8 @@ Options: |br|
 *<fastq1>*: first argument after function name should be the name of one of the fastq files |br|
 *<fastq2>*: first argument after function name should be the name of the other fastq file |br|
 *-a/\-\-adapters*: adapter sequences to trim. Default: TruSeq2-PE |br|
-*-l/\-\-length*: minimum length of read to be kept. Default: 20
+*-l/\-\-length*: minimum length of read to be kept. Default: 20 |br|
+*-f/\-\-format*: output format (tsv, json, yaml). Default: tsv
 
 |
 
@@ -614,27 +625,29 @@ Trim PE FASTQ reads
 Function names: trim_pe_fastq_reads; trim_pe_fastq |br|
 Command line interface: bk_trim_pe_fastq_reads; bk_trim_pe_fastq
 
-Quality trim paired-end FastQ data.
+Quality trim paired-end FASTQ data.
 
 FASTQ data will be trimmed according to
 quality score and length of the reads.
 Users can specify quality and length
-thresholds. Paired reads that are 
+thresholds. Paired reads that are
 maintained and saved to files with the
 suffix "_paired_trimmed.fq." Single
 reads that passed quality thresholds are
-saved to files with the suffix 
+saved to files with the suffix
 "_unpaired_trimmed.fq."
 
 .. code-block:: shell
 
-   biokit trim_pe_fastq_reads <fastq1> <fastq2> [-m/--minimum 20 -l/--length 20]
+   biokit trim_pe_fastq <fastq1> <fastq2> [-m/--minimum 20 -l/--length 20]
+   [-f/--format <tsv|json|yaml>]
 
 Options: |br|
 *<fastq1>*: first argument after function name should be the name of one of the fastq files |br|
 *<fastq2>*: first argument after function name should be the name of the other fastq file |br|
 *-m/\-\-minimum*: minimum quality of read to be kept. Default: 20 |br|
-*-l/\-\-length*: minimum length of read to be kept. Default: 20
+*-l/\-\-length*: minimum length of read to be kept. Default: 20 |br|
+*-f/\-\-format*: output format (tsv, json, yaml). Default: tsv
 
 |
 
@@ -643,7 +656,7 @@ Trim SE adapters FASTQ reads
 Function names: trim_se_adapters_fastq_reads; trim_se_adapters_fastq |br|
 Command line interface: bk_trim_se_adapters_fastq_reads; bk_trim_se_adapters_fastq
 
-Trim adapters from single-end FastQ data.
+Trim adapters from single-end FASTQ data.
 
 FASTQ data will be trimmed according to
 exact match to known adapter sequences.
@@ -654,13 +667,15 @@ output_file argument.
 
 .. code-block:: shell
 
-   biokit trim_se_adapters_fastq_reads <fastq> [-a/--adapters TruSeq2-SE -l/--length 20]
+   biokit trim_se_adapters_fastq <fastq> [-a/--adapters TruSeq2-SE -l/--length 20]
+   [-f/--format <tsv|json|yaml>]
 
 Options: |br|
 *<fastq>*: first argument after function name should be the fastq file |br|
 *-a/\-\-adapters*: adapter sequences to trim. Default: TruSeq2-SE |br|
 *-l/\-\-length*: minimum length of read to be kept. Default: 20 |br|
-*-o/\-\-output_file*: name of the output file of trimmed reads
+*-o/\-\-output_file*: name of the output file of trimmed reads |br|
+*-f/\-\-format*: output format (tsv, json, yaml). Default: tsv
 
 |
 
@@ -669,24 +684,26 @@ Trim SE FASTQ reads
 Function names: trim_se_fastq_reads; trim_se_fastq |br|
 Command line interface: bk_trim_se_fastq_reads; bk_trim_se_fastq
 
-Quality trim single-end FastQ data.
+Quality trim single-end FASTQ data.
 
 FASTQ data will be trimmed according to
 quality score and length of the reads.
 Users can specify quality and length
-thresholds. Output file has the suffix 
-"_trimmed.fq" or can be named by the user 
+thresholds. Output file has the suffix
+"_trimmed.fq" or can be named by the user
 with the output_file argument.
 
 .. code-block:: shell
 
-   biokit trim_se_fastq_reads <fastq> [-m/--minimum 20 -l/--length 20]
+   biokit trim_se_fastq <fastq> [-m/--minimum 20 -l/--length 20]
+   [-f/--format <tsv|json|yaml>]
 
 Options: |br|
 *<fastq>*: first argument after function name should be the fastq file |br|
 *-m/\-\-minimum*: minimum quality of read to be kept. Default: 20 |br|
 *-l/\-\-length*: minimum length of read to be kept. Default: 20 |br|
-*-o/\-\-output_file*: name of the output file of trimmed reads
+*-o/\-\-output_file*: name of the output file of trimmed reads |br|
+*-f/\-\-format*: output format (tsv, json, yaml). Default: tsv
 
 |
 
@@ -709,11 +726,12 @@ option.
 
 .. code-block:: shell
 
-   biokit gc_content <fasta> [-v/--verbose]
+   biokit gc_content <fasta> [-v/--verbose] [-f/--format <tsv|json|yaml>]
 
 Options: |br|
 *<fasta>*: first argument after function name should be a fasta file |br|
-*-v/\-\-verbose*: optional argument to print the GC content of each fasta entry
+*-v/\-\-verbose*: optional argument to print the GC content of each fasta entry |br|
+*-f/\-\-format*: output format (tsv, json, yaml). Default: tsv
 
 |
 
@@ -735,19 +753,20 @@ Assembly size: The sum length of all contigs in an assembly. |br|
 Number of scaffolds: The total number of scaffolds in an assembly. |br|
 Number of large scaffolds: The total number of scaffolds that are greater than the threshold for small scaffolds. |br|
 Sum length of large scaffolds: The sum length of all large scaffolds. |br|
-Frequency of A: The number of occurences of A corrected by assembly size. |br|
-Frequency of T: The number of occurences of T corrected by assembly size. |br|
-Frequency of C: The number of occurences of C corrected by assembly size. |br|
-Frequency of G: The number of occurences of G corrected by assembly size.
+Frequency of A: The number of occurrences of A corrected by assembly size. |br|
+Frequency of T: The number of occurrences of T corrected by assembly size. |br|
+Frequency of C: The number of occurrences of C corrected by assembly size. |br|
+Frequency of G: The number of occurrences of G corrected by assembly size.
 
 .. code-block:: shell
 
-   biokit genome_assembly_metrics <fasta>
+   biokit genome_assembly_metrics <fasta> [-t/--threshold <int>] [-f/--format <tsv|json|yaml>]
 
 Options: |br|
 *<fasta>*: first argument after function name should be a fasta file |br|
 *-t/\-\-threshold*: threshold for what is considered a large scaffold.
-Only scaffolds with a length greater than this value will be counted. Default: 500
+Only scaffolds with a length greater than this value will be counted. Default: 500 |br|
+*-f/\-\-format*: output format (tsv, json, yaml). Default: tsv
 
 |
 
@@ -868,8 +887,8 @@ Function names: number_of_scaffolds; num_of_scaffolds; number_of_contigs; num_of
 Command line interface: bk_number_of_scaffolds; bk_num_of_scaffolds; bk_number_of_contigs; bk_num_of_cont
 
 Calculate the number of scaffolds or entries
-in a FASTA file. In this way, a user can also 
-determine the number of predicted genes in a 
+in a FASTA file. In this way, a user can also
+determine the number of predicted genes in a
 coding sequence or protein FASTA file with this
 function.
 
@@ -887,8 +906,8 @@ Sum of scaffold lengths
 Function names: sum_of_scaffold_lengths; sum_of_contig_lengths |br|
 Command line interface: bk_sum_of_scaffold_lengths; bk_sum_of_contig_lengths
 
-Determine the sum of scaffold lengths. 
-                
+Determine the sum of scaffold lengths.
+
 The intended use of this function is to determine
 the length of a genome assembly, but can also be
 used, for example, to determine the sum length
@@ -920,10 +939,11 @@ in a genome or the frequency of amino acids in a proteome.
 
 .. code-block:: shell
 
-   biokit character_frequency <fasta> [-v/--verbose]
+   biokit character_frequency <fasta> [-f/--format <tsv|json|yaml>]
 
 Options: |br|
 *<fasta>*: first argument after function name should be a fasta file |br|
+*-f/\-\-format*: output format (tsv, json, yaml). Default: tsv
 
 |
 
@@ -934,17 +954,17 @@ Command line interface: bk_faidx; bk_get_entry; bk_ge
 
 Extracts sequence entry from fasta file.
 
-This function works similarly to the faidx function 
-in samtools, but does not requiring an indexing the
+This function works similarly to the faidx function
+in samtools, but does not require indexing the
 sequence file.
 
 .. code-block:: shell
 
-   biokit faidx <fasta> [-v/--verbose]
+   biokit faidx <fasta> -e/--entry <entry>
 
 Options: |br|
 *<fasta>*: first argument after function name should be a fasta file |br|
-*-e/\-\-entry*: entry name to be extracted from the inputted fasta file
+*-e/\-\-entry*: entry name to be extracted from the input fasta file
 
 |
 
@@ -967,7 +987,7 @@ and \-\-output_file arguments.
    biokit file_format_converter -i/--input_file <input_file> -iff/--input_file_format <input_file_format>  -o/--output_file <output_file> -off/--output_file_format <output_file_format>
 
 Options: |br|
-*-i/\-\-input_file*: input file name 
+*-i/\-\-input_file*: input file name
 *-iff/\-\-input_file_format*: input file format
 *-o/\-\-output_file*: output file name
 *-off/\-\-output_file_format*: output file format
@@ -1001,7 +1021,7 @@ Command line interface: bk_remove_fasta_entry
 Remove FASTA entry from multi-FASTA file.
 
 Output will have the suffix "pruned.fa" unless
-the user specifies a different output file name. 
+the user specifies a different output file name.
 
 .. code-block:: shell
 
@@ -1009,7 +1029,7 @@ the user specifies a different output file name.
 
 Options: |br|
 *<fasta>*: first argument after function name should be a fasta file |br|
-*-e/\-\-entry*: entry name to be removed from the inputted fasta file |br|
+*-e/\-\-entry*: entry name to be removed from the input fasta file |br|
 *-o/\-\-output*: optional argument to write the renamed fasta file to.
 Default output has the same name as the input file with the suffix "pruned.fa"
 added to it.
@@ -1037,7 +1057,7 @@ the user specifies a different output file name.
 
 Options: |br|
 *<fasta>*: first argument after function name should be a fasta file |br|
-*-t/\-\-threshold*: threshold for short sequences. Sequences greater 
+*-t/\-\-threshold*: threshold for short sequences. Sequences greater
 than this value will be kept |br|
 *-o/\-\-output*: optional argument to write the renamed fasta file to.
 Default output has the same name as the input file with the suffix "long_seqs.fa"
@@ -1050,16 +1070,16 @@ Rename FASTA entries
 Function names: rename_fasta_entries; rename_fasta |br|
 Command line interface: bk_rename_fasta_entries; bk_rename_fasta
 
-Renames fasta entries.
+Renames FASTA entries.
 
 Renaming fasta entries will follow the scheme of a tab-delimited
-file wherein the first column is the current fasta entry name and
-the second column is the new fasta entry name in the resulting 
-output alignment. 
+file wherein the first column is the current FASTA entry name and
+the second column is the new FASTA entry name in the resulting
+output FASTA file.
 
 .. code-block:: shell
 
-   rename_fasta_entries <fasta> -i/--idmap <idmap> [-o/--output <output_file>]
+   biokit rename_fasta_entries <fasta> -i/--idmap <idmap> [-o/--output <output_file>]
 
 Options: |br|
 *<fasta>*: first argument after function name should be a fasta file |br|
@@ -1074,7 +1094,7 @@ Function names: reorder_by_sequence_length; reorder_by_seq_len |br|
 Command line interface: bk_reorder_by_sequence_length; bk_reorder_by_seq_len
 
 Reorder FASTA file entries from the longest entry
-to the shortest entry. 
+to the shortest entry.
 
 .. code-block:: shell
 
@@ -1116,19 +1136,20 @@ Calculate sequence length of each FASTA entry.
 
 .. code-block:: shell
 
-   biokit sequence_length <fasta>
+   biokit sequence_length <fasta> [-f/--format <tsv|json|yaml>]
 
 Options: |br|
 *<fasta>*: first argument after function name should be a fasta file |br|
+*-f/\-\-format*: output format (tsv, json, yaml). Default: tsv
 
 |
 
-Single line to multiple line fasta
+Single line to multiple line FASTA
 ##################################
 Function names: single_line_to_multiple_line_fasta; sl2ml |br|
 Command line interface: bk_single_line_to_multiple_line_fasta; bk_sl2ml
 
-Calculate sequence length of each FASTA entry.
+Convert a single-line FASTA file to 60-character wrapped sequence lines.
 
 .. code-block:: shell
 

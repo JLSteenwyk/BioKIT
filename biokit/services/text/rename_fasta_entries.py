@@ -1,5 +1,6 @@
 import sys
 import textwrap
+from typing import Any
 
 from Bio import SeqIO
 
@@ -8,10 +9,12 @@ from ...helpers.files import read_and_parse_fasta_seqio
 
 
 class RenameFastaEntries(Text):
-    def __init__(self, args) -> None:
+    def __init__(self, args: Any) -> None:
         super().__init__(**self.process_args(args))
 
-    def run(self):
+    def run(self) -> None:
+        if self.fasta is None or self.idmap is None or self.output_file_path is None:
+            raise ValueError("fasta, idmap, and output_file_path cannot be None")
         # create biopython object of sequences
         records = read_and_parse_fasta_seqio(self.fasta)
 
@@ -21,7 +24,7 @@ class RenameFastaEntries(Text):
         # replace and write out
         self.replace_ids_and_write(self.output_file_path, records, idmap)
 
-    def process_args(self, args):
+    def process_args(self, args: Any) -> dict[str, str]:
         if args.output is None:
             output_file_path = f"{args.fasta}.renamed.fa"
         else:
@@ -34,13 +37,13 @@ class RenameFastaEntries(Text):
             fasta=args.fasta, idmap=args.idmap, output_file_path=output_file_path
         )
 
-    def replace_ids_and_write(self, output_file_path, records, idmap):
+    def replace_ids_and_write(self, output_file_path: str, records: Any, idmap: dict[str, str]) -> None:
         """
         for tips with a name as a key in the idmap,
         replace that tip name with the value in the
         idmap and write to output file
         """
-        with open(output_file_path, "w") as output_file_path:
+        with open(output_file_path, "w") as output_handle:
             try:
                 for record in records:
                     if record.id in idmap:
@@ -48,7 +51,7 @@ class RenameFastaEntries(Text):
                         record.id = idmap[record.id]
                         # remove description
                         record.description = ""
-                    SeqIO.write(record, output_file_path, "fasta")
+                    SeqIO.write(record, output_handle, "fasta")
             except FileNotFoundError:
                 print(
                     textwrap.dedent(
@@ -60,22 +63,30 @@ class RenameFastaEntries(Text):
                 )
                 sys.exit()
 
-    def idmap_to_dictionary(self, idmap: str) -> dict:
+    def idmap_to_dictionary(self, idmap: str) -> dict[str, str]:
         """
         read idmap into a dictionary
         """
-        idmap = {}
+        id_map: dict[str, str] = {}
         try:
-            with open(self.idmap) as identifiers:
+            with open(idmap) as identifiers:
                 for line in identifiers:
-                    (key, val) = line.split()
-                    idmap[key] = val
-            return idmap
+                    stripped = line.strip()
+                    if not stripped or stripped.startswith("#"):
+                        continue
+                    parts = stripped.split()
+                    if len(parts) < 2:
+                        raise ValueError(
+                            f"Malformed idmap line in {idmap!r}: {line.rstrip()!r}"
+                        )
+                    key, val = parts[0], parts[1]
+                    id_map[key] = val
+            return id_map
         except FileNotFoundError:
             print(
                 textwrap.dedent(
                     f"""
-                    {self.idmap} corresponds to no such file or directory.
+                    {idmap} corresponds to no such file or directory.
                     Please double check pathing and filenames
                     """
                 )

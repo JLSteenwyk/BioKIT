@@ -1,4 +1,5 @@
 import sys
+from typing import Any
 
 from Bio import SeqIO
 
@@ -6,10 +7,10 @@ from .base import Text
 
 
 class FileFormatConverter(Text):
-    def __init__(self, args) -> None:
+    def __init__(self, args: Any) -> None:
         super().__init__(**self.process_args(args))
 
-    def run(self):
+    def run(self) -> None:
         file_formats = [
             "fasta",
             "clustal",
@@ -23,16 +24,9 @@ class FileFormatConverter(Text):
 
         input_file_format = self.input_file_format
         output_file_format = self.output_file_format
-        if input_file_format and output_file_format in file_formats:
-            if input_file_format == "phylip_sequential":
-                input_file_format = "phylip-sequential"
-            elif input_file_format == "phylip_relaxed":
-                input_file_format = "phylip-relaxed"
-
-            if output_file_format == "phylip_sequential":
-                output_file_format = "phylip-sequential"
-            elif output_file_format == "phylip_relaxed":
-                output_file_format = "phylip-relaxed"
+        if input_file_format in file_formats and output_file_format in file_formats:
+            input_file_format = self._normalize_format(input_file_format)
+            output_file_format = self._normalize_format(output_file_format)
 
             SeqIO.convert(
                 self.input_file,
@@ -45,7 +39,15 @@ class FileFormatConverter(Text):
                 f"File format not acceptable. Please use one of the following: {file_formats}"
             )
 
-    def process_args(self, args):
+    @staticmethod
+    def _normalize_format(file_format: str) -> str:
+        if file_format == "phylip_sequential":
+            return "phylip-sequential"
+        if file_format == "phylip_relaxed":
+            return "phylip-relaxed"
+        return file_format
+
+    def process_args(self, args: Any) -> dict[str, Any]:
         if args.input_file == '-':
             input_file = sys.stdin
         else:

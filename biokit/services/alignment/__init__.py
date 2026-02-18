@@ -1,8 +1,30 @@
-from .alignment_length import AlignmentLength # noqa
-from .alignment_recoding import AlignmentRecoding # noqa
-from .alignment_summary import AlignmentSummary  # noqa
-from .consensus_sequence import ConsensusSequence  # noqa
-from .constant_sites import ConstantSites # noqa
-from .parsimony_informative_sites import ParsimonyInformativeSites  # noqa
-from .position_specific_score_matrix import PositionSpecificScoreMatrix  # noqa
-from .variable_sites import VariableSites # noqa
+import importlib
+
+__all__ = [
+    "AlignmentLength",
+    "AlignmentRecoding",
+    "AlignmentSummary",
+    "ConsensusSequence",
+    "ConstantSites",
+    "ParsimonyInformativeSites",
+    "PositionSpecificScoreMatrix",
+    "VariableSites",
+]
+
+_LAZY_IMPORTS = {
+    "AlignmentLength": ".alignment_length",
+    "AlignmentRecoding": ".alignment_recoding",
+    "AlignmentSummary": ".alignment_summary",
+    "ConsensusSequence": ".consensus_sequence",
+    "ConstantSites": ".constant_sites",
+    "ParsimonyInformativeSites": ".parsimony_informative_sites",
+    "PositionSpecificScoreMatrix": ".position_specific_score_matrix",
+    "VariableSites": ".variable_sites",
+}
+
+
+def __getattr__(name):
+    if name in _LAZY_IMPORTS:
+        module = importlib.import_module(_LAZY_IMPORTS[name], __name__)
+        return getattr(module, name)
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")

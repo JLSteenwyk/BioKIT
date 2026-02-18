@@ -13,6 +13,7 @@ class TrimPEAdaptersFastQ(FastQ):
         super().__init__(**self.process_args(args))
 
     def run(self):
+        output_format = self.normalize_output_format(self.output_format)
         adapter_table = self.read_adapter_table(self.adapters)  # noqa
 
         good_reads_paired_1 = []
@@ -138,9 +139,22 @@ class TrimPEAdaptersFastQ(FastQ):
                         kept += 1
                         adapter_removed += 1
                 cnt += 1
-        print(
-            f"Reads processed: {cnt}\nReads kept: {kept}\nReads removed: {removed}\nAdapaters removed: {adapter_removed}"
-        )
+        if output_format == "tsv":
+            print(
+                f"Reads processed: {cnt}\nReads kept: {kept}\nReads removed: {removed}\nAdapaters removed: {adapter_removed}"
+            )
+        else:
+            print(
+                self.format_object(
+                    {
+                        "reads_processed": cnt,
+                        "reads_kept": kept,
+                        "reads_removed": removed,
+                        "adapters_removed": adapter_removed,
+                    },
+                    output_format,
+                )
+            )
 
         # write output files
         # write paired output files
@@ -187,4 +201,5 @@ class TrimPEAdaptersFastQ(FastQ):
             fastq2=args.fastq2,
             adapters=adapters,
             length=length,
+            output_format=getattr(args, "format", None),
         )

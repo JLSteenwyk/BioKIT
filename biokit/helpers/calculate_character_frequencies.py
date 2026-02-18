@@ -1,21 +1,15 @@
 from collections import Counter
+from typing import Dict
 
-from ..helpers.files import read_and_parse_fasta_seqio
+from ..helpers.files import iter_fasta_sequences
 
 
-def calculate_character_frequencies(fasta: str) -> dict:
+def calculate_character_frequencies(fasta: str) -> Dict[str, int]:
     """
     determine the frequency of characters in a
     FASTA file
     """
-    # get contig lengths
-    records = read_and_parse_fasta_seqio(fasta)
-    seqs = []
-    for record in records:
-        if isinstance(record.seq._data.upper(), str):
-            seqs.append(record.seq._data.upper())
-        else:
-            seqs.append(record.seq._data.decode("utf-8").upper())
-    res = dict(Counter("".join(seqs)))
-
-    return res
+    counts: Counter[str] = Counter()
+    for seq in iter_fasta_sequences(fasta):
+        counts.update(seq.upper())
+    return dict(counts)

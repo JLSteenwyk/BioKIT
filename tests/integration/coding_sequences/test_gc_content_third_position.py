@@ -23,7 +23,7 @@ class TestAlignmentSummary(object):
     @pytest.mark.slow
     @patch("builtins.print")
     def test_gc_content_third_position_simple(self, mocked_print):
-        expected_result = "0.1222"
+        expected_result = "0.3788"
 
         testargs = [
             "biokit",

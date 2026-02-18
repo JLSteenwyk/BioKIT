@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
-import logging
 import sys
 import textwrap
+import importlib
 from .version import __version__
 
 from argparse import (
@@ -11,80 +11,30 @@ from argparse import (
     RawDescriptionHelpFormatter,
 )
 
-from .services.alignment import (
-    AlignmentLength,
-    AlignmentRecoding,
-    AlignmentSummary,
-    ConsensusSequence,
-    ConstantSites,
-    ParsimonyInformativeSites,
-    PositionSpecificScoreMatrix,
-    VariableSites,
-)
+PARSER_KWARGS = {
+    "add_help": True,
+    "usage": SUPPRESS,
+    "formatter_class": RawDescriptionHelpFormatter,
+}
 
-from .services.coding_sequences import (
-    GCContentFirstPosition,
-    GCContentSecondPosition,
-    GCContentThirdPosition,
-    GeneWiseRelativeSynonymousCodonUsage,
-    RelativeSynonymousCodonUsage,
-    TranslateSequence,
-)
 
-from .services.fastq import (
-    FastQReadLengths,
-    SubsetPEFastQReads,
-    SubsetSEFastQReads,
-    TrimPEAdaptersFastQ,
-    TrimPEFastQ,
-    TrimSEAdaptersFastQ,
-    TrimSEFastQ,
-)
-
-from .services.genome import (
-    GCContent,
-    GenomeAssemblyMetrics,
-    L50,
-    L90,
-    LongestScaffold,
-    N50,
-    N90,
-    NumberOfLargeScaffolds,
-    NumberOfScaffolds,
-    SumOfScaffoldLengths,
-)
-
-from .services.text import (
-    CharacterFrequency,
-    Faidx,
-    FileFormatConverter,
-    MultipleLineToSingleLineFasta,
-    RemoveFastaEntry,
-    RemoveShortSequences,
-    RenameFastaEntries,
-    ReorderBySequenceLength,
-    SequenceComplement,
-    SequenceLength,
-    SingleLineToMultipleLineFasta,
-)
-
-logger = logging.getLogger(__name__)
-ch = logging.StreamHandler()
-ch.setLevel(logging.INFO)
-logger.addHandler(ch)
+def _run_service(service_module, service_class, args):
+    module = importlib.import_module(f".services.{service_module}", package=__package__)
+    service = getattr(module, service_class)
+    service(args).run()
 
 help_header = fr"""
                  ____  _       _  _______ _______
                 |  _ \(_)     | |/ /_   _|__   __|
-                | |_) |_  ___ | ' /  | |    | |   
-                |  _ <| |/ _ \|  <   | |    | |   
-                | |_) | | (_) | . \ _| |_   | |   
-                |____/|_|\___/|_|\_\_____|  |_|   
-                            
+                | |_) |_  ___ | ' /  | |    | |
+                |  _ <| |/ _ \|  <   | |    | |
+                | |_) | | (_) | . \ _| |_   | |
+                |____/|_|\___/|_|\_\_____|  |_|
+
                 Version: {__version__}
                 Citation: Steenwyk et al. 2022, GENETICS. DOI: 10.1093/genetics/iyac079
                 https://academic.oup.com/genetics/article/221/3/iyac079/6583183
-                
+
 """  # noqa
 
 translation_table_codes = f"""
@@ -125,7 +75,7 @@ translation_table_codes = f"""
 """  # noqa
 
 adapters_available = f"""
-                Adapaters available
+                Adapters available
                 =====================================================
                 NexteraPE-PE
                 TruSeq2-PE
@@ -137,25 +87,12 @@ adapters_available = f"""
 
 
 class Biokit(object):
-    help_header = fr"""
-                 ____  _       _  _______ _______ 
-                |  _ \(_)     | |/ /_   _|__   __|
-                | |_) |_  ___ | ' /  | |    | |   
-                |  _ <| |/ _ \|  <   | |    | |   
-                | |_) | | (_) | . \ _| |_   | |   
-                |____/|_|\___/|_|\_\_____|  |_|   
-                            
-                Version: {__version__}
-                Citation: Steenwyk et al. 2021, bioRxiv. DOI: 10.1101/2021.10.02.462868
-                https://www.biorxiv.org/content/10.1101/2021.10.02.462868v1
-
-    """  # noqa
+    # Reuse module-level banner to avoid duplicated and inconsistent citation text.
+    help_header = help_header
 
     def __init__(self):
         parser = ArgumentParser(
-            add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
+            **PARSER_KWARGS,
             description=textwrap.dedent(
                 f"""\
                 {self.help_header}
@@ -164,15 +101,15 @@ class Biokit(object):
 
                 Usage: biokit <command> [optional command arguments]
 
-                Command specific help messages can be viewed by adding a 
+                Command specific help messages can be viewed by adding a
                 -h/--help argument after the command. For example, to see the
-                to see the help message for the command 'get_entry', execute
+                help message for the command 'get_entry', execute
                 "biokit get_entry -h" or "biokit get_entry --help".
 
                 Lastly, each function comes with aliases to save the user some
                 key strokes. For example, to get the help message for the 'get_entry'
                 function, you can type "biokit ge -h". All aliases are specified
-                in parentheses after the long form of the function name. 
+                in parentheses after the long form of the function name.
 
                 Commands for alignments
                 =======================
@@ -223,7 +160,7 @@ class Biokit(object):
                     - calculate relative synonymous codon usage
                       to evaluate potential codon usage biases
 
-                translate_sequence (alias: translate_seq, trans_seq) 
+                translate_sequence (alias: translate_seq, trans_seq)
                     - translate coding sequences to amino acids
 
                 Commands for fastq files
@@ -263,7 +200,7 @@ class Biokit(object):
                     - calculate the L50 of a genome assembly
 
                 l90
-                    - calcualte the L90 of a genome assembly
+                    - calculate the L90 of a genome assembly
 
                 longest_scaffold (alias: longest_scaff, longest_contig, longest_cont)
                     - determine the length of the longest
@@ -314,11 +251,11 @@ class Biokit(object):
                     - reorder sequences from longest to shortest in a FASTA file
 
                 sequence_complement (alias: seq_comp)
-                    - generate the complementary sequence for an alignment 
+                    - generate the complementary sequence for an alignment
 
                 sequence_length (alias: seq_len)
                     - calculate the length of each FASTA entry
-                    
+
                 single_line_to_multiple_line_fasta (alias: sl2ml)
                     - reformats sequences so that there are 60
                       characters per sequence line
@@ -342,98 +279,71 @@ class Biokit(object):
 
     # aliases # noqa
     def run_alias(self, command, argv, parser):
-        # version
-        if command in ["v"]:
+        if command == "v":
             return self.version()
-        # aliases for alignments
-        elif command in ["aln_len"]:
-            return self.alignment_length(argv)
-        elif command in ["aln_recoding", "recode"]:
-            return self.alignment_recoding(argv)
-        elif command in ["aln_summary"]:
-            return self.alignment_summary(argv)
-        elif command in ["con_seq"]:
-            return self.consensus_sequence(argv)
-        elif command in ["con_sites"]:
-            return self.constant_sites(argv)
-        elif command in ["parsimony_informative_sites", "pi_sites", "pis"]:
-            return self.parsimony_informative_sites(argv)
-        elif command in ["pssm"]:
-            return self.position_specific_score_matrix(argv)
-        elif command in ["var_sites", "vs"]:
-            return self.variable_sites(argv)
-        # aliases for coding sequences
-        elif command in ["gc1"]:
-            return self.gc_content_first_position(argv)
-        elif command in ["gc2"]:
-            return self.gc_content_second_position(argv)
-        elif command in ["gc3"]:
-            return self.gc_content_third_position(argv)
-        elif command in ["gene_wise_rscu", "gw_rscu", "grscu"]:
-            return self.gene_wise_relative_synonymous_codon_usage(argv)
-        elif command in ["rscu"]:
-            return self.relative_synonymous_codon_usage(argv)
-        elif command in ["translate_seq", "trans_seq"]:
-            return self.translate_sequence(argv)
-        # aliases for fastq files
-        elif command in ["fastq_read_lens"]:
-            return self.fastq_read_lengths(argv)
-        elif command in ["subset_pe_fastq"]:
-            return self.subset_pe_fastq_reads(argv)
-        elif command in ["subset_se_fastq"]:
-            return self.subset_se_fastq_reads(argv)
-        elif command in ["trim_pe_adapters_fastq_reads"]:
-            return self.trim_pe_adapters_fastq(argv)
-        elif command in ["trim_pe_fastq_reads"]:
-            return self.trim_pe_fastq(argv)
-        elif command in ["trim_se_adapters_fastq_reads"]:
-            return self.trim_se_adapters_fastq(argv)
-        elif command in ["trim_se_fastq_reads"]:
-            return self.trim_se_fastq(argv)
-        # aliases for genomes
-        elif command in ["gc"]:
-            return self.gc_content(argv)
-        elif command in ["assembly_metrics"]:
-            return self.genome_assembly_metrics(argv)
-        elif command in ["longest_scaff", "longest_contig", "longest_cont"]:
-            return self.longest_scaffold(argv)
-        elif command in [
-            "num_of_lrg_scaffolds",
-            "number_of_large_contigs",
-            "num_of_lrg_cont",
-        ]:
-            return self.number_of_large_scaffolds(argv)
-        elif command in ["num_of_scaffolds", "number_of_contigs", "num_of_cont"]:
-            return self.number_of_scaffolds(argv)
-        elif command in ["sum_of_contig_lengths"]:
-            return self.sum_of_scaffold_lengths(argv)
-        # alias for sequence files
-        elif command in ["char_freq"]:
-            return self.character_frequency(argv)
-        elif command in ["get_entry", "ge"]:
-            return self.faidx(argv)
-        elif command in ["format_converter", "ffc"]:
-            return self.file_format_converter(argv)
-        elif command in ["ml2sl"]:
-            return self.multiple_line_to_single_line_fasta(argv)
-        elif command in ["remove_short_seqs"]:
-            return self.remove_short_sequences(argv)
-        elif command in ["rename_fasta"]:
-            return self.rename_fasta_entries(argv)
-        elif command in ["reorder_by_seq_len"]:
-            return self.reorder_by_sequence_length(argv)
-        elif command in ["seq_comp"]:
-            return self.sequence_complement(argv)
-        elif command in ["seq_len"]:
-            return self.sequence_length(argv)
-        elif command in ["sl2ml"]:
-            return self.single_line_to_multiple_line_fasta(argv)
-        else:
-            print(
-                "Invalid command option. See help for a complete list of commands and aliases."
-            )
-            parser.print_help()
-            sys.exit(1)
+
+        alias_to_handler = {
+            "aln_len": self.alignment_length,
+            "aln_recoding": self.alignment_recoding,
+            "recode": self.alignment_recoding,
+            "aln_summary": self.alignment_summary,
+            "con_seq": self.consensus_sequence,
+            "con_sites": self.constant_sites,
+            "parsimony_informative_sites": self.parsimony_informative_sites,
+            "pi_sites": self.parsimony_informative_sites,
+            "pis": self.parsimony_informative_sites,
+            "pssm": self.position_specific_score_matrix,
+            "var_sites": self.variable_sites,
+            "vs": self.variable_sites,
+            "gc1": self.gc_content_first_position,
+            "gc2": self.gc_content_second_position,
+            "gc3": self.gc_content_third_position,
+            "gene_wise_rscu": self.gene_wise_relative_synonymous_codon_usage,
+            "gw_rscu": self.gene_wise_relative_synonymous_codon_usage,
+            "grscu": self.gene_wise_relative_synonymous_codon_usage,
+            "rscu": self.relative_synonymous_codon_usage,
+            "translate_seq": self.translate_sequence,
+            "trans_seq": self.translate_sequence,
+            "fastq_read_lens": self.fastq_read_lengths,
+            "subset_pe_fastq": self.subset_pe_fastq_reads,
+            "subset_se_fastq": self.subset_se_fastq_reads,
+            "trim_pe_adapters_fastq_reads": self.trim_pe_adapters_fastq,
+            "trim_pe_fastq_reads": self.trim_pe_fastq,
+            "trim_se_adapters_fastq_reads": self.trim_se_adapters_fastq,
+            "trim_se_fastq_reads": self.trim_se_fastq,
+            "gc": self.gc_content,
+            "assembly_metrics": self.genome_assembly_metrics,
+            "longest_scaff": self.longest_scaffold,
+            "longest_contig": self.longest_scaffold,
+            "longest_cont": self.longest_scaffold,
+            "num_of_lrg_scaffolds": self.number_of_large_scaffolds,
+            "number_of_large_contigs": self.number_of_large_scaffolds,
+            "num_of_lrg_cont": self.number_of_large_scaffolds,
+            "num_of_scaffolds": self.number_of_scaffolds,
+            "number_of_contigs": self.number_of_scaffolds,
+            "num_of_cont": self.number_of_scaffolds,
+            "sum_of_contig_lengths": self.sum_of_scaffold_lengths,
+            "char_freq": self.character_frequency,
+            "get_entry": self.faidx,
+            "ge": self.faidx,
+            "format_converter": self.file_format_converter,
+            "ffc": self.file_format_converter,
+            "ml2sl": self.multiple_line_to_single_line_fasta,
+            "remove_short_seqs": self.remove_short_sequences,
+            "rename_fasta": self.rename_fasta_entries,
+            "reorder_by_seq_len": self.reorder_by_sequence_length,
+            "seq_comp": self.sequence_complement,
+            "seq_len": self.sequence_length,
+            "sl2ml": self.single_line_to_multiple_line_fasta,
+        }
+
+        handler = alias_to_handler.get(command)
+        if handler is not None:
+            return handler(argv)
+
+        print("Invalid command option. See help for a complete list of commands and aliases.")
+        parser.print_help()
+        sys.exit(1)
 
     # print version
     def version(self):
@@ -449,18 +359,16 @@ class Biokit(object):
     @staticmethod
     def alignment_length(argv):
         parser = ArgumentParser(
-            add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
+            **PARSER_KWARGS,
             description=textwrap.dedent(
                 f"""\
                 {help_header}
 
-                Calculate the length of an alignment. 
-                
+                Calculate the length of an alignment.
+
                 Aliases:
                   alignment_length, aln_len
-                Command line interfaces: 
+                Command line interfaces:
                   bk_alignment_length, bk_aln_len
 
                 Usage:
@@ -468,7 +376,7 @@ class Biokit(object):
 
                 Options
                 =====================================================
-                <fasta>                     first argument after 
+                <fasta>                     first argument after
                                             function name should be
                                             a fasta file
                 """  # noqa
@@ -477,14 +385,12 @@ class Biokit(object):
 
         parser.add_argument("fasta", type=str, help=SUPPRESS)
         args = parser.parse_args(argv)
-        AlignmentLength(args).run()
+        _run_service("alignment.alignment_length", "AlignmentLength", args)
 
     @staticmethod
     def alignment_recoding(argv):
         parser = ArgumentParser(
-            add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
+            **PARSER_KWARGS,
             description=textwrap.dedent(
                 f"""\
                 {help_header}
@@ -498,10 +404,10 @@ class Biokit(object):
                 as a two column file wherein the first column is the
                 recoded character and the second column is the character
                 in the alignment.
-                
+
                 Aliases:
                   alignment_recoding, aln_recoding, recode
-                Command line interfaces: 
+                Command line interfaces:
                   bk_alignment_recoding, bk_aln_recoding, bk_recode
 
                 Usage:
@@ -509,7 +415,7 @@ class Biokit(object):
 
                 Options
                 =====================================================
-                <fasta>                     first argument after 
+                <fasta>                     first argument after
                                             function name should be
                                             a fasta file
 
@@ -518,9 +424,9 @@ class Biokit(object):
                 Codes for which recoding scheme to use
                 =====================================================
                 RY-nucleotide
-                    R = purines (i.e., A and G) 
+                    R = purines (i.e., A and G)
                     Y = pyrimidines (i.e., T and C)
-                
+
                 SandR-6
                     0 = A, P, S, and T
                     1 = D, E, N, and G
@@ -569,7 +475,7 @@ class Biokit(object):
                     9 = N
                     A = W
                     B = C
-                
+
                 Dayhoff-15
                     0 = D, E, and Q
                     1 = M and L
@@ -586,7 +492,7 @@ class Biokit(object):
                     C = R
                     D = W
                     E = C
-                
+
                 Dayhoff-18
                     0 = F and Y
                     1 = M and L
@@ -613,14 +519,12 @@ class Biokit(object):
         parser.add_argument("fasta", type=str, help=SUPPRESS)
         parser.add_argument("-c", "--code", type=str, help=SUPPRESS)
         args = parser.parse_args(argv)
-        AlignmentRecoding(args).run()
+        _run_service("alignment.alignment_recoding", "AlignmentRecoding", args)
 
     @staticmethod
     def alignment_summary(argv):
         parser = ArgumentParser(
-            add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
+            **PARSER_KWARGS,
             description=textwrap.dedent(
                 f"""\
                 {help_header}
@@ -629,45 +533,51 @@ class Biokit(object):
                 statistics include alignment length, number of taxa,
                 number of parsimony sites, number of variable sites,
                 number of constant sites, frequency of each character
-                (including gaps, which are considered to be '-' or '?'). 
-                
+                (including gaps, which are considered to be '-' or '?').
+
                 Aliases:
                   alignment_summary, aln_summary
-                Command line interfaces: 
+                Command line interfaces:
                   bk_alignment_summary, bk_aln_summary
 
                 Usage:
-                biokit alignment_summary <fasta>
+                biokit alignment_summary <fasta> [-f/--format <tsv|json|yaml>]
 
                 Options
                 =====================================================
-                <fasta>                     first argument after 
+                <fasta>                     first argument after
                                             function name should be
                                             a fasta file
+
+                -f/--format                 output format
+                                            (tsv, json, yaml)
+                                            Default: tsv
                 """  # noqa
             ),
         )
 
         parser.add_argument("fasta", type=str, help=SUPPRESS)
+        parser.add_argument(
+            "-f", "--format", type=str, required=False,
+            choices=["tsv", "json", "yaml"], help=SUPPRESS
+        )
         args = parser.parse_args(argv)
-        AlignmentSummary(args).run()
+        _run_service("alignment.alignment_summary", "AlignmentSummary", args)
 
     @staticmethod
     def consensus_sequence(argv):
         parser = ArgumentParser(
-            add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
+            **PARSER_KWARGS,
             description=textwrap.dedent(
                 f"""\
                 {help_header}
 
                 Generates a consequence from a multiple sequence alignment
                 file in FASTA format.
-                
+
                 Aliases:
                   consensus_sequence, con_seq
-                Command line interfaces: 
+                Command line interfaces:
                   bk_consensus_sequence, bk_con_seq
 
                 Usage:
@@ -676,14 +586,14 @@ class Biokit(object):
 
                 Options
                 =====================================================
-                <fasta>                     first argument after 
+                <fasta>                     first argument after
                                             function name should be
                                             a fasta file
 
                 -t/--threshold              threshold for how common
                                             a residue must be to be
                                             represented
-                
+
                 -ac/--ambiguous_character   the ambiguity character to
                                             use. Default is 'N'
                 """  # noqa
@@ -694,14 +604,12 @@ class Biokit(object):
         parser.add_argument("-t", "--threshold", type=str, help=SUPPRESS)
         parser.add_argument("-ac", "--ambiguous_character", type=str, help=SUPPRESS)
         args = parser.parse_args(argv)
-        ConsensusSequence(args).run()
+        _run_service("alignment.consensus_sequence", "ConsensusSequence", args)
 
     @staticmethod
     def constant_sites(argv):
         parser = ArgumentParser(
-            add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
+            **PARSER_KWARGS,
             description=textwrap.dedent(
                 f"""\
                 {help_header}
@@ -712,38 +620,45 @@ class Biokit(object):
                 Constant sites are defined as a site in an
                 alignment with the same nucleotide or amino
                 acid sequence (excluding gaps) among all taxa.
-                
+
                 Aliases:
                   constant_sites, con_sites
-                Command line interfaces: 
+                Command line interfaces:
                   bk_constant_sites, bk_con_sites
 
                 Usage:
                 biokit constant_sites <fasta> [-v/--verbose]
+                [-f/--format <tsv|json|yaml>]
 
                 Options
                 =====================================================
-                <fasta>                     first argument after 
+                <fasta>                     first argument after
                                             function name should be
                                             a fasta file
 
-                 -v/--verbose               optional argument to print
+                -v/--verbose                optional argument to print
                                             site-by-site categorization
+
+                -f/--format                 output format
+                                            (tsv, json, yaml)
+                                            Default: tsv
                 """  # noqa
             ),
         )
 
         parser.add_argument("fasta", type=str, help=SUPPRESS)
         parser.add_argument("-v", "--verbose", action="store_true", required=False, help=SUPPRESS)
+        parser.add_argument(
+            "-f", "--format", type=str, required=False,
+            choices=["tsv", "json", "yaml"], help=SUPPRESS
+        )
         args = parser.parse_args(argv)
-        ConstantSites(args).run()
+        _run_service("alignment.constant_sites", "ConstantSites", args)
 
     @staticmethod
     def parsimony_informative_sites(argv):
         parser = ArgumentParser(
-            add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
+            **PARSER_KWARGS,
             description=textwrap.dedent(
                 f"""\
                 {help_header}
@@ -755,58 +670,65 @@ class Biokit(object):
                 site in an alignment with at least two nucleotides
                 or amino acids that occur at least twice.
 
-                To obtain site-by-site summary of an alignment, 
-                use the -v/--verbose option. 
-                
+                To obtain site-by-site summary of an alignment,
+                use the -v/--verbose option.
+
                 Aliases:
                   parsimony_informative_sites, pi_sites, pis
-                Command line interfaces: 
+                Command line interfaces:
                   bk_parsimony_informative_sites, bk_pi_sites, bk_pis
 
                 Usage:
                 biokit parsimony_informative_sites <fasta> [-v/--verbose]
+                [-f/--format <tsv|json|yaml>]
 
                 Options
                 =====================================================
-                <fasta>                     first argument after 
+                <fasta>                     first argument after
                                             function name should be
                                             a fasta file
-                
-                 -v/--verbose               optional argument to print
+
+                -v/--verbose                optional argument to print
                                             site-by-site categorization
+
+                -f/--format                 output format
+                                            (tsv, json, yaml)
+                                            Default: tsv
                 """  # noqa
             ),
         )
 
         parser.add_argument("fasta", type=str, help=SUPPRESS)
         parser.add_argument("-v", "--verbose", action="store_true", required=False, help=SUPPRESS)
+        parser.add_argument(
+            "-f", "--format", type=str, required=False,
+            choices=["tsv", "json", "yaml"], help=SUPPRESS
+        )
         args = parser.parse_args(argv)
-        ParsimonyInformativeSites(args).run()
+        _run_service("alignment.parsimony_informative_sites", "ParsimonyInformativeSites", args)
 
     @staticmethod
     def position_specific_score_matrix(argv):
         parser = ArgumentParser(
-            add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
+            **PARSER_KWARGS,
             description=textwrap.dedent(
                 f"""\
                 {help_header}
 
                 Generates a position specific score matrix for an alignment.
-                
+
                 Aliases:
                   position_specific_score_matrix, pssm
-                Command line interfaces: 
+                Command line interfaces:
                   bk_position_specific_score_matrix, bk_pssm
 
                 Usage:
-                biokit position_specific_score_matrix <fasta> 
+                biokit position_specific_score_matrix <fasta>
                 [-ac/--ambiguous_character <ambiguous character>]
 
                 Options
                 =====================================================
-                <fasta>                     first argument after 
+                <fasta>                     first argument after
                                             function name should be
                                             a fasta file
 
@@ -819,14 +741,12 @@ class Biokit(object):
         parser.add_argument("fasta", type=str, help=SUPPRESS)
         parser.add_argument("-ac", "--ambiguous_character", type=str, help=SUPPRESS)
         args = parser.parse_args(argv)
-        PositionSpecificScoreMatrix(args).run()
+        _run_service("alignment.position_specific_score_matrix", "PositionSpecificScoreMatrix", args)
 
     @staticmethod
     def variable_sites(argv):
         parser = ArgumentParser(
-            add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
+            **PARSER_KWARGS,
             description=textwrap.dedent(
                 f"""\
                 {help_header}
@@ -837,51 +757,58 @@ class Biokit(object):
                 Variable sites are defined as a site in an
                 alignment with at least two nucleotide or amino
                 acid characters among all taxa.
-                
+
                 Aliases:
                   variable_sites, var_sites, vs
-                Command line interfaces: 
+                Command line interfaces:
                   bk_variable_sites, bk_var_sites, bk_vs
 
                 Usage:
                 biokit variable_sites <fasta> [-v/--verbose]
+                [-f/--format <tsv|json|yaml>]
 
                 Options
                 =====================================================
-                <fasta>                     first argument after 
+                <fasta>                     first argument after
                                             function name should be
                                             a fasta file
 
-                 -v/--verbose               optional argument to print
+                -v/--verbose                optional argument to print
                                             site-by-site categorization
+
+                -f/--format                 output format
+                                            (tsv, json, yaml)
+                                            Default: tsv
                 """  # noqa
             ),
         )
 
         parser.add_argument("fasta", type=str, help=SUPPRESS)
         parser.add_argument("-v", "--verbose", action="store_true", required=False, help=SUPPRESS)
+        parser.add_argument(
+            "-f", "--format", type=str, required=False,
+            choices=["tsv", "json", "yaml"], help=SUPPRESS
+        )
         args = parser.parse_args(argv)
-        VariableSites(args).run()
+        _run_service("alignment.variable_sites", "VariableSites", args)
 
     # coding sequence functions
     @staticmethod
     def gc_content_first_position(argv):
         parser = ArgumentParser(
-            add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
+            **PARSER_KWARGS,
             description=textwrap.dedent(
                 f"""\
                 {help_header}
-                
+
                 Calculate GC content of the first codon position.
                 The input must be the coding sequence of a gene or
                 genes. All genes are assumed to have sequence lengths
                 divisible by three.
-                
+
                 Aliases:
                   gc_content_first_position, gc1
-                Command line interfaces: 
+                Command line interfaces:
                   bk_gc_content_first_position, bk_gc1
 
                 Usage:
@@ -889,10 +816,10 @@ class Biokit(object):
 
                 Options
                 =====================================================
-                <fasta>                     first argument after 
+                <fasta>                     first argument after
                                             function name should be
-                                            a fasta file 
-            
+                                            a fasta file
+
                 -v, --verbose               optional argument to print
                                             the GC content of each fasta
                                             entry
@@ -904,26 +831,24 @@ class Biokit(object):
             "-v", "--verbose", action="store_true", required=False, help=SUPPRESS
         )
         args = parser.parse_args(argv)
-        GCContentFirstPosition(args).run()
+        _run_service("coding_sequences.gc_content_first_position", "GCContentFirstPosition", args)
 
     @staticmethod
     def gc_content_second_position(argv):
         parser = ArgumentParser(
-            add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
+            **PARSER_KWARGS,
             description=textwrap.dedent(
                 f"""\
                 {help_header}
-                
+
                 Calculate GC content of the second codon position.
                 The input must be the coding sequence of a gene or
                 genes. All genes are assumed to have sequence lengths
                 divisible by three.
-                
+
                 Aliases:
                   gc_content_second_position, gc2
-                Command line interfaces: 
+                Command line interfaces:
                   bk_gc_content_second_position, bk_gc2
 
                 Usage:
@@ -931,10 +856,10 @@ class Biokit(object):
 
                 Options
                 =====================================================
-                <fasta>                     first argument after 
+                <fasta>                     first argument after
                                             function name should be
-                                            a fasta file 
-            
+                                            a fasta file
+
                 -v, --verbose               optional argument to print
                                             the GC content of each fasta
                                             entry
@@ -946,26 +871,24 @@ class Biokit(object):
             "-v", "--verbose", action="store_true", required=False, help=SUPPRESS
         )
         args = parser.parse_args(argv)
-        GCContentSecondPosition(args).run()
+        _run_service("coding_sequences.gc_content_second_position", "GCContentSecondPosition", args)
 
     @staticmethod
     def gc_content_third_position(argv):
         parser = ArgumentParser(
-            add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
+            **PARSER_KWARGS,
             description=textwrap.dedent(
                 f"""\
                 {help_header}
-                
+
                 Calculate GC content of the third codon position.
                 The input must be the coding sequence of a gene or
                 genes. All genes are assumed to have sequence lengths
                 divisible by three.
-                
+
                 Aliases:
                   gc_content_third_position, gc3
-                Command line interfaces: 
+                Command line interfaces:
                   bk_gc_content_third_position, bk_gc3
 
                 Usage:
@@ -973,10 +896,10 @@ class Biokit(object):
 
                 Options
                 =====================================================
-                <fasta>                     first argument after 
+                <fasta>                     first argument after
                                             function name should be
-                                            a fasta file 
-            
+                                            a fasta file
+
                 -v, --verbose               optional argument to print
                                             the GC content of each fasta
                                             entry
@@ -988,14 +911,12 @@ class Biokit(object):
             "-v", "--verbose", action="store_true", required=False, help=SUPPRESS
         )
         args = parser.parse_args(argv)
-        GCContentThirdPosition(args).run()
+        _run_service("coding_sequences.gc_content_third_position", "GCContentThirdPosition", args)
 
     @staticmethod
     def gene_wise_relative_synonymous_codon_usage(argv):
         parser = ArgumentParser(
-            add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
+            **PARSER_KWARGS,
             description=textwrap.dedent(
                 f"""\
                 {help_header}
@@ -1018,27 +939,31 @@ class Biokit(object):
                 RSCU values observed in a gene.
 
                 Custom genetic codes can be used as input and should
-                be formatted with the codon in first column and the 
+                be formatted with the codon in the first column and the
                 resulting amino acid in the second column.
 
                 Aliases:
                   gene_wise_relative_synonymous_codon_usage; gene_wise_rscu; gw_rscu; grscu
-                Command line interfaces: 
+                Command line interfaces:
                   bk_gene_wise_relative_synonymous_codon_usage; bk_gene_wise_rscu; bk_gw_rscu; bk_grscu
-                
+
                 Usage:
-                biokit gene_wise_relative_synonymous_codon_usage <fasta> 
-                [-tt/--translation_table <code>]
-                
+                biokit gene_wise_relative_synonymous_codon_usage <fasta>
+                [-tt/--translation_table <code>] [-f/--format <tsv|json|yaml>]
+
                 Options
                 =====================================================
-                <fasta>                     first argument after 
+                <fasta>                     first argument after
                                             function name should be
                                             a fasta file
 
                 -tt/--translation_table     Code for the translation table
                                             to be used. Default: 1, which
                                             is the standard code.
+
+                -f/--format                 output format
+                                            (tsv, json, yaml)
+                                            Default: tsv
 
                 {translation_table_codes}
                 """  # noqa
@@ -1048,15 +973,21 @@ class Biokit(object):
         parser.add_argument(
             "-tt", "--translation_table", type=str, required=False, help=SUPPRESS
         )
+        parser.add_argument(
+            "-f",
+            "--format",
+            type=str,
+            required=False,
+            choices=["tsv", "json", "yaml"],
+            help=SUPPRESS,
+        )
         args = parser.parse_args(argv)
-        GeneWiseRelativeSynonymousCodonUsage(args).run()
+        _run_service("coding_sequences.gene_wise_relative_synonymous_codon_usage", "GeneWiseRelativeSynonymousCodonUsage", args)
 
     @staticmethod
     def relative_synonymous_codon_usage(argv):
         parser = ArgumentParser(
-            add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
+            **PARSER_KWARGS,
             description=textwrap.dedent(
                 f"""\
                 {help_header}
@@ -1069,27 +1000,31 @@ class Biokit(object):
                 codons for the same amino acids are used equally.
 
                 Custom genetic codes can be used as input and should
-                be formatted with the codon in first column and the 
+                be formatted with the codon in the first column and the
                 resulting amino acid in the second column.
 
                 Aliases:
                   relative_synonymous_codon_usage, rscu
-                Command line interfaces: 
+                Command line interfaces:
                   bk_relative_synonymous_codon_usage, bk_rscu
-                
+
                 Usage:
-                biokit relative_synonymous_codon_usage <fasta> 
-                [-tt/--translation_table <code>]
-                
+                biokit relative_synonymous_codon_usage <fasta>
+                [-tt/--translation_table <code>] [-f/--format <tsv|json|yaml>]
+
                 Options
                 =====================================================
-                <fasta>                     first argument after 
+                <fasta>                     first argument after
                                             function name should be
                                             a fasta file
 
                 -tt/--translation_table     Code for the translation table
                                             to be used. Default: 1, which
                                             is the standard code.
+
+                -f/--format                 output format
+                                            (tsv, json, yaml)
+                                            Default: tsv
 
                 {translation_table_codes}
                 """  # noqa
@@ -1099,15 +1034,21 @@ class Biokit(object):
         parser.add_argument(
             "-tt", "--translation_table", type=str, required=False, help=SUPPRESS
         )
+        parser.add_argument(
+            "-f",
+            "--format",
+            type=str,
+            required=False,
+            choices=["tsv", "json", "yaml"],
+            help=SUPPRESS,
+        )
         args = parser.parse_args(argv)
-        RelativeSynonymousCodonUsage(args).run()
+        _run_service("coding_sequences.relative_synonymous_codon_usage", "RelativeSynonymousCodonUsage", args)
 
     @staticmethod
     def translate_sequence(argv):
         parser = ArgumentParser(
-            add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
+            **PARSER_KWARGS,
             description=textwrap.dedent(
                 f"""\
                 {help_header}
@@ -1120,12 +1061,12 @@ class Biokit(object):
                 the standard genetic code is used.
 
                 Custom genetic codes can be used as input and should
-                be formatted with the codon in first column and the 
+                be formatted with the codon in the first column and the
                 resulting amino acid in the second column.
-                
+
                 Aliases:
                   translate_sequence, translate_seq, trans_seq
-                Command line interfaces: 
+                Command line interfaces:
                   bk_translate_sequence, bk_translate_seq, bk_trans_seq
 
                 Usage:
@@ -1135,19 +1076,19 @@ class Biokit(object):
 
                 Options
                 =====================================================
-                <fasta>                     first argument after 
+                <fasta>                     first argument after
                                             function name should be
                                             a fasta file
 
                 -tt/--translation_table     Code for the translation table
                                             to be used. Default: 1, which
                                             is the standard code.
-                
+
                 -o/--output                 optional argument to write
                                             the translated fasta file to.
-                                            Default output has the same 
+                                            Default output has the same
                                             name as the input file with
-                                            the suffix ".translated.fa" 
+                                            the suffix ".translated.fa"
                                             added to it.
 
 
@@ -1162,43 +1103,46 @@ class Biokit(object):
         )
         parser.add_argument("-o", "--output", type=str, required=False, help=SUPPRESS)
         args = parser.parse_args(argv)
-        TranslateSequence(args).run()
+        _run_service("coding_sequences.translate_sequence", "TranslateSequence", args)
 
     # fastq file functions
     @staticmethod
     def fastq_read_lengths(argv):
         parser = ArgumentParser(
-            add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
+            **PARSER_KWARGS,
             description=textwrap.dedent(
                 f"""\
                 {help_header}
 
                 Determine lengths of fastq reads.
-                
+
                 Using default arguments, the average and
                 standard deviation of read lengths in a
                 fastq file will be reported. To obtain
                 the lengths of all fastq reads, use the
                 verbose option.
-                
+
                 Aliases:
                   fastq_read_lengths, fastq_read_lens
-                Command line interfaces: 
+                Command line interfaces:
                   bk_fastq_read_lengths, bk_fastq_read_lens
 
                 Usage:
                 biokit fastq_read_lengths <fastq> [-v/--verbose]
+                [-f/--format <tsv|json|yaml>]
 
                 Options
                 =====================================================
-                <fastq>                     first argument after 
+                <fastq>                     first argument after
                                             function name should be
                                             a fastq file
 
                 -v/--verbose                print length of each fastq
                                             read
+
+                -f/--format                 output format
+                                            (tsv, json, yaml)
+                                            Default: tsv
                 """  # noqa
             ),
         )
@@ -1207,23 +1151,25 @@ class Biokit(object):
         parser.add_argument(
             "-v", "--verbose", action="store_true", required=False, help=SUPPRESS
         )
+        parser.add_argument(
+            "-f", "--format", type=str, required=False,
+            choices=["tsv", "json", "yaml"], help=SUPPRESS
+        )
         args = parser.parse_args(argv)
-        FastQReadLengths(args).run()
+        _run_service("fastq.fastq_read_lengths", "FastQReadLengths", args)
 
     @staticmethod
     def subset_pe_fastq_reads(argv):
         parser = ArgumentParser(
-            add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
+            **PARSER_KWARGS,
             description=textwrap.dedent(
                 f"""\
                 {help_header}
 
                 Subset paired-end FASTQ data.
 
-                Subsetting FASTQ data may be helpful for 
-                running test scripts or achieving equal 
+                Subsetting FASTQ data may be helpful for
+                running test scripts or achieving equal
                 coverage between samples. A percentage of
                 total reads in paired-end FASTQ data can
                 be obtained with this function. Random
@@ -1232,11 +1178,11 @@ class Biokit(object):
                 a seed is generated based off of the date
                 and time.
 
-                Output files will have the suffice "_subset.fq"
-                
+                Output files will have the suffix "_subset.fq"
+
                 Aliases:
                   subset_pe_fastq_reads, subset_pe_fastq
-                Command line interfaces: 
+                Command line interfaces:
                   bk_subset_pe_fastq_reads, bk_subset_pe_fastq
 
                 Usage:
@@ -1245,11 +1191,11 @@ class Biokit(object):
 
                 Options
                 =====================================================
-                <fastq1>                    first argument after 
+                <fastq1>                    first argument after
                                             function name should be
                                             a fastq file
 
-                <fastq2>                    second argument after 
+                <fastq2>                    second argument after
                                             function name should be
                                             a fastq file
 
@@ -1268,25 +1214,23 @@ class Biokit(object):
         parser.add_argument("-p", "--percent", type=str, required=False, help=SUPPRESS)
         parser.add_argument("-s", "--seed", type=str, required=False, help=SUPPRESS)
         args = parser.parse_args(argv)
-        SubsetPEFastQReads(args).run()
+        _run_service("fastq.subset_pe_fastq_reads", "SubsetPEFastQReads", args)
 
     @staticmethod
     def subset_se_fastq_reads(argv):
         parser = ArgumentParser(
-            add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
+            **PARSER_KWARGS,
             description=textwrap.dedent(
                 f"""\
                 {help_header}
 
                 Subset single-end FASTQ data.
 
-                Output file will have the suffice "_subset.fq" 
-                
+                Output file will have the suffix "_subset.fq"
+
                 Aliases:
                   subset_se_fastq_reads, subset_se_fastq
-                Command line interfaces: 
+                Command line interfaces:
                   bk_subset_se_fastq_reads, bk_subset_se_fastq
 
                 Usage:
@@ -1294,7 +1238,7 @@ class Biokit(object):
 
                 Options
                 =====================================================
-                <fastq>                     first argument after 
+                <fastq>                     first argument after
                                             function name should be
                                             a fastq file
 
@@ -1317,51 +1261,54 @@ class Biokit(object):
             "-o", "--output_file", type=str, required=False, help=SUPPRESS
         )
         args = parser.parse_args(argv)
-        SubsetSEFastQReads(args).run()
+        _run_service("fastq.subset_se_fastq_reads", "SubsetSEFastQReads", args)
 
     @staticmethod
     def trim_pe_adapters_fastq(argv):
         parser = ArgumentParser(
-            add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
+            **PARSER_KWARGS,
             description=textwrap.dedent(
                 f"""\
                 {help_header}
 
-                Trim adapters from paired-end FastQ data.
+                Trim adapters from paired-end FASTQ data.
 
                 FASTQ data will be trimmed according to
                 exact match to known adapter sequences.
-                
+
                 Output file has the suffix "_adapter_removed.fq"
                 or can be named by the user with the
                 output_file argument.
 
                 Aliases:
                   trim_pe_adapters_fastq_reads, trim_pe_adapters_fastq
-                Command line interfaces: 
+                Command line interfaces:
                   bk_trim_pe_adapters_fastq_reads, bk_trim_pe_adapters_fastq
 
                 Usage:
                 biokit trim_pe_adapters_fastq <fastq>
                 [-a/--adapters TruSeq2-PE -l/--length 20]
-                
+                [-f/--format <tsv|json|yaml>]
+
 
                 Options
                 =====================================================
-                <fastq>                     first argument after 
+                <fastq>                     first argument after
                                             function name should be
                                             a fastq file
 
                 -a/--adapters               adapter sequences to trim.
                                             Default: TruSeq2-PE
-                
-                -l/--length                 minimum length of read 
+
+                -l/--length                 minimum length of read
                                             to be kept. Default: 20
 
+                -f/--format                 output format
+                                            (tsv, json, yaml)
+                                            Default: tsv
+
                 {adapters_available}
-                
+
                 """  # noqa
             ),
         )
@@ -1370,20 +1317,22 @@ class Biokit(object):
         parser.add_argument("fastq2", type=str, help=SUPPRESS)
         parser.add_argument("-a", "--adapters", type=str, required=False, help=SUPPRESS)
         parser.add_argument("-l", "--length", type=str, required=False, help=SUPPRESS)
+        parser.add_argument(
+            "-f", "--format", type=str, required=False,
+            choices=["tsv", "json", "yaml"], help=SUPPRESS
+        )
         args = parser.parse_args(argv)
-        TrimPEAdaptersFastQ(args).run()
+        _run_service("fastq.trim_pe_adapters_fastq", "TrimPEAdaptersFastQ", args)
 
     @staticmethod
     def trim_pe_fastq(argv):
         parser = ArgumentParser(
-            add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
+            **PARSER_KWARGS,
             description=textwrap.dedent(
                 f"""\
                 {help_header}
 
-                Quality trim paired-end FastQ data.
+                Quality trim paired-end FASTQ data.
 
                 FASTQ data will be trimmed according to
                 quality score and length of the reads.
@@ -1393,37 +1342,42 @@ class Biokit(object):
                 of the read will be trimmed. Thereafter,
                 the read is ensured to be long enough to kept.
                 Users can specify quality and length thresholds.
-                
+
                 Paired reads that are maintained and saved
                 to files with the suffix "_paired_trimmed.fq."
                 Single reads that passed quality thresholds
-                are saved to files with the suffix 
+                are saved to files with the suffix
                 "_unpaired_trimmed.fq."
-                
+
                 Aliases:
                   trim_pe_fastq_reads, trim_pe_fastq
-                Command line interfaces: 
+                Command line interfaces:
                   bk_trim_pe_fastq_reads, bk_trim_pe_fastq
 
                 Usage:
-                biokit trim_pe_fastq_reads <fastq1> <fastq2> 
+                biokit trim_pe_fastq <fastq1> <fastq2>
                 [-m/--minimum 20 -l/--length 20]
+                [-f/--format <tsv|json|yaml>]
 
                 Options
                 =====================================================
-                <fastq1>                    first argument after 
+                <fastq1>                    first argument after
                                             function name should be
                                             a fastq file
 
-                <fastq2>                    second argument after 
+                <fastq2>                    second argument after
                                             function name should be
                                             a fastq file
 
-                -m/--minimum                minimum quality of read 
+                -m/--minimum                minimum quality of read
                                             to be kept. Default: 20
-                
-                -l/--length                 minimum length of read 
+
+                -l/--length                 minimum length of read
                                             to be kept. Default: 20
+
+                -f/--format                 output format
+                                            (tsv, json, yaml)
+                                            Default: tsv
                 """  # noqa
             ),
         )
@@ -1432,53 +1386,60 @@ class Biokit(object):
         parser.add_argument("fastq2", type=str, help=SUPPRESS)
         parser.add_argument("-m", "--minimum", type=str, required=False, help=SUPPRESS)
         parser.add_argument("-l", "--length", type=str, required=False, help=SUPPRESS)
+        parser.add_argument(
+            "-f", "--format", type=str, required=False,
+            choices=["tsv", "json", "yaml"], help=SUPPRESS
+        )
         args = parser.parse_args(argv)
-        TrimPEFastQ(args).run()
+        _run_service("fastq.trim_pe_fastq", "TrimPEFastQ", args)
 
     @staticmethod
     def trim_se_adapters_fastq(argv):
         parser = ArgumentParser(
-            add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
+            **PARSER_KWARGS,
             description=textwrap.dedent(
                 f"""\
                 {help_header}
 
-                Trim adapters from single-end FastQ data.
+                Trim adapters from single-end FASTQ data.
 
                 FASTQ data will be trimmed according to
                 exact match to known adapter sequences.
-                
+
                 Output file has the suffix "_adapter_removed.fq"
                 or can be named by the user with the
                 output_file argument.
 
                 Aliases:
                   trim_se_adapters_fastq_reads, trim_se_adapters_fastq
-                Command line interfaces: 
+                Command line interfaces:
                   bk_trim_se_adapters_fastq_reads, bk_trim_se_adapters_fastq
 
                 Usage:
                 biokit trim_se_adapters_fastq <fastq>
                 [-a/--adapters TruSeq2-SE -l/--length 20]
+                [-f/--format <tsv|json|yaml>]
 
                 Options
                 =====================================================
-                <fastq>                     first argument after 
+                <fastq>                     first argument after
                                             function name should be
                                             a fastq file
 
                 -a/--adapters               adapter sequences to trim.
                                             Default: TruSeq2-SE
-                
-                -l/--length                 minimum length of read 
+
+                -l/--length                 minimum length of read
                                             to be kept. Default: 20
 
                 -o/--output_file            output file name
 
+                -f/--format                 output format
+                                            (tsv, json, yaml)
+                                            Default: tsv
+
                 {adapters_available}
-                
+
                 """  # noqa
             ),
         )
@@ -1489,20 +1450,22 @@ class Biokit(object):
         parser.add_argument(
             "-o", "--output_file", type=str, required=False, help=SUPPRESS
         )
+        parser.add_argument(
+            "-f", "--format", type=str, required=False,
+            choices=["tsv", "json", "yaml"], help=SUPPRESS
+        )
         args = parser.parse_args(argv)
-        TrimSEAdaptersFastQ(args).run()
+        _run_service("fastq.trim_se_adapters_fastq", "TrimSEAdaptersFastQ", args)
 
     @staticmethod
     def trim_se_fastq(argv):
         parser = ArgumentParser(
-            add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
+            **PARSER_KWARGS,
             description=textwrap.dedent(
                 f"""\
                 {help_header}
 
-                Quality trim single-end FastQ data.
+                Quality trim single-end FASTQ data.
 
                 FASTQ data will be trimmed according to
                 quality score and length of the reads.
@@ -1512,33 +1475,38 @@ class Biokit(object):
                 of the read will be trimmed. Thereafter,
                 the read is ensured to be long enough to kept.
                 Users can specify quality and length thresholds.
-                
+
                 Output file has the suffix "_trimmed.fq"
                 or can be named by the user with the
                 output_file argument.
-                
+
                 Aliases:
                   trim_se_fastq_reads, trim_se_fastq
-                Command line interfaces: 
+                Command line interfaces:
                   bk_trim_se_fastq_reads, bk_trim_se_fastq
 
                 Usage:
-                biokit trim_se_fastq_reads <fastq>
+                biokit trim_se_fastq <fastq>
                 [-m/--minimum 20 -l/--length 20]
+                [-f/--format <tsv|json|yaml>]
 
                 Options
                 =====================================================
-                <fastq>                     first argument after 
+                <fastq>                     first argument after
                                             function name should be
                                             a fastq file
 
-                -m/--minimum                minimum quality of read 
+                -m/--minimum                minimum quality of read
                                             to be kept. Default: 20
-                
-                -l/--length                 minimum length of read 
+
+                -l/--length                 minimum length of read
                                             to be kept. Default: 20
 
                 -o/--output_file            output file name
+
+                -f/--format                 output format
+                                            (tsv, json, yaml)
+                                            Default: tsv
                 """  # noqa
             ),
         )
@@ -1549,42 +1517,49 @@ class Biokit(object):
         parser.add_argument(
             "-o", "--output_file", type=str, required=False, help=SUPPRESS
         )
+        parser.add_argument(
+            "-f", "--format", type=str, required=False,
+            choices=["tsv", "json", "yaml"], help=SUPPRESS
+        )
         args = parser.parse_args(argv)
-        TrimSEFastQ(args).run()
+        _run_service("fastq.trim_se_fastq", "TrimSEFastQ", args)
 
     # genome functions
     @staticmethod
     def gc_content(argv):
         parser = ArgumentParser(
-            add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
+            **PARSER_KWARGS,
             description=textwrap.dedent(
                 f"""\
                 {help_header}
-                
+
                 Calculate GC content of a fasta file.
 
                 GC content is the fraction of bases that are
                 either guanines or cytosines.
-                
+
                 Aliases:
                   gc_content, gc
-                Command line interfaces: 
+                Command line interfaces:
                   bk_gc_content, bk_gc
 
                 Usage:
                 biokit gc_content <fasta> [-v/--verbose]
+                [-f/--format <tsv|json|yaml>]
 
                 Options
                 =====================================================
-                <fasta>                     first argument after 
+                <fasta>                     first argument after
                                             function name should be
-                                            a fasta file 
-            
+                                            a fasta file
+
                 -v, --verbose               optional argument to print
                                             the GC content of each fasta
                                             entry
+
+                -f/--format                 output format
+                                            (tsv, json, yaml)
+                                            Default: tsv
                 """  # noqa
             ),
         )
@@ -1592,19 +1567,21 @@ class Biokit(object):
         parser.add_argument(
             "-v", "--verbose", action="store_true", required=False, help=SUPPRESS
         )
+        parser.add_argument(
+            "-f", "--format", type=str, required=False,
+            choices=["tsv", "json", "yaml"], help=SUPPRESS
+        )
         args = parser.parse_args(argv)
-        GCContent(args).run()
+        _run_service("genome.gc_content", "GCContent", args)
 
     @staticmethod
     def genome_assembly_metrics(argv):
         parser = ArgumentParser(
-            add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
+            **PARSER_KWARGS,
             description=textwrap.dedent(
                 f"""\
                 {help_header}
-                
+
                 Calculate L50, L90, N50, N90, GC content, assembly size,
                 number of scaffolds, number and sum length
                 of large scaffolds, frequency of A, T, C, and G.
@@ -1618,57 +1595,68 @@ class Biokit(object):
                 Number of scaffolds: The total number of scaffolds in an assembly.
                 Number of large scaffolds: The total number of scaffolds that are greater than the threshold for small scaffolds.
                 Sum length of large scaffolds: The sum length of all large scaffolds.
-                Frequency of A: The number of occurences of A corrected by assembly size.
-                Frequency of T: The number of occurences of T corrected by assembly size.
-                Frequency of C: The number of occurences of C corrected by assembly size.
-                Frequency of G: The number of occurences of G corrected by assembly size.
-                
+                Frequency of A: The number of occurrences of A corrected by assembly size.
+                Frequency of T: The number of occurrences of T corrected by assembly size.
+                Frequency of C: The number of occurrences of C corrected by assembly size.
+                Frequency of G: The number of occurrences of G corrected by assembly size.
+
                 Aliases:
                   genome_assembly_metrics, assembly_metrics
-                Command line interfaces: 
+                Command line interfaces:
                   bk_genome_assembly_metrics, bk_assembly_metrics
 
                 Usage:
                 biokit genome_assembly_metrics <fasta>
+                [-t/--threshold <int>] [-f/--format <tsv|json|yaml>]
 
                 Options
                 =====================================================
-                <fasta>                     first argument after 
+                <fasta>                     first argument after
                                             function name should be
-                                            a fasta file 
+                                            a fasta file
 
                 -t/--threshold              threshold for what is considered
                                             a large scaffold. Only scaffolds
                                             with a length greater than this
                                             value will be counted.
                                             Default: 500
+
+                -f/--format                 output format
+                                            (tsv, json, yaml)
+                                            Default: tsv
                 """  # noqa
             ),
         )
 
         parser.add_argument("fasta", type=str, help=SUPPRESS)
         parser.add_argument("-t", "--threshold", type=str, help=SUPPRESS)
+        parser.add_argument(
+            "-f",
+            "--format",
+            type=str,
+            required=False,
+            choices=["tsv", "json", "yaml"],
+            help=SUPPRESS,
+        )
         args = parser.parse_args(argv)
-        GenomeAssemblyMetrics(args).run()
+        _run_service("genome.genome_assembly_metrics", "GenomeAssemblyMetrics", args)
 
     @staticmethod
     def l50(argv):
         parser = ArgumentParser(
-            add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
+            **PARSER_KWARGS,
             description=textwrap.dedent(
                 f"""\
                 {help_header}
-                
+
                 Calculates L50 for a genome assembly.
 
                 L50 is the smallest number of contigs whose length sum
                 makes up half of the genome size.
-                
+
                 Aliases:
                   l50
-                Command line interfaces: 
+                Command line interfaces:
                   bk_l50
 
                 Usage:
@@ -1676,34 +1664,32 @@ class Biokit(object):
 
                 Options
                 =====================================================
-                <fasta>                     first argument after 
+                <fasta>                     first argument after
                                             function name should be
-                                            a fasta file 
+                                            a fasta file
                 """  # noqa
             ),
         )
         parser.add_argument("fasta", type=str, help=SUPPRESS)
         args = parser.parse_args(argv)
-        L50(args).run()
+        _run_service("genome.l50", "L50", args)
 
     @staticmethod
     def l90(argv):
         parser = ArgumentParser(
-            add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
+            **PARSER_KWARGS,
             description=textwrap.dedent(
                 f"""\
                 {help_header}
-                
+
                 Calculates L90 for a genome assembly.
 
                 L90 is the smallest number of contigs whose length sum
                 makes up 90% of the genome size.
-                
+
                 Aliases:
                   l90
-                Command line interfaces: 
+                Command line interfaces:
                   bk_l90
 
                 Usage:
@@ -1711,31 +1697,29 @@ class Biokit(object):
 
                 Options
                 =====================================================
-                <fasta>                     first argument after 
+                <fasta>                     first argument after
                                             function name should be
-                                            a fasta file 
+                                            a fasta file
                 """  # noqa
             ),
         )
         parser.add_argument("fasta", type=str, help=SUPPRESS)
         args = parser.parse_args(argv)
-        L90(args).run()
+        _run_service("genome.l90", "L90", args)
 
     @staticmethod
     def longest_scaffold(argv):
         parser = ArgumentParser(
-            add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
+            **PARSER_KWARGS,
             description=textwrap.dedent(
                 f"""\
                 {help_header}
 
                 Determine the length of the longest scaffold in a genome assembly.
-                
+
                 Aliases:
                   longest_scaffold, longest_scaff, longest_contig, longest_cont
-                Command line interfaces: 
+                Command line interfaces:
                   bk_longest_scaffold, bk_longest_scaff, bk_longest_contig, bk_longest_cont
 
                 Usage:
@@ -1743,34 +1727,32 @@ class Biokit(object):
 
                 Options
                 =====================================================
-                <fasta>                     first argument after 
+                <fasta>                     first argument after
                                             function name should be
-                                            a fasta file 
+                                            a fasta file
                 """  # noqa
             ),
         )
 
         parser.add_argument("fasta", type=str, help=SUPPRESS)
         args = parser.parse_args(argv)
-        LongestScaffold(args).run()
+        _run_service("genome.longest_scaffold", "LongestScaffold", args)
 
     @staticmethod
     def n50(argv):
         parser = ArgumentParser(
-            add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
+            **PARSER_KWARGS,
             description=textwrap.dedent(
                 f"""\
                 {help_header}
-                
+
                 Calculates N50 for a genome assembly.
 
                 N50 is the sequence length of the shortest contig at half of the genome size.
-                
+
                 Aliases:
                   n50
-                Command line interfaces: 
+                Command line interfaces:
                   bk_n50
 
                 Usage:
@@ -1778,33 +1760,31 @@ class Biokit(object):
 
                 Options
                 =====================================================
-                <fasta>                     first argument after 
+                <fasta>                     first argument after
                                             function name should be
-                                            a fasta file 
+                                            a fasta file
                 """  # noqa
             ),
         )
         parser.add_argument("fasta", type=str, help=SUPPRESS)
         args = parser.parse_args(argv)
-        N50(args).run()
+        _run_service("genome.n50", "N50", args)
 
     @staticmethod
     def n90(argv):
         parser = ArgumentParser(
-            add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
+            **PARSER_KWARGS,
             description=textwrap.dedent(
                 f"""\
                 {help_header}
-                
+
                 Calculates N90 for a genome assembly.
 
                 N90 is the sequence length of the shortest contig at 90% of the genome size.
-                
+
                 Aliases:
                   n90
-                Command line interfaces: 
+                Command line interfaces:
                   bk_n90
 
                 Usage:
@@ -1812,22 +1792,20 @@ class Biokit(object):
 
                 Options
                 =====================================================
-                <fasta>                     first argument after 
+                <fasta>                     first argument after
                                             function name should be
-                                            a fasta file 
+                                            a fasta file
                 """  # noqa
             ),
         )
         parser.add_argument("fasta", type=str, help=SUPPRESS)
         args = parser.parse_args(argv)
-        N90(args).run()
+        _run_service("genome.n90", "N90", args)
 
     @staticmethod
     def number_of_large_scaffolds(argv):
         parser = ArgumentParser(
-            add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
+            **PARSER_KWARGS,
             description=textwrap.dedent(
                 f"""\
                 {help_header}
@@ -1835,11 +1813,11 @@ class Biokit(object):
                 Calculate number and total sequence length of
                 large scaffolds. Each value is represented as
                 column 1 and column 2 in the output, respectively.
-                
+
                 Aliases:
                   number_of_large_scaffolds, num_of_lrg_scaffolds,
                   number_of_large_contigs, num_of_lrg_cont
-                Command line interfaces: 
+                Command line interfaces:
                   bk_number_of_large_scaffolds, bk_num_of_lrg_scaffolds,
                   bk_number_of_large_contigs, bk_num_of_lrg_cont
 
@@ -1848,10 +1826,10 @@ class Biokit(object):
 
                 Options
                 =====================================================
-                <fasta>                     first argument after 
+                <fasta>                     first argument after
                                             function name should be
                                             a fasta file
-                
+
                 -t/--threshold              threshold for what is considered
                                             a large scaffold. Only scaffolds
                                             with a length greater than this
@@ -1864,28 +1842,26 @@ class Biokit(object):
         parser.add_argument("fasta", type=str, help=SUPPRESS)
         parser.add_argument("-t", "--threshold", type=str, help=SUPPRESS)
         args = parser.parse_args(argv)
-        NumberOfLargeScaffolds(args).run()
+        _run_service("genome.number_of_large_scaffolds", "NumberOfLargeScaffolds", args)
 
     @staticmethod
     def number_of_scaffolds(argv):
         parser = ArgumentParser(
-            add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
+            **PARSER_KWARGS,
             description=textwrap.dedent(
                 f"""\
                 {help_header}
 
                 Calculate the number of scaffolds or entries
-                in a FASTA file. In this way, a user can also 
-                determine the number of predicted genes in a 
+                in a FASTA file. In this way, a user can also
+                determine the number of predicted genes in a
                 coding sequence or protein FASTA file with this
                 function.
-                
+
                 Aliases:
                   number_of_scaffolds, num_of_scaffolds,
                   number_of_contigs, num_of_cont
-                Command line interfaces: 
+                Command line interfaces:
                   bk_number_of_scaffolds, bk_num_of_scaffolds,
                   bk_number_of_contigs, bk_num_of_cont
 
@@ -1894,37 +1870,35 @@ class Biokit(object):
 
                 Options
                 =====================================================
-                <fasta>                     first argument after 
+                <fasta>                     first argument after
                                             function name should be
-                                            a fasta file 
+                                            a fasta file
                 """  # noqa
             ),
         )
 
         parser.add_argument("fasta", type=str, help=SUPPRESS)
         args = parser.parse_args(argv)
-        NumberOfScaffolds(args).run()
+        _run_service("genome.number_of_scaffolds", "NumberOfScaffolds", args)
 
     @staticmethod
     def sum_of_scaffold_lengths(argv):
         parser = ArgumentParser(
-            add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
+            **PARSER_KWARGS,
             description=textwrap.dedent(
                 f"""\
                 {help_header}
 
-                Determine the sum of scaffold lengths. 
-                
+                Determine the sum of scaffold lengths.
+
                 The intended use of this function is to determine
                 the length of a genome assembly, but can also be
                 used, for example, to determine the sum length
                 of all coding sequences.
-                
+
                 Aliases:
                   sum_of_scaffold_lengths, sum_of_contig_lengths
-                Command line interfaces: 
+                Command line interfaces:
                   bk_sum_of_scaffold_lengths, bk_sum_of_contig_lengths
 
                 Usage:
@@ -1932,7 +1906,7 @@ class Biokit(object):
 
                 Options
                 =====================================================
-                <fasta>                     first argument after 
+                <fasta>                     first argument after
                                             function name should be
                                             a fasta file
                 """  # noqa
@@ -1941,61 +1915,69 @@ class Biokit(object):
 
         parser.add_argument("fasta", type=str, help=SUPPRESS)
         args = parser.parse_args(argv)
-        SumOfScaffoldLengths(args).run()
+        _run_service("genome.sum_of_scaffold_lengths", "SumOfScaffoldLengths", args)
 
     # text functions
     @staticmethod
     def character_frequency(argv):
         parser = ArgumentParser(
-            add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
+            **PARSER_KWARGS,
             description=textwrap.dedent(
                 f"""\
                 {help_header}
 
                 Calculate the frequency of characters in a FASTA file.
-                
+
                 Aliases:
                   character_frequency, char_freq
-                Command line interfaces: 
+                Command line interfaces:
                   bk_character_frequency, bk_char_freq
 
                 Usage:
-                biokit character_frequency <fasta>
+                biokit character_frequency <fasta> [-f/--format <tsv|json|yaml>]
 
                 Options
                 =====================================================
-                <fasta>                     first argument after 
+                <fasta>                     first argument after
                                             function name should be
                                             a fasta file
+
+                -f/--format                 output format
+                                            (tsv, json, yaml)
+                                            Default: tsv
                 """  # noqa
             ),
         )
 
         parser.add_argument("fasta", type=str, help=SUPPRESS)
+        parser.add_argument(
+            "-f",
+            "--format",
+            type=str,
+            required=False,
+            choices=["tsv", "json", "yaml"],
+            help=SUPPRESS,
+        )
         args = parser.parse_args(argv)
-        CharacterFrequency(args).run()
+        _run_service("text.character_frequency", "CharacterFrequency", args)
 
     @staticmethod
     def faidx(argv):
         parser = ArgumentParser(
-            add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
+            **PARSER_KWARGS,
             description=textwrap.dedent(
                 f"""\
                 {help_header}
 
                 Extracts sequence entry from fasta file.
 
-                This function works similarly to the faidx function 
-                in samtools, but does not requiring an indexing the
+                This function works similarly to the faidx function
+                in samtools, but does not require indexing the
                 sequence file.
 
                 Aliases:
                   faidx, get_entry, ge
-                Command line interfaces: 
+                Command line interfaces:
                   bk_faidx, bk_get_entry, bk_ge
 
                 Usage:
@@ -2003,26 +1985,24 @@ class Biokit(object):
 
                 Options
                 =====================================================
-                <fasta>                     first argument after 
+                <fasta>                     first argument after
                                             function name should be a
                                             query fasta file
 
                 -e/--entry                  entry name to be extracted
-                                            from the inputted fasta file
+                                            from the input fasta file
                 """  # noqa
             ),
         )
         parser.add_argument("fasta", type=str, help=SUPPRESS)
         parser.add_argument("-e", "--entry", type=str, help=SUPPRESS)
         args = parser.parse_args(argv)
-        Faidx(args).run()
+        _run_service("text.faidx", "Faidx", args)
 
     @staticmethod
     def file_format_converter(argv):
         parser = ArgumentParser(
-            add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
+            **PARSER_KWARGS,
             description=textwrap.dedent(
                 f"""\
                 {help_header}
@@ -2038,19 +2018,19 @@ class Biokit(object):
 
                 Aliases:
                   file_format_converter, format_converter, ffc
-                Command line interfaces: 
+                Command line interfaces:
                   bk_file_format_converter, bk_format_converter, bk_ffc
-                  
+
 
                 Usage:
                 biokit file_format_converter -i/--input_file <input_file>
-                -iff/--input_file_format <input_file_format> 
+                -iff/--input_file_format <input_file_format>
                 -o/--output_file <output_file>
                 -off/--output_file_format <output_file_format>
 
                 Options
                 =====================================================
-                -i/--input_file             input file name 
+                -i/--input_file             input file name
 
                 -iff/--input_file_format    input file format
 
@@ -2070,14 +2050,12 @@ class Biokit(object):
         parser.add_argument("-o", "--output_file", type=str, help=SUPPRESS)
 
         args = parser.parse_args(argv)
-        FileFormatConverter(args).run()
+        _run_service("text.file_format_converter", "FileFormatConverter", args)
 
     @staticmethod
     def multiple_line_to_single_line_fasta(argv):
         parser = ArgumentParser(
-            add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
+            **PARSER_KWARGS,
             description=textwrap.dedent(
                 f"""\
                 {help_header}
@@ -2087,16 +2065,16 @@ class Biokit(object):
 
                 Aliases:
                   multiple_line_to_single_line_fasta, ml2sl
-                Command line interfaces: 
+                Command line interfaces:
                   bk_multiple_line_to_single_line_fasta, bk_ml2sl
-                
+
                 Usage:
-                biokit multiple_line_to_single_line_fasta <fasta> 
+                biokit multiple_line_to_single_line_fasta <fasta>
                 [-o/--output <output_file>]
-                
+
                 Options
                 =====================================================
-                <fasta>                     first argument after 
+                <fasta>                     first argument after
                                             function name should be
                                             a fasta file
 
@@ -2107,14 +2085,12 @@ class Biokit(object):
         )
         parser.add_argument("fasta", type=str, help=SUPPRESS)
         args = parser.parse_args(argv)
-        MultipleLineToSingleLineFasta(args).run()
+        _run_service("text.multiple_line_to_single_line_fasta", "MultipleLineToSingleLineFasta", args)
 
     @staticmethod
     def remove_fasta_entry(argv):
         parser = ArgumentParser(
-            add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
+            **PARSER_KWARGS,
             description=textwrap.dedent(
                 f"""\
                 {help_header}
@@ -2125,25 +2101,25 @@ class Biokit(object):
 
                 Aliases:
                   remove_fasta_entry
-                Command line interfaces: 
+                Command line interfaces:
                   bk_remove_fasta_entry
-                
+
                 Usage:
                 biokit remove_fasta_entry <fasta> -e/--entry <entry>
                 [-o/--output <output_file>]
-                
+
                 Options
                 =====================================================
-                <fasta>                     first argument after 
+                <fasta>                     first argument after
                                             function name should be
                                             a fasta file
 
                 -e/--entry                  entry name to be removed
-                                            from the inputted fasta file
+                                            from the input fasta file
 
                 -o/--output                 optional argument to write
                                             the renamed fasta file to.
-                                            Default output has the same 
+                                            Default output has the same
                                             name as the input file with
                                             the suffix "pruned.fa" added
                                             to it.
@@ -2154,14 +2130,12 @@ class Biokit(object):
         parser.add_argument("-e", "--entry", type=str, help=SUPPRESS)
         parser.add_argument("-o", "--output", type=str, help=SUPPRESS)
         args = parser.parse_args(argv)
-        RemoveFastaEntry(args).run()
+        _run_service("text.remove_fasta_entry", "RemoveFastaEntry", args)
 
     @staticmethod
     def remove_short_sequences(argv):
         parser = ArgumentParser(
-            add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
+            **PARSER_KWARGS,
             description=textwrap.dedent(
                 f"""\
                 {help_header}
@@ -2177,16 +2151,16 @@ class Biokit(object):
 
                 Aliases:
                   remove_short_sequences; remove_short_seqs
-                Command line interfaces: 
+                Command line interfaces:
                   bk_remove_short_sequences; bk_remove_short_seqs
-                
+
                 Usage:
                 biokit remove_short_sequences <fasta> -t/--threshold
                 <threshold> [-o/--output <output_file>]
-                
+
                 Options
                 =====================================================
-                <fasta>                     first argument after 
+                <fasta>                     first argument after
                                             function name should be
                                             a fasta file
 
@@ -2196,7 +2170,7 @@ class Biokit(object):
 
                 -o/--output                 optional argument to write
                                             the renamed fasta file to.
-                                            Default output has the same 
+                                            Default output has the same
                                             name as the input file with
                                             the suffix "long_seqs.fa" added
                                             to it.
@@ -2207,36 +2181,34 @@ class Biokit(object):
         parser.add_argument("-t", "--threshold", type=str, help=SUPPRESS)
         parser.add_argument("-o", "--output", type=str, help=SUPPRESS)
         args = parser.parse_args(argv)
-        RemoveShortSequences(args).run()
+        _run_service("text.remove_short_sequences", "RemoveShortSequences", args)
 
     @staticmethod
     def rename_fasta_entries(argv):
         parser = ArgumentParser(
-            add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
+            **PARSER_KWARGS,
             description=textwrap.dedent(
                 f"""\
                 {help_header}
-                Renames fasta entries.
+                Renames FASTA entries.
 
                 Renaming fasta entries will follow the scheme of a tab-delimited
-                file wherein the first column is the current fasta entry name and
-                the second column is the new fasta entry name in the resulting 
-                output alignment. 
+                file wherein the first column is the current FASTA entry name and
+                the second column is the new FASTA entry name in the resulting
+                output FASTA file.
 
                 Aliases:
                   rename_fasta_entries, rename_fasta
-                Command line interfaces: 
+                Command line interfaces:
                   bk_rename_fasta_entries, bk_rename_fasta
-                
+
                 Usage:
                 biokit rename_fasta_entries <fasta> -i/--idmap <idmap>
                 [-o/--output <output_file>]
-                
+
                 Options
                 =====================================================
-                <fasta>                     first argument after 
+                <fasta>                     first argument after
                                             function name should be
                                             a fasta file
 
@@ -2246,7 +2218,7 @@ class Biokit(object):
 
                 -o/--output                 optional argument to write
                                             the renamed fasta file to.
-                                            Default output has the same 
+                                            Default output has the same
                                             name as the input file with
                                             the suffix ".renamed.fa" added
                                             to it.
@@ -2257,37 +2229,35 @@ class Biokit(object):
         parser.add_argument("-i", "--idmap", type=str, help=SUPPRESS)
         parser.add_argument("-o", "--output", type=str, required=False, help=SUPPRESS)
         args = parser.parse_args(argv)
-        RenameFastaEntries(args).run()
+        _run_service("text.rename_fasta_entries", "RenameFastaEntries", args)
 
     @staticmethod
     def reorder_by_sequence_length(argv):
         parser = ArgumentParser(
-            add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
+            **PARSER_KWARGS,
             description=textwrap.dedent(
                 f"""\
                 {help_header}
                 Reorder FASTA file entries from the longest entry
-                to the shortest entry. 
+                to the shortest entry.
 
                 Aliases:
                   reorder_by_sequence_length, reorder_by_seq_len
-                Command line interfaces: 
+                Command line interfaces:
                   bk_reorder_by_sequence_length, bk_reorder_by_seq_len
-                
+
                 Usage:
                 biokit reorder_by_sequence_length <fasta> [-o/--output <output_file>]
-                
+
                 Options
                 =====================================================
-                <fasta>                     first argument after 
+                <fasta>                     first argument after
                                             function name should be
                                             a fasta file
 
                 -o/--output                 optional argument to write
                                             the reordered fasta file to.
-                                            Default output has the same 
+                                            Default output has the same
                                             name as the input file with
                                             the suffix ".reordered.fa" added
                                             to it.
@@ -2298,14 +2268,12 @@ class Biokit(object):
         parser.add_argument("fasta", type=str, help=SUPPRESS)
         parser.add_argument("-o", "--output", type=str, required=False, help=SUPPRESS)
         args = parser.parse_args(argv)
-        ReorderBySequenceLength(args).run()
+        _run_service("text.reorder_by_sequence_length", "ReorderBySequenceLength", args)
 
     @staticmethod
     def sequence_complement(argv):
         parser = ArgumentParser(
-            add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
+            **PARSER_KWARGS,
             description=textwrap.dedent(
                 f"""\
                 {help_header}
@@ -2313,10 +2281,10 @@ class Biokit(object):
                 Generates the sequence complement for all entries
                 in a multi-FASTA file. To generate a reverse sequence
                 complement, add the -r/--reverse argument.
-                
+
                 Aliases:
                   sequence_complement, seq_comp
-                Command line interfaces: 
+                Command line interfaces:
                   bk_sequence_complement, bk_seq_comp
 
                 Usage:
@@ -2324,7 +2292,7 @@ class Biokit(object):
 
                 Options
                 =====================================================
-                <fasta>                     first argument after 
+                <fasta>                     first argument after
                                             function name should be
                                             a fasta file
 
@@ -2339,66 +2307,74 @@ class Biokit(object):
             "-r", "--reverse", action="store_true", required=False, help=SUPPRESS
         )
         args = parser.parse_args(argv)
-        SequenceComplement(args).run()
+        _run_service("text.sequence_complement", "SequenceComplement", args)
 
     @staticmethod
     def sequence_length(argv):
         parser = ArgumentParser(
-            add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
+            **PARSER_KWARGS,
             description=textwrap.dedent(
                 f"""\
                 {help_header}
 
                 Calculate sequence length of each FASTA entry.
-                
+
                 Aliases:
                   sequence_length, seq_len
-                Command line interfaces: 
+                Command line interfaces:
                   bk_sequence_length, bk_seq_len
 
                 Usage:
-                biokit sequence_length <fasta>
+                biokit sequence_length <fasta> [-f/--format <tsv|json|yaml>]
 
                 Options
                 =====================================================
-                <fasta>                     first argument after 
+                <fasta>                     first argument after
                                             function name should be
-                                            a fasta file 
+                                            a fasta file
+
+                -f/--format                 output format
+                                            (tsv, json, yaml)
+                                            Default: tsv
                 """  # noqa
             ),
         )
 
         parser.add_argument("fasta", type=str, help=SUPPRESS)
+        parser.add_argument(
+            "-f",
+            "--format",
+            type=str,
+            required=False,
+            choices=["tsv", "json", "yaml"],
+            help=SUPPRESS,
+        )
         args = parser.parse_args(argv)
-        SequenceLength(args).run()
+        _run_service("text.sequence_length", "SequenceLength", args)
 
     @staticmethod
     def single_line_to_multiple_line_fasta(argv):
         parser = ArgumentParser(
-            add_help=True,
-            usage=SUPPRESS,
-            formatter_class=RawDescriptionHelpFormatter,
+            **PARSER_KWARGS,
             description=textwrap.dedent(
                 f"""\
                 {help_header}
                 Converts FASTA files with single lines per
                 sequence to a FASTA file with the sequence
-                on multiple lines. Each line with have 60 
+                on multiple lines. Each line will have 60
                 characters following standard NCBI format.
 
                 Aliases:
                   single_line_to_multiple_line_fasta, sl2ml
-                Command line interfaces: 
+                Command line interfaces:
                   bk_single_line_to_multiple_line_fasta, bk_sl2ml
-                
+
                 Usage:
                 biokit single_line_to_multiple_line_fasta <fasta>
-                
+
                 Options
                 =====================================================
-                <fasta>                     first argument after 
+                <fasta>                     first argument after
                                             function name should be
                                             a fasta file
                 """  # noqa
@@ -2406,7 +2382,7 @@ class Biokit(object):
         )
         parser.add_argument("fasta", type=str, help=SUPPRESS)
         args = parser.parse_args(argv)
-        SingleLineToMultipleLineFasta(args).run()
+        _run_service("text.single_line_to_multiple_line_fasta", "SingleLineToMultipleLineFasta", args)
 
 
 def main(argv=None):

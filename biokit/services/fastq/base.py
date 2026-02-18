@@ -19,6 +19,7 @@ class FastQ(BaseService):
         percent=None,
         seed=None,
         verbose=None,
+        **kwargs,
     ):
         self.adapters = adapters
         self.fastq = fastq
@@ -30,6 +31,7 @@ class FastQ(BaseService):
         self.percent = percent
         self.seed = seed
         self.verbose = verbose
+        self.output_format = kwargs.get("output_format")
 
     def read_adapter_table(self, adapters: str) -> dict:
         """

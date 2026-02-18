@@ -1,23 +1,18 @@
+from typing import Any
+
 from ..base import BaseService
 
 
 class Alignment(BaseService):
-    def __init__(
-        self,
-        *args,
-        code=None,
-        fasta=None,
-        ambiguous_character=None,
-        threshold=None,
-        verbose=None,
-    ):
-        self.code = code
-        self.fasta = fasta
-        self.ambiguous_character = ambiguous_character
-        self.threshold = threshold
-        self.verbose = verbose
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        self.code: str | None = kwargs.get("code")
+        self.fasta: str | None = kwargs.get("fasta")
+        self.ambiguous_character: str | None = kwargs.get("ambiguous_character")
+        self.threshold: str | float | None = kwargs.get("threshold")
+        self.verbose: bool | None = kwargs.get("verbose")
+        self.output_format: str | None = kwargs.get("output_format")
 
-    def determine_pis_vs_cs(self, alignment, alignment_length):
+    def determine_pis_vs_cs(self, alignment: Any, alignment_length: int) -> tuple[int, int, int, list[list[Any]]]:
         """
         determine number of parsimony informative,
         variable, and constant sites in an alignment
@@ -25,10 +20,10 @@ class Alignment(BaseService):
         parsimony_informative_sites = 0
         variable_sites = 0
         constant_sites = 0
-        site_summary = []
+        site_summary: list[list[Any]] = []
 
         for i in range(0, alignment_length):
-            temp = []
+            temp: list[Any] = []
             temp.append(i)
             seq_at_position = ""
             seq_at_position += alignment[:, i]
