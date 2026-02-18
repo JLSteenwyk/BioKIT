@@ -12,11 +12,10 @@ dev.setup:
 
 install:
 	# install so biokit command is available in terminal
-	python3 setup.py install
+	$(PYTHON) -m pip install -e .
 
 develop:
-	# https://setuptools.readthedocs.io/en/latest/setuptools.html#development-mode
-	python setup.py develop
+	$(PYTHON) -m pip install -e .
 
 test: test.unit test.integration
 

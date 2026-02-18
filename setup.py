@@ -1,9 +1,14 @@
 from os import path
+from pathlib import Path
+import re
 from setuptools import setup, find_packages
 
-from biokit.version import __version__
-
 here = path.abspath(path.dirname(__file__))
+version_text = Path(here, "biokit", "version.py").read_text(encoding="utf-8")
+version_match = re.search(r'__version__\s*=\s*"([^"]+)"', version_text)
+if version_match is None:
+    raise RuntimeError("Unable to find __version__ in biokit/version.py")
+__version__ = version_match.group(1)
 
 with open(path.join(here, "README.md")) as f:
     long_description = f.read()
