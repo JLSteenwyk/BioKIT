@@ -109,6 +109,7 @@ that can be executed by BioKIT are shown in bold.
 	about/index
 	usage/index
 	tutorials/index
+	dev/developer_workflow
 	change_log/index
 	other_software/index
 	frequently_asked_questions/index

@@ -108,12 +108,13 @@
 <li class="toctree-l3"><a class="reference internal" href="#reorder-by-sequence-length">Reorder by sequence length</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#sequence-complement">Sequence complement</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#sequence-length">Sequence length</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#single-line-to-multiple-line-fasta">Single line to multiple line fasta</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#single-line-to-multiple-line-fasta">Single line to multiple line FASTA</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/developer_workflow.html">Developer Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../change_log/index.html">Change log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../other_software/index.html">Other software</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../frequently_asked_questions/index.html">FAQ</a></li>
@@ -161,7 +162,7 @@ files, and genomes.</p>
 </div>
 <p>Command specific help messages can be viewed by adding a
 -h/--help argument after the command. For example, to see the
-to see the help message for the command ‘alignment_summary’, execute:</p>
+help message for the command ‘alignment_summary’, execute:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>alignment_summary<span class="w"> </span>-h
 <span class="c1"># or</span>
 biokit<span class="w"> </span>alignment_summary<span class="w"> </span>--help
@@ -331,11 +332,12 @@ statistics include alignment length, number of taxa,
 number of parsimony sites, number of variable sites,
 number of constant sites, frequency of each character
 (including gaps, which are considered to be ‘-’ or ‘?’).</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>alignment_summary<span class="w"> </span>&lt;fasta&gt;
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>alignment_summary<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-f/--format<span class="w"> </span>&lt;tsv<span class="p">|</span>json<span class="p">|</span>yaml&gt;<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
-<em>&lt;alignment&gt;</em>: first argument after function name should be an alignment file</p>
+<em>&lt;alignment&gt;</em>: first argument after function name should be an alignment file <br/>
+<em>-f/--format</em>: output format (tsv, json, yaml). Default: tsv</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -364,12 +366,13 @@ Command line interface: bk_constant_sites; bk_con_sites</p>
 <p>Constant sites are defined as a site in an
 alignment with the same nucleotide or amino
 acid sequence (excluding gaps) among all taxa.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>constant_sites<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-v/<span class="se">\-\-</span>verbose<span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>constant_sites<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-v/<span class="se">\-\-</span>verbose<span class="o">]</span><span class="w"> </span><span class="o">[</span>-f/--format<span class="w"> </span>&lt;tsv<span class="p">|</span>json<span class="p">|</span>yaml&gt;<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
 <em>&lt;alignment&gt;</em>: first argument after function name should be an alignment file
-<em>-v/--verbose</em>: optional argument to print site-by-site categorization</p>
+<em>-v/--verbose</em>: optional argument to print site-by-site categorization <br/>
+<em>-f/--format</em>: output format (tsv, json, yaml). Default: tsv</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -383,12 +386,13 @@ sites in an alignment.</p>
 <p>Parsimony informative sites are defined as a
 site in an alignment with at least two nucleotides
 or amino acids that occur at least twice.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>parsimony_informative_sites<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-v/<span class="se">\-\-</span>verbose<span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>parsimony_informative_sites<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-v/<span class="se">\-\-</span>verbose<span class="o">]</span><span class="w"> </span><span class="o">[</span>-f/--format<span class="w"> </span>&lt;tsv<span class="p">|</span>json<span class="p">|</span>yaml&gt;<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
 <em>&lt;alignment&gt;</em>: first argument after function name should be an alignment file <br/>
-<em>-v/--verbose</em>: optional argument to print site-by-site categorization</p>
+<em>-v/--verbose</em>: optional argument to print site-by-site categorization <br/>
+<em>-f/--format</em>: output format (tsv, json, yaml). Default: tsv</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -417,12 +421,13 @@ alignment.</p>
 <p>Variable sites are defined as a site in an
 alignment with at least two nucleotide or amino
 acid characters among all taxa.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>variable_sites<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-v/<span class="se">\-\-</span>verbose<span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>variable_sites<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-v/<span class="se">\-\-</span>verbose<span class="o">]</span><span class="w"> </span><span class="o">[</span>-f/--format<span class="w"> </span>&lt;tsv<span class="p">|</span>json<span class="p">|</span>yaml&gt;<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
-<em>&lt;alignment&gt;</em>: first argument after function name should be an alignment file
-<em>-v/--verbose</em>: optional argument to print site-by-site categorization</p>
+<em>&lt;alignment&gt;</em>: first argument after function name should be an alignment file <br/>
+<em>-v/--verbose</em>: optional argument to print site-by-site categorization <br/>
+<em>-f/--format</em>: output format (tsv, json, yaml). Default: tsv</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -504,15 +509,17 @@ col 3: the gRSCU based on the median RSCU value observed
 in a gene; and the col 4: the standard deviation of
 RSCU values observed in a gene.</p>
 <p>Custom genetic codes can be used as input and should
-be formatted with the codon in first column and the
+be formatted with the codon in the first column and the
 resulting amino acid in the second column.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>gene_wise_relative_synonymous_codon_usage<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-tt/--translation_table<span class="w"> </span>&lt;code&gt;<span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>gene_wise_relative_synonymous_codon_usage<span class="w"> </span>&lt;fasta&gt;
+<span class="o">[</span>-tt/--translation_table<span class="w"> </span>&lt;code&gt;<span class="o">]</span><span class="w"> </span><span class="o">[</span>-f/--format<span class="w"> </span>&lt;tsv<span class="p">|</span>json<span class="p">|</span>yaml&gt;<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
 <em>&lt;fasta&gt;</em>: first argument after function name should be a fasta file <br/>
 <em>-tt/--translation_table</em>: optional argument of the code for the translation
-table to be used. Default: 1, which is the standard code.</p>
+table to be used. Default: 1, which is the standard code. <br/>
+<em>-f/--format</em>: output format (tsv, json, yaml). Default: tsv</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -527,15 +534,17 @@ of the observed frequency of codons over the
 expected frequency given that all the synonymous
 codons for the same amino acids are used equally.</p>
 <p>Custom genetic codes can be used as input and should
-be formatted with the codon in first column and the
+be formatted with the codon in the first column and the
 resulting amino acid in the second column.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>relative_synonymous_codon_usage<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-tt/--translation_table<span class="w"> </span>&lt;code&gt;<span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>relative_synonymous_codon_usage<span class="w"> </span>&lt;fasta&gt;
+<span class="o">[</span>-tt/--translation_table<span class="w"> </span>&lt;code&gt;<span class="o">]</span><span class="w"> </span><span class="o">[</span>-f/--format<span class="w"> </span>&lt;tsv<span class="p">|</span>json<span class="p">|</span>yaml&gt;<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
 <em>&lt;fasta&gt;</em>: first argument after function name should be a fasta file <br/>
 <em>-tt/--translation_table</em>: optional argument of the code for the translation
-table to be used. Default: 1, which is the standard code.</p>
+table to be used. Default: 1, which is the standard code. <br/>
+<em>-f/--format</em>: output format (tsv, json, yaml). Default: tsv</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -551,7 +560,7 @@ encode two amino acids (e.g., TAG encodes
 Glu or STOP in the Blastocrithidia Nuclear Code),
 the standard genetic code is used.</p>
 <p>Custom genetic codes can be used as input and should
-be formatted with the codon in first column and the
+be formatted with the codon in the first column and the
 resulting amino acid in the second column.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>translate_sequence<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-tt/--translation_table<span class="w"> </span>&lt;code&gt;<span class="w"> </span>-o/--output<span class="w"> </span>&lt;output_file&gt;<span class="o">]</span>
 </pre></div>
@@ -581,12 +590,13 @@ standard deviation of read lengths in a
 FASTQ file will be reported. To obtain
 the lengths of all FASTQ reads, use the
 verbose option.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>fastq_read_lengths<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-tt/--translation_table<span class="w"> </span>&lt;code&gt;<span class="w"> </span>-o/--output<span class="w"> </span>&lt;output_file&gt;<span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>fastq_read_lengths<span class="w"> </span>&lt;fastq&gt;<span class="w"> </span><span class="o">[</span>-v/--verbose<span class="o">]</span><span class="w"> </span><span class="o">[</span>-f/--format<span class="w"> </span>&lt;tsv<span class="p">|</span>json<span class="p">|</span>yaml&gt;<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
 <em>&lt;fastq&gt;</em>: first argument after function name should be a FASTQ file <br/>
-<em>-v/--verbose</em>: print length of each FASTQ read</p>
+<em>-v/--verbose</em>: print length of each FASTQ read <br/>
+<em>-f/--format</em>: output format (tsv, json, yaml). Default: tsv</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -606,7 +616,7 @@ reproducibility. If no seed is specified,
 a seed is generated based off of the date
 and time. During subsampling, paired-end
 information is maintained.</p>
-<p>Files are outputed with the suffix “_subset.fq”</p>
+<p>Files are output with the suffix “_subset.fq”</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>subset_pe_fastq_reads<span class="w"> </span>&lt;fastq1&gt;<span class="w"> </span>&lt;fastq2&gt;<span class="w"> </span><span class="o">[</span>-p/--percent<span class="w"> </span>&lt;percent&gt;<span class="w"> </span>-s/--seed<span class="w"> </span>&lt;seed&gt;<span class="w"> </span>-o/--output_file<span class="w"> </span>&lt;output_file&gt;<span class="o">]</span>
 </pre></div>
 </div>
@@ -650,16 +660,17 @@ and time.</p>
 <h3>Trim PE adapters FASTQ reads<a class="headerlink" href="#trim-pe-adapters-fastq-reads" title="Link to this heading"></a></h3>
 <p>Function names: trim_pe_adapters_fastq_reads; trim_pe_adapters_fastq <br/>
 Command line interface: bk_trim_pe_adapters_fastq_reads; bk_trim_pe_adapters_fastq</p>
-<p>Trim adapters from paired-end FastQ data.</p>
+<p>Trim adapters from paired-end FASTQ data.</p>
 <p>FASTQ data will be trimmed according to
 exact match to known adapter sequences.</p>
 <p>Output file has the suffix “_adapter_removed.fq”
 or can be named by the user with the
 output_file argument.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>trim_pe_adapters_fastq_reads<span class="w"> </span>&lt;fastq1&gt;<span class="w"> </span>&lt;fastq2&gt;<span class="w"> </span><span class="o">[</span>-a/--adapters<span class="w"> </span>TruSeq2-PE<span class="w"> </span>-l/--length<span class="w"> </span><span class="m">20</span><span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>trim_pe_adapters_fastq<span class="w"> </span>&lt;fastq1&gt;<span class="w"> </span>&lt;fastq2&gt;<span class="w"> </span><span class="o">[</span>-a/--adapters<span class="w"> </span>TruSeq2-PE<span class="w"> </span>-l/--length<span class="w"> </span><span class="m">20</span><span class="o">]</span>
+<span class="o">[</span>-f/--format<span class="w"> </span>&lt;tsv<span class="p">|</span>json<span class="p">|</span>yaml&gt;<span class="o">]</span>
 </pre></div>
 </div>
-<p>Adapaters available: <br/>
+<p>Adapters available: <br/>
 NexteraPE-PE <br/>
 TruSeq2-PE <br/>
 TruSeq2-SE <br/>
@@ -670,7 +681,8 @@ TruSeq3-SE</p>
 <em>&lt;fastq1&gt;</em>: first argument after function name should be the name of one of the fastq files <br/>
 <em>&lt;fastq2&gt;</em>: first argument after function name should be the name of the other fastq file <br/>
 <em>-a/--adapters</em>: adapter sequences to trim. Default: TruSeq2-PE <br/>
-<em>-l/--length</em>: minimum length of read to be kept. Default: 20</p>
+<em>-l/--length</em>: minimum length of read to be kept. Default: 20 <br/>
+<em>-f/--format</em>: output format (tsv, json, yaml). Default: tsv</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -679,7 +691,7 @@ TruSeq3-SE</p>
 <h3>Trim PE FASTQ reads<a class="headerlink" href="#trim-pe-fastq-reads" title="Link to this heading"></a></h3>
 <p>Function names: trim_pe_fastq_reads; trim_pe_fastq <br/>
 Command line interface: bk_trim_pe_fastq_reads; bk_trim_pe_fastq</p>
-<p>Quality trim paired-end FastQ data.</p>
+<p>Quality trim paired-end FASTQ data.</p>
 <p>FASTQ data will be trimmed according to
 quality score and length of the reads.
 Users can specify quality and length
@@ -689,14 +701,16 @@ suffix “_paired_trimmed.fq.” Single
 reads that passed quality thresholds are
 saved to files with the suffix
 “_unpaired_trimmed.fq.”</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>trim_pe_fastq_reads<span class="w"> </span>&lt;fastq1&gt;<span class="w"> </span>&lt;fastq2&gt;<span class="w"> </span><span class="o">[</span>-m/--minimum<span class="w"> </span><span class="m">20</span><span class="w"> </span>-l/--length<span class="w"> </span><span class="m">20</span><span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>trim_pe_fastq<span class="w"> </span>&lt;fastq1&gt;<span class="w"> </span>&lt;fastq2&gt;<span class="w"> </span><span class="o">[</span>-m/--minimum<span class="w"> </span><span class="m">20</span><span class="w"> </span>-l/--length<span class="w"> </span><span class="m">20</span><span class="o">]</span>
+<span class="o">[</span>-f/--format<span class="w"> </span>&lt;tsv<span class="p">|</span>json<span class="p">|</span>yaml&gt;<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
 <em>&lt;fastq1&gt;</em>: first argument after function name should be the name of one of the fastq files <br/>
 <em>&lt;fastq2&gt;</em>: first argument after function name should be the name of the other fastq file <br/>
 <em>-m/--minimum</em>: minimum quality of read to be kept. Default: 20 <br/>
-<em>-l/--length</em>: minimum length of read to be kept. Default: 20</p>
+<em>-l/--length</em>: minimum length of read to be kept. Default: 20 <br/>
+<em>-f/--format</em>: output format (tsv, json, yaml). Default: tsv</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -705,20 +719,22 @@ saved to files with the suffix
 <h3>Trim SE adapters FASTQ reads<a class="headerlink" href="#trim-se-adapters-fastq-reads" title="Link to this heading"></a></h3>
 <p>Function names: trim_se_adapters_fastq_reads; trim_se_adapters_fastq <br/>
 Command line interface: bk_trim_se_adapters_fastq_reads; bk_trim_se_adapters_fastq</p>
-<p>Trim adapters from single-end FastQ data.</p>
+<p>Trim adapters from single-end FASTQ data.</p>
 <p>FASTQ data will be trimmed according to
 exact match to known adapter sequences.</p>
 <p>Output file has the suffix “_adapter_removed.fq”
 or can be named by the user with the
 output_file argument.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>trim_se_adapters_fastq_reads<span class="w"> </span>&lt;fastq&gt;<span class="w"> </span><span class="o">[</span>-a/--adapters<span class="w"> </span>TruSeq2-SE<span class="w"> </span>-l/--length<span class="w"> </span><span class="m">20</span><span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>trim_se_adapters_fastq<span class="w"> </span>&lt;fastq&gt;<span class="w"> </span><span class="o">[</span>-a/--adapters<span class="w"> </span>TruSeq2-SE<span class="w"> </span>-l/--length<span class="w"> </span><span class="m">20</span><span class="o">]</span>
+<span class="o">[</span>-f/--format<span class="w"> </span>&lt;tsv<span class="p">|</span>json<span class="p">|</span>yaml&gt;<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
 <em>&lt;fastq&gt;</em>: first argument after function name should be the fastq file <br/>
 <em>-a/--adapters</em>: adapter sequences to trim. Default: TruSeq2-SE <br/>
 <em>-l/--length</em>: minimum length of read to be kept. Default: 20 <br/>
-<em>-o/--output_file</em>: name of the output file of trimmed reads</p>
+<em>-o/--output_file</em>: name of the output file of trimmed reads <br/>
+<em>-f/--format</em>: output format (tsv, json, yaml). Default: tsv</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -727,21 +743,23 @@ output_file argument.</p>
 <h3>Trim SE FASTQ reads<a class="headerlink" href="#trim-se-fastq-reads" title="Link to this heading"></a></h3>
 <p>Function names: trim_se_fastq_reads; trim_se_fastq <br/>
 Command line interface: bk_trim_se_fastq_reads; bk_trim_se_fastq</p>
-<p>Quality trim single-end FastQ data.</p>
+<p>Quality trim single-end FASTQ data.</p>
 <p>FASTQ data will be trimmed according to
 quality score and length of the reads.
 Users can specify quality and length
 thresholds. Output file has the suffix
 “_trimmed.fq” or can be named by the user
 with the output_file argument.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>trim_se_fastq_reads<span class="w"> </span>&lt;fastq&gt;<span class="w"> </span><span class="o">[</span>-m/--minimum<span class="w"> </span><span class="m">20</span><span class="w"> </span>-l/--length<span class="w"> </span><span class="m">20</span><span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>trim_se_fastq<span class="w"> </span>&lt;fastq&gt;<span class="w"> </span><span class="o">[</span>-m/--minimum<span class="w"> </span><span class="m">20</span><span class="w"> </span>-l/--length<span class="w"> </span><span class="m">20</span><span class="o">]</span>
+<span class="o">[</span>-f/--format<span class="w"> </span>&lt;tsv<span class="p">|</span>json<span class="p">|</span>yaml&gt;<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
 <em>&lt;fastq&gt;</em>: first argument after function name should be the fastq file <br/>
 <em>-m/--minimum</em>: minimum quality of read to be kept. Default: 20 <br/>
 <em>-l/--length</em>: minimum length of read to be kept. Default: 20 <br/>
-<em>-o/--output_file</em>: name of the output file of trimmed reads</p>
+<em>-o/--output_file</em>: name of the output file of trimmed reads <br/>
+<em>-f/--format</em>: output format (tsv, json, yaml). Default: tsv</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -759,12 +777,13 @@ Command line interface: bk_gc_content; bk_gc</p>
 either guanines or cytosines. To obtain
 GC content per FASTA entry, use the verbose
 option.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>gc_content<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-v/--verbose<span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>gc_content<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-v/--verbose<span class="o">]</span><span class="w"> </span><span class="o">[</span>-f/--format<span class="w"> </span>&lt;tsv<span class="p">|</span>json<span class="p">|</span>yaml&gt;<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
 <em>&lt;fasta&gt;</em>: first argument after function name should be a fasta file <br/>
-<em>-v/--verbose</em>: optional argument to print the GC content of each fasta entry</p>
+<em>-v/--verbose</em>: optional argument to print the GC content of each fasta entry <br/>
+<em>-f/--format</em>: output format (tsv, json, yaml). Default: tsv</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -785,17 +804,18 @@ Assembly size: The sum length of all contigs in an assembly. <br/>
 Number of scaffolds: The total number of scaffolds in an assembly. <br/>
 Number of large scaffolds: The total number of scaffolds that are greater than the threshold for small scaffolds. <br/>
 Sum length of large scaffolds: The sum length of all large scaffolds. <br/>
-Frequency of A: The number of occurences of A corrected by assembly size. <br/>
-Frequency of T: The number of occurences of T corrected by assembly size. <br/>
-Frequency of C: The number of occurences of C corrected by assembly size. <br/>
-Frequency of G: The number of occurences of G corrected by assembly size.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>genome_assembly_metrics<span class="w"> </span>&lt;fasta&gt;
+Frequency of A: The number of occurrences of A corrected by assembly size. <br/>
+Frequency of T: The number of occurrences of T corrected by assembly size. <br/>
+Frequency of C: The number of occurrences of C corrected by assembly size. <br/>
+Frequency of G: The number of occurrences of G corrected by assembly size.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>genome_assembly_metrics<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-t/--threshold<span class="w"> </span>&lt;int&gt;<span class="o">]</span><span class="w"> </span><span class="o">[</span>-f/--format<span class="w"> </span>&lt;tsv<span class="p">|</span>json<span class="p">|</span>yaml&gt;<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
 <em>&lt;fasta&gt;</em>: first argument after function name should be a fasta file <br/>
 <em>-t/--threshold</em>: threshold for what is considered a large scaffold.
-Only scaffolds with a length greater than this value will be counted. Default: 500</p>
+Only scaffolds with a length greater than this value will be counted. Default: 500 <br/>
+<em>-f/--format</em>: output format (tsv, json, yaml). Default: tsv</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -942,11 +962,12 @@ Command line interface: bk_character_frequency; bk_char_freq</p>
 <p>Calculate the frequency of characters in a FASTA file.</p>
 <p>This can be used to determine the frequency of A, T, C, and G
 in a genome or the frequency of amino acids in a proteome.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>character_frequency<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-v/--verbose<span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>character_frequency<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-f/--format<span class="w"> </span>&lt;tsv<span class="p">|</span>json<span class="p">|</span>yaml&gt;<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
-<em>&lt;fasta&gt;</em>: first argument after function name should be a fasta file <br/></p>
+<em>&lt;fasta&gt;</em>: first argument after function name should be a fasta file <br/>
+<em>-f/--format</em>: output format (tsv, json, yaml). Default: tsv</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -957,14 +978,14 @@ in a genome or the frequency of amino acids in a proteome.</p>
 Command line interface: bk_faidx; bk_get_entry; bk_ge</p>
 <p>Extracts sequence entry from fasta file.</p>
 <p>This function works similarly to the faidx function
-in samtools, but does not requiring an indexing the
+in samtools, but does not require indexing the
 sequence file.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>faidx<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-v/--verbose<span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>faidx<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span>-e/--entry<span class="w"> </span>&lt;entry&gt;
 </pre></div>
 </div>
 <p>Options: <br/>
 <em>&lt;fasta&gt;</em>: first argument after function name should be a fasta file <br/>
-<em>-e/--entry</em>: entry name to be extracted from the inputted fasta file</p>
+<em>-e/--entry</em>: entry name to be extracted from the input fasta file</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -1021,7 +1042,7 @@ the user specifies a different output file name.</p>
 </div>
 <p>Options: <br/>
 <em>&lt;fasta&gt;</em>: first argument after function name should be a fasta file <br/>
-<em>-e/--entry</em>: entry name to be removed from the inputted fasta file <br/>
+<em>-e/--entry</em>: entry name to be removed from the input fasta file <br/>
 <em>-o/--output</em>: optional argument to write the renamed fasta file to.
 Default output has the same name as the input file with the suffix “pruned.fa”
 added to it.</p>
@@ -1058,12 +1079,12 @@ added to it.</p>
 <h3>Rename FASTA entries<a class="headerlink" href="#rename-fasta-entries" title="Link to this heading"></a></h3>
 <p>Function names: rename_fasta_entries; rename_fasta <br/>
 Command line interface: bk_rename_fasta_entries; bk_rename_fasta</p>
-<p>Renames fasta entries.</p>
+<p>Renames FASTA entries.</p>
 <p>Renaming fasta entries will follow the scheme of a tab-delimited
-file wherein the first column is the current fasta entry name and
-the second column is the new fasta entry name in the resulting
-output alignment.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>rename_fasta_entries<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span>-i/--idmap<span class="w"> </span>&lt;idmap&gt;<span class="w"> </span><span class="o">[</span>-o/--output<span class="w"> </span>&lt;output_file&gt;<span class="o">]</span>
+file wherein the first column is the current FASTA entry name and
+the second column is the new FASTA entry name in the resulting
+output FASTA file.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>rename_fasta_entries<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span>-i/--idmap<span class="w"> </span>&lt;idmap&gt;<span class="w"> </span><span class="o">[</span>-o/--output<span class="w"> </span>&lt;output_file&gt;<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
@@ -1114,20 +1135,21 @@ complement, add the -r/–reverse argument.</p>
 <p>Function names: sequence_length; seq_len <br/>
 Command line interface: bk_sequence_length; bk_seq_len</p>
 <p>Calculate sequence length of each FASTA entry.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>sequence_length<span class="w"> </span>&lt;fasta&gt;
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>sequence_length<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-f/--format<span class="w"> </span>&lt;tsv<span class="p">|</span>json<span class="p">|</span>yaml&gt;<span class="o">]</span>
 </pre></div>
 </div>
 <p>Options: <br/>
-<em>&lt;fasta&gt;</em>: first argument after function name should be a fasta file <br/></p>
+<em>&lt;fasta&gt;</em>: first argument after function name should be a fasta file <br/>
+<em>-f/--format</em>: output format (tsv, json, yaml). Default: tsv</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 </section>
 <section id="single-line-to-multiple-line-fasta">
-<h3>Single line to multiple line fasta<a class="headerlink" href="#single-line-to-multiple-line-fasta" title="Link to this heading"></a></h3>
+<h3>Single line to multiple line FASTA<a class="headerlink" href="#single-line-to-multiple-line-fasta" title="Link to this heading"></a></h3>
 <p>Function names: single_line_to_multiple_line_fasta; sl2ml <br/>
 Command line interface: bk_single_line_to_multiple_line_fasta; bk_sl2ml</p>
-<p>Calculate sequence length of each FASTA entry.</p>
+<p>Convert a single-line FASTA file to 60-character wrapped sequence lines.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>single_line_to_multiple_line_fasta<span class="w"> </span>&lt;fasta&gt;
 </pre></div>
 </div>
