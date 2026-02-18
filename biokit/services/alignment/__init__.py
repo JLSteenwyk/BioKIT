@@ -1,4 +1,5 @@
 import importlib
+from typing import Any
 
 __all__ = [
     "AlignmentLength",
@@ -23,7 +24,7 @@ _LAZY_IMPORTS = {
 }
 
 
-def __getattr__(name):
+def __getattr__(name: str) -> Any:
     if name in _LAZY_IMPORTS:
         module = importlib.import_module(_LAZY_IMPORTS[name], __name__)
         return getattr(module, name)

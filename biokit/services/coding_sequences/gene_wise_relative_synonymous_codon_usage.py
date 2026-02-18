@@ -53,7 +53,7 @@ class GeneWiseRelativeSynonymousCodonUsage(CodingSequence):
             )
             return
 
-        rows = [
+        rows: list[dict[str, str | float]] = [
             {
                 "gene_id": gene_id,
                 "mean_rscu": mean_rscu,
@@ -62,7 +62,7 @@ class GeneWiseRelativeSynonymousCodonUsage(CodingSequence):
             }
             for gene_id, mean_rscu, median_rscu, stddev_rscu in gw_rscu
         ]
-        rows.sort(key=lambda row: row["gene_id"])
+        rows.sort(key=lambda row: str(row["gene_id"]))
         print(self.format_rows(rows, output_format))
 
     def process_args(self, args: Any) -> dict[str, str | None]:

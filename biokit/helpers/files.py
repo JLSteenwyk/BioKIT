@@ -4,12 +4,13 @@ from typing import Any, Iterator
 
 log = logging.getLogger(__name__)
 
+_AlignIO: Any | None = None
 try:
     from Bio import AlignIO as _AlignIO
 except ImportError:  # pragma: no cover - dependency is expected in runtime env
-    _AlignIO = None
+    pass
 
-AlignIO = _AlignIO
+AlignIO: Any | None = _AlignIO
 
 
 def read_alignment_alignio(fasta: str) -> Any:
