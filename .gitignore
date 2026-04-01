@@ -147,5 +147,8 @@ submitting_to_conda.txt
 
 claude_resume.sh
 
+# Claude Code
+.claude/
+
 # Superpowers plans/specs
 docs/superpowers/
