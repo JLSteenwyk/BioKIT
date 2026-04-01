@@ -27,3 +27,14 @@ are skipped during analysis of RSCU and gw-RSCU.
 *1.1.0*: Added Dayhoff-9, -12, -15, and -18 recoding schemes 
 
 *1.1.3*: Fixed bug in RSCU calculations
+
+*1.1.4*: Added structured output support (tsv/json/yaml) to additional commands and
+expanded integration coverage with output format consistency and CLI output
+contract tests.
+
+*1.1.5*: Updated dependency pinning to fix installation failures and moved supported
+Python versions to 3.11, 3.12, and 3.13 only.
+
+*1.1.6*: Added ``fasta_deduplication`` (alias: ``dedup``) command to remove duplicate
+sequences from multi-FASTA files. Sequences are compared case-insensitively
+and the first occurrence of each unique sequence is kept.
