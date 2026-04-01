@@ -144,3 +144,8 @@ output/
 
 # notes file
 submitting_to_conda.txt
+
+claude_resume.sh
+
+# Superpowers plans/specs
+docs/superpowers/

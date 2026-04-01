@@ -1,0 +1,3 @@
+- [BioKIT Overview](project_overview.md) — Bioinformatics CLI toolkit, ~50 commands, service-based architecture
+- [User Profile](user_jacob.md) — Jacob L. Steenwyk, BioKIT author, bioinformatics researcher
+- [Use local venv](feedback_use_venv.md) — Always install packages and run tools in the local venv

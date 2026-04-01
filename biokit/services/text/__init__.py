@@ -4,6 +4,7 @@ from typing import Any
 __all__ = [
     "CharacterFrequency",
     "Faidx",
+    "FastaDeduplication",
     "FileFormatConverter",
     "MultipleLineToSingleLineFasta",
     "RenameFastaEntries",
@@ -18,6 +19,7 @@ __all__ = [
 _LAZY_IMPORTS = {
     "CharacterFrequency": ".character_frequency",
     "Faidx": ".faidx",
+    "FastaDeduplication": ".fasta_deduplication",
     "FileFormatConverter": ".file_format_converter",
     "MultipleLineToSingleLineFasta": ".multiple_line_to_single_line_fasta",
     "RenameFastaEntries": ".rename_fasta_entries",

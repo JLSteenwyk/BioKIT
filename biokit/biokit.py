@@ -241,6 +241,9 @@ class Biokit(object):
                 remove_short_sequences (alias: remove_short_seqs)
                     - remove short sequences from a FASTA file
 
+                fasta_deduplication (alias: dedup)
+                    - remove duplicate sequences from a FASTA file
+
                 remove_fasta_entry
                     - remove entry in a FASTA file
 
@@ -329,6 +332,7 @@ class Biokit(object):
             "format_converter": self.file_format_converter,
             "ffc": self.file_format_converter,
             "ml2sl": self.multiple_line_to_single_line_fasta,
+            "dedup": self.fasta_deduplication,
             "remove_short_seqs": self.remove_short_sequences,
             "rename_fasta": self.rename_fasta_entries,
             "reorder_by_seq_len": self.reorder_by_sequence_length,
@@ -2184,6 +2188,49 @@ class Biokit(object):
         _run_service("text.remove_short_sequences", "RemoveShortSequences", args)
 
     @staticmethod
+    def fasta_deduplication(argv):
+        parser = ArgumentParser(
+            **PARSER_KWARGS,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+                Remove duplicate sequences from a multi-FASTA file.
+
+                Sequences are compared case-insensitively.
+                The first occurrence of each unique sequence is kept.
+
+                Output will have the suffix ".dedup.fa" unless
+                the user specifies a different output file name.
+
+                Aliases:
+                  fasta_deduplication; dedup
+                Command line interfaces:
+                  bk_fasta_deduplication; bk_dedup
+
+                Usage:
+                biokit fasta_deduplication <fasta> [-o/--output <output_file>]
+
+                Options
+                =====================================================
+                <fasta>                     first argument after
+                                            function name should be
+                                            a fasta file
+
+                -o/--output                 optional argument to write
+                                            the deduplicated fasta file
+                                            to. Default output has the
+                                            same name as the input file
+                                            with the suffix ".dedup.fa"
+                                            added to it.
+                """  # noqa
+            ),
+        )
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        parser.add_argument("-o", "--output", type=str, help=SUPPRESS)
+        args = parser.parse_args(argv)
+        _run_service("text.fasta_deduplication", "FastaDeduplication", args)
+
+    @staticmethod
     def rename_fasta_entries(argv):
         parser = ArgumentParser(
             **PARSER_KWARGS,
@@ -2540,6 +2587,10 @@ def remove_fasta_entry(argv=None):
 
 def remove_short_sequences(argv=None):
     Biokit.remove_short_sequences(sys.argv[1:])
+
+
+def fasta_deduplication(argv=None):
+    Biokit.fasta_deduplication(sys.argv[1:])
 
 
 def rename_fasta_entries(argv=None):

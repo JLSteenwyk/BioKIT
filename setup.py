@@ -120,6 +120,8 @@ setup(
             "bk_ml2sl = biokit.biokit:multiple_line_to_single_line_fasta",
             "bk_remove_short_sequences = biokit.biokit:remove_short_sequences",
             "bk_remove_short_seqs = biokit.biokit:remove_short_sequences",
+            "bk_fasta_deduplication = biokit.biokit:fasta_deduplication",
+            "bk_dedup = biokit.biokit:fasta_deduplication",
             "bk_remove_fasta_entry = biokit.biokit:remove_fasta_entry",
             "bk_rename_fasta_entries = biokit.biokit:rename_fasta_entries",
             "bk_rename_fasta = biokit.biokit:rename_fasta_entries",
