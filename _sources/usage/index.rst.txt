@@ -1013,6 +1013,31 @@ Options: |br|
 
 |
 
+FASTA deduplication
+###################
+Function names: fasta_deduplication; dedup |br|
+Command line interface: bk_fasta_deduplication; bk_dedup
+
+Remove duplicate sequences from a multi-FASTA file.
+
+Sequences are compared case-insensitively.
+The first occurrence of each unique sequence is kept.
+
+Output will have the suffix ".dedup.fa" unless
+the user specifies a different output file name.
+
+.. code-block:: shell
+
+   biokit fasta_deduplication <fasta> [-o/--output <output_file>]
+
+Options: |br|
+*<fasta>*: first argument after function name should be a fasta file |br|
+*-o/\-\-output*: optional argument to write the deduplicated fasta file to.
+Default output has the same name as the input file with the suffix ".dedup.fa"
+added to it.
+
+|
+
 Remove FASTA entry
 ##################
 Function names: remove_fasta_entry |br|
