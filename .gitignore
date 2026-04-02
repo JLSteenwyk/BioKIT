@@ -149,6 +149,7 @@ claude_resume.sh
 
 # Claude Code
 .claude/
+claude_resume.sh
 
 # Superpowers plans/specs
 docs/superpowers/
