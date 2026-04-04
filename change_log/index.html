@@ -100,6 +100,9 @@ expanded integration coverage with output format consistency and CLI output
 contract tests.</p>
 <p><em>1.1.5</em>: Updated dependency pinning to fix installation failures and moved supported
 Python versions to 3.11, 3.12, and 3.13 only.</p>
+<p><em>1.1.7</em>: Added <code class="docutils literal notranslate"><span class="pre">protein_charge</span></code> (alias: <code class="docutils literal notranslate"><span class="pre">prot_charge</span></code>) command to calculate the
+net charge of protein sequences at a given pH (default 7.0). Uses BioPython’s
+ProteinAnalysis for the calculation. Supports tsv, json, and yaml output.</p>
 <p><em>1.1.6</em>: Added <code class="docutils literal notranslate"><span class="pre">fasta_deduplication</span></code> (alias: <code class="docutils literal notranslate"><span class="pre">dedup</span></code>) command to remove duplicate
 sequences from multi-FASTA files. Sequences are compared case-insensitively
 and the first occurrence of each unique sequence is kept.</p>

@@ -103,6 +103,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#file-format-converter">File format converter</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#multiple-line-to-single-line-fasta">Multiple line to single line FASTA</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#fasta-deduplication">FASTA deduplication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#protein-charge">Protein charge</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#remove-fasta-entry">Remove FASTA entry</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#remove-short-sequences">Remove short sequences</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rename-fasta-entries">Rename FASTA entries</a></li>
@@ -1048,6 +1049,25 @@ the user specifies a different output file name.</p>
 <em>-o/--output</em>: optional argument to write the deduplicated fasta file to.
 Default output has the same name as the input file with the suffix “.dedup.fa”
 added to it.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="protein-charge">
+<h3>Protein charge<a class="headerlink" href="#protein-charge" title="Link to this heading"></a></h3>
+<p>Function names: protein_charge; prot_charge <br/>
+Command line interface: bk_protein_charge; bk_prot_charge</p>
+<p>Calculate the net charge of protein sequences at a given pH.</p>
+<p>Uses BioPython’s ProteinAnalysis to compute the charge
+of each protein sequence in a FASTA file at the specified
+pH (default 7.0).</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>protein_charge<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-p/--pH<span class="w"> </span>&lt;pH_value&gt;<span class="o">]</span><span class="w"> </span><span class="o">[</span>-f/--format<span class="w"> </span>&lt;tsv<span class="p">|</span>json<span class="p">|</span>yaml&gt;<span class="o">]</span>
+</pre></div>
+</div>
+<p>Options: <br/>
+<em>&lt;fasta&gt;</em>: first argument after function name should be a protein fasta file <br/>
+<em>-p/--pH</em>: pH value at which to calculate charge. Default: 7.0 <br/>
+<em>-f/--format</em>: output format (tsv, json, yaml). Default: tsv</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
