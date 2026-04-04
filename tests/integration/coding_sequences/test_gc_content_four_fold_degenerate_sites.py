@@ -1,6 +1,6 @@
 import pytest
 
-from mock import patch, call
+from mock import patch
 from pathlib import Path
 import sys
 
