@@ -69,6 +69,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#gc-content-first-codon-position">GC content first codon position</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gc-content-second-codon-position">GC content second codon position</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gc-content-third-codon-position">GC content third codon position</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gc-content-four-fold-degenerate-sites">GC content four-fold degenerate sites</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gene-wise-relative-synonymous-codon-usage-grscu">Gene-wise relative synonymous codon usage (gRSCU)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#relative-synonymous-codon-usage">Relative synonymous codon usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#translate-sequence">Translate sequence</a></li>
@@ -487,6 +488,27 @@ divisible by three.</p>
 </div>
 <p>Options: <br/>
 <em>&lt;fasta&gt;</em>: first argument after function name should be a fasta file <br/>
+<em>-v/--verbose</em>: optional argument to print the GC content of each fasta entry</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="gc-content-four-fold-degenerate-sites">
+<h3>GC content four-fold degenerate sites<a class="headerlink" href="#gc-content-four-fold-degenerate-sites" title="Link to this heading"></a></h3>
+<p>Function names: gc_content_four_fold_degenerate_sites; gc4 <br/>
+Command line interface: bk_gc_content_four_fold_degenerate_sites; bk_gc4</p>
+<p>Calculate GC content of four-fold degenerate sites.
+Four-fold degenerate sites are the third codon position
+of codons where any nucleotide substitution is synonymous.
+The input must be the coding sequence of a gene or
+genes. All genes are assumed to have sequence lengths
+divisible by three.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>gc_content_four_fold_degenerate_sites<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-tt/--translation_table<span class="w"> </span>&lt;code&gt;<span class="o">]</span><span class="w"> </span><span class="o">[</span>-v/--verbose<span class="o">]</span>
+</pre></div>
+</div>
+<p>Options: <br/>
+<em>&lt;fasta&gt;</em>: first argument after function name should be a fasta file <br/>
+<em>-tt/--translation_table</em>: code for the translation table to be used. Default: 1 (standard code) <br/>
 <em>-v/--verbose</em>: optional argument to print the GC content of each fasta entry</p>
 <div class="line-block">
 <div class="line"><br /></div>

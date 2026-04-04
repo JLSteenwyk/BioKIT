@@ -393,6 +393,29 @@ Options: |br|
 
 |
 
+GC content four-fold degenerate sites
+#####################################
+Function names: gc_content_four_fold_degenerate_sites; gc4 |br|
+Command line interface: bk_gc_content_four_fold_degenerate_sites; bk_gc4
+
+Calculate GC content of four-fold degenerate sites.
+Four-fold degenerate sites are the third codon position
+of codons where any nucleotide substitution is synonymous.
+The input must be the coding sequence of a gene or
+genes. All genes are assumed to have sequence lengths
+divisible by three.
+
+.. code-block:: shell
+
+   biokit gc_content_four_fold_degenerate_sites <fasta> [-tt/--translation_table <code>] [-v/--verbose]
+
+Options: |br|
+*<fasta>*: first argument after function name should be a fasta file |br|
+*-tt/\-\-translation_table*: code for the translation table to be used. Default: 1 (standard code) |br|
+*-v/\-\-verbose*: optional argument to print the GC content of each fasta entry
+
+|
+
 Gene-wise relative synonymous codon usage (gRSCU)
 #################################################
 Function names: gene_wise_relative_synonymous_codon_usage; gene_wise_rscu; gw_rscu; grscu |br|

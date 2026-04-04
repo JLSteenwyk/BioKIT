@@ -35,6 +35,10 @@ contract tests.
 *1.1.5*: Updated dependency pinning to fix installation failures and moved supported
 Python versions to 3.11, 3.12, and 3.13 only.
 
+*1.1.8*: Added ``gc_content_four_fold_degenerate_sites`` (alias: ``gc4``) command to
+calculate GC content at four-fold degenerate sites in coding sequences. Supports
+custom translation tables via ``-tt`` and per-sequence output via ``-v``.
+
 *1.1.7*: Added ``protein_charge`` (alias: ``prot_charge``) command to calculate the
 net charge of protein sequences at a given pH (default 7.0). Uses BioPython's
 ProteinAnalysis for the calculation. Supports tsv, json, and yaml output.
