@@ -35,6 +35,10 @@ contract tests.
 *1.1.5*: Updated dependency pinning to fix installation failures and moved supported
 Python versions to 3.11, 3.12, and 3.13 only.
 
+*1.1.7*: Added ``protein_charge`` (alias: ``prot_charge``) command to calculate the
+net charge of protein sequences at a given pH (default 7.0). Uses BioPython's
+ProteinAnalysis for the calculation. Supports tsv, json, and yaml output.
+
 *1.1.6*: Added ``fasta_deduplication`` (alias: ``dedup``) command to remove duplicate
 sequences from multi-FASTA files. Sequences are compared case-insensitively
 and the first occurrence of each unique sequence is kept.

@@ -1038,6 +1038,28 @@ added to it.
 
 |
 
+Protein charge
+##############
+Function names: protein_charge; prot_charge |br|
+Command line interface: bk_protein_charge; bk_prot_charge
+
+Calculate the net charge of protein sequences at a given pH.
+
+Uses BioPython's ProteinAnalysis to compute the charge
+of each protein sequence in a FASTA file at the specified
+pH (default 7.0).
+
+.. code-block:: shell
+
+   biokit protein_charge <fasta> [-p/--pH <pH_value>] [-f/--format <tsv|json|yaml>]
+
+Options: |br|
+*<fasta>*: first argument after function name should be a protein fasta file |br|
+*-p/\-\-pH*: pH value at which to calculate charge. Default: 7.0 |br|
+*-f/\-\-format*: output format (tsv, json, yaml). Default: tsv
+
+|
+
 Remove FASTA entry
 ##################
 Function names: remove_fasta_entry |br|

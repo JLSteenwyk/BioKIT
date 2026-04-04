@@ -244,6 +244,9 @@ class Biokit(object):
                 fasta_deduplication (alias: dedup)
                     - remove duplicate sequences from a FASTA file
 
+                protein_charge (alias: prot_charge)
+                    - calculate the net charge of protein sequences at a given pH
+
                 remove_fasta_entry
                     - remove entry in a FASTA file
 
@@ -333,6 +336,7 @@ class Biokit(object):
             "ffc": self.file_format_converter,
             "ml2sl": self.multiple_line_to_single_line_fasta,
             "dedup": self.fasta_deduplication,
+            "prot_charge": self.protein_charge,
             "remove_short_seqs": self.remove_short_sequences,
             "rename_fasta": self.rename_fasta_entries,
             "reorder_by_seq_len": self.reorder_by_sequence_length,
@@ -2231,6 +2235,57 @@ class Biokit(object):
         _run_service("text.fasta_deduplication", "FastaDeduplication", args)
 
     @staticmethod
+    def protein_charge(argv):
+        parser = ArgumentParser(
+            **PARSER_KWARGS,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+                Calculate the net charge of protein sequences at a given pH.
+
+                Uses BioPython's ProteinAnalysis to compute the charge
+                of each protein sequence in a FASTA file at the specified
+                pH (default 7.0).
+
+                Aliases:
+                  protein_charge; prot_charge
+                Command line interfaces:
+                  bk_protein_charge; bk_prot_charge
+
+                Usage:
+                biokit protein_charge <fasta> [-p/--pH <pH_value>]
+                [-f/--format <tsv|json|yaml>]
+
+                Options
+                =====================================================
+                <fasta>                     first argument after
+                                            function name should be
+                                            a protein fasta file
+
+                -p/--pH                     pH value at which to
+                                            calculate charge.
+                                            Default: 7.0
+
+                -f/--format                 output format
+                                            (tsv, json, yaml)
+                                            Default: tsv
+                """  # noqa
+            ),
+        )
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        parser.add_argument("-p", "--pH", type=float, default=7.0, help=SUPPRESS)
+        parser.add_argument(
+            "-f",
+            "--format",
+            type=str,
+            required=False,
+            choices=["tsv", "json", "yaml"],
+            help=SUPPRESS,
+        )
+        args = parser.parse_args(argv)
+        _run_service("text.protein_charge", "ProteinCharge", args)
+
+    @staticmethod
     def rename_fasta_entries(argv):
         parser = ArgumentParser(
             **PARSER_KWARGS,
@@ -2591,6 +2646,10 @@ def remove_short_sequences(argv=None):
 
 def fasta_deduplication(argv=None):
     Biokit.fasta_deduplication(sys.argv[1:])
+
+
+def protein_charge(argv=None):
+    Biokit.protein_charge(sys.argv[1:])
 
 
 def rename_fasta_entries(argv=None):
