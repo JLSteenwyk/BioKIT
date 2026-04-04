@@ -3,6 +3,7 @@ from typing import Any
 
 __all__ = [
     "GCContentFirstPosition",
+    "GCContentFourFoldDegenerateSites",
     "GCContentSecondPosition",
     "GCContentThirdPosition",
     "GeneWiseRelativeSynonymousCodonUsage",
@@ -12,6 +13,7 @@ __all__ = [
 
 _LAZY_IMPORTS = {
     "GCContentFirstPosition": ".gc_content_first_position",
+    "GCContentFourFoldDegenerateSites": ".gc_content_four_fold_degenerate_sites",
     "GCContentSecondPosition": ".gc_content_second_position",
     "GCContentThirdPosition": ".gc_content_third_position",
     "GeneWiseRelativeSynonymousCodonUsage": ".gene_wise_relative_synonymous_codon_usage",

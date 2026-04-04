@@ -151,6 +151,10 @@ class Biokit(object):
                     - calculate the GC content of the third position
                       among coding sequences
 
+                gc_content_four_fold_degenerate_sites (alias: gc4)
+                    - calculate the GC content of four-fold degenerate
+                      sites among coding sequences
+
                 gene_wise_relative_synonymous_codon_usage (alias: gene_wise_rscu; gw_rscu; grscu)
                     - calculates relative synonymous codon usage
                       that has been adapted for single genes to
@@ -304,6 +308,7 @@ class Biokit(object):
             "gc1": self.gc_content_first_position,
             "gc2": self.gc_content_second_position,
             "gc3": self.gc_content_third_position,
+            "gc4": self.gc_content_four_fold_degenerate_sites,
             "gene_wise_rscu": self.gene_wise_relative_synonymous_codon_usage,
             "gw_rscu": self.gene_wise_relative_synonymous_codon_usage,
             "grscu": self.gene_wise_relative_synonymous_codon_usage,
@@ -920,6 +925,62 @@ class Biokit(object):
         )
         args = parser.parse_args(argv)
         _run_service("coding_sequences.gc_content_third_position", "GCContentThirdPosition", args)
+
+    @staticmethod
+    def gc_content_four_fold_degenerate_sites(argv):
+        parser = ArgumentParser(
+            **PARSER_KWARGS,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+
+                Calculate GC content of four-fold degenerate sites.
+                Four-fold degenerate sites are the third codon position
+                of codons where any nucleotide substitution is synonymous.
+                The input must be the coding sequence of a gene or
+                genes. All genes are assumed to have sequence lengths
+                divisible by three.
+
+                Aliases:
+                  gc_content_four_fold_degenerate_sites, gc4
+                Command line interfaces:
+                  bk_gc_content_four_fold_degenerate_sites, bk_gc4
+
+                Usage:
+                biokit gc_content_four_fold_degenerate_sites <fasta>
+                [-tt/--translation_table <code>] [-v/--verbose]
+
+                Options
+                =====================================================
+                <fasta>                     first argument after
+                                            function name should be
+                                            a fasta file
+
+                -tt/--translation_table     Code for the translation table
+                                            to be used. Default: 1, which
+                                            is the standard code.
+
+                -v, --verbose               optional argument to print
+                                            the GC content of each fasta
+                                            entry
+
+                {translation_table_codes}
+                """  # noqa
+            ),
+        )
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        parser.add_argument(
+            "-tt", "--translation_table", type=str, required=False, help=SUPPRESS
+        )
+        parser.add_argument(
+            "-v", "--verbose", action="store_true", required=False, help=SUPPRESS
+        )
+        args = parser.parse_args(argv)
+        _run_service(
+            "coding_sequences.gc_content_four_fold_degenerate_sites",
+            "GCContentFourFoldDegenerateSites",
+            args,
+        )
 
     @staticmethod
     def gene_wise_relative_synonymous_codon_usage(argv):
@@ -2535,6 +2596,10 @@ def gc_content_second_position(argv=None):
 
 def gc_content_third_position(argv=None):
     Biokit.gc_content_third_position(sys.argv[1:])
+
+
+def gc_content_four_fold_degenerate_sites(argv=None):
+    Biokit.gc_content_four_fold_degenerate_sites(sys.argv[1:])
 
 
 def gene_wise_relative_synonymous_codon_usage(argv=None):

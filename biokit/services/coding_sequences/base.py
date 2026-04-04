@@ -89,6 +89,44 @@ class CodingSequence(BaseService):
 
         return output_lines
 
+    @staticmethod
+    def get_four_fold_degenerate_prefixes(translation_table: dict[str, str]) -> set[str]:
+        from collections import defaultdict
+        prefix_to_aas: dict[str, set[str]] = defaultdict(set)
+        for codon, aa in translation_table.items():
+            prefix_to_aas[codon[:2]].add(aa)
+        return {prefix for prefix, aas in prefix_to_aas.items() if len(aas) == 1}
+
+    def gc_content_four_fold_degenerate(
+        self, translation_table: dict[str, str]
+    ) -> list[str]:
+        if self.fasta is None:
+            raise ValueError("fasta cannot be None")
+
+        four_fold_prefixes = self.get_four_fold_degenerate_prefixes(translation_table)
+
+        output_lines: list[str] = []
+        aggregated_chars: list[str] = []
+
+        for seq_id, seq in iter_fasta_entries(self.fasta):
+            seq_rna = seq.upper().replace("T", "U")
+            four_fold_chars: list[str] = []
+            for i in range(0, len(seq_rna) - 2, 3):
+                codon = seq_rna[i:i + 3]
+                if len(codon) == 3 and codon[:2] in four_fold_prefixes:
+                    four_fold_chars.append(seq[i + 2])
+
+            if self.verbose:
+                gc_content = self.calculate_gc_content("".join(four_fold_chars))
+                output_lines.append(f"{seq_id}\t{gc_content}")
+            else:
+                aggregated_chars.extend(four_fold_chars)
+
+        if not self.verbose:
+            output_lines.append(str(self.calculate_gc_content("".join(aggregated_chars))))
+
+        return output_lines
+
     def read_translation_table(self, translation_table: str | None) -> dict[str, str]:
         """
         return translation table with codons as keys and amino acids as values

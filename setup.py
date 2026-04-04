@@ -63,6 +63,8 @@ setup(
             "bk_gc2 = biokit.biokit:gc_content_second_position",
             "bk_gc_content_third_position = biokit.biokit:gc_content_third_position",
             "bk_gc3 = biokit.biokit:gc_content_third_position",
+            "bk_gc_content_four_fold_degenerate_sites = biokit.biokit:gc_content_four_fold_degenerate_sites",
+            "bk_gc4 = biokit.biokit:gc_content_four_fold_degenerate_sites",
             "bk_gene_wise_relative_synonymous_codon_usage = biokit.biokit:gene_wise_relative_synonymous_codon_usage",
             "bk_gene_wise_rscu = biokit.biokit:gene_wise_relative_synonymous_codon_usage",
             "bk_gw_rscu = biokit.biokit:gene_wise_relative_synonymous_codon_usage",
