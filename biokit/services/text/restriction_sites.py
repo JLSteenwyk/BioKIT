@@ -1,6 +1,6 @@
 from typing import Any
 
-from Bio.Restriction import RestrictionBatch, Analysis
+from Bio.Restriction import RestrictionBatch, Analysis  # type: ignore[attr-defined]
 from Bio.Seq import Seq
 
 from .base import Text
