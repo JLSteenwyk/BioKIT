@@ -257,6 +257,9 @@ class Biokit(object):
                 rename_fasta_entries (alias: rename_fasta)
                     - rename entries in a FASTA file
 
+                restriction_sites (alias: re_sites)
+                    - find restriction enzyme recognition sites in sequences
+
                 reorder_by_sequence_length (alias: reorder_by_seq_len)
                     - reorder sequences from longest to shortest in a FASTA file
 
@@ -344,6 +347,7 @@ class Biokit(object):
             "prot_charge": self.protein_charge,
             "remove_short_seqs": self.remove_short_sequences,
             "rename_fasta": self.rename_fasta_entries,
+            "re_sites": self.restriction_sites,
             "reorder_by_seq_len": self.reorder_by_sequence_length,
             "seq_comp": self.sequence_complement,
             "seq_len": self.sequence_length,
@@ -2395,6 +2399,50 @@ class Biokit(object):
         _run_service("text.rename_fasta_entries", "RenameFastaEntries", args)
 
     @staticmethod
+    def restriction_sites(argv):
+        parser = ArgumentParser(
+            **PARSER_KWARGS,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+                Find restriction enzyme recognition sites in sequences.
+
+                Specify one or more enzymes and get cut positions and
+                fragment sizes for each sequence in a FASTA file.
+
+                Output columns (tab-separated):
+                  seq_id  enzyme  num_sites  positions  fragment_sizes
+
+                Aliases:
+                  restriction_sites; re_sites
+                Command line interfaces:
+                  bk_restriction_sites; bk_re_sites
+
+                Usage:
+                biokit restriction_sites <fasta> -e/--enzymes <enzyme1,enzyme2,...>
+
+                Options
+                =====================================================
+                <fasta>                     first argument after
+                                            function name should be
+                                            a fasta file
+
+                -e/--enzymes                one or more restriction
+                                            enzyme names, comma-separated
+                                            or specified multiple times
+                                            (e.g., EcoRI,BamHI or
+                                            -e EcoRI -e BamHI)
+                """  # noqa
+            ),
+        )
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        parser.add_argument(
+            "-e", "--enzymes", type=str, action="append", required=True, help=SUPPRESS
+        )
+        args = parser.parse_args(argv)
+        _run_service("text.restriction_sites", "RestrictionSites", args)
+
+    @staticmethod
     def reorder_by_sequence_length(argv):
         parser = ArgumentParser(
             **PARSER_KWARGS,
@@ -2719,6 +2767,10 @@ def protein_charge(argv=None):
 
 def rename_fasta_entries(argv=None):
     Biokit.rename_fasta_entries(sys.argv[1:])
+
+
+def restriction_sites(argv=None):
+    Biokit.restriction_sites(sys.argv[1:])
 
 
 def reorder_by_sequence_length(argv=None):
