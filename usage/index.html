@@ -105,6 +105,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#multiple-line-to-single-line-fasta">Multiple line to single line FASTA</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#fasta-deduplication">FASTA deduplication</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#protein-charge">Protein charge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#restriction-sites">Restriction sites</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#remove-fasta-entry">Remove FASTA entry</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#remove-short-sequences">Remove short sequences</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rename-fasta-entries">Rename FASTA entries</a></li>
@@ -1090,6 +1091,26 @@ pH (default 7.0).</p>
 <em>&lt;fasta&gt;</em>: first argument after function name should be a protein fasta file <br/>
 <em>-p/--pH</em>: pH value at which to calculate charge. Default: 7.0 <br/>
 <em>-f/--format</em>: output format (tsv, json, yaml). Default: tsv</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="restriction-sites">
+<h3>Restriction sites<a class="headerlink" href="#restriction-sites" title="Link to this heading"></a></h3>
+<p>Function names: restriction_sites; re_sites <br/>
+Command line interface: bk_restriction_sites; bk_re_sites</p>
+<p>Find restriction enzyme recognition sites in sequences.
+Specify one or more enzymes and get cut positions and
+fragment sizes for each sequence in a FASTA file.</p>
+<p>Output columns (tab-separated):
+seq_id, enzyme, num_sites, positions, fragment_sizes.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>restriction_sites<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span>-e/--enzymes<span class="w"> </span>&lt;enzyme1,enzyme2,...&gt;
+</pre></div>
+</div>
+<p>Options: <br/>
+<em>&lt;fasta&gt;</em>: first argument after function name should be a fasta file <br/>
+<em>-e/--enzymes</em>: one or more restriction enzyme names, comma-separated
+or specified multiple times (e.g., <code class="docutils literal notranslate"><span class="pre">-e</span> <span class="pre">EcoRI,BamHI</span></code> or <code class="docutils literal notranslate"><span class="pre">-e</span> <span class="pre">EcoRI</span> <span class="pre">-e</span> <span class="pre">BamHI</span></code>)</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>

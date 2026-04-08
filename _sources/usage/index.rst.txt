@@ -1083,6 +1083,29 @@ Options: |br|
 
 |
 
+Restriction sites
+#################
+Function names: restriction_sites; re_sites |br|
+Command line interface: bk_restriction_sites; bk_re_sites
+
+Find restriction enzyme recognition sites in sequences.
+Specify one or more enzymes and get cut positions and
+fragment sizes for each sequence in a FASTA file.
+
+Output columns (tab-separated):
+seq_id, enzyme, num_sites, positions, fragment_sizes.
+
+.. code-block:: shell
+
+   biokit restriction_sites <fasta> -e/--enzymes <enzyme1,enzyme2,...>
+
+Options: |br|
+*<fasta>*: first argument after function name should be a fasta file |br|
+*-e/\-\-enzymes*: one or more restriction enzyme names, comma-separated
+or specified multiple times (e.g., ``-e EcoRI,BamHI`` or ``-e EcoRI -e BamHI``)
+
+|
+
 Remove FASTA entry
 ##################
 Function names: remove_fasta_entry |br|

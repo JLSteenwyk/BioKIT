@@ -35,6 +35,10 @@ contract tests.
 *1.1.5*: Updated dependency pinning to fix installation failures and moved supported
 Python versions to 3.11, 3.12, and 3.13 only.
 
+*1.1.9*: Added ``restriction_sites`` (alias: ``re_sites``) command to find restriction
+enzyme recognition sites in sequences. Reports cut positions and fragment sizes
+for one or more enzymes per sequence. Uses BioPython's Restriction module.
+
 *1.1.8*: Added ``gc_content_four_fold_degenerate_sites`` (alias: ``gc4``) command to
 calculate GC content at four-fold degenerate sites in coding sequences. Supports
 custom translation tables via ``-tt`` and per-sequence output via ``-v``.
