@@ -1106,6 +1106,32 @@ or specified multiple times (e.g., ``-e EcoRI,BamHI`` or ``-e EcoRI -e BamHI``)
 
 |
 
+Shuffle sequences
+#################
+Function names: shuffle_sequences; shuffle_seqs |br|
+Command line interface: bk_shuffle_sequences; bk_shuffle_seqs
+
+Randomly shuffle nucleotide or amino acid order within each
+sequence while preserving composition. Useful for generating
+null distributions in motif finding, structure prediction,
+and statistical tests.
+
+Output will have the suffix ".shuffled.fa" unless
+the user specifies a different output file name.
+
+.. code-block:: shell
+
+   biokit shuffle_sequences <fasta> [-o/--output <output_file>] [-s/--seed <seed>]
+
+Options: |br|
+*<fasta>*: first argument after function name should be a fasta file |br|
+*-o/\-\-output*: optional argument to write the shuffled fasta file to.
+Default output has the same name as the input file with the suffix ".shuffled.fa"
+added to it. |br|
+*-s/\-\-seed*: optional random seed for reproducible shuffling
+
+|
+
 Remove FASTA entry
 ##################
 Function names: remove_fasta_entry |br|

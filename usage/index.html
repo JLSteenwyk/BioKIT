@@ -106,6 +106,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#fasta-deduplication">FASTA deduplication</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#protein-charge">Protein charge</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#restriction-sites">Restriction sites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#shuffle-sequences">Shuffle sequences</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#remove-fasta-entry">Remove FASTA entry</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#remove-short-sequences">Remove short sequences</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rename-fasta-entries">Rename FASTA entries</a></li>
@@ -1111,6 +1112,29 @@ seq_id, enzyme, num_sites, positions, fragment_sizes.</p>
 <em>&lt;fasta&gt;</em>: first argument after function name should be a fasta file <br/>
 <em>-e/--enzymes</em>: one or more restriction enzyme names, comma-separated
 or specified multiple times (e.g., <code class="docutils literal notranslate"><span class="pre">-e</span> <span class="pre">EcoRI,BamHI</span></code> or <code class="docutils literal notranslate"><span class="pre">-e</span> <span class="pre">EcoRI</span> <span class="pre">-e</span> <span class="pre">BamHI</span></code>)</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="shuffle-sequences">
+<h3>Shuffle sequences<a class="headerlink" href="#shuffle-sequences" title="Link to this heading"></a></h3>
+<p>Function names: shuffle_sequences; shuffle_seqs <br/>
+Command line interface: bk_shuffle_sequences; bk_shuffle_seqs</p>
+<p>Randomly shuffle nucleotide or amino acid order within each
+sequence while preserving composition. Useful for generating
+null distributions in motif finding, structure prediction,
+and statistical tests.</p>
+<p>Output will have the suffix “.shuffled.fa” unless
+the user specifies a different output file name.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>shuffle_sequences<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-o/--output<span class="w"> </span>&lt;output_file&gt;<span class="o">]</span><span class="w"> </span><span class="o">[</span>-s/--seed<span class="w"> </span>&lt;seed&gt;<span class="o">]</span>
+</pre></div>
+</div>
+<p>Options: <br/>
+<em>&lt;fasta&gt;</em>: first argument after function name should be a fasta file <br/>
+<em>-o/--output</em>: optional argument to write the shuffled fasta file to.
+Default output has the same name as the input file with the suffix “.shuffled.fa”
+added to it. <br/>
+<em>-s/--seed</em>: optional random seed for reproducible shuffling</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>

@@ -100,6 +100,9 @@ expanded integration coverage with output format consistency and CLI output
 contract tests.</p>
 <p><em>1.1.5</em>: Updated dependency pinning to fix installation failures and moved supported
 Python versions to 3.11, 3.12, and 3.13 only.</p>
+<p><em>1.1.10</em>: Added <code class="docutils literal notranslate"><span class="pre">shuffle_sequences</span></code> (alias: <code class="docutils literal notranslate"><span class="pre">shuffle_seqs</span></code>) command to randomly
+shuffle nucleotide or amino acid order within each sequence while preserving
+composition. Supports reproducible shuffling via <code class="docutils literal notranslate"><span class="pre">-s/--seed</span></code>.</p>
 <p><em>1.1.9</em>: Added <code class="docutils literal notranslate"><span class="pre">restriction_sites</span></code> (alias: <code class="docutils literal notranslate"><span class="pre">re_sites</span></code>) command to find restriction
 enzyme recognition sites in sequences. Reports cut positions and fragment sizes
 for one or more enzymes per sequence. Uses BioPython’s Restriction module.</p>
