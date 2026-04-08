@@ -106,6 +106,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#fasta-deduplication">FASTA deduplication</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#protein-charge">Protein charge</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#restriction-sites">Restriction sites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#melting-temperature">Melting temperature</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#shuffle-sequences">Shuffle sequences</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#remove-fasta-entry">Remove FASTA entry</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#remove-short-sequences">Remove short sequences</a></li>
@@ -1112,6 +1113,25 @@ seq_id, enzyme, num_sites, positions, fragment_sizes.</p>
 <em>&lt;fasta&gt;</em>: first argument after function name should be a fasta file <br/>
 <em>-e/--enzymes</em>: one or more restriction enzyme names, comma-separated
 or specified multiple times (e.g., <code class="docutils literal notranslate"><span class="pre">-e</span> <span class="pre">EcoRI,BamHI</span></code> or <code class="docutils literal notranslate"><span class="pre">-e</span> <span class="pre">EcoRI</span> <span class="pre">-e</span> <span class="pre">BamHI</span></code>)</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="melting-temperature">
+<h3>Melting temperature<a class="headerlink" href="#melting-temperature" title="Link to this heading"></a></h3>
+<p>Function names: melting_temperature; tm <br/>
+Command line interface: bk_melting_temperature; bk_tm</p>
+<p>Calculate melting temperature (Tm) for nucleotide sequences
+using nearest-neighbor thermodynamics. Designed for short
+sequences such as primers and oligos.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>melting_temperature<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>--na<span class="w"> </span>&lt;mM&gt;<span class="o">]</span><span class="w"> </span><span class="o">[</span>--oligo_conc<span class="w"> </span>&lt;nM&gt;<span class="o">]</span><span class="w"> </span><span class="o">[</span>-f/--format<span class="w"> </span>&lt;tsv<span class="p">|</span>json<span class="p">|</span>yaml&gt;<span class="o">]</span>
+</pre></div>
+</div>
+<p>Options: <br/>
+<em>&lt;fasta&gt;</em>: first argument after function name should be a fasta file <br/>
+<em>--na</em>: monovalent cation (Na+) concentration in mM. Default: 50 <br/>
+<em>--oligo_conc</em>: oligo concentration in nM. Default: 250 <br/>
+<em>-f/--format</em>: output format (tsv, json, yaml). Default: tsv</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>

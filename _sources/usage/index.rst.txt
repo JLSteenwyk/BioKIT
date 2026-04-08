@@ -1106,6 +1106,27 @@ or specified multiple times (e.g., ``-e EcoRI,BamHI`` or ``-e EcoRI -e BamHI``)
 
 |
 
+Melting temperature
+###################
+Function names: melting_temperature; tm |br|
+Command line interface: bk_melting_temperature; bk_tm
+
+Calculate melting temperature (Tm) for nucleotide sequences
+using nearest-neighbor thermodynamics. Designed for short
+sequences such as primers and oligos.
+
+.. code-block:: shell
+
+   biokit melting_temperature <fasta> [--na <mM>] [--oligo_conc <nM>] [-f/--format <tsv|json|yaml>]
+
+Options: |br|
+*<fasta>*: first argument after function name should be a fasta file |br|
+*\-\-na*: monovalent cation (Na+) concentration in mM. Default: 50 |br|
+*\-\-oligo_conc*: oligo concentration in nM. Default: 250 |br|
+*-f/\-\-format*: output format (tsv, json, yaml). Default: tsv
+
+|
+
 Shuffle sequences
 #################
 Function names: shuffle_sequences; shuffle_seqs |br|
