@@ -260,6 +260,9 @@ class Biokit(object):
                 restriction_sites (alias: re_sites)
                     - find restriction enzyme recognition sites in sequences
 
+                shuffle_sequences (alias: shuffle_seqs)
+                    - randomly shuffle sequences while preserving composition
+
                 reorder_by_sequence_length (alias: reorder_by_seq_len)
                     - reorder sequences from longest to shortest in a FASTA file
 
@@ -348,6 +351,7 @@ class Biokit(object):
             "remove_short_seqs": self.remove_short_sequences,
             "rename_fasta": self.rename_fasta_entries,
             "re_sites": self.restriction_sites,
+            "shuffle_seqs": self.shuffle_sequences,
             "reorder_by_seq_len": self.reorder_by_sequence_length,
             "seq_comp": self.sequence_complement,
             "seq_len": self.sequence_length,
@@ -2443,6 +2447,54 @@ class Biokit(object):
         _run_service("text.restriction_sites", "RestrictionSites", args)
 
     @staticmethod
+    def shuffle_sequences(argv):
+        parser = ArgumentParser(
+            **PARSER_KWARGS,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+                Randomly shuffle nucleotide or amino acid order within
+                each sequence while preserving composition. Useful for
+                generating null distributions in motif finding, structure
+                prediction, and statistical tests.
+
+                Output will have the suffix ".shuffled.fa" unless
+                the user specifies a different output file name.
+
+                Aliases:
+                  shuffle_sequences; shuffle_seqs
+                Command line interfaces:
+                  bk_shuffle_sequences; bk_shuffle_seqs
+
+                Usage:
+                biokit shuffle_sequences <fasta> [-o/--output <output_file>]
+                [-s/--seed <seed>]
+
+                Options
+                =====================================================
+                <fasta>                     first argument after
+                                            function name should be
+                                            a fasta file
+
+                -o/--output                 optional argument to write
+                                            the shuffled fasta file
+                                            to. Default output has the
+                                            same name as the input file
+                                            with the suffix ".shuffled.fa"
+                                            added to it.
+
+                -s/--seed                   optional random seed for
+                                            reproducible shuffling
+                """  # noqa
+            ),
+        )
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        parser.add_argument("-o", "--output", type=str, help=SUPPRESS)
+        parser.add_argument("-s", "--seed", type=int, help=SUPPRESS)
+        args = parser.parse_args(argv)
+        _run_service("text.shuffle_sequences", "ShuffleSequences", args)
+
+    @staticmethod
     def reorder_by_sequence_length(argv):
         parser = ArgumentParser(
             **PARSER_KWARGS,
@@ -2771,6 +2823,10 @@ def rename_fasta_entries(argv=None):
 
 def restriction_sites(argv=None):
     Biokit.restriction_sites(sys.argv[1:])
+
+
+def shuffle_sequences(argv=None):
+    Biokit.shuffle_sequences(sys.argv[1:])
 
 
 def reorder_by_sequence_length(argv=None):

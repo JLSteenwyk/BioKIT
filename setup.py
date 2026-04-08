@@ -131,6 +131,8 @@ setup(
             "bk_rename_fasta = biokit.biokit:rename_fasta_entries",
             "bk_restriction_sites = biokit.biokit:restriction_sites",
             "bk_re_sites = biokit.biokit:restriction_sites",
+            "bk_shuffle_sequences = biokit.biokit:shuffle_sequences",
+            "bk_shuffle_seqs = biokit.biokit:shuffle_sequences",
             "bk_reorder_by_sequence_length = biokit.biokit:reorder_by_sequence_length",
             "bk_reorder_by_seq_len = biokit.biokit:reorder_by_sequence_length",
             "bk_sequence_complement = biokit.biokit:sequence_complement",

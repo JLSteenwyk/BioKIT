@@ -35,6 +35,10 @@ contract tests.
 *1.1.5*: Updated dependency pinning to fix installation failures and moved supported
 Python versions to 3.11, 3.12, and 3.13 only.
 
+*1.1.10*: Added ``shuffle_sequences`` (alias: ``shuffle_seqs``) command to randomly
+shuffle nucleotide or amino acid order within each sequence while preserving
+composition. Supports reproducible shuffling via ``-s/--seed``.
+
 *1.1.9*: Added ``restriction_sites`` (alias: ``re_sites``) command to find restriction
 enzyme recognition sites in sequences. Reports cut positions and fragment sizes
 for one or more enzymes per sequence. Uses BioPython's Restriction module.
