@@ -248,6 +248,9 @@ class Biokit(object):
                 fasta_deduplication (alias: dedup)
                     - remove duplicate sequences from a FASTA file
 
+                melting_temperature (alias: tm)
+                    - calculate melting temperature of nucleotide sequences
+
                 protein_charge (alias: prot_charge)
                     - calculate the net charge of protein sequences at a given pH
 
@@ -347,6 +350,7 @@ class Biokit(object):
             "ffc": self.file_format_converter,
             "ml2sl": self.multiple_line_to_single_line_fasta,
             "dedup": self.fasta_deduplication,
+            "tm": self.melting_temperature,
             "prot_charge": self.protein_charge,
             "remove_short_seqs": self.remove_short_sequences,
             "rename_fasta": self.rename_fasta_entries,
@@ -2304,6 +2308,61 @@ class Biokit(object):
         _run_service("text.fasta_deduplication", "FastaDeduplication", args)
 
     @staticmethod
+    def melting_temperature(argv):
+        parser = ArgumentParser(
+            **PARSER_KWARGS,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+                Calculate melting temperature (Tm) for nucleotide sequences
+                using nearest-neighbor thermodynamics.
+
+                Designed for short sequences such as primers and oligos.
+
+                Aliases:
+                  melting_temperature; tm
+                Command line interfaces:
+                  bk_melting_temperature; bk_tm
+
+                Usage:
+                biokit melting_temperature <fasta>
+                [--na <mM>] [--oligo_conc <nM>]
+                [-f/--format <tsv|json|yaml>]
+
+                Options
+                =====================================================
+                <fasta>                     first argument after
+                                            function name should be
+                                            a fasta file
+
+                --na                        monovalent cation (Na+)
+                                            concentration in mM.
+                                            Default: 50
+
+                --oligo_conc                oligo concentration in nM.
+                                            Default: 250
+
+                -f/--format                 output format
+                                            (tsv, json, yaml)
+                                            Default: tsv
+                """  # noqa
+            ),
+        )
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        parser.add_argument("--na", type=float, default=50.0, help=SUPPRESS)
+        parser.add_argument("--oligo_conc", type=float, default=250.0, help=SUPPRESS)
+        parser.add_argument(
+            "-f",
+            "--format",
+            type=str,
+            required=False,
+            choices=["tsv", "json", "yaml"],
+            help=SUPPRESS,
+        )
+        args = parser.parse_args(argv)
+        _run_service("text.melting_temperature", "MeltingTemperature", args)
+
+    @staticmethod
     def protein_charge(argv):
         parser = ArgumentParser(
             **PARSER_KWARGS,
@@ -2811,6 +2870,10 @@ def remove_short_sequences(argv=None):
 
 def fasta_deduplication(argv=None):
     Biokit.fasta_deduplication(sys.argv[1:])
+
+
+def melting_temperature(argv=None):
+    Biokit.melting_temperature(sys.argv[1:])
 
 
 def protein_charge(argv=None):

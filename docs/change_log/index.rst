@@ -35,6 +35,10 @@ contract tests.
 *1.1.5*: Updated dependency pinning to fix installation failures and moved supported
 Python versions to 3.11, 3.12, and 3.13 only.
 
+*1.1.11*: Added ``melting_temperature`` (alias: ``tm``) command to calculate melting
+temperature of nucleotide sequences using nearest-neighbor thermodynamics. Supports
+custom Na+ and oligo concentrations.
+
 *1.1.10*: Added ``shuffle_sequences`` (alias: ``shuffle_seqs``) command to randomly
 shuffle nucleotide or amino acid order within each sequence while preserving
 composition. Supports reproducible shuffling via ``-s/--seed``.
