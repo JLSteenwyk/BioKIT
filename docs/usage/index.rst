@@ -735,6 +735,27 @@ Genome functions
 
 ^^^^^
 
+Assembly curve
+##############
+Function names: assembly_curve; asm_curve |br|
+Command line interface: bk_assembly_curve; bk_asm_curve
+
+Output cumulative length vs. contig rank (sorted by descending length).
+Researchers plot this to visually compare assemblies.
+
+.. code-block:: shell
+
+   biokit assembly_curve <fasta> [-p/--plot] [-o/--output <file>]
+   [-f/--format <tsv|json|yaml>]
+
+Options: |br|
+*<fasta>*: first argument after function name should be a fasta file |br|
+*-p/\-\-plot*: optional flag to generate a PNG plot of the assembly curve |br|
+*-o/\-\-output*: output file path for the plot (default: assembly_curve.png) |br|
+*-f/\-\-format*: output format (tsv, json, yaml). Default: tsv
+
+|
+
 GC content
 ##########
 Function names: gc_content; gc |br|

@@ -35,6 +35,10 @@ contract tests.
 *1.1.5*: Updated dependency pinning to fix installation failures and moved supported
 Python versions to 3.11, 3.12, and 3.13 only.
 
+*1.1.12*: Added ``assembly_curve`` (alias: ``asm_curve``) command to output
+cumulative length vs. contig rank (sorted by descending length). Supports
+optional plotting via ``-p/--plot`` to generate a PNG assembly curve figure.
+
 *1.1.11*: Added ``melting_temperature`` (alias: ``tm``) command to calculate melting
 temperature of nucleotide sequences using nearest-neighbor thermodynamics. Supports
 custom Na+ and oligo concentrations.

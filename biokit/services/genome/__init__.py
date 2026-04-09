@@ -1,6 +1,7 @@
 import importlib
 
 __all__ = [
+    "AssemblyCurve",
     "GCContent",
     "GenomeAssemblyMetrics",
     "L50",
@@ -14,6 +15,7 @@ __all__ = [
 ]
 
 _LAZY_IMPORTS = {
+    "AssemblyCurve": ".assembly_curve",
     "GCContent": ".gc_content",
     "GenomeAssemblyMetrics": ".genome_assembly_metrics",
     "L50": ".l50",

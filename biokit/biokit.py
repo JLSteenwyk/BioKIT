@@ -194,6 +194,9 @@ class Biokit(object):
 
                 Commands for genomes
                 ====================
+                assembly_curve (alias: asm_curve)
+                    - output cumulative length vs. contig rank curve
+
                 gc_content (alias: gc)
                     - calculate the GC content of a FASTA file
 
@@ -332,6 +335,7 @@ class Biokit(object):
             "trim_se_adapters_fastq_reads": self.trim_se_adapters_fastq,
             "trim_se_fastq_reads": self.trim_se_fastq,
             "gc": self.gc_content,
+            "asm_curve": self.assembly_curve,
             "assembly_metrics": self.genome_assembly_metrics,
             "longest_scaff": self.longest_scaffold,
             "longest_contig": self.longest_scaffold,
@@ -1607,6 +1611,59 @@ class Biokit(object):
 
     # genome functions
     @staticmethod
+    def assembly_curve(argv):
+        parser = ArgumentParser(
+            **PARSER_KWARGS,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+
+                Output cumulative length vs. contig rank (sorted by
+                descending length). Researchers plot this to visually
+                compare assemblies.
+
+                Aliases:
+                  assembly_curve, asm_curve
+                Command line interfaces:
+                  bk_assembly_curve, bk_asm_curve
+
+                Usage:
+                biokit assembly_curve <fasta> [-p/--plot]
+                [-o/--output <file>] [-f/--format <tsv|json|yaml>]
+
+                Options
+                =====================================================
+                <fasta>                     first argument after
+                                            function name should be
+                                            a fasta file
+
+                -p, --plot                  optional flag to generate
+                                            a plot (saved as PNG)
+
+                -o, --output                output file path for the
+                                            plot (default: assembly_curve.png)
+
+                -f/--format                 output format
+                                            (tsv, json, yaml)
+                                            Default: tsv
+                """  # noqa
+            ),
+        )
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        parser.add_argument(
+            "-p", "--plot", action="store_true", required=False, help=SUPPRESS
+        )
+        parser.add_argument(
+            "-o", "--output", type=str, required=False, help=SUPPRESS
+        )
+        parser.add_argument(
+            "-f", "--format", type=str, required=False,
+            choices=["tsv", "json", "yaml"], help=SUPPRESS
+        )
+        args = parser.parse_args(argv)
+        _run_service("genome.assembly_curve", "AssemblyCurve", args)
+
+    @staticmethod
     def gc_content(argv):
         parser = ArgumentParser(
             **PARSER_KWARGS,
@@ -2803,6 +2860,10 @@ def trim_se_fastq(argv=None):
 
 
 # genome-based functions
+def assembly_curve(argv=None):
+    Biokit.assembly_curve(sys.argv[1:])
+
+
 def gc_content(argv=None):
     Biokit.gc_content(sys.argv[1:])
 

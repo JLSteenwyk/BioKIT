@@ -23,7 +23,7 @@ CLASSIFIERS = [
     "Topic :: Scientific/Engineering",
 ]
 
-REQUIRES = ["biopython>=1.82", "numpy>=1.24.0", "cython"]
+REQUIRES = ["biopython>=1.82", "matplotlib>=3.6.0", "numpy>=1.24.0", "cython"]
 
 setup(
     name="jlsteenwyk-biokit",
@@ -88,7 +88,9 @@ setup(
             "bk_trim_se_adapters_fastq_reads = biokit.biokit:trim_se_adapters_fastq",
             "bk_trim_se_fastq = biokit.biokit:trim_se_fastq",
             "bk_trim_se_fastq_reads = biokit.biokit:trim_se_fastq",
-            "bk_gc_content = biokit.biokit:gc_content",  # genomes-based functions
+            "bk_assembly_curve = biokit.biokit:assembly_curve",  # genomes-based functions
+            "bk_asm_curve = biokit.biokit:assembly_curve",
+            "bk_gc_content = biokit.biokit:gc_content",
             "bk_gc = biokit.biokit:gc_content",
             "bk_genome_assembly_metrics = biokit.biokit:genome_assembly_metrics",
             "bk_assembly_metrics = biokit.biokit:genome_assembly_metrics",
