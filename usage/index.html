@@ -86,6 +86,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#genome-functions">Genome functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#assembly-curve">Assembly curve</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gc-content">GC content</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#genome-assembly-metrics">Genome assembly metrics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#l50">L50</a></li>
@@ -795,6 +796,25 @@ with the output_file argument.</p>
 <section id="genome-functions">
 <h2>Genome functions<a class="headerlink" href="#genome-functions" title="Link to this heading"></a></h2>
 <hr class="docutils" />
+<section id="assembly-curve">
+<h3>Assembly curve<a class="headerlink" href="#assembly-curve" title="Link to this heading"></a></h3>
+<p>Function names: assembly_curve; asm_curve <br/>
+Command line interface: bk_assembly_curve; bk_asm_curve</p>
+<p>Output cumulative length vs. contig rank (sorted by descending length).
+Researchers plot this to visually compare assemblies.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>assembly_curve<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-p/--plot<span class="o">]</span><span class="w"> </span><span class="o">[</span>-o/--output<span class="w"> </span>&lt;file&gt;<span class="o">]</span>
+<span class="o">[</span>-f/--format<span class="w"> </span>&lt;tsv<span class="p">|</span>json<span class="p">|</span>yaml&gt;<span class="o">]</span>
+</pre></div>
+</div>
+<p>Options: <br/>
+<em>&lt;fasta&gt;</em>: first argument after function name should be a fasta file <br/>
+<em>-p/--plot</em>: optional flag to generate a PNG plot of the assembly curve <br/>
+<em>-o/--output</em>: output file path for the plot (default: assembly_curve.png) <br/>
+<em>-f/--format</em>: output format (tsv, json, yaml). Default: tsv</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
 <section id="gc-content">
 <h3>GC content<a class="headerlink" href="#gc-content" title="Link to this heading"></a></h3>
 <p>Function names: gc_content; gc <br/>
