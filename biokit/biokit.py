@@ -241,6 +241,10 @@ class Biokit(object):
                     - convert a multiple sequence file from one format
                       to another
 
+                genbank_to_fasta (alias: gb2fa)
+                    - extract sequences from GenBank flat files,
+                      optionally filtering by feature type
+
                 multiple_line_to_single_line_fasta (alias: ml2sl)
                     - reformats sequences that occur on multiple
                       lines to be represented in a single line
@@ -352,6 +356,7 @@ class Biokit(object):
             "ge": self.faidx,
             "format_converter": self.file_format_converter,
             "ffc": self.file_format_converter,
+            "gb2fa": self.genbank_to_fasta,
             "ml2sl": self.multiple_line_to_single_line_fasta,
             "dedup": self.fasta_deduplication,
             "tm": self.melting_temperature,
@@ -2191,6 +2196,63 @@ class Biokit(object):
         _run_service("text.file_format_converter", "FileFormatConverter", args)
 
     @staticmethod
+    def genbank_to_fasta(argv):
+        parser = ArgumentParser(
+            **PARSER_KWARGS,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+
+                Extract sequences from GenBank flat files and write
+                them as FASTA. Without a feature type, the entire
+                record sequence is written. With a feature type
+                (e.g., CDS, rRNA, tRNA, gene), each matching feature
+                is extracted as its own FASTA entry. Multiple feature
+                types can be specified as a comma-separated list.
+
+                Aliases:
+                  genbank_to_fasta, gb2fa
+                Command line interfaces:
+                  bk_genbank_to_fasta, bk_gb2fa
+
+                Usage:
+                biokit genbank_to_fasta <genbank> [-t/--feature_type <type>]
+                [--translate] [-o/--output <file>]
+
+                Options
+                =====================================================
+                <genbank>                   first argument after
+                                            function name should be
+                                            a GenBank flat file
+
+                -t, --feature_type          optional feature type filter
+                                            (e.g., CDS, rRNA, tRNA, gene).
+                                            Multiple types may be specified
+                                            as a comma-separated list.
+
+                --translate                 when extracting CDS features,
+                                            output the protein translation
+                                            instead of the nucleotide
+                                            sequence
+
+                -o, --output                output file path (default: stdout)
+                """  # noqa
+            ),
+        )
+        parser.add_argument("genbank", type=str, help=SUPPRESS)
+        parser.add_argument(
+            "-t", "--feature_type", type=str, required=False, help=SUPPRESS
+        )
+        parser.add_argument(
+            "--translate", action="store_true", required=False, help=SUPPRESS
+        )
+        parser.add_argument(
+            "-o", "--output", type=str, required=False, help=SUPPRESS
+        )
+        args = parser.parse_args(argv)
+        _run_service("text.genbank_to_fasta", "GenbankToFasta", args)
+
+    @staticmethod
     def multiple_line_to_single_line_fasta(argv):
         parser = ArgumentParser(
             **PARSER_KWARGS,
@@ -2915,6 +2977,10 @@ def faidx(argv=None):
 
 def file_format_converter(argv=None):
     Biokit.file_format_converter(sys.argv[1:])
+
+
+def genbank_to_fasta(argv=None):
+    Biokit.genbank_to_fasta(sys.argv[1:])
 
 
 def multiple_line_to_single_line_fasta(argv=None):

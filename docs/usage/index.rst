@@ -1038,6 +1038,32 @@ Options: |br|
 
 |
 
+GenBank to FASTA
+################
+Function names: genbank_to_fasta; gb2fa |br|
+Command line interface: bk_genbank_to_fasta; bk_gb2fa
+
+Extract sequences from GenBank flat files and write them as FASTA.
+
+Without a feature type, the entire record sequence is written.
+With a feature type (e.g., CDS, rRNA, tRNA, gene), each matching
+feature is extracted as its own FASTA entry. Multiple feature types
+can be specified as a comma-separated list. For CDS features, the
+``--translate`` option outputs the protein translation instead of
+the nucleotide sequence.
+
+.. code-block:: shell
+
+   biokit genbank_to_fasta <genbank> [-t/--feature_type <type>] [--translate] [-o/--output <file>]
+
+Options: |br|
+*<genbank>*: first argument after function name should be a GenBank flat file |br|
+*-t/\-\-feature_type*: optional feature type filter (e.g., CDS, rRNA, tRNA, gene); comma-separated for multiple |br|
+*\-\-translate*: for CDS features, output protein translation instead of nucleotide |br|
+*-o/\-\-output*: output file path (default: stdout)
+
+|
+
 Multiple line to single line FASTA
 ##################################
 Function names: multiple_line_to_single_line_fasta; ml2sl |br|

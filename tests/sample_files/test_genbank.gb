@@ -1,0 +1,29 @@
+LOCUS       TEST001                   90 bp    DNA     linear   UNK 01-JAN-2024
+DEFINITION  Test record for biokit genbank_to_fasta.
+ACCESSION   TEST001
+VERSION     TEST001.1
+KEYWORDS    .
+SOURCE      synthetic construct
+  ORGANISM  synthetic construct
+            unclassified sequences; artificial sequences.
+FEATURES             Location/Qualifiers
+     source          1..90
+                     /organism="synthetic construct"
+                     /mol_type="genomic DNA"
+     CDS             1..30
+                     /locus_tag="TEST001_01"
+                     /gene="geneA"
+                     /product="protein A"
+                     /translation="MKIL*"
+     CDS             31..60
+                     /locus_tag="TEST001_02"
+                     /gene="geneB"
+                     /product="protein B"
+                     /translation="MARN*"
+     rRNA            61..90
+                     /locus_tag="TEST001_rrna_01"
+                     /product="16S ribosomal RNA"
+ORIGIN
+        1 atgaaaattt tataggcgca ttgagcgcct atggctcgca actaacgatg ggcgttaagg
+       61 ccataaaatt ggcattttaa gcctgcacac
+//
