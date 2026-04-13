@@ -172,6 +172,9 @@ class Biokit(object):
                 fastq_read_lengths (alias: fastq_read_lens)
                     - determine the lengths of fastq reads
 
+                fastq_to_fasta (alias: fq2fa)
+                    - convert FASTQ to FASTA, stripping quality scores
+
                 subset_pe_fastq_reads (alias: subset_pe_fastq)
                     - subset paired-end fastq reads and
                       maintain pairing information
@@ -332,6 +335,7 @@ class Biokit(object):
             "translate_seq": self.translate_sequence,
             "trans_seq": self.translate_sequence,
             "fastq_read_lens": self.fastq_read_lengths,
+            "fq2fa": self.fastq_to_fasta,
             "subset_pe_fastq": self.subset_pe_fastq_reads,
             "subset_se_fastq": self.subset_se_fastq_reads,
             "trim_pe_adapters_fastq_reads": self.trim_pe_adapters_fastq,
@@ -1247,6 +1251,46 @@ class Biokit(object):
         )
         args = parser.parse_args(argv)
         _run_service("fastq.fastq_read_lengths", "FastQReadLengths", args)
+
+    @staticmethod
+    def fastq_to_fasta(argv):
+        parser = ArgumentParser(
+            **PARSER_KWARGS,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+
+                Convert a FASTQ file to FASTA by stripping quality scores.
+
+                Pass "-" as the input to read from stdin. By default
+                the FASTA output is written to stdout; use -o/--output
+                to write to a file instead.
+
+                Aliases:
+                  fastq_to_fasta, fq2fa
+                Command line interfaces:
+                  bk_fastq_to_fasta, bk_fq2fa
+
+                Usage:
+                biokit fastq_to_fasta <fastq> [-o/--output <file>]
+
+                Options
+                =====================================================
+                <fastq>                     first argument after
+                                            function name should be
+                                            a fastq file (or "-" for stdin)
+
+                -o, --output                output file path
+                                            (default: stdout)
+                """  # noqa
+            ),
+        )
+        parser.add_argument("fastq", type=str, help=SUPPRESS)
+        parser.add_argument(
+            "-o", "--output", type=str, required=False, help=SUPPRESS
+        )
+        args = parser.parse_args(argv)
+        _run_service("fastq.fastq_to_fasta", "FastQToFasta", args)
 
     @staticmethod
     def subset_pe_fastq_reads(argv):
@@ -2895,6 +2939,10 @@ def translate_sequence(argv=None):
 # FASTQ-based functions
 def fastq_read_lengths(argv=None):
     Biokit.fastq_read_lengths(sys.argv[1:])
+
+
+def fastq_to_fasta(argv=None):
+    Biokit.fastq_to_fasta(sys.argv[1:])
 
 
 def subset_pe_fastq_reads(argv=None):

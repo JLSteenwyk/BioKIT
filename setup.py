@@ -76,6 +76,8 @@ setup(
             "bk_trans_seq = biokit.biokit:translate_sequence",
             "bk_fastq_read_lengths = biokit.biokit:fastq_read_lengths",  # FASTQ-based functions
             "bk_fastq_read_lens = biokit.biokit:fastq_read_lengths",
+            "bk_fastq_to_fasta = biokit.biokit:fastq_to_fasta",
+            "bk_fq2fa = biokit.biokit:fastq_to_fasta",
             "bk_subset_pe_fastq_reads = biokit.biokit:subset_pe_fastq_reads",
             "bk_subset_pe_fastq = biokit.biokit:subset_pe_fastq_reads",
             "bk_subset_se_fastq_reads = biokit.biokit:subset_se_fastq_reads",

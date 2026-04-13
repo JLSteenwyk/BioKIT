@@ -2,6 +2,7 @@ import importlib
 
 __all__ = [
     "FastQReadLengths",
+    "FastQToFasta",
     "SubsetPEFastQReads",
     "SubsetSEFastQReads",
     "TrimPEAdaptersFastQ",
@@ -12,6 +13,7 @@ __all__ = [
 
 _LAZY_IMPORTS = {
     "FastQReadLengths": ".fastq_read_lengths",
+    "FastQToFasta": ".fastq_to_fasta",
     "SubsetPEFastQReads": ".subset_pe_fastq_reads",
     "SubsetSEFastQReads": ".subset_se_fastq_reads",
     "TrimPEAdaptersFastQ": ".trim_pe_adapters_fastq",

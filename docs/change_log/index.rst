@@ -35,6 +35,10 @@ contract tests.
 *1.1.5*: Updated dependency pinning to fix installation failures and moved supported
 Python versions to 3.11, 3.12, and 3.13 only.
 
+*1.1.14*: Added ``fastq_to_fasta`` (alias: ``fq2fa``) command to convert
+FASTQ files to FASTA by stripping quality scores. Supports stdin input
+via ``-`` and optional output file via ``-o/--output``.
+
 *1.1.13*: Added ``genbank_to_fasta`` (alias: ``gb2fa``) command to extract
 sequences from GenBank flat files. Optionally filters by feature type
 (e.g., CDS, rRNA, tRNA, gene) via ``-t/--feature_type`` and can output
