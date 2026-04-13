@@ -100,6 +100,9 @@ expanded integration coverage with output format consistency and CLI output
 contract tests.</p>
 <p><em>1.1.5</em>: Updated dependency pinning to fix installation failures and moved supported
 Python versions to 3.11, 3.12, and 3.13 only.</p>
+<p><em>1.1.14</em>: Added <code class="docutils literal notranslate"><span class="pre">fastq_to_fasta</span></code> (alias: <code class="docutils literal notranslate"><span class="pre">fq2fa</span></code>) command to convert
+FASTQ files to FASTA by stripping quality scores. Supports stdin input
+via <code class="docutils literal notranslate"><span class="pre">-</span></code> and optional output file via <code class="docutils literal notranslate"><span class="pre">-o/--output</span></code>.</p>
 <p><em>1.1.13</em>: Added <code class="docutils literal notranslate"><span class="pre">genbank_to_fasta</span></code> (alias: <code class="docutils literal notranslate"><span class="pre">gb2fa</span></code>) command to extract
 sequences from GenBank flat files. Optionally filters by feature type
 (e.g., CDS, rRNA, tRNA, gene) via <code class="docutils literal notranslate"><span class="pre">-t/--feature_type</span></code> and can output

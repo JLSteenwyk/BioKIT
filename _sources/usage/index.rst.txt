@@ -543,6 +543,27 @@ Options: |br|
 
 |
 
+FASTQ to FASTA
+##############
+Function names: fastq_to_fasta; fq2fa |br|
+Command line interface: bk_fastq_to_fasta; bk_fq2fa
+
+Convert a FASTQ file to FASTA by stripping quality scores.
+
+Pass ``-`` as the input to read from stdin. By default the FASTA
+output is written to stdout; use ``-o/--output`` to write to a file
+instead.
+
+.. code-block:: shell
+
+   biokit fastq_to_fasta <fastq> [-o/--output <file>]
+
+Options: |br|
+*<fastq>*: first argument after function name should be a FASTQ file (or ``-`` for stdin) |br|
+*-o/\-\-output*: output file path (default: stdout)
+
+|
+
 Subset PE FASTQ reads
 #####################
 Function names: subset_pe_fastq_reads; subset_pe_fastq |br|

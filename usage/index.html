@@ -77,6 +77,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#fastq-file-functions">FASTQ file functions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#fastq-read-lengths">FASTQ read lengths</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fastq-to-fasta">FASTQ to FASTA</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#subset-pe-fastq-reads">Subset PE FASTQ reads</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#subset-se-fastq-reads">Subset SE FASTQ reads</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#trim-pe-adapters-fastq-reads">Trim PE adapters FASTQ reads</a></li>
@@ -626,6 +627,24 @@ verbose option.</p>
 <em>&lt;fastq&gt;</em>: first argument after function name should be a FASTQ file <br/>
 <em>-v/--verbose</em>: print length of each FASTQ read <br/>
 <em>-f/--format</em>: output format (tsv, json, yaml). Default: tsv</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="fastq-to-fasta">
+<h3>FASTQ to FASTA<a class="headerlink" href="#fastq-to-fasta" title="Link to this heading"></a></h3>
+<p>Function names: fastq_to_fasta; fq2fa <br/>
+Command line interface: bk_fastq_to_fasta; bk_fq2fa</p>
+<p>Convert a FASTQ file to FASTA by stripping quality scores.</p>
+<p>Pass <code class="docutils literal notranslate"><span class="pre">-</span></code> as the input to read from stdin. By default the FASTA
+output is written to stdout; use <code class="docutils literal notranslate"><span class="pre">-o/--output</span></code> to write to a file
+instead.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>fastq_to_fasta<span class="w"> </span>&lt;fastq&gt;<span class="w"> </span><span class="o">[</span>-o/--output<span class="w"> </span>&lt;file&gt;<span class="o">]</span>
+</pre></div>
+</div>
+<p>Options: <br/>
+<em>&lt;fastq&gt;</em>: first argument after function name should be a FASTQ file (or <code class="docutils literal notranslate"><span class="pre">-</span></code> for stdin) <br/>
+<em>-o/--output</em>: output file path (default: stdout)</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
