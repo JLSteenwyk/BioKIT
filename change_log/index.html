@@ -100,6 +100,11 @@ expanded integration coverage with output format consistency and CLI output
 contract tests.</p>
 <p><em>1.1.5</em>: Updated dependency pinning to fix installation failures and moved supported
 Python versions to 3.11, 3.12, and 3.13 only.</p>
+<p><em>1.1.15</em>: Added <code class="docutils literal notranslate"><span class="pre">homopolymer_runs</span></code> (alias: <code class="docutils literal notranslate"><span class="pre">homopolymer</span></code>) command to
+find the longest homopolymer run per sequence in a FASTA file. Reports
+length, base, and 1-based start position. Relevant for nanopore/PacBio
+QC where homopolymer errors are the dominant error mode. Use
+<code class="docutils literal notranslate"><span class="pre">--per-base</span></code> to report the longest run for each of A, C, G, T.</p>
 <p><em>1.1.14</em>: Added <code class="docutils literal notranslate"><span class="pre">fastq_to_fasta</span></code> (alias: <code class="docutils literal notranslate"><span class="pre">fq2fa</span></code>) command to convert
 FASTQ files to FASTA by stripping quality scores. Supports stdin input
 via <code class="docutils literal notranslate"><span class="pre">-</span></code> and optional output file via <code class="docutils literal notranslate"><span class="pre">-o/--output</span></code>.</p>

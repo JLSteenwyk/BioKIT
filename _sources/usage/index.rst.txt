@@ -1085,6 +1085,30 @@ Options: |br|
 
 |
 
+Homopolymer runs
+################
+Function names: homopolymer_runs; homopolymer |br|
+Command line interface: bk_homopolymer_runs; bk_homopolymer
+
+Find the longest homopolymer run per sequence in a FASTA file.
+
+Relevant for nanopore/PacBio QC where homopolymer errors are
+the dominant error mode. Default output reports one row per
+sequence with the longest run length, base, and 1-based start
+position. With ``--per-base``, reports the longest run length
+for each of A, C, G, T per sequence.
+
+.. code-block:: shell
+
+   biokit homopolymer_runs <fasta> [--per-base] [-f/--format <tsv|json|yaml>]
+
+Options: |br|
+*<fasta>*: first argument after function name should be a fasta file |br|
+*\-\-per-base*: report the longest run for each of A, C, G, T per sequence |br|
+*-f/\-\-format*: output format (tsv, json, yaml). Default: tsv
+
+|
+
 Multiple line to single line FASTA
 ##################################
 Function names: multiple_line_to_single_line_fasta; ml2sl |br|

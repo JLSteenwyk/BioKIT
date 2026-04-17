@@ -35,6 +35,12 @@ contract tests.
 *1.1.5*: Updated dependency pinning to fix installation failures and moved supported
 Python versions to 3.11, 3.12, and 3.13 only.
 
+*1.1.15*: Added ``homopolymer_runs`` (alias: ``homopolymer``) command to
+find the longest homopolymer run per sequence in a FASTA file. Reports
+length, base, and 1-based start position. Relevant for nanopore/PacBio
+QC where homopolymer errors are the dominant error mode. Use
+``--per-base`` to report the longest run for each of A, C, G, T.
+
 *1.1.14*: Added ``fastq_to_fasta`` (alias: ``fq2fa``) command to convert
 FASTQ files to FASTA by stripping quality scores. Supports stdin input
 via ``-`` and optional output file via ``-o/--output``.
