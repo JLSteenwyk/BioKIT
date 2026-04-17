@@ -248,6 +248,9 @@ class Biokit(object):
                     - extract sequences from GenBank flat files,
                       optionally filtering by feature type
 
+                homopolymer_runs (alias: homopolymer)
+                    - find the longest homopolymer run per sequence
+
                 multiple_line_to_single_line_fasta (alias: ml2sl)
                     - reformats sequences that occur on multiple
                       lines to be represented in a single line
@@ -361,6 +364,7 @@ class Biokit(object):
             "format_converter": self.file_format_converter,
             "ffc": self.file_format_converter,
             "gb2fa": self.genbank_to_fasta,
+            "homopolymer": self.homopolymer_runs,
             "ml2sl": self.multiple_line_to_single_line_fasta,
             "dedup": self.fasta_deduplication,
             "tm": self.melting_temperature,
@@ -2297,6 +2301,61 @@ class Biokit(object):
         _run_service("text.genbank_to_fasta", "GenbankToFasta", args)
 
     @staticmethod
+    def homopolymer_runs(argv):
+        parser = ArgumentParser(
+            **PARSER_KWARGS,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+
+                Find the longest homopolymer run per sequence in a
+                FASTA file. Relevant for nanopore/PacBio QC where
+                homopolymer errors are the dominant error mode.
+
+                Default output reports one row per sequence with the
+                longest run length, base, and 1-based start position.
+                With --per-base, reports the longest run length for
+                each of A, C, G, T per sequence.
+
+                Aliases:
+                  homopolymer_runs, homopolymer
+                Command line interfaces:
+                  bk_homopolymer_runs, bk_homopolymer
+
+                Usage:
+                biokit homopolymer_runs <fasta> [--per-base]
+                [-f/--format <tsv|json|yaml>]
+
+                Options
+                =====================================================
+                <fasta>                     first argument after
+                                            function name should be
+                                            a fasta file
+
+                --per-base                  report the longest run for
+                                            each of A, C, G, T per
+                                            sequence instead of the
+                                            single longest overall
+
+                -f/--format                 output format
+                                            (tsv, json, yaml)
+                                            Default: tsv
+                """  # noqa
+            ),
+        )
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        parser.add_argument(
+            "--per-base", dest="per_base", action="store_true",
+            required=False, help=SUPPRESS,
+        )
+        parser.add_argument(
+            "-f", "--format", type=str, required=False,
+            choices=["tsv", "json", "yaml"], help=SUPPRESS,
+        )
+        args = parser.parse_args(argv)
+        _run_service("text.homopolymer_runs", "HomopolymerRuns", args)
+
+    @staticmethod
     def multiple_line_to_single_line_fasta(argv):
         parser = ArgumentParser(
             **PARSER_KWARGS,
@@ -3029,6 +3088,10 @@ def file_format_converter(argv=None):
 
 def genbank_to_fasta(argv=None):
     Biokit.genbank_to_fasta(sys.argv[1:])
+
+
+def homopolymer_runs(argv=None):
+    Biokit.homopolymer_runs(sys.argv[1:])
 
 
 def multiple_line_to_single_line_fasta(argv=None):
