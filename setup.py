@@ -126,6 +126,8 @@ setup(
             "bk_gb2fa = biokit.biokit:genbank_to_fasta",
             "bk_homopolymer_runs = biokit.biokit:homopolymer_runs",
             "bk_homopolymer = biokit.biokit:homopolymer_runs",
+            "bk_kmer_frequency = biokit.biokit:kmer_frequency",
+            "bk_kmer_freq = biokit.biokit:kmer_frequency",
             "bk_multiple_line_to_single_line_fasta = biokit.biokit:multiple_line_to_single_line_fasta",
             "bk_ml2sl = biokit.biokit:multiple_line_to_single_line_fasta",
             "bk_remove_short_sequences = biokit.biokit:remove_short_sequences",

@@ -251,6 +251,9 @@ class Biokit(object):
                 homopolymer_runs (alias: homopolymer)
                     - find the longest homopolymer run per sequence
 
+                kmer_frequency (alias: kmer_freq)
+                    - count all k-mers of a given size in sequences
+
                 multiple_line_to_single_line_fasta (alias: ml2sl)
                     - reformats sequences that occur on multiple
                       lines to be represented in a single line
@@ -365,6 +368,7 @@ class Biokit(object):
             "ffc": self.file_format_converter,
             "gb2fa": self.genbank_to_fasta,
             "homopolymer": self.homopolymer_runs,
+            "kmer_freq": self.kmer_frequency,
             "ml2sl": self.multiple_line_to_single_line_fasta,
             "dedup": self.fasta_deduplication,
             "tm": self.melting_temperature,
@@ -2356,6 +2360,74 @@ class Biokit(object):
         _run_service("text.homopolymer_runs", "HomopolymerRuns", args)
 
     @staticmethod
+    def kmer_frequency(argv):
+        parser = ArgumentParser(
+            **PARSER_KWARGS,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+
+                Count all k-mers of a given size in sequences.
+
+                Broadly useful for genomic signatures, metagenomics
+                binning prep, and alignment-free sequence comparison.
+                The k-mer spectrum is a fingerprint of a genome.
+
+                By default, counts are aggregated across all sequences
+                in the FASTA file. Use -v/--verbose to report per-
+                sequence counts. K-mers containing non-ACGT characters
+                (e.g., N) are skipped. With --canonical, each k-mer
+                and its reverse complement are collapsed into the
+                lexicographically smaller one.
+
+                Aliases:
+                  kmer_frequency, kmer_freq
+                Command line interfaces:
+                  bk_kmer_frequency, bk_kmer_freq
+
+                Usage:
+                biokit kmer_frequency <fasta> -k/--kmer_size <int>
+                [--canonical] [-v/--verbose] [-f/--format <tsv|json|yaml>]
+
+                Options
+                =====================================================
+                <fasta>                     first argument after
+                                            function name should be
+                                            a fasta file
+
+                -k, --kmer_size             k-mer length (required)
+
+                --canonical                 collapse each k-mer with
+                                            its reverse complement
+
+                -v, --verbose               report per-sequence k-mer
+                                            counts instead of the
+                                            aggregated total
+
+                -f/--format                 output format
+                                            (tsv, json, yaml)
+                                            Default: tsv
+                """  # noqa
+            ),
+        )
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        parser.add_argument(
+            "-k", "--kmer_size", type=int, required=True, help=SUPPRESS
+        )
+        parser.add_argument(
+            "--canonical", action="store_true", required=False, help=SUPPRESS
+        )
+        parser.add_argument(
+            "-v", "--verbose", action="store_true", required=False, help=SUPPRESS
+        )
+        parser.add_argument(
+            "-f", "--format", type=str, required=False,
+            choices=["tsv", "json", "yaml"], help=SUPPRESS,
+        )
+        args = parser.parse_args(argv)
+        _run_service("text.kmer_frequency", "KmerFrequency", args)
+
+    @staticmethod
     def multiple_line_to_single_line_fasta(argv):
         parser = ArgumentParser(
             **PARSER_KWARGS,
@@ -3092,6 +3164,10 @@ def genbank_to_fasta(argv=None):
 
 def homopolymer_runs(argv=None):
     Biokit.homopolymer_runs(sys.argv[1:])
+
+
+def kmer_frequency(argv=None):
+    Biokit.kmer_frequency(sys.argv[1:])
 
 
 def multiple_line_to_single_line_fasta(argv=None):

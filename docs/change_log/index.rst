@@ -35,6 +35,13 @@ contract tests.
 *1.1.5*: Updated dependency pinning to fix installation failures and moved supported
 Python versions to 3.11, 3.12, and 3.13 only.
 
+*1.1.16*: Added ``kmer_frequency`` (alias: ``kmer_freq``) command to count
+all k-mers of a given size in sequences. Useful for genomic signatures,
+metagenomics binning prep, and alignment-free sequence comparison.
+Supports ``--canonical`` to collapse each k-mer with its reverse complement
+and ``-v/--verbose`` for per-sequence counts. K-mers containing non-ACGT
+characters are skipped.
+
 *1.1.15*: Added ``homopolymer_runs`` (alias: ``homopolymer``) command to
 find the longest homopolymer run per sequence in a FASTA file. Reports
 length, base, and 1-based start position. Relevant for nanopore/PacBio

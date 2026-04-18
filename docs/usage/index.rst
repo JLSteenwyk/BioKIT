@@ -1085,6 +1085,34 @@ Options: |br|
 
 |
 
+K-mer frequency
+###############
+Function names: kmer_frequency; kmer_freq |br|
+Command line interface: bk_kmer_frequency; bk_kmer_freq
+
+Count all k-mers of a given size in sequences.
+
+Broadly useful for genomic signatures, metagenomics binning prep,
+and alignment-free sequence comparison. By default, counts are
+aggregated across all sequences in the FASTA file. Use
+``-v/--verbose`` to report per-sequence counts. K-mers containing
+non-ACGT characters (e.g., N) are skipped. With ``--canonical``,
+each k-mer and its reverse complement are collapsed into the
+lexicographically smaller one.
+
+.. code-block:: shell
+
+   biokit kmer_frequency <fasta> -k/--kmer_size <int> [--canonical] [-v/--verbose] [-f/--format <tsv|json|yaml>]
+
+Options: |br|
+*<fasta>*: first argument after function name should be a fasta file |br|
+*-k/\-\-kmer_size*: k-mer length (required) |br|
+*\-\-canonical*: collapse each k-mer with its reverse complement |br|
+*-v/\-\-verbose*: report per-sequence k-mer counts |br|
+*-f/\-\-format*: output format (tsv, json, yaml). Default: tsv
+
+|
+
 Homopolymer runs
 ################
 Function names: homopolymer_runs; homopolymer |br|
