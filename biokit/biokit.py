@@ -254,6 +254,9 @@ class Biokit(object):
                 kmer_frequency (alias: kmer_freq)
                     - count all k-mers of a given size in sequences
 
+                find_orfs (alias: orfs)
+                    - identify open reading frames across all 6 frames
+
                 multiple_line_to_single_line_fasta (alias: ml2sl)
                     - reformats sequences that occur on multiple
                       lines to be represented in a single line
@@ -369,6 +372,7 @@ class Biokit(object):
             "gb2fa": self.genbank_to_fasta,
             "homopolymer": self.homopolymer_runs,
             "kmer_freq": self.kmer_frequency,
+            "orfs": self.find_orfs,
             "ml2sl": self.multiple_line_to_single_line_fasta,
             "dedup": self.fasta_deduplication,
             "tm": self.melting_temperature,
@@ -2428,6 +2432,85 @@ class Biokit(object):
         _run_service("text.kmer_frequency", "KmerFrequency", args)
 
     @staticmethod
+    def find_orfs(argv):
+        parser = ArgumentParser(
+            **PARSER_KWARGS,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+
+                Identify all open reading frames (ORFs) above a
+                minimum length in nucleotide sequences, searching all
+                6 reading frames (3 forward, 3 reverse). Reports one
+                row per ORF with coordinates and lengths. With
+                --extract, outputs ORF sequences as FASTA instead.
+
+                An ORF is defined as a run from an ATG start codon
+                to the next in-frame stop codon (or end of sequence
+                if no stop is found). Positions are 1-based and
+                inclusive; coordinates on the reverse strand are
+                reported in the original (forward-strand) coordinate
+                system. length_aa excludes the stop codon.
+
+                Aliases:
+                  find_orfs, orfs
+                Command line interfaces:
+                  bk_find_orfs, bk_orfs
+
+                Usage:
+                biokit find_orfs <fasta> [-m/--min_length <int>]
+                [-tt/--translation_table <int>]
+                [--extract] [--protein]
+                [-f/--format <tsv|json|yaml>]
+
+                Options
+                =====================================================
+                <fasta>                     first argument after
+                                            function name should be
+                                            a fasta file
+
+                -m, --min_length            minimum ORF length in
+                                            amino acids (default: 100)
+
+                -tt, --translation_table    NCBI genetic code table
+                                            number (default: 1)
+
+                --extract                   output ORF sequences as
+                                            FASTA instead of a report
+
+                --protein                   when combined with
+                                            --extract, output protein
+                                            translations instead of
+                                            nucleotide sequences
+
+                -f/--format                 output format
+                                            (tsv, json, yaml)
+                                            Default: tsv
+                """  # noqa
+            ),
+        )
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        parser.add_argument(
+            "-m", "--min_length", type=int, default=100, required=False, help=SUPPRESS
+        )
+        parser.add_argument(
+            "-tt", "--translation_table", type=int, default=1,
+            required=False, help=SUPPRESS,
+        )
+        parser.add_argument(
+            "--extract", action="store_true", required=False, help=SUPPRESS
+        )
+        parser.add_argument(
+            "--protein", action="store_true", required=False, help=SUPPRESS
+        )
+        parser.add_argument(
+            "-f", "--format", type=str, required=False,
+            choices=["tsv", "json", "yaml"], help=SUPPRESS,
+        )
+        args = parser.parse_args(argv)
+        _run_service("text.find_orfs", "FindOrfs", args)
+
+    @staticmethod
     def multiple_line_to_single_line_fasta(argv):
         parser = ArgumentParser(
             **PARSER_KWARGS,
@@ -3168,6 +3251,10 @@ def homopolymer_runs(argv=None):
 
 def kmer_frequency(argv=None):
     Biokit.kmer_frequency(sys.argv[1:])
+
+
+def find_orfs(argv=None):
+    Biokit.find_orfs(sys.argv[1:])
 
 
 def multiple_line_to_single_line_fasta(argv=None):

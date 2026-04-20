@@ -128,6 +128,8 @@ setup(
             "bk_homopolymer = biokit.biokit:homopolymer_runs",
             "bk_kmer_frequency = biokit.biokit:kmer_frequency",
             "bk_kmer_freq = biokit.biokit:kmer_frequency",
+            "bk_find_orfs = biokit.biokit:find_orfs",
+            "bk_orfs = biokit.biokit:find_orfs",
             "bk_multiple_line_to_single_line_fasta = biokit.biokit:multiple_line_to_single_line_fasta",
             "bk_ml2sl = biokit.biokit:multiple_line_to_single_line_fasta",
             "bk_remove_short_sequences = biokit.biokit:remove_short_sequences",
