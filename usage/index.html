@@ -106,6 +106,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#file-format-converter">File format converter</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#genbank-to-fasta">GenBank to FASTA</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#k-mer-frequency">K-mer frequency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#find-orfs">Find ORFs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#homopolymer-runs">Homopolymer runs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#multiple-line-to-single-line-fasta">Multiple line to single line FASTA</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#fasta-deduplication">FASTA deduplication</a></li>
@@ -1125,6 +1126,35 @@ lexicographically smaller one.</p>
 <em>-k/--kmer_size</em>: k-mer length (required) <br/>
 <em>--canonical</em>: collapse each k-mer with its reverse complement <br/>
 <em>-v/--verbose</em>: report per-sequence k-mer counts <br/>
+<em>-f/--format</em>: output format (tsv, json, yaml). Default: tsv</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="find-orfs">
+<h3>Find ORFs<a class="headerlink" href="#find-orfs" title="Link to this heading"></a></h3>
+<p>Function names: find_orfs; orfs <br/>
+Command line interface: bk_find_orfs; bk_orfs</p>
+<p>Identify all open reading frames (ORFs) above a minimum length in
+nucleotide sequences, searching all 6 reading frames (3 forward, 3
+reverse). Reports one row per ORF with coordinates and lengths.</p>
+<p>An ORF is defined as a run from an ATG start codon to the next in-frame
+stop codon (or end of sequence if no stop is found). Positions are
+1-based and inclusive; coordinates on the reverse strand are reported
+in the original (forward-strand) coordinate system. <code class="docutils literal notranslate"><span class="pre">length_aa</span></code>
+excludes the stop codon.</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">--extract</span></code>, outputs the ORF sequences as FASTA instead of a
+tabular report. Combine with <code class="docutils literal notranslate"><span class="pre">--protein</span></code> to output protein
+translations rather than nucleotide sequences.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>find_orfs<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-m/--min_length<span class="w"> </span>&lt;int&gt;<span class="o">]</span><span class="w"> </span><span class="o">[</span>-tt/--translation_table<span class="w"> </span>&lt;int&gt;<span class="o">]</span><span class="w"> </span><span class="o">[</span>--extract<span class="o">]</span><span class="w"> </span><span class="o">[</span>--protein<span class="o">]</span><span class="w"> </span><span class="o">[</span>-f/--format<span class="w"> </span>&lt;tsv<span class="p">|</span>json<span class="p">|</span>yaml&gt;<span class="o">]</span>
+</pre></div>
+</div>
+<p>Options: <br/>
+<em>&lt;fasta&gt;</em>: first argument after function name should be a fasta file <br/>
+<em>-m/--min_length</em>: minimum ORF length in amino acids (default: 100) <br/>
+<em>-tt/--translation_table</em>: NCBI genetic code table number (default: 1) <br/>
+<em>--extract</em>: output ORF sequences as FASTA instead of a report <br/>
+<em>--protein</em>: with <code class="docutils literal notranslate"><span class="pre">--extract</span></code>, output protein translations instead of nucleotide sequences <br/>
 <em>-f/--format</em>: output format (tsv, json, yaml). Default: tsv</p>
 <div class="line-block">
 <div class="line"><br /></div>

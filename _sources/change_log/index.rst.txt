@@ -35,6 +35,14 @@ contract tests.
 *1.1.5*: Updated dependency pinning to fix installation failures and moved supported
 Python versions to 3.11, 3.12, and 3.13 only.
 
+*1.1.17*: Added ``find_orfs`` (alias: ``orfs``) command to identify all open
+reading frames above a minimum length in nucleotide sequences, searching
+all 6 reading frames (3 forward, 3 reverse). Reports id, frame, start,
+stop, and length in nucleotides and amino acids. With ``--extract``,
+outputs the ORF sequences as FASTA; with ``--protein``, outputs protein
+translations instead of nucleotides. Supports custom genetic codes via
+``-tt/--translation_table``.
+
 *1.1.16*: Added ``kmer_frequency`` (alias: ``kmer_freq``) command to count
 all k-mers of a given size in sequences. Useful for genomic signatures,
 metagenomics binning prep, and alignment-free sequence comparison.

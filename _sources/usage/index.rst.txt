@@ -1113,6 +1113,39 @@ Options: |br|
 
 |
 
+Find ORFs
+#########
+Function names: find_orfs; orfs |br|
+Command line interface: bk_find_orfs; bk_orfs
+
+Identify all open reading frames (ORFs) above a minimum length in
+nucleotide sequences, searching all 6 reading frames (3 forward, 3
+reverse). Reports one row per ORF with coordinates and lengths.
+
+An ORF is defined as a run from an ATG start codon to the next in-frame
+stop codon (or end of sequence if no stop is found). Positions are
+1-based and inclusive; coordinates on the reverse strand are reported
+in the original (forward-strand) coordinate system. ``length_aa``
+excludes the stop codon.
+
+With ``--extract``, outputs the ORF sequences as FASTA instead of a
+tabular report. Combine with ``--protein`` to output protein
+translations rather than nucleotide sequences.
+
+.. code-block:: shell
+
+   biokit find_orfs <fasta> [-m/--min_length <int>] [-tt/--translation_table <int>] [--extract] [--protein] [-f/--format <tsv|json|yaml>]
+
+Options: |br|
+*<fasta>*: first argument after function name should be a fasta file |br|
+*-m/\-\-min_length*: minimum ORF length in amino acids (default: 100) |br|
+*-tt/\-\-translation_table*: NCBI genetic code table number (default: 1) |br|
+*\-\-extract*: output ORF sequences as FASTA instead of a report |br|
+*\-\-protein*: with ``--extract``, output protein translations instead of nucleotide sequences |br|
+*-f/\-\-format*: output format (tsv, json, yaml). Default: tsv
+
+|
+
 Homopolymer runs
 ################
 Function names: homopolymer_runs; homopolymer |br|

@@ -100,6 +100,13 @@ expanded integration coverage with output format consistency and CLI output
 contract tests.</p>
 <p><em>1.1.5</em>: Updated dependency pinning to fix installation failures and moved supported
 Python versions to 3.11, 3.12, and 3.13 only.</p>
+<p><em>1.1.17</em>: Added <code class="docutils literal notranslate"><span class="pre">find_orfs</span></code> (alias: <code class="docutils literal notranslate"><span class="pre">orfs</span></code>) command to identify all open
+reading frames above a minimum length in nucleotide sequences, searching
+all 6 reading frames (3 forward, 3 reverse). Reports id, frame, start,
+stop, and length in nucleotides and amino acids. With <code class="docutils literal notranslate"><span class="pre">--extract</span></code>,
+outputs the ORF sequences as FASTA; with <code class="docutils literal notranslate"><span class="pre">--protein</span></code>, outputs protein
+translations instead of nucleotides. Supports custom genetic codes via
+<code class="docutils literal notranslate"><span class="pre">-tt/--translation_table</span></code>.</p>
 <p><em>1.1.16</em>: Added <code class="docutils literal notranslate"><span class="pre">kmer_frequency</span></code> (alias: <code class="docutils literal notranslate"><span class="pre">kmer_freq</span></code>) command to count
 all k-mers of a given size in sequences. Useful for genomic signatures,
 metagenomics binning prep, and alignment-free sequence comparison.
