@@ -282,6 +282,9 @@ class Biokit(object):
                 restriction_sites (alias: re_sites)
                     - find restriction enzyme recognition sites in sequences
 
+                sample_sequences (alias: sample_seqs)
+                    - randomly sample N or % of sequences from a FASTA file
+
                 shuffle_sequences (alias: shuffle_seqs)
                     - randomly shuffle sequences while preserving composition
 
@@ -380,6 +383,7 @@ class Biokit(object):
             "remove_short_seqs": self.remove_short_sequences,
             "rename_fasta": self.rename_fasta_entries,
             "re_sites": self.restriction_sites,
+            "sample_seqs": self.sample_sequences,
             "shuffle_seqs": self.shuffle_sequences,
             "reorder_by_seq_len": self.reorder_by_sequence_length,
             "seq_comp": self.sequence_complement,
@@ -2883,6 +2887,68 @@ class Biokit(object):
         _run_service("text.restriction_sites", "RestrictionSites", args)
 
     @staticmethod
+    def sample_sequences(argv):
+        parser = ArgumentParser(
+            **PARSER_KWARGS,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+
+                Randomly draw N sequences (or a percentage) from a
+                FASTA file with an optional seed for reproducibility.
+                Sampling is without replacement. Use -n/--number for
+                an absolute count or -p/--percent for a percentage
+                (default: 10 percent if neither is specified).
+
+                Aliases:
+                  sample_sequences, sample_seqs
+                Command line interfaces:
+                  bk_sample_sequences, bk_sample_seqs
+
+                Usage:
+                biokit sample_sequences <fasta> [-n/--number <int>]
+                [-p/--percent <float>] [-s/--seed <int>]
+                [-o/--output <file>]
+
+                Options
+                =====================================================
+                <fasta>                     first argument after
+                                            function name should be
+                                            a fasta file (or "-" for
+                                            stdin)
+
+                -n, --number                absolute number of sequences
+                                            to sample (mutually exclusive
+                                            with --percent)
+
+                -p, --percent               percentage of sequences to
+                                            sample, 0-100 (default: 10)
+
+                -s, --seed                  optional random seed for
+                                            reproducible sampling
+
+                -o, --output                output file path
+                                            (default: stdout)
+                """  # noqa
+            ),
+        )
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        parser.add_argument(
+            "-n", "--number", type=int, required=False, help=SUPPRESS
+        )
+        parser.add_argument(
+            "-p", "--percent", type=float, required=False, help=SUPPRESS
+        )
+        parser.add_argument(
+            "-s", "--seed", type=int, required=False, help=SUPPRESS
+        )
+        parser.add_argument(
+            "-o", "--output", type=str, required=False, help=SUPPRESS
+        )
+        args = parser.parse_args(argv)
+        _run_service("text.sample_sequences", "SampleSequences", args)
+
+    @staticmethod
     def shuffle_sequences(argv):
         parser = ArgumentParser(
             **PARSER_KWARGS,
@@ -3287,6 +3353,10 @@ def rename_fasta_entries(argv=None):
 
 def restriction_sites(argv=None):
     Biokit.restriction_sites(sys.argv[1:])
+
+
+def sample_sequences(argv=None):
+    Biokit.sample_sequences(sys.argv[1:])
 
 
 def shuffle_sequences(argv=None):

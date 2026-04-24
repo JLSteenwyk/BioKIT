@@ -35,6 +35,12 @@ contract tests.
 *1.1.5*: Updated dependency pinning to fix installation failures and moved supported
 Python versions to 3.11, 3.12, and 3.13 only.
 
+*1.1.18*: Added ``sample_sequences`` (alias: ``sample_seqs``) command to
+randomly draw N sequences (``-n/--number``) or a percentage
+(``-p/--percent``, default 10%) from a FASTA file without replacement.
+Supports reproducible sampling via ``-s/--seed`` and optional output
+file via ``-o/--output``.
+
 *1.1.17*: Added ``find_orfs`` (alias: ``orfs``) command to identify all open
 reading frames above a minimum length in nucleotide sequences, searching
 all 6 reading frames (3 forward, 3 reverse). Reports id, frame, start,
