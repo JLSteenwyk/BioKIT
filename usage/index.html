@@ -113,6 +113,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#protein-charge">Protein charge</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#restriction-sites">Restriction sites</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#melting-temperature">Melting temperature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sample-sequences">Sample sequences</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#shuffle-sequences">Shuffle sequences</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#remove-fasta-entry">Remove FASTA entry</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#remove-short-sequences">Remove short sequences</a></li>
@@ -1273,6 +1274,29 @@ sequences such as primers and oligos.</p>
 <em>--na</em>: monovalent cation (Na+) concentration in mM. Default: 50 <br/>
 <em>--oligo_conc</em>: oligo concentration in nM. Default: 250 <br/>
 <em>-f/--format</em>: output format (tsv, json, yaml). Default: tsv</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="sample-sequences">
+<h3>Sample sequences<a class="headerlink" href="#sample-sequences" title="Link to this heading"></a></h3>
+<p>Function names: sample_sequences; sample_seqs <br/>
+Command line interface: bk_sample_sequences; bk_sample_seqs</p>
+<p>Randomly draw N sequences (or a percentage) from a FASTA file
+with an optional seed for reproducibility.</p>
+<p>Sampling is without replacement. Use <code class="docutils literal notranslate"><span class="pre">-n/--number</span></code> for an
+absolute count or <code class="docutils literal notranslate"><span class="pre">-p/--percent</span></code> for a percentage. If neither
+is specified, 10 percent is drawn by default. Output is written
+to stdout unless <code class="docutils literal notranslate"><span class="pre">-o/--output</span></code> is provided.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>sample_sequences<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-n/--number<span class="w"> </span>&lt;int&gt;<span class="o">]</span><span class="w"> </span><span class="o">[</span>-p/--percent<span class="w"> </span>&lt;float&gt;<span class="o">]</span><span class="w"> </span><span class="o">[</span>-s/--seed<span class="w"> </span>&lt;int&gt;<span class="o">]</span><span class="w"> </span><span class="o">[</span>-o/--output<span class="w"> </span>&lt;file&gt;<span class="o">]</span>
+</pre></div>
+</div>
+<p>Options: <br/>
+<em>&lt;fasta&gt;</em>: first argument after function name should be a fasta file (or <code class="docutils literal notranslate"><span class="pre">-</span></code> for stdin) <br/>
+<em>-n/--number</em>: absolute number of sequences to sample (mutually exclusive with <code class="docutils literal notranslate"><span class="pre">--percent</span></code>) <br/>
+<em>-p/--percent</em>: percentage of sequences to sample, 0-100 (default: 10) <br/>
+<em>-s/--seed</em>: optional random seed for reproducible sampling <br/>
+<em>-o/--output</em>: output file path (default: stdout)</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>

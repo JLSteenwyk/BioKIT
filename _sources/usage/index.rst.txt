@@ -1280,6 +1280,32 @@ Options: |br|
 
 |
 
+Sample sequences
+################
+Function names: sample_sequences; sample_seqs |br|
+Command line interface: bk_sample_sequences; bk_sample_seqs
+
+Randomly draw N sequences (or a percentage) from a FASTA file
+with an optional seed for reproducibility.
+
+Sampling is without replacement. Use ``-n/--number`` for an
+absolute count or ``-p/--percent`` for a percentage. If neither
+is specified, 10 percent is drawn by default. Output is written
+to stdout unless ``-o/--output`` is provided.
+
+.. code-block:: shell
+
+   biokit sample_sequences <fasta> [-n/--number <int>] [-p/--percent <float>] [-s/--seed <int>] [-o/--output <file>]
+
+Options: |br|
+*<fasta>*: first argument after function name should be a fasta file (or ``-`` for stdin) |br|
+*-n/\-\-number*: absolute number of sequences to sample (mutually exclusive with ``--percent``) |br|
+*-p/\-\-percent*: percentage of sequences to sample, 0-100 (default: 10) |br|
+*-s/\-\-seed*: optional random seed for reproducible sampling |br|
+*-o/\-\-output*: output file path (default: stdout)
+
+|
+
 Shuffle sequences
 #################
 Function names: shuffle_sequences; shuffle_seqs |br|

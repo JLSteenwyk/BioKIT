@@ -100,6 +100,11 @@ expanded integration coverage with output format consistency and CLI output
 contract tests.</p>
 <p><em>1.1.5</em>: Updated dependency pinning to fix installation failures and moved supported
 Python versions to 3.11, 3.12, and 3.13 only.</p>
+<p><em>1.1.18</em>: Added <code class="docutils literal notranslate"><span class="pre">sample_sequences</span></code> (alias: <code class="docutils literal notranslate"><span class="pre">sample_seqs</span></code>) command to
+randomly draw N sequences (<code class="docutils literal notranslate"><span class="pre">-n/--number</span></code>) or a percentage
+(<code class="docutils literal notranslate"><span class="pre">-p/--percent</span></code>, default 10%) from a FASTA file without replacement.
+Supports reproducible sampling via <code class="docutils literal notranslate"><span class="pre">-s/--seed</span></code> and optional output
+file via <code class="docutils literal notranslate"><span class="pre">-o/--output</span></code>.</p>
 <p><em>1.1.17</em>: Added <code class="docutils literal notranslate"><span class="pre">find_orfs</span></code> (alias: <code class="docutils literal notranslate"><span class="pre">orfs</span></code>) command to identify all open
 reading frames above a minimum length in nucleotide sequences, searching
 all 6 reading frames (3 forward, 3 reverse). Reports id, frame, start,
