@@ -416,6 +416,38 @@ Options: |br|
 
 |
 
+Neutrality plot
+###############
+Function names: neutrality_plot |br|
+Command line interface: bk_neutrality_plot
+
+Generate a neutrality plot: per-gene GC12 vs. GC3 with linear
+regression.
+
+The regression slope is a classical codon usage diagnostic.
+A slope near 1 indicates that codon usage is largely driven
+by mutation (similar pressure on all three codon positions),
+while a slope near 0 indicates that GC12 is constrained by
+selection while GC3 drifts.
+
+Default output is the regression summary (slope, intercept,
+r-squared, n). With ``-v/--verbose``, the per-gene GC12 and
+GC3 values are also included. With ``-p/--plot``, a scatter
+plot with the regression line is saved as a PNG.
+
+.. code-block:: shell
+
+   biokit neutrality_plot <fasta> [-v/--verbose] [-p/--plot] [-o/--output <file>] [-f/--format <tsv|json|yaml>]
+
+Options: |br|
+*<fasta>*: first argument after function name should be a CDS fasta file |br|
+*-v/\-\-verbose*: include per-gene GC12 and GC3 values |br|
+*-p/\-\-plot*: generate a scatter plot with the regression line (saved as PNG) |br|
+*-o/\-\-output*: output file path for the plot (default: neutrality_plot.png) |br|
+*-f/\-\-format*: output format (tsv, json, yaml). Default: tsv
+
+|
+
 Gene-wise relative synonymous codon usage (gRSCU)
 #################################################
 Function names: gene_wise_relative_synonymous_codon_usage; gene_wise_rscu; gw_rscu; grscu |br|

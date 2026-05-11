@@ -7,6 +7,7 @@ __all__ = [
     "GCContentSecondPosition",
     "GCContentThirdPosition",
     "GeneWiseRelativeSynonymousCodonUsage",
+    "NeutralityPlot",
     "RelativeSynonymousCodonUsage",
     "TranslateSequence",
 ]
@@ -17,6 +18,7 @@ _LAZY_IMPORTS = {
     "GCContentSecondPosition": ".gc_content_second_position",
     "GCContentThirdPosition": ".gc_content_third_position",
     "GeneWiseRelativeSynonymousCodonUsage": ".gene_wise_relative_synonymous_codon_usage",
+    "NeutralityPlot": ".neutrality_plot",
     "RelativeSynonymousCodonUsage": ".relative_synonymous_codon_usage",
     "TranslateSequence": ".translate_sequence",
 }

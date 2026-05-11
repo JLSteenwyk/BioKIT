@@ -65,6 +65,7 @@ setup(
             "bk_gc3 = biokit.biokit:gc_content_third_position",
             "bk_gc_content_four_fold_degenerate_sites = biokit.biokit:gc_content_four_fold_degenerate_sites",
             "bk_gc4 = biokit.biokit:gc_content_four_fold_degenerate_sites",
+            "bk_neutrality_plot = biokit.biokit:neutrality_plot",
             "bk_gene_wise_relative_synonymous_codon_usage = biokit.biokit:gene_wise_relative_synonymous_codon_usage",
             "bk_gene_wise_rscu = biokit.biokit:gene_wise_relative_synonymous_codon_usage",
             "bk_gw_rscu = biokit.biokit:gene_wise_relative_synonymous_codon_usage",

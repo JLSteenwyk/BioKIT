@@ -155,6 +155,10 @@ class Biokit(object):
                     - calculate the GC content of four-fold degenerate
                       sites among coding sequences
 
+                neutrality_plot
+                    - GC12 vs. GC3 regression to diagnose mutation
+                      vs. selection pressure on codon usage
+
                 gene_wise_relative_synonymous_codon_usage (alias: gene_wise_rscu; gw_rscu; grscu)
                     - calculates relative synonymous codon usage
                       that has been adapted for single genes to
@@ -1022,6 +1026,75 @@ class Biokit(object):
             "GCContentFourFoldDegenerateSites",
             args,
         )
+
+    @staticmethod
+    def neutrality_plot(argv):
+        parser = ArgumentParser(
+            **PARSER_KWARGS,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+
+                Generate a neutrality plot: per-gene GC12 vs. GC3
+                with linear regression. The regression slope is a
+                classical codon usage diagnostic — a slope near 1
+                indicates that codon usage is largely driven by
+                mutation (similar pressure on all positions), while
+                a slope near 0 indicates that GC12 is constrained by
+                selection while GC3 drifts.
+
+                Default output is the regression summary (slope,
+                intercept, r-squared, n). With -v/--verbose, the
+                per-gene GC12 and GC3 values are also included. With
+                -p/--plot, a scatter plot with the regression line is
+                saved as a PNG.
+
+                Command line interface:
+                  bk_neutrality_plot
+
+                Usage:
+                biokit neutrality_plot <fasta> [-v/--verbose]
+                [-p/--plot] [-o/--output <file>]
+                [-f/--format <tsv|json|yaml>]
+
+                Options
+                =====================================================
+                <fasta>                     first argument after
+                                            function name should be
+                                            a CDS fasta file
+
+                -v, --verbose               include per-gene GC12 and
+                                            GC3 values in the output
+
+                -p, --plot                  generate a scatter plot
+                                            with the regression line
+                                            (saved as PNG)
+
+                -o, --output                output file path for the
+                                            plot (default: neutrality_plot.png)
+
+                -f/--format                 output format
+                                            (tsv, json, yaml)
+                                            Default: tsv
+                """  # noqa
+            ),
+        )
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        parser.add_argument(
+            "-v", "--verbose", action="store_true", required=False, help=SUPPRESS
+        )
+        parser.add_argument(
+            "-p", "--plot", action="store_true", required=False, help=SUPPRESS
+        )
+        parser.add_argument(
+            "-o", "--output", type=str, required=False, help=SUPPRESS
+        )
+        parser.add_argument(
+            "-f", "--format", type=str, required=False,
+            choices=["tsv", "json", "yaml"], help=SUPPRESS,
+        )
+        args = parser.parse_args(argv)
+        _run_service("coding_sequences.neutrality_plot", "NeutralityPlot", args)
 
     @staticmethod
     def gene_wise_relative_synonymous_codon_usage(argv):
@@ -3202,6 +3275,10 @@ def gc_content_third_position(argv=None):
 
 def gc_content_four_fold_degenerate_sites(argv=None):
     Biokit.gc_content_four_fold_degenerate_sites(sys.argv[1:])
+
+
+def neutrality_plot(argv=None):
+    Biokit.neutrality_plot(sys.argv[1:])
 
 
 def gene_wise_relative_synonymous_codon_usage(argv=None):
