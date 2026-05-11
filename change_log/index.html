@@ -100,6 +100,13 @@ expanded integration coverage with output format consistency and CLI output
 contract tests.</p>
 <p><em>1.1.5</em>: Updated dependency pinning to fix installation failures and moved supported
 Python versions to 3.11, 3.12, and 3.13 only.</p>
+<p><em>1.1.19</em>: Added <code class="docutils literal notranslate"><span class="pre">neutrality_plot</span></code> command for GC12 vs. GC3 regression
+analysis of coding sequences. The regression slope is a classical codon
+usage diagnostic — a slope near 1 indicates that codon usage is largely
+mutation-driven, while a slope near 0 indicates that GC12 is constrained
+by selection while GC3 drifts. Reports slope, intercept, r-squared, and
+n; with <code class="docutils literal notranslate"><span class="pre">-v/--verbose</span></code> includes per-gene GC12 and GC3 values; with
+<code class="docutils literal notranslate"><span class="pre">-p/--plot</span></code> saves a scatter plot with the regression line as PNG.</p>
 <p><em>1.1.18</em>: Added <code class="docutils literal notranslate"><span class="pre">sample_sequences</span></code> (alias: <code class="docutils literal notranslate"><span class="pre">sample_seqs</span></code>) command to
 randomly draw N sequences (<code class="docutils literal notranslate"><span class="pre">-n/--number</span></code>) or a percentage
 (<code class="docutils literal notranslate"><span class="pre">-p/--percent</span></code>, default 10%) from a FASTA file without replacement.

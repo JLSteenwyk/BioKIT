@@ -70,6 +70,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#gc-content-second-codon-position">GC content second codon position</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gc-content-third-codon-position">GC content third codon position</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gc-content-four-fold-degenerate-sites">GC content four-fold degenerate sites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#neutrality-plot">Neutrality plot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gene-wise-relative-synonymous-codon-usage-grscu">Gene-wise relative synonymous codon usage (gRSCU)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#relative-synonymous-codon-usage">Relative synonymous codon usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#translate-sequence">Translate sequence</a></li>
@@ -520,6 +521,34 @@ divisible by three.</p>
 <em>&lt;fasta&gt;</em>: first argument after function name should be a fasta file <br/>
 <em>-tt/--translation_table</em>: code for the translation table to be used. Default: 1 (standard code) <br/>
 <em>-v/--verbose</em>: optional argument to print the GC content of each fasta entry</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="neutrality-plot">
+<h3>Neutrality plot<a class="headerlink" href="#neutrality-plot" title="Link to this heading"></a></h3>
+<p>Function names: neutrality_plot <br/>
+Command line interface: bk_neutrality_plot</p>
+<p>Generate a neutrality plot: per-gene GC12 vs. GC3 with linear
+regression.</p>
+<p>The regression slope is a classical codon usage diagnostic.
+A slope near 1 indicates that codon usage is largely driven
+by mutation (similar pressure on all three codon positions),
+while a slope near 0 indicates that GC12 is constrained by
+selection while GC3 drifts.</p>
+<p>Default output is the regression summary (slope, intercept,
+r-squared, n). With <code class="docutils literal notranslate"><span class="pre">-v/--verbose</span></code>, the per-gene GC12 and
+GC3 values are also included. With <code class="docutils literal notranslate"><span class="pre">-p/--plot</span></code>, a scatter
+plot with the regression line is saved as a PNG.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>neutrality_plot<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-v/--verbose<span class="o">]</span><span class="w"> </span><span class="o">[</span>-p/--plot<span class="o">]</span><span class="w"> </span><span class="o">[</span>-o/--output<span class="w"> </span>&lt;file&gt;<span class="o">]</span><span class="w"> </span><span class="o">[</span>-f/--format<span class="w"> </span>&lt;tsv<span class="p">|</span>json<span class="p">|</span>yaml&gt;<span class="o">]</span>
+</pre></div>
+</div>
+<p>Options: <br/>
+<em>&lt;fasta&gt;</em>: first argument after function name should be a CDS fasta file <br/>
+<em>-v/--verbose</em>: include per-gene GC12 and GC3 values <br/>
+<em>-p/--plot</em>: generate a scatter plot with the regression line (saved as PNG) <br/>
+<em>-o/--output</em>: output file path for the plot (default: neutrality_plot.png) <br/>
+<em>-f/--format</em>: output format (tsv, json, yaml). Default: tsv</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>

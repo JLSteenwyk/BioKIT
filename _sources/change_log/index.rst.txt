@@ -35,6 +35,14 @@ contract tests.
 *1.1.5*: Updated dependency pinning to fix installation failures and moved supported
 Python versions to 3.11, 3.12, and 3.13 only.
 
+*1.1.19*: Added ``neutrality_plot`` command for GC12 vs. GC3 regression
+analysis of coding sequences. The regression slope is a classical codon
+usage diagnostic — a slope near 1 indicates that codon usage is largely
+mutation-driven, while a slope near 0 indicates that GC12 is constrained
+by selection while GC3 drifts. Reports slope, intercept, r-squared, and
+n; with ``-v/--verbose`` includes per-gene GC12 and GC3 values; with
+``-p/--plot`` saves a scatter plot with the regression line as PNG.
+
 *1.1.18*: Added ``sample_sequences`` (alias: ``sample_seqs``) command to
 randomly draw N sequences (``-n/--number``) or a percentage
 (``-p/--percent``, default 10%) from a FASTA file without replacement.
