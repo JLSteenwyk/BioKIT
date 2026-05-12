@@ -241,6 +241,9 @@ class Biokit(object):
                 character_frequency (alias: char_freq)
                     - determine the frequency of all observed characters
 
+                dinucleotide_odds (alias: dno)
+                    - observed/expected ratios for all 16 dinucleotides
+
                 faidx (alias: get_entry; ge)
                     - extract query fasta entry from multi-fasta file
 
@@ -372,6 +375,7 @@ class Biokit(object):
             "num_of_cont": self.number_of_scaffolds,
             "sum_of_contig_lengths": self.sum_of_scaffold_lengths,
             "char_freq": self.character_frequency,
+            "dno": self.dinucleotide_odds,
             "get_entry": self.faidx,
             "ge": self.faidx,
             "format_converter": self.file_format_converter,
@@ -2238,6 +2242,65 @@ class Biokit(object):
         _run_service("text.character_frequency", "CharacterFrequency", args)
 
     @staticmethod
+    def dinucleotide_odds(argv):
+        parser = ArgumentParser(
+            **PARSER_KWARGS,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+
+                Calculate observed/expected (O/E) ratios for all 16
+                dinucleotides in a FASTA file.
+
+                O/E for dinucleotide XY is computed as
+                f(XY) / (f(X) * f(Y)), where f(XY) is the observed
+                dinucleotide frequency and f(X), f(Y) are the
+                mononucleotide frequencies. CpG O/E is heavily used
+                in methylation studies and viral genomics — CpG
+                suppression is a hallmark of vertebrate-adapted
+                viruses. Only A, C, G, T are counted; ambiguous bases
+                (e.g., N) are ignored.
+
+                Default output reports aggregated O/E across all
+                sequences. With -v/--verbose, reports O/E per sequence
+                (one row per sequence, one column per dinucleotide).
+
+                Aliases:
+                  dinucleotide_odds, dno
+                Command line interfaces:
+                  bk_dinucleotide_odds, bk_dno
+
+                Usage:
+                biokit dinucleotide_odds <fasta> [-v/--verbose]
+                [-f/--format <tsv|json|yaml>]
+
+                Options
+                =====================================================
+                <fasta>                     first argument after
+                                            function name should be
+                                            a fasta file
+
+                -v, --verbose               report per-sequence O/E
+                                            instead of aggregated
+
+                -f/--format                 output format
+                                            (tsv, json, yaml)
+                                            Default: tsv
+                """  # noqa
+            ),
+        )
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        parser.add_argument(
+            "-v", "--verbose", action="store_true", required=False, help=SUPPRESS
+        )
+        parser.add_argument(
+            "-f", "--format", type=str, required=False,
+            choices=["tsv", "json", "yaml"], help=SUPPRESS,
+        )
+        args = parser.parse_args(argv)
+        _run_service("text.dinucleotide_odds", "DinucleotideOdds", args)
+
+    @staticmethod
     def faidx(argv):
         parser = ArgumentParser(
             **PARSER_KWARGS,
@@ -3374,6 +3437,10 @@ def sum_of_scaffold_lengths(argv=None):
 # sequence-based functions
 def character_frequency(argv=None):
     Biokit.character_frequency(sys.argv[1:])
+
+
+def dinucleotide_odds(argv=None):
+    Biokit.dinucleotide_odds(sys.argv[1:])
 
 
 def faidx(argv=None):

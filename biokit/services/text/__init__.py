@@ -3,6 +3,7 @@ from typing import Any
 
 __all__ = [
     "CharacterFrequency",
+    "DinucleotideOdds",
     "Faidx",
     "FastaDeduplication",
     "FileFormatConverter",
@@ -27,6 +28,7 @@ __all__ = [
 
 _LAZY_IMPORTS = {
     "CharacterFrequency": ".character_frequency",
+    "DinucleotideOdds": ".dinucleotide_odds",
     "Faidx": ".faidx",
     "FastaDeduplication": ".fasta_deduplication",
     "FileFormatConverter": ".file_format_converter",

@@ -117,6 +117,8 @@ setup(
             "bk_sum_of_contig_lengths = biokit.biokit:sum_of_scaffold_lengths",
             "bk_character_frequency = biokit.biokit:character_frequency",  # text-based functions
             "bk_char_freq = biokit.biokit:character_frequency",
+            "bk_dinucleotide_odds = biokit.biokit:dinucleotide_odds",
+            "bk_dno = biokit.biokit:dinucleotide_odds",
             "bk_faidx = biokit.biokit:faidx",
             "bk_get_entry = biokit.biokit:faidx",
             "bk_ge = biokit.biokit:faidx",

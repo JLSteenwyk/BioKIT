@@ -1044,6 +1044,37 @@ Options: |br|
 
 |
 
+Dinucleotide odds
+#################
+Function names: dinucleotide_odds; dno |br|
+Command line interface: bk_dinucleotide_odds; bk_dno
+
+Calculate observed/expected (O/E) ratios for all 16
+dinucleotides in a FASTA file.
+
+O/E for dinucleotide XY is computed as
+``f(XY) / (f(X) * f(Y))``, where ``f(XY)`` is the observed
+dinucleotide frequency and ``f(X)``, ``f(Y)`` are the
+mononucleotide frequencies. CpG O/E is heavily used in
+methylation studies and viral genomics — CpG suppression is a
+hallmark of vertebrate-adapted viruses. Only A, C, G, T are
+counted; ambiguous bases (e.g., N) are ignored.
+
+Default output reports aggregated O/E across all sequences.
+With ``-v/--verbose``, reports O/E per sequence (one row per
+sequence, one column per dinucleotide).
+
+.. code-block:: shell
+
+   biokit dinucleotide_odds <fasta> [-v/--verbose] [-f/--format <tsv|json|yaml>]
+
+Options: |br|
+*<fasta>*: first argument after function name should be a fasta file |br|
+*-v/\-\-verbose*: report per-sequence O/E instead of aggregated |br|
+*-f/\-\-format*: output format (tsv, json, yaml). Default: tsv
+
+|
+
 Get FASTA entry (faidx)
 #######################
 Function names: faidx; get_entry; ge |br|

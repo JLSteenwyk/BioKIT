@@ -35,6 +35,12 @@ contract tests.
 *1.1.5*: Updated dependency pinning to fix installation failures and moved supported
 Python versions to 3.11, 3.12, and 3.13 only.
 
+*1.1.20*: Added ``dinucleotide_odds`` (alias: ``dno``) command to compute
+observed/expected (O/E) ratios for all 16 dinucleotides in a FASTA file.
+CpG O/E is heavily used in methylation studies and viral genomics — CpG
+suppression is a hallmark of vertebrate-adapted viruses. With
+``-v/--verbose``, reports per-sequence ratios instead of aggregated.
+
 *1.1.19*: Added ``neutrality_plot`` command for GC12 vs. GC3 regression
 analysis of coding sequences. The regression slope is a classical codon
 usage diagnostic — a slope near 1 indicates that codon usage is largely
