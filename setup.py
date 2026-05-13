@@ -143,6 +143,8 @@ setup(
             "bk_tm = biokit.biokit:melting_temperature",
             "bk_protein_charge = biokit.biokit:protein_charge",
             "bk_prot_charge = biokit.biokit:protein_charge",
+            "bk_protein_properties = biokit.biokit:protein_properties",
+            "bk_prot_prop = biokit.biokit:protein_properties",
             "bk_remove_fasta_entry = biokit.biokit:remove_fasta_entry",
             "bk_rename_fasta_entries = biokit.biokit:rename_fasta_entries",
             "bk_rename_fasta = biokit.biokit:rename_fasta_entries",

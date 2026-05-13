@@ -1299,6 +1299,31 @@ Options: |br|
 
 |
 
+Protein properties
+##################
+Function names: protein_properties; prot_prop |br|
+Command line interface: bk_protein_properties; bk_prot_prop
+
+Compute per-sequence protein properties for a protein FASTA file:
+molecular weight, isoelectric point (pI), GRAVY (Grand Average of
+Hydropathy / hydrophobicity), aromaticity (relative frequency of
+F, W, Y), and instability index.
+
+Uses BioPython's ProtParam for the computations. Stop characters
+(``*``) and gaps (``-``) are stripped before analysis. Sequences
+containing other non-standard residues may produce null values
+for some properties.
+
+.. code-block:: shell
+
+   biokit protein_properties <fasta> [-f/--format <tsv|json|yaml>]
+
+Options: |br|
+*<fasta>*: first argument after function name should be a protein fasta file |br|
+*-f/\-\-format*: output format (tsv, json, yaml). Default: tsv
+
+|
+
 Restriction sites
 #################
 Function names: restriction_sites; re_sites |br|

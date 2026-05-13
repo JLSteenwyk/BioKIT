@@ -280,6 +280,10 @@ class Biokit(object):
                 protein_charge (alias: prot_charge)
                     - calculate the net charge of protein sequences at a given pH
 
+                protein_properties (alias: prot_prop)
+                    - molecular weight, pI, GRAVY, aromaticity,
+                      instability index per protein sequence
+
                 remove_fasta_entry
                     - remove entry in a FASTA file
 
@@ -388,6 +392,7 @@ class Biokit(object):
             "dedup": self.fasta_deduplication,
             "tm": self.melting_temperature,
             "prot_charge": self.protein_charge,
+            "prot_prop": self.protein_properties,
             "remove_short_seqs": self.remove_short_sequences,
             "rename_fasta": self.rename_fasta_entries,
             "re_sites": self.restriction_sites,
@@ -2931,6 +2936,54 @@ class Biokit(object):
         _run_service("text.protein_charge", "ProteinCharge", args)
 
     @staticmethod
+    def protein_properties(argv):
+        parser = ArgumentParser(
+            **PARSER_KWARGS,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+
+                Compute per-sequence protein properties for a protein
+                FASTA file. Reports molecular weight, isoelectric
+                point (pI), GRAVY (Grand Average of Hydropathy /
+                hydrophobicity), aromaticity (relative frequency of
+                F, W, Y), and instability index.
+
+                Stop characters ('*') and gaps ('-') are stripped
+                before computation. Sequences containing other
+                non-standard residues may produce null values for
+                some properties.
+
+                Aliases:
+                  protein_properties, prot_prop
+                Command line interfaces:
+                  bk_protein_properties, bk_prot_prop
+
+                Usage:
+                biokit protein_properties <fasta>
+                [-f/--format <tsv|json|yaml>]
+
+                Options
+                =====================================================
+                <fasta>                     first argument after
+                                            function name should be
+                                            a protein fasta file
+
+                -f/--format                 output format
+                                            (tsv, json, yaml)
+                                            Default: tsv
+                """  # noqa
+            ),
+        )
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        parser.add_argument(
+            "-f", "--format", type=str, required=False,
+            choices=["tsv", "json", "yaml"], help=SUPPRESS,
+        )
+        args = parser.parse_args(argv)
+        _run_service("text.protein_properties", "ProteinProperties", args)
+
+    @staticmethod
     def rename_fasta_entries(argv):
         parser = ArgumentParser(
             **PARSER_KWARGS,
@@ -3489,6 +3542,10 @@ def melting_temperature(argv=None):
 
 def protein_charge(argv=None):
     Biokit.protein_charge(sys.argv[1:])
+
+
+def protein_properties(argv=None):
+    Biokit.protein_properties(sys.argv[1:])
 
 
 def rename_fasta_entries(argv=None):
