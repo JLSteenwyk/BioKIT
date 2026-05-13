@@ -100,6 +100,12 @@ expanded integration coverage with output format consistency and CLI output
 contract tests.</p>
 <p><em>1.1.5</em>: Updated dependency pinning to fix installation failures and moved supported
 Python versions to 3.11, 3.12, and 3.13 only.</p>
+<p><em>1.1.21</em>: Added <code class="docutils literal notranslate"><span class="pre">protein_properties</span></code> (alias: <code class="docutils literal notranslate"><span class="pre">prot_prop</span></code>) command to
+report per-sequence protein properties for a protein FASTA: length,
+molecular weight, isoelectric point (pI), GRAVY (Grand Average of
+Hydropathy), aromaticity, and instability index. Uses BioPython’s
+ProtParam for the computations. Stop characters and gaps are stripped
+before analysis.</p>
 <p><em>1.1.20</em>: Added <code class="docutils literal notranslate"><span class="pre">dinucleotide_odds</span></code> (alias: <code class="docutils literal notranslate"><span class="pre">dno</span></code>) command to compute
 observed/expected (O/E) ratios for all 16 dinucleotides in a FASTA file.
 CpG O/E is heavily used in methylation studies and viral genomics — CpG

@@ -113,6 +113,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#multiple-line-to-single-line-fasta">Multiple line to single line FASTA</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#fasta-deduplication">FASTA deduplication</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#protein-charge">Protein charge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#protein-properties">Protein properties</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#restriction-sites">Restriction sites</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#melting-temperature">Melting temperature</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#sample-sequences">Sample sequences</a></li>
@@ -1291,6 +1292,28 @@ pH (default 7.0).</p>
 <p>Options: <br/>
 <em>&lt;fasta&gt;</em>: first argument after function name should be a protein fasta file <br/>
 <em>-p/--pH</em>: pH value at which to calculate charge. Default: 7.0 <br/>
+<em>-f/--format</em>: output format (tsv, json, yaml). Default: tsv</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="protein-properties">
+<h3>Protein properties<a class="headerlink" href="#protein-properties" title="Link to this heading"></a></h3>
+<p>Function names: protein_properties; prot_prop <br/>
+Command line interface: bk_protein_properties; bk_prot_prop</p>
+<p>Compute per-sequence protein properties for a protein FASTA file:
+molecular weight, isoelectric point (pI), GRAVY (Grand Average of
+Hydropathy / hydrophobicity), aromaticity (relative frequency of
+F, W, Y), and instability index.</p>
+<p>Uses BioPython’s ProtParam for the computations. Stop characters
+(<code class="docutils literal notranslate"><span class="pre">*</span></code>) and gaps (<code class="docutils literal notranslate"><span class="pre">-</span></code>) are stripped before analysis. Sequences
+containing other non-standard residues may produce null values
+for some properties.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>protein_properties<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-f/--format<span class="w"> </span>&lt;tsv<span class="p">|</span>json<span class="p">|</span>yaml&gt;<span class="o">]</span>
+</pre></div>
+</div>
+<p>Options: <br/>
+<em>&lt;fasta&gt;</em>: first argument after function name should be a protein fasta file <br/>
 <em>-f/--format</em>: output format (tsv, json, yaml). Default: tsv</p>
 <div class="line-block">
 <div class="line"><br /></div>

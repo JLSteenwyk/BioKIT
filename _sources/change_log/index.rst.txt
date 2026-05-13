@@ -35,6 +35,13 @@ contract tests.
 *1.1.5*: Updated dependency pinning to fix installation failures and moved supported
 Python versions to 3.11, 3.12, and 3.13 only.
 
+*1.1.21*: Added ``protein_properties`` (alias: ``prot_prop``) command to
+report per-sequence protein properties for a protein FASTA: length,
+molecular weight, isoelectric point (pI), GRAVY (Grand Average of
+Hydropathy), aromaticity, and instability index. Uses BioPython's
+ProtParam for the computations. Stop characters and gaps are stripped
+before analysis.
+
 *1.1.20*: Added ``dinucleotide_odds`` (alias: ``dno``) command to compute
 observed/expected (O/E) ratios for all 16 dinucleotides in a FASTA file.
 CpG O/E is heavily used in methylation studies and viral genomics — CpG
