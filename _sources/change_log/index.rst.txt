@@ -35,6 +35,14 @@ contract tests.
 *1.1.5*: Updated dependency pinning to fix installation failures and moved supported
 Python versions to 3.11, 3.12, and 3.13 only.
 
+*1.1.22*: Added ``effective_number_of_codons`` (alias: ``enc``) command to
+compute Wright's (1990) effective number of codons for each coding
+sequence. ENC ranges from 20 (extreme bias) to 61 (no bias). Sequences
+whose length is not divisible by 3 are skipped. Reuses the existing
+translation table machinery (29 built-in tables plus custom). With
+``-v/--verbose`` adds per-gene GC3; with ``-p/--plot`` saves an ENC
+vs. GC3 scatter plus the expected curve under mutation-only bias as PNG.
+
 *1.1.21*: Added ``protein_properties`` (alias: ``prot_prop``) command to
 report per-sequence protein properties for a protein FASTA: length,
 molecular weight, isoelectric point (pI), GRAVY (Grand Average of

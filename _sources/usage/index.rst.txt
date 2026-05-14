@@ -416,6 +416,39 @@ Options: |br|
 
 |
 
+Effective number of codons (ENC)
+################################
+Function names: effective_number_of_codons; enc |br|
+Command line interface: bk_effective_number_of_codons; bk_enc
+
+Calculate Wright's (1990) effective number of codons (ENC) for
+each coding sequence. ENC ranges from 20 (extreme bias — one codon
+per amino acid) to 61 (no bias — synonymous codons used equally).
+
+Sequences whose length is not divisible by 3 are skipped. Stop
+codons are not counted.
+
+Default output is one row per gene with gene_id and ENC. With
+``-v/--verbose``, GC3 is also included (consistent with the ENC
+vs. GC3 plot). With ``-p/--plot``, a scatter of ENC vs. GC3 per
+gene plus the expected curve under mutation-only bias is saved
+as a PNG. The expected curve uses Wright's formulation
+``ENC = 2 + s + 29 / (s² + (1-s)²)`` where s = GC3.
+
+.. code-block:: shell
+
+   biokit effective_number_of_codons <fasta> [-tt/--translation_table <code>] [-v/--verbose] [-p/--plot] [-o/--output <file>] [-f/--format <tsv|json|yaml>]
+
+Options: |br|
+*<fasta>*: first argument after function name should be a CDS fasta file |br|
+*-tt/\-\-translation_table*: code for the translation table to be used. Default: 1 (standard code) |br|
+*-v/\-\-verbose*: include per-gene GC3 alongside ENC |br|
+*-p/\-\-plot*: generate ENC vs. GC3 scatter with expected curve (saved as PNG) |br|
+*-o/\-\-output*: output file path for the plot (default: enc_plot.png) |br|
+*-f/\-\-format*: output format (tsv, json, yaml). Default: tsv
+
+|
+
 Neutrality plot
 ###############
 Function names: neutrality_plot |br|

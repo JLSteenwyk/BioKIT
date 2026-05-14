@@ -100,6 +100,13 @@ expanded integration coverage with output format consistency and CLI output
 contract tests.</p>
 <p><em>1.1.5</em>: Updated dependency pinning to fix installation failures and moved supported
 Python versions to 3.11, 3.12, and 3.13 only.</p>
+<p><em>1.1.22</em>: Added <code class="docutils literal notranslate"><span class="pre">effective_number_of_codons</span></code> (alias: <code class="docutils literal notranslate"><span class="pre">enc</span></code>) command to
+compute Wright’s (1990) effective number of codons for each coding
+sequence. ENC ranges from 20 (extreme bias) to 61 (no bias). Sequences
+whose length is not divisible by 3 are skipped. Reuses the existing
+translation table machinery (29 built-in tables plus custom). With
+<code class="docutils literal notranslate"><span class="pre">-v/--verbose</span></code> adds per-gene GC3; with <code class="docutils literal notranslate"><span class="pre">-p/--plot</span></code> saves an ENC
+vs. GC3 scatter plus the expected curve under mutation-only bias as PNG.</p>
 <p><em>1.1.21</em>: Added <code class="docutils literal notranslate"><span class="pre">protein_properties</span></code> (alias: <code class="docutils literal notranslate"><span class="pre">prot_prop</span></code>) command to
 report per-sequence protein properties for a protein FASTA: length,
 molecular weight, isoelectric point (pI), GRAVY (Grand Average of
