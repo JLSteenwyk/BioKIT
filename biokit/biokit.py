@@ -155,6 +155,9 @@ class Biokit(object):
                     - calculate the GC content of four-fold degenerate
                       sites among coding sequences
 
+                effective_number_of_codons (alias: enc)
+                    - Wright's (1990) ENC for each coding sequence
+
                 neutrality_plot
                     - GC12 vs. GC3 regression to diagnose mutation
                       vs. selection pressure on codon usage
@@ -351,6 +354,7 @@ class Biokit(object):
             "gc2": self.gc_content_second_position,
             "gc3": self.gc_content_third_position,
             "gc4": self.gc_content_four_fold_degenerate_sites,
+            "enc": self.effective_number_of_codons,
             "gene_wise_rscu": self.gene_wise_relative_synonymous_codon_usage,
             "gw_rscu": self.gene_wise_relative_synonymous_codon_usage,
             "grscu": self.gene_wise_relative_synonymous_codon_usage,
@@ -1033,6 +1037,92 @@ class Biokit(object):
         _run_service(
             "coding_sequences.gc_content_four_fold_degenerate_sites",
             "GCContentFourFoldDegenerateSites",
+            args,
+        )
+
+    @staticmethod
+    def effective_number_of_codons(argv):
+        parser = ArgumentParser(
+            **PARSER_KWARGS,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+
+                Calculate Wright's (1990) effective number of codons
+                (ENC) for each coding sequence. ENC ranges from 20
+                (extreme bias — one codon per amino acid) to 61
+                (no bias — synonymous codons used equally).
+                Sequences whose length is not divisible by 3 are
+                skipped. Stop codons are not counted.
+
+                Default output is one row per gene with
+                gene_id and ENC. With -v/--verbose, GC3 is also
+                included (consistent with the ENC vs. GC3 plot).
+                With -p/--plot, a scatter of ENC vs. GC3 per gene
+                plus the expected curve under mutation-only bias is
+                saved as a PNG.
+
+                Aliases:
+                  effective_number_of_codons, enc
+                Command line interfaces:
+                  bk_effective_number_of_codons, bk_enc
+
+                Usage:
+                biokit effective_number_of_codons <fasta>
+                [-tt/--translation_table <code>]
+                [-v/--verbose] [-p/--plot] [-o/--output <file>]
+                [-f/--format <tsv|json|yaml>]
+
+                Options
+                =====================================================
+                <fasta>                     first argument after
+                                            function name should be
+                                            a CDS fasta file
+
+                -tt, --translation_table    code for the translation
+                                            table (default: 1, standard
+                                            code). See "biokit translate_sequence -h"
+                                            for the list of supported codes.
+
+                -v, --verbose               include per-gene GC3 column
+                                            alongside ENC
+
+                -p, --plot                  generate a scatter of ENC
+                                            vs. GC3 per gene with the
+                                            expected curve under
+                                            mutation-only bias
+                                            (saved as PNG)
+
+                -o, --output                output file path for the
+                                            plot (default: enc_plot.png)
+
+                -f/--format                 output format
+                                            (tsv, json, yaml)
+                                            Default: tsv
+                """  # noqa
+            ),
+        )
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        parser.add_argument(
+            "-tt", "--translation_table", type=str, required=False, help=SUPPRESS
+        )
+        parser.add_argument(
+            "-v", "--verbose", action="store_true", required=False, help=SUPPRESS
+        )
+        parser.add_argument(
+            "-p", "--plot", action="store_true", required=False, help=SUPPRESS
+        )
+        parser.add_argument(
+            "-o", "--output", type=str, required=False, help=SUPPRESS
+        )
+        parser.add_argument(
+            "-f", "--format", type=str, required=False,
+            choices=["tsv", "json", "yaml"], help=SUPPRESS,
+        )
+        args = parser.parse_args(argv)
+        _run_service(
+            "coding_sequences.effective_number_of_codons",
+            "EffectiveNumberOfCodons",
             args,
         )
 
@@ -3395,6 +3485,10 @@ def gc_content_four_fold_degenerate_sites(argv=None):
 
 def neutrality_plot(argv=None):
     Biokit.neutrality_plot(sys.argv[1:])
+
+
+def effective_number_of_codons(argv=None):
+    Biokit.effective_number_of_codons(sys.argv[1:])
 
 
 def gene_wise_relative_synonymous_codon_usage(argv=None):
