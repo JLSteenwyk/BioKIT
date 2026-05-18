@@ -2,6 +2,7 @@ import importlib
 from typing import Any
 
 __all__ = [
+    "CodonAdaptationIndex",
     "EffectiveNumberOfCodons",
     "GCContentFirstPosition",
     "GCContentFourFoldDegenerateSites",
@@ -14,6 +15,7 @@ __all__ = [
 ]
 
 _LAZY_IMPORTS = {
+    "CodonAdaptationIndex": ".codon_adaptation_index",
     "EffectiveNumberOfCodons": ".effective_number_of_codons",
     "GCContentFirstPosition": ".gc_content_first_position",
     "GCContentFourFoldDegenerateSites": ".gc_content_four_fold_degenerate_sites",

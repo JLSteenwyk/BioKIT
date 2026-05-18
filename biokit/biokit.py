@@ -158,6 +158,10 @@ class Biokit(object):
                 effective_number_of_codons (alias: enc)
                     - Wright's (1990) ENC for each coding sequence
 
+                codon_adaptation_index (alias: cai)
+                    - Sharp & Li (1987) CAI for each coding sequence
+                      using a user-provided reference set
+
                 neutrality_plot
                     - GC12 vs. GC3 regression to diagnose mutation
                       vs. selection pressure on codon usage
@@ -355,6 +359,7 @@ class Biokit(object):
             "gc3": self.gc_content_third_position,
             "gc4": self.gc_content_four_fold_degenerate_sites,
             "enc": self.effective_number_of_codons,
+            "cai": self.codon_adaptation_index,
             "gene_wise_rscu": self.gene_wise_relative_synonymous_codon_usage,
             "gw_rscu": self.gene_wise_relative_synonymous_codon_usage,
             "grscu": self.gene_wise_relative_synonymous_codon_usage,
@@ -1123,6 +1128,88 @@ class Biokit(object):
         _run_service(
             "coding_sequences.effective_number_of_codons",
             "EffectiveNumberOfCodons",
+            args,
+        )
+
+    @staticmethod
+    def codon_adaptation_index(argv):
+        parser = ArgumentParser(
+            **PARSER_KWARGS,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+
+                Calculate Sharp & Li's (1987) Codon Adaptation Index
+                (CAI) for each coding sequence. Relative adaptiveness
+                values (w_i) are derived from a user-supplied
+                reference set of highly expressed coding sequences
+                (typically ribosomal proteins). Each query gene is
+                scored as the geometric mean of w_i across its
+                synonymous codons.
+
+                CAI ranges from 0 to 1, where 1 indicates that the
+                gene's codon usage perfectly matches the reference.
+                Sequences whose length is not divisible by 3 are
+                skipped. Single-codon families (e.g. Met, Trp under
+                the standard code) and stop codons do not contribute.
+
+                A pseudocount of 0.5 is added to reference codons
+                with zero observations to avoid log(0) and to keep
+                CAI defined for query genes containing such codons.
+
+                Aliases:
+                  codon_adaptation_index, cai
+                Command line interfaces:
+                  bk_codon_adaptation_index, bk_cai
+
+                Usage:
+                biokit codon_adaptation_index <fasta>
+                -r/--reference <reference_fasta>
+                [-tt/--translation_table <code>]
+                [-v/--verbose] [-f/--format <tsv|json|yaml>]
+
+                Options
+                =====================================================
+                <fasta>                     first argument after
+                                            function name should be
+                                            a query CDS fasta file
+
+                -r, --reference             FASTA of reference highly
+                                            expressed coding sequences
+                                            (required)
+
+                -tt, --translation_table    code for the translation
+                                            table (default: 1, standard
+                                            code). See "biokit translate_sequence -h"
+                                            for the list of supported codes.
+
+                -v, --verbose               include the number of
+                                            scored codons per gene
+
+                -f/--format                 output format
+                                            (tsv, json, yaml)
+                                            Default: tsv
+                """  # noqa
+            ),
+        )
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        parser.add_argument(
+            "-r", "--reference", type=str, required=True, help=SUPPRESS
+        )
+        parser.add_argument(
+            "-tt", "--translation_table", type=str, required=False, help=SUPPRESS
+        )
+        parser.add_argument(
+            "-v", "--verbose", action="store_true", required=False, help=SUPPRESS
+        )
+        parser.add_argument(
+            "-f", "--format", type=str, required=False,
+            choices=["tsv", "json", "yaml"], help=SUPPRESS,
+        )
+        args = parser.parse_args(argv)
+        _run_service(
+            "coding_sequences.codon_adaptation_index",
+            "CodonAdaptationIndex",
             args,
         )
 
@@ -3489,6 +3576,10 @@ def neutrality_plot(argv=None):
 
 def effective_number_of_codons(argv=None):
     Biokit.effective_number_of_codons(sys.argv[1:])
+
+
+def codon_adaptation_index(argv=None):
+    Biokit.codon_adaptation_index(sys.argv[1:])
 
 
 def gene_wise_relative_synonymous_codon_usage(argv=None):

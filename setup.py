@@ -68,6 +68,8 @@ setup(
             "bk_neutrality_plot = biokit.biokit:neutrality_plot",
             "bk_effective_number_of_codons = biokit.biokit:effective_number_of_codons",
             "bk_enc = biokit.biokit:effective_number_of_codons",
+            "bk_codon_adaptation_index = biokit.biokit:codon_adaptation_index",
+            "bk_cai = biokit.biokit:codon_adaptation_index",
             "bk_gene_wise_relative_synonymous_codon_usage = biokit.biokit:gene_wise_relative_synonymous_codon_usage",
             "bk_gene_wise_rscu = biokit.biokit:gene_wise_relative_synonymous_codon_usage",
             "bk_gw_rscu = biokit.biokit:gene_wise_relative_synonymous_codon_usage",
