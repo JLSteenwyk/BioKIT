@@ -449,6 +449,40 @@ Options: |br|
 
 |
 
+Codon adaptation index (CAI)
+############################
+Function names: codon_adaptation_index; cai |br|
+Command line interface: bk_codon_adaptation_index; bk_cai
+
+Calculate Sharp & Li's (1987) Codon Adaptation Index (CAI) for
+each coding sequence using a user-supplied reference set of
+highly expressed CDS (typically ribosomal proteins). Relative
+adaptiveness values (w_i) are derived from the reference, and
+each query gene is scored as the geometric mean of w_i across
+its synonymous codons.
+
+CAI ranges from 0 to 1; a value near 1 means the query gene's
+codon usage closely matches the reference (often interpreted as
+high expression potential). Sequences whose length is not
+divisible by 3 are skipped. Single-codon families (Met, Trp
+under the standard code) and stop codons do not contribute. A
+pseudocount of 0.5 is added to reference codons with zero
+observations so that CAI remains defined for query genes that
+contain them.
+
+.. code-block:: shell
+
+   biokit codon_adaptation_index <fasta> -r/--reference <reference_fasta> [-tt/--translation_table <code>] [-v/--verbose] [-f/--format <tsv|json|yaml>]
+
+Options: |br|
+*<fasta>*: first argument after function name should be a query CDS fasta file |br|
+*-r/\-\-reference*: FASTA of reference highly expressed CDS (required) |br|
+*-tt/\-\-translation_table*: code for the translation table to be used. Default: 1 (standard code) |br|
+*-v/\-\-verbose*: include the number of scored codons per gene |br|
+*-f/\-\-format*: output format (tsv, json, yaml). Default: tsv
+
+|
+
 Neutrality plot
 ###############
 Function names: neutrality_plot |br|

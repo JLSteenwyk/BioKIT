@@ -100,6 +100,13 @@ expanded integration coverage with output format consistency and CLI output
 contract tests.</p>
 <p><em>1.1.5</em>: Updated dependency pinning to fix installation failures and moved supported
 Python versions to 3.11, 3.12, and 3.13 only.</p>
+<p><em>1.1.23</em>: Added <code class="docutils literal notranslate"><span class="pre">codon_adaptation_index</span></code> (alias: <code class="docutils literal notranslate"><span class="pre">cai</span></code>) command to
+compute Sharp &amp; Li’s (1987) CAI for each coding sequence using a
+user-supplied reference set of highly expressed CDS (e.g. ribosomal
+proteins). Relative adaptiveness values (w_i) are derived from the
+reference; each query gene is scored as the geometric mean of w_i
+across its synonymous codons. CAI ranges from 0 to 1. A pseudocount
+of 0.5 is added to reference codons with zero observations.</p>
 <p><em>1.1.22</em>: Added <code class="docutils literal notranslate"><span class="pre">effective_number_of_codons</span></code> (alias: <code class="docutils literal notranslate"><span class="pre">enc</span></code>) command to
 compute Wright’s (1990) effective number of codons for each coding
 sequence. ENC ranges from 20 (extreme bias) to 61 (no bias). Sequences

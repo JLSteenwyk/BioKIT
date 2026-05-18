@@ -71,6 +71,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#gc-content-third-codon-position">GC content third codon position</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gc-content-four-fold-degenerate-sites">GC content four-fold degenerate sites</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#effective-number-of-codons-enc">Effective number of codons (ENC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#codon-adaptation-index-cai">Codon adaptation index (CAI)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#neutrality-plot">Neutrality plot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gene-wise-relative-synonymous-codon-usage-grscu">Gene-wise relative synonymous codon usage (gRSCU)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#relative-synonymous-codon-usage">Relative synonymous codon usage</a></li>
@@ -552,6 +553,37 @@ as a PNG. The expected curve uses Wright’s formulation
 <em>-v/--verbose</em>: include per-gene GC3 alongside ENC <br/>
 <em>-p/--plot</em>: generate ENC vs. GC3 scatter with expected curve (saved as PNG) <br/>
 <em>-o/--output</em>: output file path for the plot (default: enc_plot.png) <br/>
+<em>-f/--format</em>: output format (tsv, json, yaml). Default: tsv</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="codon-adaptation-index-cai">
+<h3>Codon adaptation index (CAI)<a class="headerlink" href="#codon-adaptation-index-cai" title="Link to this heading"></a></h3>
+<p>Function names: codon_adaptation_index; cai <br/>
+Command line interface: bk_codon_adaptation_index; bk_cai</p>
+<p>Calculate Sharp &amp; Li’s (1987) Codon Adaptation Index (CAI) for
+each coding sequence using a user-supplied reference set of
+highly expressed CDS (typically ribosomal proteins). Relative
+adaptiveness values (w_i) are derived from the reference, and
+each query gene is scored as the geometric mean of w_i across
+its synonymous codons.</p>
+<p>CAI ranges from 0 to 1; a value near 1 means the query gene’s
+codon usage closely matches the reference (often interpreted as
+high expression potential). Sequences whose length is not
+divisible by 3 are skipped. Single-codon families (Met, Trp
+under the standard code) and stop codons do not contribute. A
+pseudocount of 0.5 is added to reference codons with zero
+observations so that CAI remains defined for query genes that
+contain them.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>codon_adaptation_index<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span>-r/--reference<span class="w"> </span>&lt;reference_fasta&gt;<span class="w"> </span><span class="o">[</span>-tt/--translation_table<span class="w"> </span>&lt;code&gt;<span class="o">]</span><span class="w"> </span><span class="o">[</span>-v/--verbose<span class="o">]</span><span class="w"> </span><span class="o">[</span>-f/--format<span class="w"> </span>&lt;tsv<span class="p">|</span>json<span class="p">|</span>yaml&gt;<span class="o">]</span>
+</pre></div>
+</div>
+<p>Options: <br/>
+<em>&lt;fasta&gt;</em>: first argument after function name should be a query CDS fasta file <br/>
+<em>-r/--reference</em>: FASTA of reference highly expressed CDS (required) <br/>
+<em>-tt/--translation_table</em>: code for the translation table to be used. Default: 1 (standard code) <br/>
+<em>-v/--verbose</em>: include the number of scored codons per gene <br/>
 <em>-f/--format</em>: output format (tsv, json, yaml). Default: tsv</p>
 <div class="line-block">
 <div class="line"><br /></div>
