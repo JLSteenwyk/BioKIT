@@ -54,6 +54,8 @@ setup(
             "bk_pis = biokit.biokit:parsimony_informative_sites",
             "bk_position_specific_score_matrix = biokit.biokit:position_specific_score_matrix",
             "bk_pssm = biokit.biokit:position_specific_score_matrix",
+            "bk_transition_transversion_ratio = biokit.biokit:transition_transversion_ratio",
+            "bk_ti_tv = biokit.biokit:transition_transversion_ratio",
             "bk_variable_sites = biokit.biokit:variable_sites",
             "bk_var_sites = biokit.biokit:variable_sites",
             "bk_vs = biokit.biokit:variable_sites",

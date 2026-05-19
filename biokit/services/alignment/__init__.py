@@ -9,6 +9,7 @@ __all__ = [
     "ConstantSites",
     "ParsimonyInformativeSites",
     "PositionSpecificScoreMatrix",
+    "TransitionTransversionRatio",
     "VariableSites",
 ]
 
@@ -20,6 +21,7 @@ _LAZY_IMPORTS = {
     "ConstantSites": ".constant_sites",
     "ParsimonyInformativeSites": ".parsimony_informative_sites",
     "PositionSpecificScoreMatrix": ".position_specific_score_matrix",
+    "TransitionTransversionRatio": ".transition_transversion_ratio",
     "VariableSites": ".variable_sites",
 }
 

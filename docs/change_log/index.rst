@@ -35,6 +35,14 @@ contract tests.
 *1.1.5*: Updated dependency pinning to fix installation failures and moved supported
 Python versions to 3.11, 3.12, and 3.13 only.
 
+*1.1.24*: Added ``transition_transversion_ratio`` (alias: ``ti_tv``) command
+to calculate the transition/transversion ratio from a nucleotide
+alignment. Counts pairwise substitutions across all alignment columns;
+columns containing any gap or ``?`` are skipped. With ``-v/--verbose``,
+prints per-site classification (transition, transversion, constant, gap)
+where a site is labeled ``transversion`` if any pairwise transversion is
+present.
+
 *1.1.23*: Added ``codon_adaptation_index`` (alias: ``cai``) command to
 compute Sharp & Li's (1987) CAI for each coding sequence using a
 user-supplied reference set of highly expressed CDS (e.g. ribosomal

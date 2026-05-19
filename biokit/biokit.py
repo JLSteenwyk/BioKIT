@@ -134,6 +134,10 @@ class Biokit(object):
                 position_specific_score_matrix (alias: pssm)
                     - create a position specific score matrix for an alignment
 
+                transition_transversion_ratio (alias: ti_tv)
+                    - calculate the transition/transversion ratio
+                      from a nucleotide alignment
+
                 variable_sites (alias: var_sites, vs)
                     - calculate the number of variable sites in an alignment
 
@@ -352,6 +356,7 @@ class Biokit(object):
             "pi_sites": self.parsimony_informative_sites,
             "pis": self.parsimony_informative_sites,
             "pssm": self.position_specific_score_matrix,
+            "ti_tv": self.transition_transversion_ratio,
             "var_sites": self.variable_sites,
             "vs": self.variable_sites,
             "gc1": self.gc_content_first_position,
@@ -818,6 +823,74 @@ class Biokit(object):
         parser.add_argument("-ac", "--ambiguous_character", type=str, help=SUPPRESS)
         args = parser.parse_args(argv)
         _run_service("alignment.position_specific_score_matrix", "PositionSpecificScoreMatrix", args)
+
+    @staticmethod
+    def transition_transversion_ratio(argv):
+        parser = ArgumentParser(
+            **PARSER_KWARGS,
+            description=textwrap.dedent(
+                f"""\
+                {help_header}
+
+                Calculate the transition/transversion ratio (Ti/Tv)
+                from a nucleotide alignment.
+
+                Transitions are purine<->purine (A<->G) or
+                pyrimidine<->pyrimidine (C<->T) substitutions.
+                All other substitutions are transversions. Pairwise
+                substitutions are counted across all alignment
+                columns; columns containing any gap or '?' are
+                skipped entirely.
+
+                Default output (tsv):
+                  transitions\\ttransversions\\tratio
+
+                With -v/--verbose, prints one row per alignment column
+                with a per-site classification (transition,
+                transversion, constant, gap). A site is labeled
+                'transversion' if any pairwise transversion is
+                present, even when transitions are also present.
+
+                Aliases:
+                  transition_transversion_ratio, ti_tv
+                Command line interfaces:
+                  bk_transition_transversion_ratio, bk_ti_tv
+
+                Usage:
+                biokit transition_transversion_ratio <fasta>
+                [-v/--verbose] [-f/--format <tsv|json|yaml>]
+
+                Options
+                =====================================================
+                <fasta>                     first argument after
+                                            function name should be
+                                            a nucleotide alignment
+                                            in FASTA format
+
+                -v, --verbose               emit per-site
+                                            classification instead of
+                                            the summary counts
+
+                -f/--format                 output format
+                                            (tsv, json, yaml)
+                                            Default: tsv
+                """  # noqa
+            ),
+        )
+        parser.add_argument("fasta", type=str, help=SUPPRESS)
+        parser.add_argument(
+            "-v", "--verbose", action="store_true", required=False, help=SUPPRESS
+        )
+        parser.add_argument(
+            "-f", "--format", type=str, required=False,
+            choices=["tsv", "json", "yaml"], help=SUPPRESS,
+        )
+        args = parser.parse_args(argv)
+        _run_service(
+            "alignment.transition_transversion_ratio",
+            "TransitionTransversionRatio",
+            args,
+        )
 
     @staticmethod
     def variable_sites(argv):
@@ -3547,6 +3620,10 @@ def parsimony_informative_sites(argv=None):
 
 def position_specific_score_matrix(argv=None):
     Biokit.position_specific_score_matrix(sys.argv[1:])
+
+
+def transition_transversion_ratio(argv=None):
+    Biokit.transition_transversion_ratio(sys.argv[1:])
 
 
 def variable_sites(argv=None):
