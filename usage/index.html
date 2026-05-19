@@ -62,6 +62,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#constant-sites">Constant sites</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#parsimony-informative-sites">Parsimony informative sites</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#position-specific-score-matrix">Position specific score matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#transition-transversion-ratio-ti-tv">Transition/transversion ratio (Ti/Tv)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#variable-sites">Variable sites</a></li>
 </ul>
 </li>
@@ -426,6 +427,33 @@ Command line interface: bk_position_specific_score_matrix; bk_pssm</p>
 <p>Options: <br/>
 <em>&lt;fasta&gt;</em>: first argument after function name should be an alignment fasta file
 <em>&lt;ambiguous character&gt;</em>: the ambiguity character to use. Default is ‘N’</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="transition-transversion-ratio-ti-tv">
+<h3>Transition/transversion ratio (Ti/Tv)<a class="headerlink" href="#transition-transversion-ratio-ti-tv" title="Link to this heading"></a></h3>
+<p>Function names: transition_transversion_ratio; ti_tv <br/>
+Command line interface: bk_transition_transversion_ratio; bk_ti_tv</p>
+<p>Calculate the transition/transversion ratio (Ti/Tv) from a
+nucleotide alignment.</p>
+<p>Transitions are purine&lt;-&gt;purine (A&lt;-&gt;G) or pyrimidine&lt;-&gt;pyrimidine
+(C&lt;-&gt;T) substitutions. All other substitutions are transversions.
+Pairwise substitutions are counted across all alignment columns;
+columns containing any gap or <code class="docutils literal notranslate"><span class="pre">?</span></code> are skipped entirely.</p>
+<p>Default output (tsv): <code class="docutils literal notranslate"><span class="pre">transitions\ttransversions\tratio</span></code>.
+With <code class="docutils literal notranslate"><span class="pre">-v/--verbose</span></code>, one row per alignment column is emitted
+with a per-site classification (<code class="docutils literal notranslate"><span class="pre">transition</span></code>, <code class="docutils literal notranslate"><span class="pre">transversion</span></code>,
+<code class="docutils literal notranslate"><span class="pre">constant</span></code>, <code class="docutils literal notranslate"><span class="pre">gap</span></code>). A site is labeled <code class="docutils literal notranslate"><span class="pre">transversion</span></code> if any
+pairwise transversion is present, even when transitions are also
+present.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>biokit<span class="w"> </span>transition_transversion_ratio<span class="w"> </span>&lt;fasta&gt;<span class="w"> </span><span class="o">[</span>-v/--verbose<span class="o">]</span><span class="w"> </span><span class="o">[</span>-f/--format<span class="w"> </span>&lt;tsv<span class="p">|</span>json<span class="p">|</span>yaml&gt;<span class="o">]</span>
+</pre></div>
+</div>
+<p>Options: <br/>
+<em>&lt;fasta&gt;</em>: first argument after function name should be a nucleotide alignment fasta file <br/>
+<em>-v/--verbose</em>: emit per-site classification instead of summary counts <br/>
+<em>-f/--format</em>: output format (tsv, json, yaml). Default: tsv</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>

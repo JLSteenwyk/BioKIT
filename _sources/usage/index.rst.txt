@@ -305,6 +305,37 @@ Options: |br|
 
 |
 
+Transition/transversion ratio (Ti/Tv)
+#####################################
+Function names: transition_transversion_ratio; ti_tv |br|
+Command line interface: bk_transition_transversion_ratio; bk_ti_tv
+
+Calculate the transition/transversion ratio (Ti/Tv) from a
+nucleotide alignment.
+
+Transitions are purine<->purine (A<->G) or pyrimidine<->pyrimidine
+(C<->T) substitutions. All other substitutions are transversions.
+Pairwise substitutions are counted across all alignment columns;
+columns containing any gap or ``?`` are skipped entirely.
+
+Default output (tsv): ``transitions\ttransversions\tratio``.
+With ``-v/--verbose``, one row per alignment column is emitted
+with a per-site classification (``transition``, ``transversion``,
+``constant``, ``gap``). A site is labeled ``transversion`` if any
+pairwise transversion is present, even when transitions are also
+present.
+
+.. code-block:: shell
+
+	biokit transition_transversion_ratio <fasta> [-v/--verbose] [-f/--format <tsv|json|yaml>]
+
+Options: |br|
+*<fasta>*: first argument after function name should be a nucleotide alignment fasta file |br|
+*-v/\-\-verbose*: emit per-site classification instead of summary counts |br|
+*-f/\-\-format*: output format (tsv, json, yaml). Default: tsv
+
+|
+
 Variable sites
 ##############
 Function names: variable_sites; var_sites; vs |br|

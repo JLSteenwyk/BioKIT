@@ -100,6 +100,13 @@ expanded integration coverage with output format consistency and CLI output
 contract tests.</p>
 <p><em>1.1.5</em>: Updated dependency pinning to fix installation failures and moved supported
 Python versions to 3.11, 3.12, and 3.13 only.</p>
+<p><em>1.1.24</em>: Added <code class="docutils literal notranslate"><span class="pre">transition_transversion_ratio</span></code> (alias: <code class="docutils literal notranslate"><span class="pre">ti_tv</span></code>) command
+to calculate the transition/transversion ratio from a nucleotide
+alignment. Counts pairwise substitutions across all alignment columns;
+columns containing any gap or <code class="docutils literal notranslate"><span class="pre">?</span></code> are skipped. With <code class="docutils literal notranslate"><span class="pre">-v/--verbose</span></code>,
+prints per-site classification (transition, transversion, constant, gap)
+where a site is labeled <code class="docutils literal notranslate"><span class="pre">transversion</span></code> if any pairwise transversion is
+present.</p>
 <p><em>1.1.23</em>: Added <code class="docutils literal notranslate"><span class="pre">codon_adaptation_index</span></code> (alias: <code class="docutils literal notranslate"><span class="pre">cai</span></code>) command to
 compute Sharp &amp; Li’s (1987) CAI for each coding sequence using a
 user-supplied reference set of highly expressed CDS (e.g. ribosomal
